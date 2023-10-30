@@ -61,7 +61,7 @@ function generateRandomUserID()
 // }
 
 // // Base URL Configuration
-// $baseUrl = "https://yayukyuningsih.arbiet.my.id/";
+// $baseUrl = "https://asadulaziz.arbiet.my.id/";
 
 // // Base Logo
-// $baseLogoUrl = "https://yayukyuningsih.arbiet.my.id/static/logo.png";
+// $baseLogoUrl = "https://asadulaziz.arbiet.my.id/static/logo.png";

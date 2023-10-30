@@ -1,7 +1,7 @@
 <?php
-include_once('../components/header.php');
 session_start();
 require_once('../../database/connection.php');
+include_once('../components/header.php');
 
 // Check if the user is logged in
 if (!isset($_SESSION['UserID'])) {
