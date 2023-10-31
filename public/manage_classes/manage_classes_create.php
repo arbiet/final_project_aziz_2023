@@ -33,7 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->execute()) {
             // Class creation successful
-
+            // Log the activity for class creation
+            $activityDescription = "Class created: $class_name, Academic Year: $academic_year";
+            $currentUserID = $_SESSION['UserID'];
+            insertLogActivity($conn, $currentUserID, $activityDescription);
             // Tampilkan notifikasi SweetAlert untuk sukses
             echo '<script>
         Swal.fire({

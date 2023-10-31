@@ -54,7 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         // Class update successful
-
+        // Log the activity for class update
+        $activityDescription = "Class updated: $class_name, Academic Year: $academic_year";
+        $currentUserID = $_SESSION['UserID'];
+        insertLogActivity($conn, $currentUserID, $activityDescription);
         // Tampilkan notifikasi SweetAlert untuk sukses
         echo '<script>
         Swal.fire({

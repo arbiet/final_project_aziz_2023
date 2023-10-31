@@ -55,7 +55,14 @@ $stmt = $conn->prepare($query);
 $stmt->bind_param('si', $newStatus, $id);
 
 if ($stmt->execute()) {
-    // Update successful
+    $success_message = "User's activation status has been updated to $newStatus.";
+
+    // Log the activity for the user deletion
+    $activityDescription = "User with UserID: $id has been deleted.";
+    $currentUserID = $_SESSION['UserID'];
+
+    // Call the insertLogActivity function to log the activity
+    insertLogActivity($conn, $currentUserID, $activityDescription);
     $stmt->close();
     $success_message = "Users activation status has been updated to $newStatus.";
 } else {

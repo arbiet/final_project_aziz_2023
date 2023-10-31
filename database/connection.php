@@ -33,19 +33,12 @@ function insertLogActivity($conn, $userID, $activityDescription)
 
 function generateRandomUserID()
 {
-    $characters = '0123456789';
-    $randomUserID = '';
-    $length = 10;
+    $timestamp = time(); // Get the current timestamp
+    $randomPart = str_pad(mt_rand(1, 9999999999), 10, '0', STR_PAD_LEFT);
 
-    for (
-        $i = 0;
-        $i < $length;
-        $i++
-    ) {
-        $randomUserID .= $characters[rand(0, strlen($characters) - 1)];
-    }
+    $user_id = $timestamp . $randomPart;
 
-    return $randomUserID;
+    return substr($user_id, 0, 10); // Take the first 10 digits
 }
 // $hostname = "localhost";
 // $db_username = "ikiz5613_admin_aziz";

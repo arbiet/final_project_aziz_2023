@@ -72,7 +72,7 @@ $errors = array();
                             $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
                             $page = isset($_GET['page']) ? $_GET['page'] : 1;
                             $query = "SELECT * FROM Classes
-                                      WHERE ClassName LIKE '%$searchTerm%'
+                                      WHERE ClassName LIKE '%$searchTerm%' OR HomeroomTeacher LIKE '%$searchTerm%' OR Curriculum LIKE '%$searchTerm%'
                                       LIMIT 15 OFFSET " . ($page - 1) * 15;
                             $result = $conn->query($query);
 

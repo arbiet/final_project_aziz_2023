@@ -85,6 +85,4 @@ if (!empty($success_message)) {
 ?>
 
 <div class="h-screen flex flex-col">
-    <?php include_once('../components/navbar.php'); ?>
-    <?php include('../components/footer.php'); ?>
 </div>
