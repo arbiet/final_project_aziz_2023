@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6 shadow-md sticky top-0">
+<nav class="flex items-center justify-between flex-wrap bg-gray-800 py-2 px-6 shadow-md sticky top-0">
     <div class="flex items-center flex-shrink-0 text-white mr-6 ">
         <a href="<?php echo $baseUrl; ?>public/index.php" class="flex items-center space-x-2">
             <img src="<?php echo $baseLogoUrl; ?>" alt="Logo" class="w-12" /> <!-- Tambahkan kelas w-40 di sini -->
