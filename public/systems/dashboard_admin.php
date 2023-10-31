@@ -8,6 +8,7 @@ require_once('../../database/connection.php');
 $username = $password = '';
 $errors = array();
 
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the user inputs
@@ -44,8 +45,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['Email'] = $row['Email'];
             $_SESSION['FullName'] = $row['FullName'];
 
-            // Redirect to a dashboard or homepage
-            header('Location: systems/dashboard.php');
+            if (isset($_SESSION['UserID'])) {
+                $roleID = $_SESSION['RoleID']; // Dapatkan RoleID dari sesi
+
+                // Pengecekan peran
+                if (
+                    $roleID == 1
+                ) {
+                    // Admin login, redirect to admin dashboard
+                    header('Location: dashboard_admin.php');
+                    exit();
+                } elseif ($roleID == 2) {
+                    // Teacher login, redirect to teacher dashboard
+                    header('Location: dashboard_teacher.php');
+                    exit();
+                } elseif ($roleID == 3) {
+                    // Student login, redirect to student dashboard
+                    header('Location: dashboard_student.php');
+                    exit();
+                }
+            }
             exit();
         } else {
             $errors['login_failed'] = 'Invalid username or password.';

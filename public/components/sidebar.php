@@ -2,7 +2,22 @@
     <ul class="text-gray-400">
         <li class="px-6 py-4 hover:bg-gray-700 cursor-pointer space-x-2 flex items-center">
             <i class="fas fa-tachometer-alt mr-3"></i>
-            <a href="../systems/dashboard.php">Dashboard</a>
+            <?php
+            if (isset($_SESSION['RoleID'])) {
+                $roleID = $_SESSION['RoleID'];
+
+                if ($roleID == 1) {
+                    // Admin
+                    echo '<a href="../systems/dashboard_admin.php">Dashboard</a>';
+                } elseif ($roleID == 2) {
+                    // Teacher
+                    echo '<a href="../systems/dashboard_teacher.php">Dashboard</a>';
+                } elseif ($roleID == 3) {
+                    // Student
+                    echo '<a href="../systems/dashboard_student.php">Dashboard</a>';
+                }
+            }
+            ?>
         </li>
         <li class="px-6 py-4 hover-bg-gray-700 cursor-pointer space-x-2 flex items-center">
             <i class="fas fa-user mr-3"></i>

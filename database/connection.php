@@ -40,6 +40,7 @@ function generateRandomUserID()
 
     return substr($user_id, 0, 10); // Take the first 10 digits
 }
+
 // $hostname = "localhost";
 // $db_username = "ikiz5613_admin_aziz";
 // $db_password = "yongalah";

@@ -10,19 +10,18 @@ if (isset($_SESSION['UserID'])) {
     // Pengecekan peran
     if ($roleID == 1) {
         // Admin login, redirect to admin dashboard
-        header('Location: systems/dashboard_admin.php');
+        header('Location: dashboard_admin.php');
         exit();
     } elseif ($roleID == 2) {
         // Teacher login, redirect to teacher dashboard
-        header('Location: systems/dashboard_teacher.php');
+        header('Location: dashboard_teacher.php');
         exit();
     } elseif ($roleID == 3) {
         // Student login, redirect to student dashboard
-        header('Location: systems/dashboard_student.php');
+        header('Location: dashboard_student.php');
         exit();
     }
 }
-
 
 ?>
 <!DOCTYPE html>

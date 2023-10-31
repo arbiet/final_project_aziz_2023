@@ -8,11 +8,23 @@ include_once('../components/header.php');
 $username = $password = '';
 $errors = array();
 
-// Check if the user is already logged in
 if (isset($_SESSION['UserID'])) {
-    // If user is already logged in, redirect to dashboard
-    header('Location: systems/dashboard.php');
-    exit();
+    $roleID = $_SESSION['RoleID']; // Dapatkan RoleID dari sesi
+
+    // Pengecekan peran
+    if ($roleID == 1) {
+        // Admin login, redirect to admin dashboard
+        header('Location: dashboard_admin.php');
+        exit();
+    } elseif ($roleID == 2) {
+        // Teacher login, redirect to teacher dashboard
+        header('Location: dashboard_teacher.php');
+        exit();
+    } elseif ($roleID == 3) {
+        // Student login, redirect to student dashboard
+        header('Location: dashboard_student.php');
+        exit();
+    }
 }
 
 // Check if the form is submitted
@@ -61,19 +73,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $updateLastLoginStmt->execute();
             $updateLastLoginStmt->close();
 
-            // Trigger a SweetAlert for successful login
-            echo '<script>
-                Swal.fire({
-                    icon: "success",
-                    title: "Success!",
-                    text: "Login successful.",
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then(function(){
-                    window.location.href = "../systems/dashboard.php";
-                });
-            </script>';
-            exit();
+            // Perform login actions
+            $roleID = $row['RoleID'];
+
+            if ($roleID == 1) {
+                // Admin login, redirect to admin dashboard
+                echo '<script>
+            Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Admin login successful.",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                window.location.href = "dashboard_admin.php";
+            });
+        </script>';
+            } elseif ($roleID == 2) {
+                // Teacher login, redirect to teacher dashboard
+                echo '<script>
+            Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Teacher login successful.",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                window.location.href = "dashboard_teacher.php";
+            });
+        </script>';
+            } elseif ($roleID == 3) {
+                // Student login, redirect to student dashboard
+                echo '<script>
+            Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Student login successful.",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                window.location.href = "dashboard_student.php";
+            });
+        </script>';
+            }
+            // Perform login actions
+            $roleID = $row['RoleID'];
+
+            if ($roleID == 1) {
+                // Admin login, redirect to admin dashboard
+                echo '<script>
+            Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Admin login successful.",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                window.location.href = "dashboard_admin.php";
+            });
+        </script>';
+            } elseif ($roleID == 2) {
+                // Teacher login, redirect to teacher dashboard
+                echo '<script>
+            Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Teacher login successful.",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                window.location.href = "dashboard_teacher.php";
+            });
+        </script>';
+            } elseif ($roleID == 3) {
+                // Student login, redirect to student dashboard
+                echo '<script>
+            Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: "Student login successful.",
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                window.location.href = "dashboard_student.php";
+            });
+        </script>';
+            }
         } else {
             $errors['login_failed'] = 'Invalid username or password.';
 
