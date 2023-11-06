@@ -97,6 +97,10 @@ $errors = array();
                       <i class='fas fa-eye mr-2'></i>
                       <span>Detail</span>
                     </a>
+                    <a href="<?php echo $baseUrl; ?>public/manage_materials/manage_materials_create.php?subject_id=<?php echo $row['SubjectID']; ?>" class='bg-yellow-500 hover-bg-yellow-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                      <i class='fas fa-plus mr-2'></i>
+                      <span>Add Material</span>
+                    </a>
                     <a href="<?php echo $baseUrl; ?>public/manage_subjects/manage_subjects_update.php?id=<?php echo $row['SubjectID'] ?>" class='bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                       <i class='fas fa-edit mr-2'></i>
                       <span>Edit</span>

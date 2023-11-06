@@ -117,9 +117,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for="education_level" class="block font-semibold text-gray-800 mt-2 mb-2">Education Level</label>
                         <input type="text" id="education_level" name="education_level" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Education Level" value="<?php echo $education_level; ?>">
 
+                        <?php
+
+                        // Fetch the list of teachers who are not homeroom teachers
+                        $query = "SELECT Teachers.TeacherID, Users.FullName, Teachers.AcademicDegree
+                        FROM Teachers
+                        INNER JOIN Users ON Teachers.UserID = Users.UserID
+                        WHERE Teachers.TeacherID NOT IN (SELECT HomeroomTeacher FROM Classes)";
+
+                        $result = $conn->query($query);
+
+                        // Check for errors in the database query
+                        if (!$result) {
+                            die("Database query failed: " . $conn->error);
+                        }
+
+                        // Close the database connection
+                        $conn->close();
+
+                        ?>
+
                         <!-- Homeroom Teacher -->
                         <label for="homeroom_teacher" class="block font-semibold text-gray-800 mt-2 mb-2">Homeroom Teacher</label>
-                        <input type="text" id="homeroom_teacher" name="homeroom_teacher" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Homeroom Teacher" value="<?php echo $homeroom_teacher; ?>">
+                        <select id="homeroom_teacher" name="homeroom_teacher" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600">
+                            <?php
+                            // Iterate through the retrieved teachers and populate the select field
+                            while ($row = $result->fetch_assoc()) {
+                                $teacherID = $row['TeacherID'];
+                                $teacherName = $row['FullName'];
+                                $AcademicDegree = $row['AcademicDegree'];
+                                echo "<option value='$teacherID'>$teacherName, $AcademicDegree</option>";
+                            }
+                            ?>
+                        </select>
 
                         <!-- Curriculum -->
                         <label for="curriculum" class="block font-semibold text-gray-800 mt-2 mb-2">Curriculum</label>

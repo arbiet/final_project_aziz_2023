@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2023 at 09:35 AM
+-- Generation Time: Nov 07, 2023 at 12:15 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,9 +42,31 @@ CREATE TABLE `Classes` (
 --
 
 INSERT INTO `Classes` (`ClassID`, `ClassName`, `EducationLevel`, `HomeroomTeacher`, `Curriculum`, `AcademicYear`, `ClassCode`) VALUES
-(1, 'X TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', 'Anik Safitri Budiyati, S.Kom', 'Kurikulum Merdeka', '2023', NULL),
-(3, 'X TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', 'Nur Alfiyah, S.Kom', 'Kurikulum Merdeka', '2023', NULL),
-(4, 'XI TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', 'Diyah Yustiana, M.Kom.', 'Kurikulum Merdeka', '2023', NULL);
+(1, 'X TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '1', 'Kurikulum Merdeka', '2023', NULL),
+(2, 'X TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '2', 'Kurikulum Merdeka', '2023', NULL),
+(3, 'XI TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '3', 'Kurikulum Merdeka', '2023', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ClassSubjects`
+--
+
+CREATE TABLE `ClassSubjects` (
+  `ClassSubjectID` int(11) NOT NULL,
+  `ClassID` int(11) DEFAULT NULL,
+  `SubjectID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ClassSubjects`
+--
+
+INSERT INTO `ClassSubjects` (`ClassSubjectID`, `ClassID`, `SubjectID`) VALUES
+(9, 1, 1),
+(10, 1, 2),
+(11, 2, 2),
+(14, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -138,7 +160,37 @@ INSERT INTO `LogActivity` (`LogID`, `UserID`, `ActivityDescription`, `ActivityTi
 (72, 0, 'User logged in', '2023-10-31 05:14:14'),
 (73, 0, 'User logged out', '2023-10-31 05:16:24'),
 (74, 0, 'User logged in', '2023-10-31 05:16:31'),
-(75, 0, 'User logged in', '2023-10-31 05:19:43');
+(75, 0, 'User logged in', '2023-10-31 05:19:43'),
+(76, 137648118, 'Student created: Student Number: 13466174142, Parent/Guardian: dfgsdg', '2023-11-03 10:17:23'),
+(77, 137648118, 'User logged out', '2023-11-03 10:17:49'),
+(78, 0, 'User logged in', '2023-11-03 10:17:58'),
+(79, 0, 'User logged out', '2023-11-03 10:18:12'),
+(80, 137648118, 'User logged in', '2023-11-03 10:18:17'),
+(81, 137648118, 'Student with Username: ahmadhasby has been updated.', '2023-11-03 10:18:30'),
+(82, 137648118, 'Teacher created: NIP: 24124123515, Full Name: Asadul Azis', '2023-11-03 10:39:19'),
+(83, 137648118, 'Teacher created: NIP: 14125323523, Full Name: agadhsdh', '2023-11-03 10:41:57'),
+(84, 137648118, 'Teacher created: NIP: 34235235, Full Name: fasdgsdgsg', '2023-11-03 10:46:30'),
+(85, 137648118, 'Teacher created: NIP: 23582358253, Full Name: adgsapgiaoipdgh', '2023-11-03 10:55:06'),
+(86, 137648118, 'User with Username: nanda has been created with the following details - Full Name: oufhoudhgouhd, Role: 2, Account Status: Active, Activation Status: Activated.', '2023-11-03 10:55:59'),
+(87, 137648118, 'User with UserID: 1699008959 has been deleted.', '2023-11-03 10:56:03'),
+(88, 137648118, 'Teacher created: NIP: 143225435, Full Name: ', '2023-11-03 11:02:16'),
+(89, 137648118, 'Teacher with Username: aziz has been updated.', '2023-11-03 11:20:03'),
+(90, 137648118, 'User logged in', '2023-11-06 18:36:19'),
+(91, 137648118, 'Class updated: X TKJ 2 - (Teknik Komputer Jaringan), Academic Year: 2023', '2023-11-06 18:45:30'),
+(92, 137648118, 'Class updated: X TKJ 1 - (Teknik Komputer Jaringan), Academic Year: 2023', '2023-11-06 18:47:49'),
+(93, 137648118, 'Class updated: XI TKJ 2 - (Teknik Komputer Jaringan), Academic Year: 2023', '2023-11-06 18:47:55'),
+(94, 137648118, 'Subject with SubjectID: 3 has been removed from ClassID: 3.', '2023-11-06 19:17:18'),
+(95, 137648118, 'Subject with SubjectID: 1 has been removed from ClassID: 3.', '2023-11-06 19:18:56'),
+(96, 137648118, 'Teacher with Username: renal has been updated.', '2023-11-06 19:19:38'),
+(97, 137648118, 'Teacher with Username: agdag has been updated.', '2023-11-06 19:19:46'),
+(98, 137648118, 'Teacher with Username: agdag has been updated.', '2023-11-06 19:20:04'),
+(99, 137648118, 'Subject updated: Jaringan Dasar', '2023-11-06 19:25:52'),
+(100, 137648118, 'Subject updated: Jaringan Dasar', '2023-11-06 19:26:14'),
+(101, 137648118, 'Subject created: asf', '2023-11-06 19:28:16'),
+(102, 137648118, 'Subject with SubjectID: 4 has been deleted.', '2023-11-06 19:28:19'),
+(103, 137648118, 'User logged out', '2023-11-06 19:37:17'),
+(104, 137648118, 'User logged in', '2023-11-06 19:37:23'),
+(105, 137648118, 'User logged in', '2023-11-06 19:37:53');
 
 -- --------------------------------------------------------
 
@@ -200,9 +252,10 @@ CREATE TABLE `Students` (
 
 INSERT INTO `Students` (`StudentID`, `StudentNumber`, `Religion`, `ParentGuardianFullName`, `ParentGuardianAddress`, `ParentGuardianPhoneNumber`, `ParentGuardianEmail`, `ClassID`, `UserID`) VALUES
 (1, '123523542', 'asdasf', 'asdgasdg', 'asdgasg', 'asgasg', 'asgasg@gmail.com', 1, 2147483647),
-(2, '235235234', 'Agnostik', 'Paijo', 'Paijo', 'Paijo', 'paijo@gmail.com', NULL, 65405),
-(4, '542436546', 'Agnostik', 'Kartu Prakerja - Firmansyah Mukti Wijaya', 'Jl. Ahmad Dahlan No.76, Mojoroto, Kec. Mojoroto, Kota Kediri, Jawa Timur 64112', '+6281216318022', 'iki.mukti@gmail.com', 1, 1698716970),
-(5, '8345738488', 'Agnostik', 'Paijo', 'Paijo', 'Paijo', 'paijo@gmail.com', 4, 0);
+(2, '235235234', 'Agnostik', 'Paijo', 'Paijo', 'Paijo', 'paijo@gmail.com', 1, 65405),
+(4, '542436546', 'Agnostik', 'Kartu Prakerja - Firmansyah Mukti Wijaya', 'Jl. Ahmad Dahlan No.76, Mojoroto, Kec. Mojoroto, Kota Kediri, Jawa Timur 64112', '+6281216318022', 'iki.mukti@gmail.com', 3, 1698716970),
+(5, '8345738488', 'Agnostik', 'Paijo', 'Paijo', 'Paijo', 'paijo@gmail.com', 2, 0),
+(6, '13466174142', 'fsdgsfdh', 'dfgsdg', 'sdgsdgsd', 'sdgsdgsfg', 'dsfhsdufh@jbsfbdfb.s', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -234,6 +287,31 @@ INSERT INTO `Subjects` (`SubjectID`, `SubjectName`, `DifficultyLevel`, `Teaching
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Teachers`
+--
+
+CREATE TABLE `Teachers` (
+  `TeacherID` int(11) NOT NULL,
+  `NIP` varchar(20) NOT NULL,
+  `AcademicDegree` varchar(50) DEFAULT NULL,
+  `EducationLevel` varchar(50) DEFAULT NULL,
+  `EmploymentStatus` varchar(50) DEFAULT NULL,
+  `UserID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Teachers`
+--
+
+INSERT INTO `Teachers` (`TeacherID`, `NIP`, `AcademicDegree`, `EducationLevel`, `EmploymentStatus`, `UserID`) VALUES
+(1, '24124123515', 'S.Kom', 'Bachelor Degree', 'Active', 1699007959),
+(2, '14125323523', 'S.Pd', 'Bachelor Degree', 'Active', 1699008117),
+(3, '34235235', 'S. Kom', 'asgasg', 'Active', 1699008390),
+(4, '23582358253', 'S.T.', 'Banchelor Degree', 'active', 1699008906);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Users`
 --
 
@@ -260,11 +338,17 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `DateOfBirth`, `Gender`, `Address`, `PhoneNumber`, `RoleID`, `AccountCreationDate`, `LastLogin`, `AccountStatus`, `ProfilePictureURL`, `ActivationStatus`) VALUES
-(0, 'ikimukti', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '19103020046@unpkediri.ac.id', 'Firmansyah Mukti Wijaya', '2023-10-12', 'Male', 'Nglaban 1111', '081216318022', 3, '2023-10-31 05:19:43', '2023-10-31 12:19:43', NULL, '653e5a409b4fb.jpeg', 'active'),
+(0, 'ikimukti', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '19103020046@unpkediri.ac.id', 'Firmansyah Mukti Wijaya', '2023-10-12', 'Male', 'Nglaban 1111', '081216318022', 3, '2023-11-03 10:17:58', '2023-11-03 17:17:58', NULL, '653e5a409b4fb.jpeg', 'active'),
 (65405, 'ahmadhasby', '$2y$10$cDLCzK6Rq0IISeN.nI46pOs3PzPgmREX0rbhPlvtPg7iPuw2sRGNK', 'ahmadhasby@gmail.com', 'Ahmad Hasby Maulana', '2023-10-10', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:17:15', NULL, NULL, NULL, 'active'),
-(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-10-31 04:53:53', '2023-10-31 11:53:53', NULL, 'default.png', 'active'),
+(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-11-06 19:37:53', '2023-11-07 02:37:53', NULL, 'default.png', 'active'),
 (1698716970, 'akbarsandi', '$2y$10$GzsUjuYCcfymGzNusQgul.fUn42ETSFy71ECQpYe8NTVRi1z45SoS', 'akbarsandi@gmail.com', 'Akbar Sandi Pratama', '2023-10-12', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:17:23', NULL, NULL, NULL, 'active'),
 (1698719401, 'andrean', '$2y$10$hELFb0BIW5L8uwyVqMLmd.hG7L2avzq/dojKCui.XW1XJOffghcma', 'andreanprasetyo@gmail.com', 'Andrean Prasetyo', '2023-02-07', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:30:01', NULL, 'active', NULL, 'active'),
+(1699006643, 'paijo', '$2y$10$sYyoVnssegJ91BQO8RC6qOFr3XWgUAvNFKcI/WPO8s63Yi8KmGIMu', 'sdhgushg@hfugihdf.d', 'isdhgouhsduog', '2023-11-22', 'Male', 'agdsgdfghdfhg', 'dgsdfhgdf', 3, '2023-11-03 10:17:23', NULL, 'active', NULL, 'active'),
+(1699007959, 'aziz', '$2y$10$Gne2UkY5RR3C6zSTCuQW9uRyWRqPpiHZ8DLyXbHT0PxYurpGDOQkm', 'azizasadul@gmail.com', 'Asadul Azis', '2023-11-22', 'Male', 'agadhsfhdgh', '34236346457', 2, '2023-11-03 11:20:03', NULL, 'active', NULL, 'active'),
+(1699008117, 'tika', '$2y$10$XMghwn955y4Vr4J7bc5pju78Dx6.ikMeerd49FnFCvPPKQB1axXtS', 'tik@gfljsdghs.asfsdg', 'Tika', '2023-11-16', 'Female', 'agdsgsfd', '2134124125', 2, '2023-11-03 10:54:16', NULL, 'active', NULL, 'active'),
+(1699008390, 'renal', '$2y$10$MPgdqVlT.pfxusRT.4xFbuwHE2YHCHPKEmyl/aiDeqXAcxr2fbV7y', 'asfasgag@afasfa', 'Renal', '2023-11-17', 'Male', 'asgadads', '12481285712', 2, '2023-11-03 10:54:11', NULL, 'active', NULL, 'active'),
+(1699008906, 'agdag', '$2y$10$qiodW.6G2b42N5akckDfr.PQqNFr6m/JEWZ2AoOhPonAUIEXqhvwG', 'aoghouah@ojfouadhsd', 'Nefira', '2023-11-08', 'Female', 'asgagasg', '3532456346', 2, '2023-11-03 10:55:25', NULL, 'active', NULL, 'active'),
+(1699008959, 'nanda', '$2y$10$S.Lr0XU71eYd93gnHJYFkuNvwDlySLWMAa1kCobICvsOJUinbFDeq', 'sedhgisdfghi@olfosdhf', 'Nanda', NULL, 'Male', 'sdhgedfhdryxj', '24534563546457', 2, '2023-11-03 11:01:59', NULL, 'Active', NULL, 'active'),
 (2147483647, 'abisatria1', '$2y$10$lHoNtWimVtfPR7WomlzRx.KN4P08K1LhlUHWgF4L.xz0ziNjqGyOS', 'abisatria@gmail.com', 'Abi Satria', '2023-10-27', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 03:02:52', NULL, 'Active', NULL, 'active');
 
 --
@@ -276,6 +360,14 @@ INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `Dat
 --
 ALTER TABLE `Classes`
   ADD PRIMARY KEY (`ClassID`);
+
+--
+-- Indexes for table `ClassSubjects`
+--
+ALTER TABLE `ClassSubjects`
+  ADD PRIMARY KEY (`ClassSubjectID`),
+  ADD KEY `ClassID` (`ClassID`),
+  ADD KEY `SubjectID` (`SubjectID`);
 
 --
 -- Indexes for table `LogActivity`
@@ -313,6 +405,13 @@ ALTER TABLE `Subjects`
   ADD PRIMARY KEY (`SubjectID`);
 
 --
+-- Indexes for table `Teachers`
+--
+ALTER TABLE `Teachers`
+  ADD PRIMARY KEY (`TeacherID`),
+  ADD KEY `UserID` (`UserID`);
+
+--
 -- Indexes for table `Users`
 --
 ALTER TABLE `Users`
@@ -332,51 +431,82 @@ ALTER TABLE `Classes`
   MODIFY `ClassID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `ClassSubjects`
+--
+ALTER TABLE `ClassSubjects`
+  MODIFY `ClassSubjectID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `LogActivity`
 --
 ALTER TABLE `LogActivity`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
+--
+-- AUTO_INCREMENT for table `Material`
+--
+ALTER TABLE `Material`
+  MODIFY `MaterialID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `Students`
 --
 ALTER TABLE `Students`
-  MODIFY `StudentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `StudentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `Subjects`
 --
 ALTER TABLE `Subjects`
-  MODIFY `SubjectID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `SubjectID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `Teachers`
+--
+ALTER TABLE `Teachers`
+  MODIFY `TeacherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `ClassSubjects`
+--
+ALTER TABLE `ClassSubjects`
+  ADD CONSTRAINT `classsubjects_ibfk_1` FOREIGN KEY (`ClassID`) REFERENCES `Classes` (`ClassID`),
+  ADD CONSTRAINT `classsubjects_ibfk_2` FOREIGN KEY (`SubjectID`) REFERENCES `Subjects` (`SubjectID`);
+
+--
 -- Constraints for table `LogActivity`
 --
 ALTER TABLE `LogActivity`
-  ADD CONSTRAINT `LogActivity_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`);
+  ADD CONSTRAINT `LogActivity_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
 
 --
 -- Constraints for table `Material`
 --
 ALTER TABLE `Material`
-  ADD CONSTRAINT `FK_Material_Subject` FOREIGN KEY (`SubjectID`) REFERENCES `Subjects` (`SubjectID`);
+  ADD CONSTRAINT `FK_Material_Subject` FOREIGN KEY (`SubjectID`) REFERENCES `subjects` (`SubjectID`);
 
 --
 -- Constraints for table `Students`
 --
 ALTER TABLE `Students`
-  ADD CONSTRAINT `students_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`),
-  ADD CONSTRAINT `students_ibfk_3` FOREIGN KEY (`ClassID`) REFERENCES `Classes` (`ClassID`);
+  ADD CONSTRAINT `students_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`),
+  ADD CONSTRAINT `students_ibfk_3` FOREIGN KEY (`ClassID`) REFERENCES `classes` (`ClassID`);
+
+--
+-- Constraints for table `Teachers`
+--
+ALTER TABLE `Teachers`
+  ADD CONSTRAINT `teachers_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`);
 
 --
 -- Constraints for table `Users`
 --
 ALTER TABLE `Users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`RoleID`) REFERENCES `Role` (`RoleID`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`RoleID`) REFERENCES `role` (`RoleID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

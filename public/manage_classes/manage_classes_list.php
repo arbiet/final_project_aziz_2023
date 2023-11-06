@@ -71,9 +71,14 @@ $errors = array();
                             // Fetch class data from the database
                             $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
                             $page = isset($_GET['page']) ? $_GET['page'] : 1;
-                            $query = "SELECT * FROM Classes
-                                      WHERE ClassName LIKE '%$searchTerm%' OR HomeroomTeacher LIKE '%$searchTerm%' OR Curriculum LIKE '%$searchTerm%'
-                                      LIMIT 15 OFFSET " . ($page - 1) * 15;
+
+                            $query = "SELECT Classes.ClassID, Classes.ClassName, Classes.EducationLevel, Teachers.AcademicDegree, Users.FullName AS HomeroomTeacher, Classes.Curriculum, Classes.AcademicYear
+                            FROM Classes
+                            LEFT JOIN Teachers ON Classes.HomeroomTeacher = Teachers.TeacherID
+                            LEFT JOIN Users ON Teachers.UserID = Users.UserID
+                            WHERE Classes.ClassName LIKE '%$searchTerm%'
+                            LIMIT 15 OFFSET " . ($page - 1) * 15;
+
                             $result = $conn->query($query);
 
                             // Count total rows in the table
@@ -90,7 +95,16 @@ $errors = array();
                                     <td class="py-2"><?php echo $no++; ?></td>
                                     <td class="py-2"><?php echo $row['ClassName']; ?></td>
                                     <td class="py-2"><?php echo $row['EducationLevel']; ?></td>
-                                    <td class="py-2"><?php echo $row['HomeroomTeacher']; ?></td>
+                                    <td class="py-2">
+                                        <?php
+                                        if ($row['HomeroomTeacher']) {
+                                            echo $row['HomeroomTeacher'];
+                                            echo ' (' . $row['AcademicDegree'] . ')';
+                                        } else {
+                                            echo 'N/A';
+                                        }
+                                        ?>
+                                    </td>
                                     <td class="py-2"><?php echo $row['Curriculum']; ?></td>
                                     <td class="py-2"><?php echo $row['AcademicYear']; ?></td>
 
@@ -102,6 +116,10 @@ $errors = array();
                                         <a href="<?php echo $baseUrl; ?>public/manage_classes/manage_classes_update.php?id=<?php echo $row['ClassID'] ?>" class='bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                                             <i class='fas fa-edit mr-2'></i>
                                             <span>Edit</span>
+                                        </a>
+                                        <a href="<?php echo $baseUrl; ?>public/manage_classes/manage_classes_add_subject.php?id=<?php echo $row['ClassID'] ?>" class='bg-purple-500 hover-bg-purple-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                                            <i class='fas fa-plus mr-2'></i>
+                                            <span>Add Subject</span>
                                         </a>
                                         <a href="#" onclick="confirmDelete(<?php echo $row['ClassID']; ?>)" class='bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                                             <i class='fas fa-trash mr-2'></i>
