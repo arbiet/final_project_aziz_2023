@@ -46,7 +46,7 @@
         }
         ?>
         <?php
-        if ($_SESSION['RoleID'] === 1) {
+        if ($_SESSION['RoleID'] === 10) {
             // Menu "Manage Users" hanya ditampilkan jika peran pengguna adalah "Admin"
             echo '
             <li class="px-6 py-4 hover-bg-gray-700 cursor-pointer space-x-2 flex items-center">
