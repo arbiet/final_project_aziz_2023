@@ -4,7 +4,7 @@ require_once('../../database/connection.php');
 
 // Retrieve materials data based on the subject or your specific query
 $subjectID = 1; // Replace with the appropriate subject ID
-$materialQuery = "SELECT MaterialID, Sequence FROM Material WHERE SubjectID = $subjectID ORDER BY Sequence";
+$materialQuery = "SELECT MaterialID, Sequence FROM Materials WHERE SubjectID = $subjectID ORDER BY Sequence";
 $materialResult = $conn->query($materialQuery);
 
 $materialsData = array();
@@ -19,7 +19,7 @@ if (isset($_POST['materialID']) && isset($_POST['direction'])) {
   $direction = $_POST['direction'];
 
   // Get the current material sequence
-  $query = "SELECT Sequence FROM Material WHERE MaterialID = $materialID";
+  $query = "SELECT Sequence FROM Materials WHERE MaterialID = $materialID";
   $result = $conn->query($query);
 
   if ($result->num_rows > 0) {
@@ -32,9 +32,9 @@ if (isset($_POST['materialID']) && isset($_POST['direction'])) {
       if ($currentSequence > 1) {
         $previousMaterialID = $materialsData[$currentSequence - 2]['MaterialID'];
         $newSequence = $currentSequence - 1;
-        $updateQuery = "UPDATE Material SET Sequence = $newSequence WHERE MaterialID = $materialID";
+        $updateQuery = "UPDATE Materials SET Sequence = $newSequence WHERE MaterialID = $materialID";
         $conn->query($updateQuery);
-        $updateQuery = "UPDATE Material SET Sequence = $currentSequence WHERE MaterialID = $previousMaterialID";
+        $updateQuery = "UPDATE Materials SET Sequence = $currentSequence WHERE MaterialID = $previousMaterialID";
         $conn->query($updateQuery);
         echo "success";
       } else {
@@ -45,9 +45,9 @@ if (isset($_POST['materialID']) && isset($_POST['direction'])) {
       if ($currentSequence < count($materialsData)) {
         $nextMaterialID = $materialsData[$currentSequence]['MaterialID'];
         $newSequence = $currentSequence + 1;
-        $updateQuery = "UPDATE Material SET Sequence = $newSequence WHERE MaterialID = $materialID";
+        $updateQuery = "UPDATE Materials SET Sequence = $newSequence WHERE MaterialID = $materialID";
         $conn->query($updateQuery);
-        $updateQuery = "UPDATE Material SET Sequence = $currentSequence WHERE MaterialID = $nextMaterialID";
+        $updateQuery = "UPDATE Materials SET Sequence = $currentSequence WHERE MaterialID = $nextMaterialID";
         $conn->query($updateQuery);
         echo "success";
       } else {

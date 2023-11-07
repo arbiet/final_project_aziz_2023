@@ -41,7 +41,7 @@ if (isset($_GET['id'])) {
 
     // Retrieve materials associated with the subject
     $materialQuery = "SELECT m.MaterialID, m.TitleMaterial, m.Type, m.Content, m.Link, m.Sequence
-                  FROM Material m
+                  FROM Materials m
                   WHERE m.SubjectID = $subjectID
                   ORDER BY m.Sequence";
     $materialResult = $conn->query($materialQuery);

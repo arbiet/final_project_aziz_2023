@@ -34,6 +34,27 @@ if (isset($_SESSION['UserID'])) {
   }
 }
 
+// Find the index of the currently displayed material
+$currentMaterialIndex = -1;
+if (isset($_GET['material'])) {
+  $currentMaterialID = $_GET['material'];
+  foreach ($materials as $index => $material) {
+    if ($material['MaterialID'] == $currentMaterialID) {
+      $currentMaterialIndex = $index;
+      break;
+    }
+  }
+}
+
+// Determine the previous and next material links
+$previousMaterialLink = null;
+$nextMaterialLink = null;
+if ($currentMaterialIndex > 0) {
+  $previousMaterialLink = "subjects_detail.php?subject_id=$subjectID&material=" . $materials[$currentMaterialIndex - 1]['MaterialID'];
+}
+if ($currentMaterialIndex < count($materials) - 1) {
+  $nextMaterialLink = "subjects_detail.php?subject_id=$subjectID&material=" . $materials[$currentMaterialIndex + 1]['MaterialID'];
+}
 ?>
 
 <body class="overflow-hidden">
@@ -47,7 +68,13 @@ if (isset($_SESSION['UserID'])) {
   <!-- Your existing header code can go here -->
   <div class="h-screen flex flex-row overflow-hidden sc-hide">
     <!-- Sidebar for Materials -->
-    <div class="bg-gray-200 w-2/12">
+    <div class="bg-gray-200 w-3/12 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
+      <div class="p-4 hover:bg-gray-300">
+        <a href="../systems/dashboard_student.php" class=" hover:text-blue-500">
+          <i class="fas fa-arrow-left mr-2"></i>
+          Back
+        </a>
+      </div>
       <h3 class="text-lg font-semibold p-4">Materials</h3>
       <ul class="list-inside">
         <!-- Special list item for "start" with an icon -->
@@ -59,13 +86,13 @@ if (isset($_SESSION['UserID'])) {
         <!-- Regular list items for other materials with icons and hover effect -->
         <?php foreach ($materials as $material) { ?>
           <li class="py-2 px-4 hover:bg-gray-300">
-            <a href="<?php echo $material['Link']; ?>" class="hover:text-blue-500">
+            <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=<?php echo $material['MaterialID']; ?>" class="hover:text-blue-500">
               <i class="fas fa-file-alt mr-2"></i> <?php echo $material['TitleMaterial']; ?>
             </a>
           </li>
         <?php } ?>
         <!-- Special list item for "end" with an icon -->
-        <li class="py-2 px-4 hover:bg-gray-300">
+        <li class="py-2 px-4 hover-bg-gray-300">
           <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=end" class="hover:text-blue-500">
             <i class="fas fa-stop-circle mr-2"></i> End
           </a>
@@ -73,14 +100,46 @@ if (isset($_SESSION['UserID'])) {
       </ul>
     </div>
     <!-- Main Content -->
-    <div class="w-10/12">
+    <div class="w-9/12 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
       <!-- Main Content -->
       <main class="container mx-auto mt-4 p-4">
-        <h2 class="text-3xl font-semibold mb-4">Subject Details: <?php echo $subjectData['SubjectName']; ?></h2>
+        <!-- navigation previous and next -->
+        <div class="flex justify-between">
+          <?php if ($_GET['material'] !== 'start') { ?>
+            <?php if ($previousMaterialLink) { ?>
+              <a href="<?php echo $previousMaterialLink; ?>" class="p-4 hover:bg-gray-300 hover:text-blue-500 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Previous Material
+              </a>
+            <?php } ?>
+          <?php } ?>
+
+          <?php if ($_GET['material'] !== 'end') { ?>
+            <?php if ($nextMaterialLink) { ?>
+              <a href="<?php echo $nextMaterialLink; ?>" class="p-4 hover:bg-gray-300 hover:text-blue-500 flex items-center">
+                <?php if ($_GET['material'] !== 'finish') { ?>
+                  Next Material
+                  <i class="fas fa-arrow-right ml-2"></i>
+                <?php } else { ?>
+                  <i class="fas fa-arrow-right mr-2"></i>
+                  Finish
+                <?php } ?>
+              </a>
+            <?php } ?>
+          <?php } else { ?>
+            <a href="../systems/dashboard_student.php" class="p-4 hover:bg-gray-300 hover:text-blue-500 flex items-center">
+              <i class="fas fa-arrow-right mr-2"></i>
+              Finish
+            </a>
+          <?php } ?>
+        </div>
+
+
+        <h2 class="text-3xl font-semibold mb-4"><?php echo $subjectData['SubjectName']; ?></h2>
 
         <?php if (isset($_GET['material'])) : ?>
-          <?php $materialType = $_GET['material']; ?>
-          <?php if ($materialType === 'start') : ?>
+          <?php $material_id = $_GET['material']; ?>
+          <?php if ($material_id === 'start') : ?>
             <div class="bg-white rounded p-4 shadow relative shadow:md mb-4">
               <i class="fas fa-play-circle text-5xl text-blue-500 mb-4"></i>
               <p class="text-2xl font-semibold">Welcome to the Beginning</p>
@@ -90,7 +149,7 @@ if (isset($_SESSION['UserID'])) {
               <p class="text-lg">Difficulty: <?= $subjectData['DifficultyLevel']; ?></p>
               <p class="text-lg">Teaching Method: <?= $subjectData['TeachingMethod']; ?></p>
             </div>
-          <?php elseif ($materialType === 'end') : ?>
+          <?php elseif ($material_id === 'end') : ?>
             <div class="bg-white rounded p-4 shadow relative shadow:md mb-4">
               <i class="fas fa-stop-circle text-5xl text-red-500 mb-4"></i>
               <p class="text-2xl font-semibold">Congratulations, You've Finished!</p>
@@ -100,6 +159,19 @@ if (isset($_SESSION['UserID'])) {
               <p class="text-lg">Difficulty: <?= $subjectData['DifficultyLevel']; ?></p>
               <p class="text-lg">Teaching Method: <?= $subjectData['TeachingMethod']; ?></p>
             </div>
+          <?php else : ?>
+            <?php
+            // Check if the material_id is a valid material ID
+            $materialQuery = "SELECT * FROM Materials WHERE MaterialID = $material_id AND SubjectID = $subjectID";
+            $materialResult = mysqli_query($conn, $materialQuery);
+
+            if ($materialResult && mysqli_num_rows($materialResult) > 0) {
+              $materialData = mysqli_fetch_assoc($materialResult);
+              include($materialData['Link']); // Include the material file
+            } else {
+              echo "Material not found or invalid ID.";
+            }
+            ?>
           <?php endif; ?>
         <?php else : ?>
           <!-- Display subject information if no material type is specified -->
@@ -115,14 +187,8 @@ if (isset($_SESSION['UserID'])) {
           </div>
         <?php endif; ?>
       </main>
+      <!-- Footer -->
     </div>
-
-    <!-- Footer -->
-    <footer class="fixed bottom-0 w-full p-4 text-gray-600 ">
-      <div class="container mx-auto text-center">
-        &copy; <?php echo date('Y'); ?> <?php echo $baseTitle; ?> - All Rights Reserved
-      </div>
-    </footer>
   </div>
 </body>
 

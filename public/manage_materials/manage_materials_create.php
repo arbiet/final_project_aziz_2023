@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors['title_material'] = "Title Material is required.";
     }
     // Query to get the maximum sequence for the given subject_id
-    $maxSequenceQuery = "SELECT MAX(Sequence) AS MaxSequence FROM Material WHERE SubjectID = ?";
+    $maxSequenceQuery = "SELECT MAX(Sequence) AS MaxSequence FROM Materials WHERE SubjectID = ?";
     $stmt = $conn->prepare($maxSequenceQuery);
     $stmt->bind_param("s", $subject_id);
     $stmt->execute();
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // File upload successful, update the $link variable with the file path
                     $link = '../materials_data/' . $new_file_name;
 
-                    $query = "INSERT INTO Material (SubjectID, TitleMaterial, Type, Content, Link, Sequence)
+                    $query = "INSERT INTO Materials (SubjectID, TitleMaterial, Type, Content, Link, Sequence)
                   VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = $conn->prepare($query);
                     $stmt->bind_param(
@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // If there are no errors, insert the data into the database
         if (empty($errors)) {
-            $query = "INSERT INTO Material (SubjectID, TitleMaterial, Type, Content, Link, Sequence)
+            $query = "INSERT INTO Materials (SubjectID, TitleMaterial, Type, Content, Link, Sequence)
                   VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
@@ -201,7 +201,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             title: "Success",
             text: "Material created successfully."
         }).then(function() {
-            window.location.href = "manage_subjects_list.php";
+            window.location.href = "manage_materials_create.php";
         });
     </script>';
     }
