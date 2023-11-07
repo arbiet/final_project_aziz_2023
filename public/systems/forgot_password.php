@@ -25,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if ($user) {
     // Reset the password to "12345678"
-    $new_password = hash('sha256', '12345678');
+    $password = "12345678";
+    $new_password = hash('sha256', $password);
     $update_query = "UPDATE users SET password=? WHERE email=?";
     $update_stmt = $conn->prepare($update_query);
     $update_stmt->bind_param('ss', $new_password, $email);
@@ -77,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <?php endforeach;
           }
           ?>
-          <form action="forgot-password.php" method="POST" class="mb-6">
+          <form action="forgot_password.php" method="POST" class="mb-6">
             <label for="email" class="block text-left text-gray-600 mb-2">Email</label>
             <input type="email" id="email" name="email" class="border border-gray-300 rounded-full px-4 py-2 w-full mb-2" required>
 

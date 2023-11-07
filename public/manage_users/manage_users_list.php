@@ -123,6 +123,10 @@ $errors = array();
                                             <i class='fas fa-sync-alt mr-2'></i>
                                             <span>Status</span>
                                         </a>
+                                        <a href="<?php echo $baseUrl; ?>public/manage_users/manage_users_reset_password.php?id=<?php echo $row['UserID']; ?>" class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm">
+                                            <i class="fas fa-key mr-2"></i>
+                                            <span>Reset Password</span>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php
