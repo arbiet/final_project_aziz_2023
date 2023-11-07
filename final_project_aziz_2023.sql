@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2023 at 12:15 AM
+-- Generation Time: Nov 07, 2023 at 11:11 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `final_project_aziz_2023`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Answers`
+--
+
+CREATE TABLE `Answers` (
+  `AnswerID` int(11) NOT NULL,
+  `AnswerText` text NOT NULL,
+  `IsCorrect` tinyint(1) NOT NULL,
+  `QuestionID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Answers`
+--
+
+INSERT INTO `Answers` (`AnswerID`, `AnswerText`, `IsCorrect`, `QuestionID`) VALUES
+(9, 'A) London', 0, 4),
+(10, 'B) Madrid', 0, 4),
+(11, 'C) Paris', 1, 4),
+(12, 'D) Rome', 0, 4),
+(13, 'True', 0, 5),
+(14, 'False', 1, 5),
+(15, 'A) 5', 0, 6),
+(16, 'B) 9', 0, 6),
+(17, 'C) 10', 1, 6),
+(18, 'D) 12', 0, 6);
 
 -- --------------------------------------------------------
 
@@ -190,15 +219,41 @@ INSERT INTO `LogActivity` (`LogID`, `UserID`, `ActivityDescription`, `ActivityTi
 (102, 137648118, 'Subject with SubjectID: 4 has been deleted.', '2023-11-06 19:28:19'),
 (103, 137648118, 'User logged out', '2023-11-06 19:37:17'),
 (104, 137648118, 'User logged in', '2023-11-06 19:37:23'),
-(105, 137648118, 'User logged in', '2023-11-06 19:37:53');
+(105, 137648118, 'User logged in', '2023-11-06 19:37:53'),
+(106, 137648118, 'User logged in', '2023-11-06 23:54:22'),
+(107, 137648118, 'Material created: asdgasgads', '2023-11-07 00:12:24'),
+(108, 137648118, 'Material created: Material 1', '2023-11-07 00:20:23'),
+(109, 137648118, 'Material created: Material 2', '2023-11-07 00:21:21'),
+(110, 137648118, 'Material created: Material 3', '2023-11-07 00:23:16'),
+(111, 137648118, 'Material created: Material 4', '2023-11-07 00:33:26'),
+(112, 137648118, 'Material created: Material 1', '2023-11-07 00:51:49'),
+(113, 137648118, 'Material created: Material 1', '2023-11-07 00:59:02'),
+(114, 137648118, 'Material created: Material 2', '2023-11-07 00:59:56'),
+(115, 137648118, 'Material created: Material2', '2023-11-07 01:07:29'),
+(116, 137648118, 'Material created: Material 2', '2023-11-07 01:41:00'),
+(117, 137648118, 'Material created: Material 1', '2023-11-07 01:57:44'),
+(118, 137648118, 'User logged in', '2023-11-07 04:45:09'),
+(119, 137648118, 'User logged out', '2023-11-07 04:59:48'),
+(120, 137648118, 'User logged in', '2023-11-07 05:00:40'),
+(121, 137648118, 'User logged out', '2023-11-07 05:01:19'),
+(122, 137648118, 'User logged in', '2023-11-07 05:01:58'),
+(123, 137648118, 'User logged out', '2023-11-07 05:08:52'),
+(124, 137648118, 'User logged in', '2023-11-07 05:16:21'),
+(125, 137648118, 'User logged out', '2023-11-07 05:16:31'),
+(126, 65405, 'User logged in', '2023-11-07 05:16:44'),
+(127, 65405, 'User logged in', '2023-11-07 05:27:47'),
+(128, 137648118, 'User logged in', '2023-11-07 05:31:13'),
+(129, 65405, 'User logged in', '2023-11-07 05:58:02'),
+(130, 65405, 'User logged out', '2023-11-07 06:23:09'),
+(131, 65405, 'User logged in', '2023-11-07 06:24:30');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Material`
+-- Table structure for table `Materials`
 --
 
-CREATE TABLE `Material` (
+CREATE TABLE `Materials` (
   `MaterialID` int(11) NOT NULL,
   `SubjectID` int(11) DEFAULT NULL,
   `TitleMaterial` varchar(255) DEFAULT NULL,
@@ -207,6 +262,38 @@ CREATE TABLE `Material` (
   `Link` varchar(255) DEFAULT NULL,
   `Sequence` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Materials`
+--
+
+INSERT INTO `Materials` (`MaterialID`, `SubjectID`, `TitleMaterial`, `Type`, `Content`, `Link`, `Sequence`) VALUES
+(7, 1, 'Material 1', 'Type A', 'Material 1', '../materials_data/1_Material1.php', 1),
+(10, 1, 'Material 2', 'Type B', 'Material 1', '../materials_data/1_Material2.php', 2),
+(11, 2, 'Material 1', 'Type C', 'Material 1', '../materials_data/2_Material1.php', 1),
+(12, 1, 'Material 3', 'Type B', 'Material 1', '../materials_data/1_Material2.php', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Questions`
+--
+
+CREATE TABLE `Questions` (
+  `QuestionID` int(11) NOT NULL,
+  `QuestionText` text NOT NULL,
+  `QuestionType` enum('Multiple Choice','True/False') NOT NULL,
+  `TestID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Questions`
+--
+
+INSERT INTO `Questions` (`QuestionID`, `QuestionText`, `QuestionType`, `TestID`) VALUES
+(4, 'What is the capital of France?', 'Multiple Choice', 1),
+(5, 'The Earth is round. (True/False)', 'True/False', 1),
+(6, 'What is 7 + 3?', 'Multiple Choice', 2);
 
 -- --------------------------------------------------------
 
@@ -227,6 +314,20 @@ INSERT INTO `Role` (`RoleID`, `RoleName`) VALUES
 (1, 'Admin'),
 (3, 'Student'),
 (2, 'Teacher');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `StudentResponses`
+--
+
+CREATE TABLE `StudentResponses` (
+  `ResponseID` int(11) NOT NULL,
+  `StudentID` int(11) DEFAULT NULL,
+  `TestID` int(11) DEFAULT NULL,
+  `QuestionID` int(11) DEFAULT NULL,
+  `AnswerID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -272,17 +373,18 @@ CREATE TABLE `Subjects` (
   `DurationHours` int(11) DEFAULT NULL,
   `CurriculumFramework` varchar(100) DEFAULT NULL,
   `AssessmentMethod` varchar(100) DEFAULT NULL,
-  `StudentEngagement` varchar(100) DEFAULT NULL
+  `StudentEngagement` varchar(100) DEFAULT NULL,
+  `TeacherID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `Subjects`
 --
 
-INSERT INTO `Subjects` (`SubjectID`, `SubjectName`, `DifficultyLevel`, `TeachingMethod`, `LearningObjective`, `DurationHours`, `CurriculumFramework`, `AssessmentMethod`, `StudentEngagement`) VALUES
-(1, 'Jaringan Dasar', 'Fase E', 'Pembelajaran Daring', 'Pada akhir mata pelajaran Jaringan Dasar, siswa diharapkan mampu memahami prinsip dasar jaringan komputer, termasuk konsep dasar tentang protokol, alamat IP, topologi jaringan, dan perangkat jaringan. Siswa akan dapat merancang, mengonfigurasi, dan mengelola jaringan kecil hingga menengah. Mereka juga akan memahami keamanan jaringan dasar dan protokol yang digunakan untuk melindungi jaringan. Selain itu, siswa akan dapat menjelaskan aplikasi jaringan yang umumnya digunakan dalam konteks bisnis dan mengidentifikasi tantangan dan peluang yang terkait dengan jaringan komputer dalam dunia nyata.', 40, 'Kurikulum Merdeka', 'Ujian Tertulis, Ujian Praktek, Ujian Lisan', 'Diskusi Kelompok'),
-(2, 'Sistem Operasi', 'Fase E', 'Pembelajaran daring', 'Pada akhir mata pelajaran Sistem Operasi, siswa diharapkan mampu memahami konsep dasar tentang sistem operasi, manajemen sumber daya, dan interaksi antara perangkat keras dan perangkat lunak dalam komputer. Mereka akan dapat menginstal, mengkonfigurasi, dan mengelola sistem operasi komputer, serta menyelesaikan masalah yang berkaitan dengan sistem operasi. Siswa juga akan memahami pentingnya keamanan sistem operasi dan prinsip-prinsip manajemen hak akses.', 50, 'Kurikulum Merdeka', 'Ujian Tertulis, Proyek Praktikum', 'Diskusi kelompok, Praktikum'),
-(3, 'Pemrograman Lanjut', 'Fase F', 'Pembelajaran tatap muka', 'Pada akhir mata pelajaran Pemrograman Lanjut, siswa diharapkan mampu menguasai konsep dan teknik pemrograman yang lebih kompleks. Mereka akan dapat merancang dan mengembangkan perangkat lunak yang rumit, menggunakan bahasa pemrograman yang beragam seperti Java, Python, dan C++. Siswa akan memahami konsep berorientasi objek, pemrograman berbasis peristiwa, serta manajemen memori. Selain itu, mereka akan dapat menerapkan praktik-praktik pengujian dan pemecahan masalah yang efektif dalam pengembangan perangkat lunak.', 60, 'Kurikulum Merdeka', ' Proyek pengembangan perangkat lunak, Ujian praktikum', 'Diskusi kelompok, Proyek tim');
+INSERT INTO `Subjects` (`SubjectID`, `SubjectName`, `DifficultyLevel`, `TeachingMethod`, `LearningObjective`, `DurationHours`, `CurriculumFramework`, `AssessmentMethod`, `StudentEngagement`, `TeacherID`) VALUES
+(1, 'Jaringan Dasar', 'Fase E', 'Pembelajaran Daring', 'Pada akhir mata pelajaran Jaringan Dasar, siswa diharapkan mampu memahami prinsip dasar jaringan komputer, termasuk konsep dasar tentang protokol, alamat IP, topologi jaringan, dan perangkat jaringan. Siswa akan dapat merancang, mengonfigurasi, dan mengelola jaringan kecil hingga menengah. Mereka juga akan memahami keamanan jaringan dasar dan protokol yang digunakan untuk melindungi jaringan. Selain itu, siswa akan dapat menjelaskan aplikasi jaringan yang umumnya digunakan dalam konteks bisnis dan mengidentifikasi tantangan dan peluang yang terkait dengan jaringan komputer dalam dunia nyata.', 40, 'Kurikulum Merdeka', 'Ujian Tertulis, Ujian Praktek, Ujian Lisan', 'Diskusi Kelompok', 1),
+(2, 'Sistem Operasi', 'Fase E', 'Pembelajaran daring', 'Pada akhir mata pelajaran Sistem Operasi, siswa diharapkan mampu memahami konsep dasar tentang sistem operasi, manajemen sumber daya, dan interaksi antara perangkat keras dan perangkat lunak dalam komputer. Mereka akan dapat menginstal, mengkonfigurasi, dan mengelola sistem operasi komputer, serta menyelesaikan masalah yang berkaitan dengan sistem operasi. Siswa juga akan memahami pentingnya keamanan sistem operasi dan prinsip-prinsip manajemen hak akses.', 50, 'Kurikulum Merdeka', 'Ujian Tertulis, Proyek Praktikum', 'Diskusi kelompok, Praktikum', 2),
+(3, 'Pemrograman Lanjut', 'Fase F', 'Pembelajaran tatap muka', 'Pada akhir mata pelajaran Pemrograman Lanjut, siswa diharapkan mampu menguasai konsep dan teknik pemrograman yang lebih kompleks. Mereka akan dapat merancang dan mengembangkan perangkat lunak yang rumit, menggunakan bahasa pemrograman yang beragam seperti Java, Python, dan C++. Siswa akan memahami konsep berorientasi objek, pemrograman berbasis peristiwa, serta manajemen memori. Selain itu, mereka akan dapat menerapkan praktik-praktik pengujian dan pemecahan masalah yang efektif dalam pengembangan perangkat lunak.', 60, 'Kurikulum Merdeka', ' Proyek pengembangan perangkat lunak, Ujian praktikum', 'Diskusi kelompok, Proyek tim', 3);
 
 -- --------------------------------------------------------
 
@@ -308,6 +410,29 @@ INSERT INTO `Teachers` (`TeacherID`, `NIP`, `AcademicDegree`, `EducationLevel`, 
 (2, '14125323523', 'S.Pd', 'Bachelor Degree', 'Active', 1699008117),
 (3, '34235235', 'S. Kom', 'asgasg', 'Active', 1699008390),
 (4, '23582358253', 'S.T.', 'Banchelor Degree', 'active', 1699008906);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Tests`
+--
+
+CREATE TABLE `Tests` (
+  `TestID` int(11) NOT NULL,
+  `TestName` varchar(255) NOT NULL,
+  `TestType` enum('Pretest','Post-test') NOT NULL,
+  `MaterialID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Tests`
+--
+
+INSERT INTO `Tests` (`TestID`, `TestName`, `TestType`, `MaterialID`) VALUES
+(1, 'Pretest Example 1', 'Pretest', 7),
+(2, 'Post-test Example 1', 'Post-test', 7),
+(3, 'Pretest Example 2', 'Pretest', 10),
+(4, 'Post-test Example 2', 'Post-test', 10);
 
 -- --------------------------------------------------------
 
@@ -339,8 +464,8 @@ CREATE TABLE `Users` (
 
 INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `DateOfBirth`, `Gender`, `Address`, `PhoneNumber`, `RoleID`, `AccountCreationDate`, `LastLogin`, `AccountStatus`, `ProfilePictureURL`, `ActivationStatus`) VALUES
 (0, 'ikimukti', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '19103020046@unpkediri.ac.id', 'Firmansyah Mukti Wijaya', '2023-10-12', 'Male', 'Nglaban 1111', '081216318022', 3, '2023-11-03 10:17:58', '2023-11-03 17:17:58', NULL, '653e5a409b4fb.jpeg', 'active'),
-(65405, 'ahmadhasby', '$2y$10$cDLCzK6Rq0IISeN.nI46pOs3PzPgmREX0rbhPlvtPg7iPuw2sRGNK', 'ahmadhasby@gmail.com', 'Ahmad Hasby Maulana', '2023-10-10', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:17:15', NULL, NULL, NULL, 'active'),
-(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-11-06 19:37:53', '2023-11-07 02:37:53', NULL, 'default.png', 'active'),
+(65405, 'ahmadhasby', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'ahmadhasby@gmail.com', 'Ahmad Hasby Maulana', '2023-10-10', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-11-07 06:24:30', '2023-11-07 13:24:30', NULL, 'default.png', 'active'),
+(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-11-07 05:31:13', '2023-11-07 12:31:13', NULL, 'default.png', 'active'),
 (1698716970, 'akbarsandi', '$2y$10$GzsUjuYCcfymGzNusQgul.fUn42ETSFy71ECQpYe8NTVRi1z45SoS', 'akbarsandi@gmail.com', 'Akbar Sandi Pratama', '2023-10-12', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:17:23', NULL, NULL, NULL, 'active'),
 (1698719401, 'andrean', '$2y$10$hELFb0BIW5L8uwyVqMLmd.hG7L2avzq/dojKCui.XW1XJOffghcma', 'andreanprasetyo@gmail.com', 'Andrean Prasetyo', '2023-02-07', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:30:01', NULL, 'active', NULL, 'active'),
 (1699006643, 'paijo', '$2y$10$sYyoVnssegJ91BQO8RC6qOFr3XWgUAvNFKcI/WPO8s63Yi8KmGIMu', 'sdhgushg@hfugihdf.d', 'isdhgouhsduog', '2023-11-22', 'Male', 'agdsgdfghdfhg', 'dgsdfhgdf', 3, '2023-11-03 10:17:23', NULL, 'active', NULL, 'active'),
@@ -349,11 +474,18 @@ INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `Dat
 (1699008390, 'renal', '$2y$10$MPgdqVlT.pfxusRT.4xFbuwHE2YHCHPKEmyl/aiDeqXAcxr2fbV7y', 'asfasgag@afasfa', 'Renal', '2023-11-17', 'Male', 'asgadads', '12481285712', 2, '2023-11-03 10:54:11', NULL, 'active', NULL, 'active'),
 (1699008906, 'agdag', '$2y$10$qiodW.6G2b42N5akckDfr.PQqNFr6m/JEWZ2AoOhPonAUIEXqhvwG', 'aoghouah@ojfouadhsd', 'Nefira', '2023-11-08', 'Female', 'asgagasg', '3532456346', 2, '2023-11-03 10:55:25', NULL, 'active', NULL, 'active'),
 (1699008959, 'nanda', '$2y$10$S.Lr0XU71eYd93gnHJYFkuNvwDlySLWMAa1kCobICvsOJUinbFDeq', 'sedhgisdfghi@olfosdhf', 'Nanda', NULL, 'Male', 'sdhgedfhdryxj', '24534563546457', 2, '2023-11-03 11:01:59', NULL, 'Active', NULL, 'active'),
-(2147483647, 'abisatria1', '$2y$10$lHoNtWimVtfPR7WomlzRx.KN4P08K1LhlUHWgF4L.xz0ziNjqGyOS', 'abisatria@gmail.com', 'Abi Satria', '2023-10-27', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 03:02:52', NULL, 'Active', NULL, 'active');
+(2147483647, 'abisatria', '$2y$10$lHoNtWimVtfPR7WomlzRx.KN4P08K1LhlUHWgF4L.xz0ziNjqGyOS', 'abisatria@gmail.com', 'Abi Satria', '2023-10-27', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-11-07 05:00:21', NULL, 'Active', NULL, 'active');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `Answers`
+--
+ALTER TABLE `Answers`
+  ADD PRIMARY KEY (`AnswerID`),
+  ADD KEY `QuestionID` (`QuestionID`);
 
 --
 -- Indexes for table `Classes`
@@ -377,11 +509,18 @@ ALTER TABLE `LogActivity`
   ADD KEY `UserID` (`UserID`);
 
 --
--- Indexes for table `Material`
+-- Indexes for table `Materials`
 --
-ALTER TABLE `Material`
+ALTER TABLE `Materials`
   ADD PRIMARY KEY (`MaterialID`),
   ADD KEY `FK_Material_Subject` (`SubjectID`);
+
+--
+-- Indexes for table `Questions`
+--
+ALTER TABLE `Questions`
+  ADD PRIMARY KEY (`QuestionID`),
+  ADD KEY `TestID` (`TestID`);
 
 --
 -- Indexes for table `Role`
@@ -389,6 +528,16 @@ ALTER TABLE `Material`
 ALTER TABLE `Role`
   ADD PRIMARY KEY (`RoleID`),
   ADD UNIQUE KEY `RoleName` (`RoleName`);
+
+--
+-- Indexes for table `StudentResponses`
+--
+ALTER TABLE `StudentResponses`
+  ADD PRIMARY KEY (`ResponseID`),
+  ADD KEY `StudentID` (`StudentID`),
+  ADD KEY `TestID` (`TestID`),
+  ADD KEY `QuestionID` (`QuestionID`),
+  ADD KEY `AnswerID` (`AnswerID`);
 
 --
 -- Indexes for table `Students`
@@ -402,7 +551,8 @@ ALTER TABLE `Students`
 -- Indexes for table `Subjects`
 --
 ALTER TABLE `Subjects`
-  ADD PRIMARY KEY (`SubjectID`);
+  ADD PRIMARY KEY (`SubjectID`),
+  ADD KEY `TeacherID` (`TeacherID`);
 
 --
 -- Indexes for table `Teachers`
@@ -410,6 +560,13 @@ ALTER TABLE `Subjects`
 ALTER TABLE `Teachers`
   ADD PRIMARY KEY (`TeacherID`),
   ADD KEY `UserID` (`UserID`);
+
+--
+-- Indexes for table `Tests`
+--
+ALTER TABLE `Tests`
+  ADD PRIMARY KEY (`TestID`),
+  ADD KEY `MaterialID` (`MaterialID`);
 
 --
 -- Indexes for table `Users`
@@ -423,6 +580,12 @@ ALTER TABLE `Users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `Answers`
+--
+ALTER TABLE `Answers`
+  MODIFY `AnswerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `Classes`
@@ -440,13 +603,25 @@ ALTER TABLE `ClassSubjects`
 -- AUTO_INCREMENT for table `LogActivity`
 --
 ALTER TABLE `LogActivity`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
--- AUTO_INCREMENT for table `Material`
+-- AUTO_INCREMENT for table `Materials`
 --
-ALTER TABLE `Material`
-  MODIFY `MaterialID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Materials`
+  MODIFY `MaterialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `Questions`
+--
+ALTER TABLE `Questions`
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `StudentResponses`
+--
+ALTER TABLE `StudentResponses`
+  MODIFY `ResponseID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `Students`
@@ -467,8 +642,20 @@ ALTER TABLE `Teachers`
   MODIFY `TeacherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `Tests`
+--
+ALTER TABLE `Tests`
+  MODIFY `TestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `Answers`
+--
+ALTER TABLE `Answers`
+  ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`QuestionID`) REFERENCES `Questions` (`QuestionID`);
 
 --
 -- Constraints for table `ClassSubjects`
@@ -481,13 +668,28 @@ ALTER TABLE `ClassSubjects`
 -- Constraints for table `LogActivity`
 --
 ALTER TABLE `LogActivity`
-  ADD CONSTRAINT `LogActivity_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+  ADD CONSTRAINT `LogActivity_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `Material`
+-- Constraints for table `Materials`
 --
-ALTER TABLE `Material`
+ALTER TABLE `Materials`
   ADD CONSTRAINT `FK_Material_Subject` FOREIGN KEY (`SubjectID`) REFERENCES `subjects` (`SubjectID`);
+
+--
+-- Constraints for table `Questions`
+--
+ALTER TABLE `Questions`
+  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`TestID`) REFERENCES `Tests` (`TestID`);
+
+--
+-- Constraints for table `StudentResponses`
+--
+ALTER TABLE `StudentResponses`
+  ADD CONSTRAINT `studentresponses_ibfk_1` FOREIGN KEY (`StudentID`) REFERENCES `Students` (`StudentID`),
+  ADD CONSTRAINT `studentresponses_ibfk_2` FOREIGN KEY (`TestID`) REFERENCES `Tests` (`TestID`),
+  ADD CONSTRAINT `studentresponses_ibfk_3` FOREIGN KEY (`QuestionID`) REFERENCES `Questions` (`QuestionID`),
+  ADD CONSTRAINT `studentresponses_ibfk_4` FOREIGN KEY (`AnswerID`) REFERENCES `Answers` (`AnswerID`);
 
 --
 -- Constraints for table `Students`
@@ -497,10 +699,22 @@ ALTER TABLE `Students`
   ADD CONSTRAINT `students_ibfk_3` FOREIGN KEY (`ClassID`) REFERENCES `classes` (`ClassID`);
 
 --
+-- Constraints for table `Subjects`
+--
+ALTER TABLE `Subjects`
+  ADD CONSTRAINT `subjects_ibfk_1` FOREIGN KEY (`TeacherID`) REFERENCES `Teachers` (`TeacherID`);
+
+--
 -- Constraints for table `Teachers`
 --
 ALTER TABLE `Teachers`
   ADD CONSTRAINT `teachers_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`);
+
+--
+-- Constraints for table `Tests`
+--
+ALTER TABLE `Tests`
+  ADD CONSTRAINT `tests_ibfk_1` FOREIGN KEY (`MaterialID`) REFERENCES `materials` (`MaterialID`);
 
 --
 -- Constraints for table `Users`
