@@ -38,6 +38,19 @@ if (isset($_GET['id'])) {
             $classesData[] = $row;
         }
     }
+
+    // Retrieve materials associated with the subject
+    $materialQuery = "SELECT m.MaterialID, m.TitleMaterial, m.Type, m.Content, m.Link, m.Sequence
+                  FROM Material m
+                  WHERE m.SubjectID = $subjectID
+                  ORDER BY m.Sequence";
+    $materialResult = $conn->query($materialQuery);
+
+    if ($materialResult->num_rows > 0) {
+        while ($materialRow = $materialResult->fetch_assoc()) {
+            $materialsData[] = $materialRow;
+        }
+    }
 }
 ?>
 
@@ -88,6 +101,65 @@ if (isset($_GET['id'])) {
                             <p><strong>Assessment Method:</strong> <?php echo $subjectData['AssessmentMethod']; ?></p>
                             <p><strong>Student Engagement:</strong> <?php echo $subjectData['StudentEngagement']; ?></p>
                         </div>
+                        <!-- Material Details -->
+                        <?php if (!empty($materialsData)) : ?>
+                            <div class="mt-4 bg-white shadow-md p-4 rounded-md">
+                                <h3 class="text-lg font-semibold text-gray-800">Materials for this Subject</h3>
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-100">
+                                        <tr>
+                                            <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Material Title</th>
+                                            <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                            <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link</th>
+                                            <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sequence</th>
+                                            <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <?php foreach ($materialsData as $index => $material) : ?>
+                                            <tr>
+                                                <td class="px-2 py-2 whitespace-nowrap">
+                                                    <?php echo $material['TitleMaterial']; ?>
+                                                </td>
+                                                <td class="px-2 py-2 whitespace-nowrap">
+                                                    <?php echo $material['Type']; ?>
+                                                </td>
+                                                <td class="px-2 py-2 whitespace-nowrap">
+                                                    <?php echo $material['Link']; ?>
+                                                </td>
+                                                <td class="px-2 py-2 whitespace-nowrap">
+                                                    <?php echo $material['Sequence']; ?>
+                                                    <?php if ($index > 0) : ?>
+                                                        <button class="move-material-up hover:bg-gray-200 py-1 px-2" data-material-id="<?php echo $material['MaterialID']; ?>">
+                                                            <i class="fas fa-arrow-up"></i> Up
+                                                        </button>
+                                                    <?php endif; ?>
+                                                    <?php if ($index < count($materialsData) - 1) : ?>
+                                                        <button class="move-material-down hover:bg-gray-200 py-1 px-2" data-material-id="<?php echo $material['MaterialID']; ?>">
+                                                            <i class="fas fa-arrow-down"></i> Down
+                                                        </button>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td class="px-2 py-2 whitespace-nowrap">
+                                                    <button class="add-pretest hover:bg-gray-200 py-1 px-2" data-material-id="<?php echo $material['MaterialID']; ?>">
+                                                        <i class="fas fa-plus"></i> Add Pretest
+                                                    </button>
+                                                    <button class="add-posttest hover:bg-gray-200 py-1 px-2" data-material-id="<?php echo $material['MaterialID']; ?>">
+                                                        <i class="fas fa-plus"></i> Add Post Test
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php else : ?>
+                            <div class="bg-white shadow-md p-4 rounded-md mt-4">
+                                <p>No materials available for this subject.</p>
+                            </div>
+                        <?php endif; ?>
+
+
                         <!-- Associated Classes -->
                         <?php if (!empty($classesData)) : ?>
                             <div class="mt-4 bg-white shadow-md p-4 rounded-md">
@@ -152,5 +224,38 @@ if (isset($_GET['id'])) {
     <!-- End Footer -->
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".move-material-up").click(function() {
+            moveMaterial($(this).data('material-id'), 'up');
+        });
+
+        $(".move-material-down").click(function() {
+            moveMaterial($(this).data('material-id'), 'down');
+        });
+
+        function moveMaterial(materialID, direction) {
+            $.ajax({
+                type: "POST",
+                url: "../manage_materials/update_material_order.php",
+                data: {
+                    materialID: materialID,
+                    direction: direction
+                },
+                success: function(data) {
+                    if (data === 'success') {
+                        // Reload the page to reflect the updated order
+                        location.reload();
+                    } else {
+                        alert(data); // Display an error message
+                    }
+                }
+            });
+        }
+    });
+</script>
+
+
 
 </html>
