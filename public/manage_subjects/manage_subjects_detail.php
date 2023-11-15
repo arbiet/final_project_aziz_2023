@@ -40,10 +40,12 @@ if (isset($_GET['id'])) {
     }
 
     // Retrieve materials associated with the subject
-    $materialQuery = "SELECT m.MaterialID, m.TitleMaterial, m.Type, m.Content, m.Link, m.Sequence
-                  FROM Materials m
-                  WHERE m.SubjectID = $subjectID
-                  ORDER BY m.Sequence";
+    $materialsData = array();
+    $materialQuery = "SELECT m.MaterialID, m.TitleMaterial, m.Type, m.Content, m.Link, m.Sequence, t.TestID, t.TestType
+              FROM Materials m
+              LEFT JOIN Tests t ON m.MaterialID = t.MaterialID
+              WHERE m.SubjectID = $subjectID
+              ORDER BY m.Sequence";
     $materialResult = $conn->query($materialQuery);
 
     if ($materialResult->num_rows > 0) {
@@ -101,7 +103,6 @@ if (isset($_GET['id'])) {
                             <p><strong>Assessment Method:</strong> <?php echo $subjectData['AssessmentMethod']; ?></p>
                             <p><strong>Student Engagement:</strong> <?php echo $subjectData['StudentEngagement']; ?></p>
                         </div>
-                        <!-- Material Details -->
                         <?php if (!empty($materialsData)) : ?>
                             <div class="mt-4 bg-white shadow-md p-4 rounded-md">
                                 <h3 class="text-lg font-semibold text-gray-800">Materials for this Subject</h3>
@@ -110,45 +111,64 @@ if (isset($_GET['id'])) {
                                         <tr>
                                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Material Title</th>
                                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                                            <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Link</th>
                                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sequence</th>
                                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam</th>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
+                                        <?php $uniqueMaterials = array(); ?>
                                         <?php foreach ($materialsData as $index => $material) : ?>
-                                            <tr>
-                                                <td class="px-2 py-2 whitespace-nowrap">
-                                                    <?php echo $material['TitleMaterial']; ?>
-                                                </td>
-                                                <td class="px-2 py-2 whitespace-nowrap">
-                                                    <?php echo $material['Type']; ?>
-                                                </td>
-                                                <td class="px-2 py-2 whitespace-nowrap">
-                                                    <?php echo $material['Link']; ?>
-                                                </td>
-                                                <td class="px-2 py-2 whitespace-nowrap">
-                                                    <?php echo $material['Sequence']; ?>
-                                                    <?php if ($index > 0) : ?>
-                                                        <button class="move-material-up hover:bg-gray-200 py-1 px-2" data-material-id="<?php echo $material['MaterialID']; ?>">
-                                                            <i class="fas fa-arrow-up"></i> Up
-                                                        </button>
-                                                    <?php endif; ?>
-                                                    <?php if ($index < count($materialsData) - 1) : ?>
-                                                        <button class="move-material-down hover:bg-gray-200 py-1 px-2" data-material-id="<?php echo $material['MaterialID']; ?>">
-                                                            <i class="fas fa-arrow-down"></i> Down
-                                                        </button>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td class="px-2 py-2 whitespace-nowrap">
-                                                    <button class="add-pretest hover:bg-gray-200 py-1 px-2" data-material-id="<?php echo $material['MaterialID']; ?>">
-                                                        <i class="fas fa-plus"></i> Add Pretest
-                                                    </button>
-                                                    <button class="add-posttest hover:bg-gray-200 py-1 px-2" data-material-id="<?php echo $material['MaterialID']; ?>">
-                                                        <i class="fas fa-plus"></i> Add Post Test
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            <?php if (!in_array($material['MaterialID'], $uniqueMaterials)) : ?>
+                                                <tr>
+                                                    <td class="px-2 py-2 whitespace-nowrap">
+                                                        <?php echo $material['TitleMaterial']; ?>
+                                                    </td>
+                                                    <td class="px-2 py-2 whitespace-nowrap">
+                                                        <?php echo $material['Type']; ?>
+                                                    </td>
+                                                    <td class="px-2 py-2 whitespace-nowrap">
+                                                        <?php echo $material['Sequence']; ?>
+                                                        <?php if ($index > 0) : ?>
+                                                            <button class="move-material-up hover:bg-gray-200 py-1 px-2" data-material-id="<?php echo $material['MaterialID']; ?>">
+                                                                <i class="fas fa-arrow-up"></i> Up
+                                                            </button>
+                                                        <?php endif; ?>
+                                                        <?php if ($index < count($materialsData) - 1) : ?>
+                                                            <button class="move-material-down hover:bg-gray-200 py-1 px-2" data-material-id="<?php echo $material['MaterialID']; ?>">
+                                                                <i class="fas fa-arrow-down"></i> Down
+                                                            </button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <!-- Exam Column -->
+                                                    <td class="px-2 py-2 whitespace-nowrap">
+                                                        <?php if ($material['TestID']) : ?>
+                                                            <?php if ($material['TestType'] === 'Pretest') : ?>
+                                                                <!-- Edit Pretest -->
+                                                                <a href="edit_test.php?test_id=<?php echo $material['TestID']; ?>" class="text-blue-500 hover:underline">
+                                                                    <i class="fas fa-edit"></i> Edit Pretest
+                                                                </a>
+                                                            <?php endif; ?>
+                                                            <?php if ($material['TestType'] === 'Post-test') : ?>
+                                                                <!-- Edit Post Test -->
+                                                                <a href="edit_test.php?test_id=<?php echo $material['TestID']; ?>" class="text-blue-500 hover:underline ml-2">
+                                                                    <i class="fas fa-edit"></i> Edit Post Test
+                                                                </a>
+                                                            <?php endif; ?>
+                                                        <?php else : ?>
+                                                            <!-- Add Pretest -->
+                                                            <a href="add_test.php?material_id=<?php echo $material['MaterialID']; ?>&type=pretest" class="text-green-500 hover:underline">
+                                                                <i class="fas fa-plus"></i> Add Pretest
+                                                            </a>
+
+                                                            <!-- Add Post Test -->
+                                                            <a href="add_test.php?material_id=<?php echo $material['MaterialID']; ?>&type=posttest" class="text-green-500 hover:underline ml-2">
+                                                                <i class="fas fa-plus"></i> Add Post Test
+                                                            </a>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                                <?php $uniqueMaterials[] = $material['MaterialID']; ?>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
@@ -158,8 +178,6 @@ if (isset($_GET['id'])) {
                                 <p>No materials available for this subject.</p>
                             </div>
                         <?php endif; ?>
-
-
                         <!-- Associated Classes -->
                         <?php if (!empty($classesData)) : ?>
                             <div class="mt-4 bg-white shadow-md p-4 rounded-md">

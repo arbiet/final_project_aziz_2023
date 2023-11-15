@@ -95,8 +95,8 @@ if (isset($_SESSION['UserID'])) {
             <p class="text-gray-500">Kesulitan: <?php echo $subject['DifficultyLevel']; ?></p>
             <p class="text-gray-500">Metode Pengajaran: <?php echo $subject['TeachingMethod']; ?></p>
             <div class="mt-2 flex justify-between items-center">
-              <a href="../subjects/subjects_detail.php?subject_id=<?php echo $subject['SubjectID']; ?>" class="text-blue-500 hover:underline">Lihat Materi</a>
-              <span class="text-blue-500 font-semibold">Materi: <?php echo $subject['TotalMaterials']; ?></span>
+              <a href="../subjects/subjects_detail.php?subject_id=<?php echo $subject['SubjectID']; ?>&material=start" class="text-blue-500 hover:underline">Lihat Materi</a>
+              <span class="text-blue-500 font-semibold"><?php echo $subject['TotalMaterials']; ?> Materi <i class="fas fa-file-alt mr-2"></i></span>
             </div>
             <div class="mt-4 mb-4">
               <label for="progress-<?php echo $subject['SubjectName']; ?>" class="text-sm font-semibold block">Progress:</label>

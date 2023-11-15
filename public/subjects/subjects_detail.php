@@ -77,26 +77,48 @@ if ($currentMaterialIndex < count($materials) - 1) {
       </div>
       <h3 class="text-lg font-semibold p-4">Materials</h3>
       <ul class="list-inside">
-        <!-- Special list item for "start" with an icon -->
+        <!-- Displaying a manual type for "Start" -->
         <li class="py-2 px-4 hover:bg-gray-300">
-          <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=start" class="hover:text-blue-500">
-            <i class="fas fa-play-circle mr-2"></i> Start
-          </a>
+          <span class="text-gray-500">Starter</span>
         </li>
-        <!-- Regular list items for other materials with icons and hover effect -->
-        <?php foreach ($materials as $material) { ?>
+        <!-- Special list item for "start" with an icon -->
+        <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=start" class="hover:text-blue-500">
           <li class="py-2 px-4 hover:bg-gray-300">
-            <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=<?php echo $material['MaterialID']; ?>" class="hover:text-blue-500">
-              <i class="fas fa-file-alt mr-2"></i> <?php echo $material['TitleMaterial']; ?>
-            </a>
+            <i class="fas fa-play-circle mr-2"></i> Start
           </li>
-        <?php } ?>
-        <!-- Special list item for "end" with an icon -->
+        </a>
+        <?php
+        $prevMaterialType = null;
+        foreach ($materials as $material) {
+          // Check if the current material has the same type as the previous one
+          if ($material['Type'] !== $prevMaterialType) {
+            // Display the material type
+            echo '<li class="py-2 px-4 hover:bg-gray-300">';
+            echo '<span class="text-gray-500">' . $material['Type'] . '</span>';
+            echo '</li>';
+          }
+          echo '<a href="subjects_detail.php?subject_id=' . $subjectID . '&material=' . $material['MaterialID'] . '" class="hover:text-blue-500">';
+          echo '<li class="py-2 px-4 hover:bg-gray-300">';
+          echo '<i class="fas fa-file-alt mr-2"></i>' . $material['TitleMaterial'];
+          echo '</li>';
+          echo '</a>';
+
+          // Update the previous material type
+          $prevMaterialType = $material['Type'];
+        }
+        ?>
+
+        <!-- Displaying a manual type for "End" -->
         <li class="py-2 px-4 hover-bg-gray-300">
-          <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=end" class="hover:text-blue-500">
-            <i class="fas fa-stop-circle mr-2"></i> End
-          </a>
+          <span class="text-gray-500">Finish</span>
         </li>
+
+        <!-- Special list item for "end" with an icon -->
+        <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=end" class="hover:text-blue-500">
+          <li class="py-2 px-4 hover-bg-gray-300">
+            <i class="fas fa-stop-circle mr-2"></i> End
+          </li>
+        </a>
       </ul>
     </div>
     <!-- Main Content -->
