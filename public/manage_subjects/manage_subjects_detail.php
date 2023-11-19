@@ -41,9 +41,8 @@ if (isset($_GET['id'])) {
 
     // Retrieve materials associated with the subject
     $materialsData = array();
-    $materialQuery = "SELECT m.MaterialID, m.TitleMaterial, m.Type, m.Content, m.Link, m.Sequence, t.TestID, t.TestType
+    $materialQuery = "SELECT m.MaterialID, m.TitleMaterial, m.Type, m.Content, m.Link, m.Sequence
               FROM Materials m
-              LEFT JOIN Tests t ON m.MaterialID = t.MaterialID
               WHERE m.SubjectID = $subjectID
               ORDER BY m.Sequence";
     $materialResult = $conn->query($materialQuery);
@@ -141,30 +140,35 @@ if (isset($_GET['id'])) {
                                                     </td>
                                                     <!-- Exam Column -->
                                                     <td class="px-2 py-2 whitespace-nowrap">
-                                                        <?php if ($material['TestID']) : ?>
-                                                            <?php if ($material['TestType'] === 'Pretest') : ?>
-                                                                <!-- Edit Pretest -->
-                                                                <a href="edit_test.php?test_id=<?php echo $material['TestID']; ?>" class="text-blue-500 hover:underline">
-                                                                    <i class="fas fa-edit"></i> Edit Pretest
-                                                                </a>
-                                                            <?php endif; ?>
-                                                            <?php if ($material['TestType'] === 'Post-test') : ?>
-                                                                <!-- Edit Post Test -->
-                                                                <a href="edit_test.php?test_id=<?php echo $material['TestID']; ?>" class="text-blue-500 hover:underline ml-2">
-                                                                    <i class="fas fa-edit"></i> Edit Post Test
-                                                                </a>
-                                                            <?php endif; ?>
-                                                        <?php else : ?>
-                                                            <!-- Add Pretest -->
-                                                            <a href="add_test.php?material_id=<?php echo $material['MaterialID']; ?>&type=pretest" class="text-green-500 hover:underline">
-                                                                <i class="fas fa-plus"></i> Add Pretest
-                                                            </a>
+                                                        <?php
+                                                        $pretestExists = false;
+                                                        $posttestExists = false;
 
-                                                            <!-- Add Post Test -->
-                                                            <a href="add_test.php?material_id=<?php echo $material['MaterialID']; ?>&type=posttest" class="text-green-500 hover:underline ml-2">
-                                                                <i class="fas fa-plus"></i> Add Post Test
-                                                            </a>
-                                                        <?php endif; ?>
+                                                        // Check if pretest and posttest exist for the material
+                                                        $testQuery = "SELECT TestType FROM Tests WHERE MaterialID = {$material['MaterialID']}";
+                                                        $testResult = $conn->query($testQuery);
+
+                                                        while ($testRow = $testResult->fetch_assoc()) {
+                                                            if ($testRow['TestType'] === 'Pretest') {
+                                                                $pretestExists = true;
+                                                            } elseif ($testRow['TestType'] === 'Post-test') {
+                                                                $posttestExists = true;
+                                                            }
+                                                        }
+
+                                                        // Display buttons or links based on test existence
+                                                        if (!$pretestExists) {
+                                                            echo '<a href="../manage_exams/manage_exams_add_test.php?material_id=' . $material['MaterialID'] . '&type=Pretest" class="text-green-500 hover:underline"><i class="fas fa-plus"></i> Add Pretest</a>';
+                                                        } else {
+                                                            echo '<a href="../manage_exams/manage_exams_view_test.php?material_id=' . $material['MaterialID'] . '&type=Pretest" class="text-blue-500 hover:underline"><i class="fas fa-eye"></i> View Pretest</a>';
+                                                        }
+
+                                                        if (!$posttestExists) {
+                                                            echo '<a href="../manage_exams/manage_exams_add_test.php?material_id=' . $material['MaterialID'] . '&type=Post-test" class="text-green-500 hover:underline ml-2"><i class="fas fa-plus"></i> Add Post Test</a>';
+                                                        } else {
+                                                            echo '<a href="../manage_exams/manage_exams_view_test.php?material_id=' . $material['MaterialID'] . '&type=Post-test" class="text-blue-500 hover:underline ml-2"><i class="fas fa-eye"></i> View Post Test</a>';
+                                                        }
+                                                        ?>
                                                     </td>
                                                 </tr>
                                                 <?php $uniqueMaterials[] = $material['MaterialID']; ?>
