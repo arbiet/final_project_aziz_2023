@@ -89,6 +89,28 @@
             ';
         }
         ?>
+        <?php
+        if ($_SESSION['RoleID'] === 1 or $_SESSION['RoleID'] === 2) {
+            // Menu "Manage Users" hanya ditampilkan jika peran pengguna adalah "Admin"
+            echo '
+            <li class="px-6 py-4 hover-bg-gray-700 cursor-pointer space-x-2 flex items-center">
+                <i class="fa-solid fa-book mr-3"></i>
+                <a href="../manage_materials/manage_materials_list.php">Manage Materials</a>
+            </li>
+            ';
+        }
+        ?>
+        <?php
+        if ($_SESSION['RoleID'] === 1 or $_SESSION['RoleID'] === 2) {
+            // Menu "Manage Users" hanya ditampilkan jika peran pengguna adalah "Admin"
+            echo '
+            <li class="px-6 py-4 hover-bg-gray-700 cursor-pointer space-x-2 flex items-center">
+                <i class="fa-solid fa-comments"></i>
+                <a href="../manage_exams/manage_exams_list.php">Manage Exams</a>
+            </li>
+            ';
+        }
+        ?>
 
         <?php
         if ($_SESSION['RoleID'] === 1) {

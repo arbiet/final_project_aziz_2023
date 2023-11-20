@@ -158,15 +158,15 @@ if (isset($_GET['id'])) {
 
                                                         // Display buttons or links based on test existence
                                                         if (!$pretestExists) {
-                                                            echo '<a href="../manage_exams/manage_exams_add_test.php?material_id=' . $material['MaterialID'] . '&type=Pretest" class="text-green-500 hover:underline"><i class="fas fa-plus"></i> Add Pretest</a>';
+                                                            echo '<a href="../manage_exams/manage_exams_create.php?material_id=' . $material['MaterialID'] . '&type=Pretest" class="text-green-500 hover:underline"><i class="fas fa-plus"></i> Add Pretest</a>';
                                                         } else {
-                                                            echo '<a href="../manage_exams/manage_exams_view_test.php?material_id=' . $material['MaterialID'] . '&type=Pretest" class="text-blue-500 hover:underline"><i class="fas fa-eye"></i> View Pretest</a>';
+                                                            echo '<a href="../manage_exams/manage_exams_detail.php?material_id=' . $material['MaterialID'] . '&type=Pretest" class="text-blue-500 hover:underline"><i class="fas fa-eye"></i> View Pretest</a>';
                                                         }
 
                                                         if (!$posttestExists) {
-                                                            echo '<a href="../manage_exams/manage_exams_add_test.php?material_id=' . $material['MaterialID'] . '&type=Post-test" class="text-green-500 hover:underline ml-2"><i class="fas fa-plus"></i> Add Post Test</a>';
+                                                            echo '<a href="../manage_exams/manage_exams_create.php?material_id=' . $material['MaterialID'] . '&type=Post-test" class="text-green-500 hover:underline ml-2"><i class="fas fa-plus"></i> Add Post Test</a>';
                                                         } else {
-                                                            echo '<a href="../manage_exams/manage_exams_view_test.php?material_id=' . $material['MaterialID'] . '&type=Post-test" class="text-blue-500 hover:underline ml-2"><i class="fas fa-eye"></i> View Post Test</a>';
+                                                            echo '<a href="../manage_exams/manage_exams_detail.php?material_id=' . $material['MaterialID'] . '&type=Post-test" class="text-blue-500 hover:underline ml-2"><i class="fas fa-eye"></i> View Post Test</a>';
                                                         }
                                                         ?>
                                                     </td>
