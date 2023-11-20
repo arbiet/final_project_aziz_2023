@@ -14,92 +14,101 @@ $answers = array();
 
 // Process the form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize and validate the input data
-    $testID = mysqli_real_escape_string($conn, $_POST['test_id']);
-    $questionText = mysqli_real_escape_string($conn, $_POST['question_text']);
-    $questionType = mysqli_real_escape_string($conn, $_POST['question_type']);
-    
-    // Validate the test ID
-    if (empty($testID)) {
-        $errors['test_id'] = "Test ID is required.";
-    }
+  // Sanitize and validate the input data
+  $testID = mysqli_real_escape_string($conn, $_POST['test_id']);
+  $questionText = mysqli_real_escape_string($conn, $_POST['question_text']);
+  $questionType = mysqli_real_escape_string($conn, $_POST['question_type']);
 
-    // Validate the question text
-    if (empty($questionText)) {
-        $errors['question_text'] = "Question text is required.";
-    }
+  // Validate the test ID
+  if (empty($testID)) {
+    $errors['test_id'] = "Test ID is required.";
+  }
 
-    // Validate the question type
-    if (empty($questionType)) {
-        $errors['question_type'] = "Question type is required.";
-    }
+  // Validate the question text
+  if (empty($questionText)) {
+    $errors['question_text'] = "Question text is required.";
+  }
 
-    // Validate and process answers based on question type
-    $answers = array();
-    if ($questionType === 'true_false') {
-        // For true/false questions
+  // Validate the question type
+  if (empty($questionType)) {
+    $errors['question_type'] = "Question type is required.";
+  }
+
+  // Validate and process answers based on question type
+  $answers = array();
+  if ($questionType === 'true_false') {
+    // For true/false questions
+    $answers[] = array(
+      'answer_text' => 'True',
+      'is_correct' => isset($_POST['true_false_answer']) && $_POST['true_false_answer'] === 'true'
+    );
+    $answers[] = array(
+      'answer_text' => 'False',
+      'is_correct' => isset($_POST['true_false_answer']) && $_POST['true_false_answer'] === 'false'
+    );
+  } elseif ($questionType === 'multiple_choice') {
+    // For multiple/single choice questions
+    for ($i = 1; $i <= 4; $i++) {
+      $answerText = mysqli_real_escape_string($conn, $_POST["choice_multiple{$i}"]);
+      $isCorrect = false;
+      if (isset($_POST["correct_choice_multiple{$i}"]) && $_POST["correct_choice_multiple{$i}"] === 'true') {
+        $isCorrect = true;
+      }
+      if (!empty($answerText)) {
         $answers[] = array(
-            'answer_text' => 'True',
-            'is_correct' => isset($_POST['true_false_answer']) && $_POST['true_false_answer'] === 'true'
+          'answer_text' => $answerText,
+          'is_correct' => $isCorrect
         );
-        $answers[] = array(
-            'answer_text' => 'False',
-            'is_correct' => isset($_POST['true_false_answer']) && $_POST['true_false_answer'] === 'false'
-        );
-    } elseif ($questionType === 'multiple_choice' || $questionType === 'single_choice') {
-        // For multiple/single choice questions
-        for ($i = 1; $i <= 4; $i++) {
-            $answerText = mysqli_real_escape_string($conn, $_POST["choice{$i}"]);
-            $isCorrect = isset($_POST["correct_choice{$i}"]) && $_POST["correct_choice{$i}"] === 'true';
-
-            if (!empty($answerText)) {
-                $answers[] = array(
-                    'answer_text' => $answerText,
-                    'is_correct' => $isCorrect
-                );
-            }
-        }
-        
+      }
     }
+  } elseif ($questionType === 'single_choice') {
+    // For multiple/single choice questions
+    for ($i = 1; $i <= 4; $i++) {
+      $isCorrect = false;
+      $answerText = mysqli_real_escape_string($conn, $_POST["choice_single{$i}"]);
+      if ($_POST["correct_choice_single"] == $i) {
+        $isCorrect = true;
+      }
+      if (!empty($answerText)) {
+        $answers[] = array(
+          'answer_text' => $answerText,
+          'is_correct' => $isCorrect
+        );
+      }
+    }
+  }
 
-    // Check for errors
-    if (empty($errors)) {
-        // Insert the question into the database
+  // Check for errors
+  if (empty($errors)) {
+    // Insert the question into the database
+    // Note: Adjust the SQL query based on your database schema
+    $query = "INSERT INTO Questions (QuestionText, QuestionType, TestID) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ssi", $questionText, $questionType, $testID);
+
+    if ($stmt->execute()) {
+      $questionID = $stmt->insert_id;
+
+      // Insert answers into the database
+      foreach ($answers as $answer) {
+        $answerText = $answer['answer_text'];
+        $isCorrect = $answer['is_correct'];
+
         // Note: Adjust the SQL query based on your database schema
-        if($questionType === 'multiple_choice') {
-            $questionType = 'Multiple Choice';
-        } elseif($questionType === 'true_false') {
-            $questionText = "True/False";
-        } else {
-            $questionType = 'Single Choice';
-        }
-        $query = "INSERT INTO Questions (QuestionText, QuestionType, TestID) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssi", $questionText, $questionType, $testID);
+        $answerQuery = "INSERT INTO Answers (AnswerText, IsCorrect, QuestionID) VALUES (?, ?, ?)";
+        $answerStmt = $conn->prepare($answerQuery);
+        $answerStmt->bind_param("ssi", $answerText, $isCorrect, $questionID);
+        $answerStmt->execute();
+      }
 
-        if ($stmt->execute()) {
-            $questionID = $stmt->insert_id;
+      // Question and answers creation successful
+      // Log the activity for question creation
+      $activityDescription = "Question created for Test ID: $testID";
+      $currentUserID = $_SESSION['UserID'];
+      insertLogActivity($conn, $currentUserID, $activityDescription);
 
-            // Insert answers into the database
-            foreach ($answers as $answer) {
-                $answerText = $answer['answer_text'];
-                $isCorrect = $answer['is_correct'];
-
-                // Note: Adjust the SQL query based on your database schema
-                $answerQuery = "INSERT INTO Answers (AnswerText, IsCorrect, QuestionID) VALUES (?, ?, ?)";
-                $answerStmt = $conn->prepare($answerQuery);
-                $answerStmt->bind_param("ssi", $answerText, $isCorrect, $questionID);
-                $answerStmt->execute();
-            }
-
-            // Question and answers creation successful
-            // Log the activity for question creation
-            $activityDescription = "Question created for Test ID: $testID";
-            $currentUserID = $_SESSION['UserID'];
-            insertLogActivity($conn, $currentUserID, $activityDescription);
-
-            // Display a success notification
-            echo '<script>
+      // Display a success notification
+      echo '<script>
                 Swal.fire({
                     icon: "success",
                     title: "Success",
@@ -108,35 +117,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     window.location.href = "../manage_exams/manage_exams_detail.php?id=' . $testID . '";
                 });
             </script>';
-            exit();
-        } else {
-            // Question creation failed
-            $errors['db_error'] = "Question creation failed.";
+      exit();
+    } else {
+      // Question creation failed
+      $errors['db_error'] = "Question creation failed.";
 
-            // Display an error notification
-            echo '<script>
+      // Display an error notification
+      echo '<script>
                 Swal.fire({
                     icon: "error",
                     title: "Error",
                     text: "Question creation failed.",
                 });
             </script>';
-        }
     }
-} 
+  }
+}
 // If it's a GET request, fetch the test_id from the URL
 $testID = mysqli_real_escape_string($conn, $_GET['test_id']);
 // Fetch the Test Name based on the Test ID
 $testName = '';
 if (!empty($testID)) {
-    $testQuery = "SELECT TestName FROM Tests WHERE TestID = ?";
-    $testStmt = $conn->prepare($testQuery);
-    $testStmt->bind_param("i", $testID);
-    $testStmt->execute();
-    $testResult = $testStmt->get_result();
-    if ($testRow = $testResult->fetch_assoc()) {
-        $testName = $testRow['TestName'];
-    }
+  $testQuery = "SELECT TestName FROM Tests WHERE TestID = ?";
+  $testStmt = $conn->prepare($testQuery);
+  $testStmt->bind_param("i", $testID);
+  $testStmt->execute();
+  $testResult = $testStmt->get_result();
+  if ($testRow = $testResult->fetch_assoc()) {
+    $testName = $testRow['TestName'];
+  }
 }
 
 
@@ -223,30 +232,30 @@ if (!empty($testID)) {
                 </div>
               </div>
               <!-- Updated Single Choice Answers Section -->
-                <div id="singleChoiceAnswers" class="hidden">
-                    <?php for ($i = 1; $i <= 4; $i++) : ?>
-                        <div class="flex items-center mt-2 space-x-2">
-                            <label class="block font-semibold text-gray-800">Choice <?php echo $i; ?></label>
-                            <input type="text" name="choice<?php echo $i; ?>" class="w-1/2 rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Choice <?php echo $i; ?>">
-                            <input type="radio" name="correct_choice" value="<?php echo $i; ?>">
-                            <label class="block font-semibold text-gray-800">Correct</label>
-                        </div>
-                    <?php endfor; ?>
-                </div>
-                <!-- End Updated Single Choice Answers Section -->
-
-                <!-- Multiple Choice Answers Section -->
-                <div id="multipleChoiceAnswers" class="hidden">
+              <div id="singleChoiceAnswers" class="hidden">
                 <?php for ($i = 1; $i <= 4; $i++) : ?>
-                    <div class="flex items-center mt-2 space-x-2">
+                  <div class="flex items-center mt-2 space-x-2">
                     <label class="block font-semibold text-gray-800">Choice <?php echo $i; ?></label>
-                    <input type="text" name="choice<?php echo $i; ?>" class="w-1/2 rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Choice <?php echo $i; ?>">
-                    <input type="checkbox" name="correct_choice<?php echo $i; ?>" value="true">
+                    <input type="text" name="choice_single<?php echo $i; ?>" class="w-1/2 rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Choice <?php echo $i; ?>">
+                    <input type="radio" name="correct_choice_single" value="<?php echo $i; ?>">
                     <label class="block font-semibold text-gray-800">Correct</label>
-                    </div>
+                  </div>
                 <?php endfor; ?>
-                </div>
-                <!-- End Multiple Choice Answers Section -->
+              </div>
+              <!-- End Updated Single Choice Answers Section -->
+
+              <!-- Multiple Choice Answers Section -->
+              <div id="multipleChoiceAnswers" class="hidden">
+                <?php for ($i = 1; $i <= 4; $i++) : ?>
+                  <div class="flex items-center mt-2 space-x-2">
+                    <label class="block font-semibold text-gray-800">Choice <?php echo $i; ?></label>
+                    <input type="text" name="choice_multiple<?php echo $i; ?>" class="w-1/2 rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Choice <?php echo $i; ?>">
+                    <input type="checkbox" name="correct_choice_multiple<?php echo $i; ?>" value="true">
+                    <label class="block font-semibold text-gray-800">Correct</label>
+                  </div>
+                <?php endfor; ?>
+              </div>
+              <!-- End Multiple Choice Answers Section -->
 
             </div>
             <!-- End Answers Section -->

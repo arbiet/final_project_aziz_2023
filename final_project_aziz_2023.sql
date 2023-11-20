@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2023 at 05:22 AM
+-- Generation Time: Nov 21, 2023 at 12:03 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,22 +33,6 @@ CREATE TABLE `Answers` (
   `IsCorrect` tinyint(1) NOT NULL,
   `QuestionID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `Answers`
---
-
-INSERT INTO `Answers` (`AnswerID`, `AnswerText`, `IsCorrect`, `QuestionID`) VALUES
-(9, 'A) London', 0, 4),
-(10, 'B) Madrid', 0, 4),
-(11, 'C) Paris', 1, 4),
-(12, 'D) Rome', 0, 4),
-(13, 'True', 0, 5),
-(14, 'False', 1, 5),
-(15, 'A) 5', 0, 6),
-(16, 'B) 9', 0, 6),
-(17, 'C) 10', 1, 6),
-(18, 'D) 12', 0, 6);
 
 -- --------------------------------------------------------
 
@@ -273,7 +257,54 @@ INSERT INTO `LogActivity` (`LogID`, `UserID`, `ActivityDescription`, `ActivityTi
 (156, 137648118, 'User logged in', '2023-11-15 22:11:39'),
 (157, 137648118, 'User logged in', '2023-11-17 11:47:16'),
 (158, 137648118, 'User logged out', '2023-11-17 12:37:39'),
-(159, 137648118, 'User logged in', '2023-11-17 12:37:57');
+(159, 137648118, 'User logged in', '2023-11-17 12:37:57'),
+(160, 137648118, 'User logged in', '2023-11-20 11:07:39'),
+(161, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:11:12'),
+(162, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:11:41'),
+(163, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:12:06'),
+(164, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:12:37'),
+(165, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:14:25'),
+(166, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:14:56'),
+(167, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:18:32'),
+(168, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:23:44'),
+(169, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:24:33'),
+(170, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:24:49'),
+(171, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:27:05'),
+(172, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:27:58'),
+(173, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:29:22'),
+(174, 137648118, 'Question created for Test ID: 1', '2023-11-20 11:30:38'),
+(175, 137648118, 'Question updated with ID: 5', '2023-11-20 22:15:53'),
+(176, 137648118, 'Question updated with ID: 5', '2023-11-20 22:16:08'),
+(177, 137648118, 'Question updated with ID: 5', '2023-11-20 22:16:15'),
+(178, 137648118, 'Question updated with ID: 5', '2023-11-20 22:18:15'),
+(179, 137648118, 'Question updated with ID: 5', '2023-11-20 22:18:20'),
+(180, 137648118, 'Question updated with ID: 5', '2023-11-20 22:20:36'),
+(181, 137648118, 'Question updated with ID: 5', '2023-11-20 22:22:14'),
+(182, 137648118, 'Question updated with ID: 5', '2023-11-20 22:22:24'),
+(183, 137648118, 'Question updated with ID: 5', '2023-11-20 22:22:29'),
+(184, 137648118, 'Question updated with ID: 5', '2023-11-20 22:24:07'),
+(185, 137648118, 'Question updated with ID: 5', '2023-11-20 22:26:51'),
+(186, 137648118, 'Question updated with ID: 5', '2023-11-20 22:27:12'),
+(187, 137648118, 'Question updated with ID: 5', '2023-11-20 22:29:15'),
+(188, 137648118, 'Question updated with ID: 5', '2023-11-20 22:29:21'),
+(189, 137648118, 'Question updated with ID: 5', '2023-11-20 22:29:42'),
+(190, 137648118, 'Question updated with ID: 5', '2023-11-20 22:29:45'),
+(191, 137648118, 'Question updated with ID: 4', '2023-11-20 22:29:53'),
+(192, 137648118, 'Question updated with ID: 4', '2023-11-20 22:30:00'),
+(193, 137648118, 'Question updated with ID: 14', '2023-11-20 22:30:14'),
+(194, 137648118, 'Question with QuestionID: 20 has been deleted.', '2023-11-20 22:40:37'),
+(195, 137648118, 'Question with QuestionID: 1 has been deleted.', '2023-11-20 22:43:14'),
+(196, 137648118, 'Question with QuestionID: 1 has been deleted.', '2023-11-20 22:43:29'),
+(197, 137648118, 'Question with QuestionID: 1 has been deleted.', '2023-11-20 22:43:36'),
+(198, 137648118, 'Question with QuestionID: 1 has been deleted.', '2023-11-20 22:44:06'),
+(199, 137648118, 'Question with QuestionID: 16 has been deleted.', '2023-11-20 22:44:49'),
+(200, 137648118, 'Question with QuestionID: 15 has been deleted.', '2023-11-20 22:44:52'),
+(201, 137648118, 'Question with QuestionID: 14 has been deleted.', '2023-11-20 22:44:55'),
+(202, 137648118, 'Question with QuestionID: 11 has been deleted.', '2023-11-20 22:45:01'),
+(203, 137648118, 'Test with TestID: 2 has been deleted.', '2023-11-20 22:49:19'),
+(204, 137648118, 'Test with TestID: 1 has been deleted.', '2023-11-20 22:49:23'),
+(205, 137648118, 'Exam created: 13, Type: Pretest, Name: Pretest Pengenalan Jaringan Dasar', '2023-11-20 23:01:04'),
+(206, 137648118, 'Exam created: 14, Type: Pretest, Name: Pretest Sejarah Jaringan Komputer', '2023-11-20 23:03:02');
 
 -- --------------------------------------------------------
 
@@ -322,18 +353,9 @@ INSERT INTO `Materials` (`MaterialID`, `SubjectID`, `TitleMaterial`, `Type`, `Co
 CREATE TABLE `Questions` (
   `QuestionID` int(11) NOT NULL,
   `QuestionText` text NOT NULL,
-  `QuestionType` enum('Multiple Choice','True/False') NOT NULL,
+  `QuestionType` enum('multiple_choice','true_false','single_choice') NOT NULL,
   `TestID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `Questions`
---
-
-INSERT INTO `Questions` (`QuestionID`, `QuestionText`, `QuestionType`, `TestID`) VALUES
-(4, 'What is the capital of France?', 'Multiple Choice', 1),
-(5, 'The Earth is round. (True/False)', 'True/False', 1),
-(6, 'What is 7 + 3?', 'Multiple Choice', 2);
 
 -- --------------------------------------------------------
 
@@ -469,10 +491,10 @@ CREATE TABLE `Tests` (
 --
 
 INSERT INTO `Tests` (`TestID`, `TestName`, `TestType`, `MaterialID`) VALUES
-(1, 'Pretest Example 1', 'Pretest', 7),
-(2, 'Post-test Example 1', 'Post-test', 7),
 (3, 'Pretest Example 2', 'Pretest', 10),
-(4, 'Post-test Example 2', 'Post-test', 10);
+(4, 'Post-test Example 2', 'Post-test', 10),
+(5, 'Pretest Pengenalan Jaringan Dasar', 'Pretest', 13),
+(6, 'Pretest Sejarah Jaringan Komputer', 'Pretest', 14);
 
 -- --------------------------------------------------------
 
@@ -505,7 +527,7 @@ CREATE TABLE `Users` (
 INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `DateOfBirth`, `Gender`, `Address`, `PhoneNumber`, `RoleID`, `AccountCreationDate`, `LastLogin`, `AccountStatus`, `ProfilePictureURL`, `ActivationStatus`) VALUES
 (0, 'ikimukti', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '19103020046@unpkediri.ac.id', 'Firmansyah Mukti Wijaya', '2023-10-12', 'Male', 'Nglaban 1111', '081216318022', 3, '2023-11-03 10:17:58', '2023-11-03 17:17:58', NULL, '653e5a409b4fb.jpeg', 'active'),
 (65405, 'ahmadhasby', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'ahmadhasby@gmail.com', 'Ahmad Hasby Maulana', '2023-10-10', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-11-15 21:49:15', '2023-11-16 04:49:15', NULL, 'default.png', 'active'),
-(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-11-17 12:37:57', '2023-11-17 19:37:57', NULL, 'default.png', 'active'),
+(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-11-20 11:07:39', '2023-11-20 18:07:39', NULL, 'default.png', 'active'),
 (1698716970, 'akbarsandi', '$2y$10$GzsUjuYCcfymGzNusQgul.fUn42ETSFy71ECQpYe8NTVRi1z45SoS', 'akbarsandi@gmail.com', 'Akbar Sandi Pratama', '2023-10-12', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:17:23', NULL, NULL, NULL, 'active'),
 (1698719401, 'andrean', '$2y$10$hELFb0BIW5L8uwyVqMLmd.hG7L2avzq/dojKCui.XW1XJOffghcma', 'andreanprasetyo@gmail.com', 'Andrean Prasetyo', '2023-02-07', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:30:01', NULL, 'active', NULL, 'active'),
 (1699006643, 'paijo', '$2y$10$sYyoVnssegJ91BQO8RC6qOFr3XWgUAvNFKcI/WPO8s63Yi8KmGIMu', 'sdhgushg@hfugihdf.d', 'isdhgouhsduog', '2023-11-22', 'Male', 'agdsgdfghdfhg', 'dgsdfhgdf', 3, '2023-11-03 10:17:23', NULL, 'active', NULL, 'active'),
@@ -625,7 +647,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Answers`
 --
 ALTER TABLE `Answers`
-  MODIFY `AnswerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `AnswerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `Classes`
@@ -643,7 +665,7 @@ ALTER TABLE `ClassSubjects`
 -- AUTO_INCREMENT for table `LogActivity`
 --
 ALTER TABLE `LogActivity`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
 
 --
 -- AUTO_INCREMENT for table `Materials`
@@ -655,7 +677,7 @@ ALTER TABLE `Materials`
 -- AUTO_INCREMENT for table `Questions`
 --
 ALTER TABLE `Questions`
-  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `StudentResponses`
@@ -685,7 +707,7 @@ ALTER TABLE `Teachers`
 -- AUTO_INCREMENT for table `Tests`
 --
 ALTER TABLE `Tests`
-  MODIFY `TestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `TestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

@@ -141,7 +141,7 @@ if (isset($_GET['id'])) {
                                                                 <?php echo $answer['AnswerText']; ?>
                                                                 <i class="fas fa-check"></i>
                                                             </span>
-                                                        <?php else: ?>
+                                                        <?php else : ?>
                                                             <span class="mr-2 text-gray-500"><?php echo $answer['AnswerText']; ?></span>
                                                         <?php endif; ?>
                                                     </div>
@@ -235,15 +235,26 @@ if (isset($_GET['id'])) {
 
     function editQuestion(questionID) {
         // Redirect to the page for editing a question with the question ID
-        window.location.href = `../manage_questions/manage_questions_update.php?id=${questionID}`;
+        window.location.href = `../manage_questions/manage_questions_update.php?test_id=<?php echo $testID; ?>&question_id=${questionID}`;
     }
 
     function confirmDeleteQuestion(questionID) {
-        // Display a confirmation dialog before deleting the question
-        if (confirm("Are you sure you want to delete this question?")) {
-            // Redirect to the page for deleting a question with the question ID
-            window.location.href = `../manage_questions/manage_questions_delete.php?id=${questionID}`;
-        }
+        // Display a SweetAlert2 confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If the user clicks "Yes," redirect to the page for deleting a question with the question ID
+                window.location.href = `../manage_questions/manage_questions_delete.php?test_id=<?php echo $testID; ?>&question_id=${questionID}`;
+            }
+        });
     }
 </script>
+
 </html>
