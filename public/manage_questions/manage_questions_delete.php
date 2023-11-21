@@ -26,6 +26,31 @@ if (!isset($_GET['test_id']) || !is_numeric($_GET['test_id'])) {
 
 $test_id = $_GET['test_id'];
 
+// Fetch the question details to get the image file path and folder
+$questionQuery = "SELECT QuestionImage FROM Questions WHERE QuestionID = ?";
+$stmtQuestion = $conn->prepare($questionQuery);
+$stmtQuestion->bind_param('i', $id);
+$stmtQuestion->execute();
+$resultQuestion = $stmtQuestion->get_result();
+
+if ($rowQuestion = $resultQuestion->fetch_assoc()) {
+    $questionImage = $rowQuestion['QuestionImage'];
+
+    // Check if the question has an associated image
+    if (!empty($questionImage) && file_exists($questionImage)) {
+        // Delete the image file
+        unlink($questionImage);
+
+        // Get the folder path and attempt to delete it
+        $folderPath = dirname($questionImage);
+        if (is_dir($folderPath)) {
+            rmdir($folderPath);
+        }
+    }
+}
+
+$stmtQuestion->close();
+
 // Initialize success and error messages
 $success_message = '';
 $error_message = '';

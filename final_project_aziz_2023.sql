@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2023 at 12:03 AM
+-- Generation Time: Nov 21, 2023 at 12:41 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,6 +33,94 @@ CREATE TABLE `Answers` (
   `IsCorrect` tinyint(1) NOT NULL,
   `QuestionID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Answers`
+--
+
+INSERT INTO `Answers` (`AnswerID`, `AnswerText`, `IsCorrect`, `QuestionID`) VALUES
+(144, 'True', 0, 30),
+(145, 'False', 1, 30),
+(146, 'True', 1, 31),
+(147, 'False', 0, 31),
+(150, 'True', 0, 32),
+(151, 'False', 1, 32),
+(152, 'Mengirim sinyal', 1, 33),
+(153, 'Mengubah kode biner menjadi pesan teks', 1, 33),
+(154, 'Menghubungkan media transmisi', 0, 33),
+(155, 'Menerima data informasi', 0, 33),
+(156, 'Menerima sinyal dari media transmisi', 0, 34),
+(157, 'Mengubah sinyal digital menjadi sinyal analog', 0, 34),
+(158, 'Mengirim pesan atau data', 1, 34),
+(159, 'Menghubungkan antara pengirim dan penerima informasi', 0, 34),
+(160, 'Sender mengirim sinyal analog tanpa protokol encode.', 0, 29),
+(161, 'Receiver langsung mengolah sinyal digital.', 0, 29),
+(162, 'Sender mengirim sinyal informasi, diubah oleh protokol encode, dan di-decode oleh protokol kedua pada receiver.', 1, 29),
+(163, 'Media transmisi tidak diperlukan dalam prinsip kerja jaringan.', 0, 29),
+(164, 'Sebuah sistem yang terdiri dari satu komputer.', 0, 28),
+(165, 'Sebuah sistem yang terdiri dari beberapa komputer dan perangkat jaringan yang saling terhubung.', 1, 28),
+(166, 'Sebuah sistem yang hanya menggunakan media transmisi nirkabel.', 0, 28),
+(167, 'Sebuah sistem yang tidak memungkinkan berbagi data antar komputer.', 0, 28),
+(168, 'True', 1, 36),
+(169, 'False', 0, 36),
+(170, 'Local Area Network', 1, 37),
+(171, 'Wide Area Network', 0, 37),
+(172, 'Personal Area Network', 0, 37),
+(173, 'Metropolitan Area Network', 0, 37),
+(174, 'Susunan fisik atau logis dari koneksi antar perangkat dalam jaringan', 1, 38),
+(175, 'Jenis kabel yang digunakan dalam jaringan', 0, 38),
+(176, 'Protokol komunikasi dalam jaringan', 0, 38),
+(177, 'Kecepatan transfer data dalam jaringan', 0, 38),
+(178, 'False', 1, 39),
+(179, 'True', 0, 39),
+(180, 'Personal Area Network', 1, 40),
+(181, 'Local Area Network', 0, 40),
+(182, 'Wide Area Network', 0, 40),
+(183, 'Metropolitan Area Network', 0, 40),
+(184, 'Redundansi dan kehandalan tinggi', 1, 41),
+(185, 'Pengaturan dan manajemen yang mudah', 0, 41),
+(186, 'Biaya implementasi yang rendah', 0, 41),
+(187, 'Tahan terhadap gangguan', 0, 41),
+(188, 'False', 1, 42),
+(189, 'True', 0, 42),
+(190, 'Tahan terhadap gangguan', 1, 43),
+(191, 'Cepat dalam deteksi dan isolasi kesalahan', 0, 43),
+(192, 'Mudah untuk diatur dan dikelola', 0, 43),
+(193, 'Biaya implementasi yang rendah', 0, 43),
+(194, 'Metropolitan Area Network', 1, 44),
+(195, 'Personal Area Network', 0, 44),
+(196, 'Local Area Network', 0, 44),
+(197, 'Wide Area Network', 0, 44),
+(198, 'False', 1, 45),
+(199, 'True', 0, 45),
+(200, 'Cepat dalam deteksi dan isolasi kesalahan', 1, 46),
+(201, 'Murah dalam implementasi', 0, 46),
+(202, 'Mudah untuk diatur dan dikelola', 0, 46),
+(203, 'Tahan terhadap gangguan', 0, 46),
+(204, 'Wide Area Network', 1, 47),
+(205, 'Local Area Network', 0, 47),
+(206, 'Personal Area Network', 0, 47),
+(207, 'Metropolitan Area Network', 0, 47),
+(208, 'False', 1, 48),
+(209, 'True', 0, 48),
+(210, 'Menghubungkan perangkat dalam jarak dekat', 1, 49),
+(211, 'Menghubungkan perangkat di wilayah yang luas', 0, 49),
+(212, 'Menghubungkan perangkat di tingkat global', 0, 49),
+(213, 'Menghubungkan perangkat di tingkat kota', 0, 49),
+(214, 'Ketergantungan pada node sentral', 1, 50),
+(215, 'Cepat dalam deteksi dan isolasi kesalahan', 0, 50),
+(216, 'Mudah untuk diatur dan dikelola', 0, 50),
+(217, 'Tahan terhadap gangguan', 0, 50),
+(218, 'False', 1, 51),
+(219, 'True', 0, 51),
+(220, 'Tidak tahan terhadap gangguan', 1, 52),
+(221, 'Cepat dalam deteksi dan isolasi kesalahan', 0, 52),
+(222, 'Mudah untuk diatur dan dikelola', 0, 52),
+(223, 'Biaya implementasi yang rendah', 0, 52),
+(224, 'Local Area Network', 1, 53),
+(225, 'Wide Area Network', 0, 53),
+(226, 'Personal Area Network', 0, 53),
+(227, 'Metropolitan Area Network', 0, 53);
 
 -- --------------------------------------------------------
 
@@ -304,7 +392,66 @@ INSERT INTO `LogActivity` (`LogID`, `UserID`, `ActivityDescription`, `ActivityTi
 (203, 137648118, 'Test with TestID: 2 has been deleted.', '2023-11-20 22:49:19'),
 (204, 137648118, 'Test with TestID: 1 has been deleted.', '2023-11-20 22:49:23'),
 (205, 137648118, 'Exam created: 13, Type: Pretest, Name: Pretest Pengenalan Jaringan Dasar', '2023-11-20 23:01:04'),
-(206, 137648118, 'Exam created: 14, Type: Pretest, Name: Pretest Sejarah Jaringan Komputer', '2023-11-20 23:03:02');
+(206, 137648118, 'Exam created: 14, Type: Pretest, Name: Pretest Sejarah Jaringan Komputer', '2023-11-20 23:03:02'),
+(207, 137648118, 'User logged in', '2023-11-21 00:03:01'),
+(208, 137648118, 'Question created for Test ID: 5', '2023-11-21 00:42:53'),
+(209, 137648118, 'Question created for Test ID: 5', '2023-11-21 00:50:28'),
+(210, 137648118, 'Question created for Test ID: 5', '2023-11-21 01:04:07'),
+(211, 137648118, 'User logged out', '2023-11-21 01:07:53'),
+(212, 137648118, 'User logged in', '2023-11-21 01:08:07'),
+(213, 137648118, 'Question created for Test ID: 5', '2023-11-21 01:09:02'),
+(214, 137648118, 'Question updated with ID: 27', '2023-11-21 01:20:47'),
+(215, 137648118, 'Question updated with ID: 27', '2023-11-21 01:21:42'),
+(216, 137648118, 'Question updated with ID: 27', '2023-11-21 01:24:44'),
+(217, 137648118, 'Question updated with ID: 27', '2023-11-21 01:24:52'),
+(218, 137648118, 'Question updated with ID: 27', '2023-11-21 01:27:02'),
+(219, 137648118, 'Question updated with ID: 27', '2023-11-21 01:27:30'),
+(220, 137648118, 'Question updated with ID: 27', '2023-11-21 01:28:10'),
+(221, 137648118, 'Question updated with ID: 27', '2023-11-21 01:28:17'),
+(222, 137648118, 'Question updated with ID: 27', '2023-11-21 01:28:30'),
+(223, 137648118, 'Question updated with ID: 27', '2023-11-21 01:29:22'),
+(224, 137648118, 'Question updated with ID: 27', '2023-11-21 01:29:30'),
+(225, 137648118, 'Question updated with ID: 27', '2023-11-21 01:30:20'),
+(226, 137648118, 'Question updated with ID: 27', '2023-11-21 01:30:27'),
+(227, 137648118, 'Question updated with ID: 27', '2023-11-21 01:31:40'),
+(228, 137648118, 'Question updated with ID: 27', '2023-11-21 01:31:44'),
+(229, 137648118, 'Question updated with ID: 27', '2023-11-21 01:31:49'),
+(230, 137648118, 'Question updated with ID: 27', '2023-11-21 01:31:55'),
+(231, 137648118, 'Question with QuestionID: 27 has been deleted.', '2023-11-21 01:35:10'),
+(232, 137648118, 'Question with QuestionID: 25 has been deleted.', '2023-11-21 01:36:01'),
+(233, 137648118, 'Question with QuestionID: 24 has been deleted.', '2023-11-21 01:36:07'),
+(234, 137648118, 'User logged out', '2023-11-21 01:37:00'),
+(235, 65405, 'User logged in', '2023-11-21 01:37:16'),
+(236, 65405, 'User logged out', '2023-11-21 01:38:36'),
+(237, 137648118, 'User logged in', '2023-11-21 01:38:45'),
+(238, 137648118, 'Question created for Test ID: 5', '2023-11-21 01:40:35'),
+(239, 137648118, 'Question created for Test ID: 5', '2023-11-21 01:41:09'),
+(240, 137648118, 'Question updated with ID: 29', '2023-11-21 01:41:23'),
+(241, 137648118, 'Question created for Test ID: 5', '2023-11-21 01:42:53'),
+(242, 137648118, 'Question created for Test ID: 5', '2023-11-21 01:43:09'),
+(243, 137648118, 'Question created for Test ID: 5', '2023-11-21 01:43:22'),
+(244, 137648118, 'Question updated with ID: 32', '2023-11-21 01:43:27'),
+(245, 137648118, 'Question created for Test ID: 5', '2023-11-21 01:44:17'),
+(246, 137648118, 'Question created for Test ID: 5', '2023-11-21 01:44:57'),
+(247, 137648118, 'Question updated with ID: 29', '2023-11-21 01:45:15'),
+(248, 137648118, 'Question updated with ID: 28', '2023-11-21 01:45:29'),
+(249, 137648118, 'Test with TestID: 6 has been deleted.', '2023-11-21 02:00:17'),
+(250, 137648118, 'Exam created: 24, Type: Post-test, Name: sfsdfsdf', '2023-11-21 02:38:07'),
+(251, 137648118, 'Test with TestID: 14 has been deleted.', '2023-11-21 02:38:12'),
+(252, 137648118, 'User logged out', '2023-11-21 02:38:22'),
+(253, 65405, 'User logged in', '2023-11-21 02:38:30'),
+(254, 65405, 'User logged out', '2023-11-21 03:01:18'),
+(255, 65405, 'User logged in', '2023-11-21 03:01:27'),
+(256, 65405, 'User logged in', '2023-11-21 03:02:21'),
+(257, 65405, 'User logged in', '2023-11-21 03:06:33'),
+(258, 65405, 'User logged out', '2023-11-21 03:55:19'),
+(259, 65405, 'User logged in', '2023-11-21 03:55:27'),
+(260, 65405, 'User logged out', '2023-11-21 04:12:26'),
+(261, 65405, 'User logged in', '2023-11-21 04:12:48'),
+(262, 65405, 'User logged in', '2023-11-21 06:21:04'),
+(263, 65405, 'User logged out', '2023-11-21 06:23:54'),
+(264, 65405, 'User logged in', '2023-11-21 06:24:00'),
+(265, 65405, 'User logged in', '2023-11-21 07:45:55');
 
 -- --------------------------------------------------------
 
@@ -354,8 +501,40 @@ CREATE TABLE `Questions` (
   `QuestionID` int(11) NOT NULL,
   `QuestionText` text NOT NULL,
   `QuestionType` enum('multiple_choice','true_false','single_choice') NOT NULL,
-  `TestID` int(11) DEFAULT NULL
+  `TestID` int(11) DEFAULT NULL,
+  `QuestionImage` varchar(1024) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Questions`
+--
+
+INSERT INTO `Questions` (`QuestionID`, `QuestionText`, `QuestionType`, `TestID`, `QuestionImage`) VALUES
+(28, 'Pertanyaan : Apa itu Jaringan Komputer?', 'single_choice', 5, NULL),
+(29, 'Pertanyaan : Bagaimana prinsip kerja Jaringan Komputer?', 'single_choice', 5, NULL),
+(30, 'Pernyataan: Jaringan Komputer adalah sistem yang terdiri dari satu komputer dan beberapa perangkat jaringan.', 'true_false', 5, NULL),
+(31, 'Pernyataan: Media transmisi adalah media yang menghubungkan antara pengirim dan penerima informasi.', 'true_false', 5, NULL),
+(32, 'Pernyataan: Receiver berfungsi sebagai pengirim pesan atau data dalam jaringan komputer.', 'true_false', 5, NULL),
+(33, 'Pertanyaan: Protokol jaringan berperan dalam hal apa?', 'multiple_choice', 5, NULL),
+(34, 'Pertanyaan: Apa yang dilakukan sender dalam jaringan komputer?', 'multiple_choice', 5, NULL),
+(36, 'Sejarah jaringan komputer dimulai pada tahun 1960-an.', 'true_false', 8, NULL),
+(37, 'Apakah singkatan LAN?', 'multiple_choice', 8, NULL),
+(38, 'Apa yang dimaksud dengan topologi jaringan?', 'single_choice', 8, NULL),
+(39, 'Tipe-tipe jaringan komputer hanya terdiri dari LAN dan WAN.', 'true_false', 9, NULL),
+(40, 'Apa kepanjangan dari PAN?', 'multiple_choice', 9, NULL),
+(41, 'Apa manfaat dari penggunaan topologi mesh dalam jaringan?', 'single_choice', 9, NULL),
+(42, 'Topologi jaringan hanya mempengaruhi kecepatan transfer data.', 'true_false', 10, NULL),
+(43, 'Apa keuntungan dari topologi ring dalam jaringan?', 'multiple_choice', 10, NULL),
+(44, 'Apa yang dimaksud dengan MAN?', 'single_choice', 10, NULL),
+(45, 'Topologi jaringan hanya berlaku untuk jaringan kabel.', 'true_false', 11, NULL),
+(46, 'Apa keuntungan dari penggunaan topologi bintang dalam jaringan?', 'multiple_choice', 11, NULL),
+(47, 'Apa yang dimaksud dengan WAN?', 'single_choice', 11, NULL),
+(48, 'Penggunaan topologi mesh mengurangi kehandalan jaringan.', 'true_false', 12, NULL),
+(49, 'Apa fungsi utama dari PAN?', 'multiple_choice', 12, NULL),
+(50, 'Apa kekurangan dari topologi star dalam jaringan?', 'single_choice', 12, NULL),
+(51, 'Topologi jaringan tidak mempengaruhi kecepatan transfer data.', 'true_false', 13, NULL),
+(52, 'Apa kekurangan dari topologi bus dalam jaringan?', 'multiple_choice', 13, NULL),
+(53, 'Apa yang dimaksud dengan LAN?', 'single_choice', 13, NULL);
 
 -- --------------------------------------------------------
 
@@ -388,7 +567,8 @@ CREATE TABLE `StudentResponses` (
   `StudentID` int(11) DEFAULT NULL,
   `TestID` int(11) DEFAULT NULL,
   `QuestionID` int(11) DEFAULT NULL,
-  `AnswerID` int(11) DEFAULT NULL
+  `AnswerID` int(11) DEFAULT NULL,
+  `IsCorrect` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -476,6 +656,22 @@ INSERT INTO `Teachers` (`TeacherID`, `NIP`, `AcademicDegree`, `EducationLevel`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `TestResults`
+--
+
+CREATE TABLE `TestResults` (
+  `ResultID` int(11) NOT NULL,
+  `StudentID` int(11) DEFAULT NULL,
+  `TestID` int(11) DEFAULT NULL,
+  `IsCompleted` tinyint(1) DEFAULT NULL,
+  `CorrectAnswers` int(11) DEFAULT NULL,
+  `IncorrectAnswers` int(11) DEFAULT NULL,
+  `Score` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Tests`
 --
 
@@ -483,18 +679,24 @@ CREATE TABLE `Tests` (
   `TestID` int(11) NOT NULL,
   `TestName` varchar(255) NOT NULL,
   `TestType` enum('Pretest','Post-test') NOT NULL,
-  `MaterialID` int(11) DEFAULT NULL
+  `DurationMins` int(11) DEFAULT NULL,
+  `NumQuestions` int(11) DEFAULT NULL,
+  `MaterialID` int(11) DEFAULT NULL,
+  `SubjectID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `Tests`
 --
 
-INSERT INTO `Tests` (`TestID`, `TestName`, `TestType`, `MaterialID`) VALUES
-(3, 'Pretest Example 2', 'Pretest', 10),
-(4, 'Post-test Example 2', 'Post-test', 10),
-(5, 'Pretest Pengenalan Jaringan Dasar', 'Pretest', 13),
-(6, 'Pretest Sejarah Jaringan Komputer', 'Pretest', 14);
+INSERT INTO `Tests` (`TestID`, `TestName`, `TestType`, `DurationMins`, `NumQuestions`, `MaterialID`, `SubjectID`) VALUES
+(5, 'Pretest Pengenalan Jaringan Dasar', 'Pretest', 40, NULL, 13, 1),
+(8, 'Pretest 1', 'Pretest', 40, 3, 14, 1),
+(9, 'Pretest 2', 'Pretest', 40, NULL, 15, 1),
+(10, 'Pretest 3', 'Pretest', 40, NULL, 16, 1),
+(11, 'Post-test 1', 'Post-test', 40, NULL, 14, 1),
+(12, 'Post-test 2', 'Post-test', 40, NULL, 15, 1),
+(13, 'Post-test 3', 'Post-test', 40, NULL, 16, 1);
 
 -- --------------------------------------------------------
 
@@ -526,8 +728,8 @@ CREATE TABLE `Users` (
 
 INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `DateOfBirth`, `Gender`, `Address`, `PhoneNumber`, `RoleID`, `AccountCreationDate`, `LastLogin`, `AccountStatus`, `ProfilePictureURL`, `ActivationStatus`) VALUES
 (0, 'ikimukti', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '19103020046@unpkediri.ac.id', 'Firmansyah Mukti Wijaya', '2023-10-12', 'Male', 'Nglaban 1111', '081216318022', 3, '2023-11-03 10:17:58', '2023-11-03 17:17:58', NULL, '653e5a409b4fb.jpeg', 'active'),
-(65405, 'ahmadhasby', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'ahmadhasby@gmail.com', 'Ahmad Hasby Maulana', '2023-10-10', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-11-15 21:49:15', '2023-11-16 04:49:15', NULL, 'default.png', 'active'),
-(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-11-20 11:07:39', '2023-11-20 18:07:39', NULL, 'default.png', 'active'),
+(65405, 'ahmadhasby', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'ahmadhasby@gmail.com', 'Ahmad Hasby Maulana', '2023-10-10', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-11-21 07:45:55', '2023-11-21 14:45:55', NULL, 'default.png', 'active'),
+(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-11-21 01:38:45', '2023-11-21 08:38:45', NULL, 'default.png', 'active'),
 (1698716970, 'akbarsandi', '$2y$10$GzsUjuYCcfymGzNusQgul.fUn42ETSFy71ECQpYe8NTVRi1z45SoS', 'akbarsandi@gmail.com', 'Akbar Sandi Pratama', '2023-10-12', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:17:23', NULL, NULL, NULL, 'active'),
 (1698719401, 'andrean', '$2y$10$hELFb0BIW5L8uwyVqMLmd.hG7L2avzq/dojKCui.XW1XJOffghcma', 'andreanprasetyo@gmail.com', 'Andrean Prasetyo', '2023-02-07', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:30:01', NULL, 'active', NULL, 'active'),
 (1699006643, 'paijo', '$2y$10$sYyoVnssegJ91BQO8RC6qOFr3XWgUAvNFKcI/WPO8s63Yi8KmGIMu', 'sdhgushg@hfugihdf.d', 'isdhgouhsduog', '2023-11-22', 'Male', 'agdsgdfghdfhg', 'dgsdfhgdf', 3, '2023-11-03 10:17:23', NULL, 'active', NULL, 'active'),
@@ -624,11 +826,20 @@ ALTER TABLE `Teachers`
   ADD KEY `UserID` (`UserID`);
 
 --
+-- Indexes for table `TestResults`
+--
+ALTER TABLE `TestResults`
+  ADD PRIMARY KEY (`ResultID`),
+  ADD KEY `StudentID` (`StudentID`),
+  ADD KEY `TestID` (`TestID`);
+
+--
 -- Indexes for table `Tests`
 --
 ALTER TABLE `Tests`
   ADD PRIMARY KEY (`TestID`),
-  ADD KEY `MaterialID` (`MaterialID`);
+  ADD KEY `MaterialID` (`MaterialID`),
+  ADD KEY `SubjectID` (`SubjectID`);
 
 --
 -- Indexes for table `Users`
@@ -647,7 +858,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Answers`
 --
 ALTER TABLE `Answers`
-  MODIFY `AnswerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `AnswerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
 
 --
 -- AUTO_INCREMENT for table `Classes`
@@ -665,7 +876,7 @@ ALTER TABLE `ClassSubjects`
 -- AUTO_INCREMENT for table `LogActivity`
 --
 ALTER TABLE `LogActivity`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
 
 --
 -- AUTO_INCREMENT for table `Materials`
@@ -677,7 +888,7 @@ ALTER TABLE `Materials`
 -- AUTO_INCREMENT for table `Questions`
 --
 ALTER TABLE `Questions`
-  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `StudentResponses`
@@ -704,10 +915,16 @@ ALTER TABLE `Teachers`
   MODIFY `TeacherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `TestResults`
+--
+ALTER TABLE `TestResults`
+  MODIFY `ResultID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `Tests`
 --
 ALTER TABLE `Tests`
-  MODIFY `TestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `TestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -717,14 +934,14 @@ ALTER TABLE `Tests`
 -- Constraints for table `Answers`
 --
 ALTER TABLE `Answers`
-  ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`QuestionID`) REFERENCES `Questions` (`QuestionID`);
+  ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`QuestionID`) REFERENCES `questions` (`QuestionID`);
 
 --
 -- Constraints for table `ClassSubjects`
 --
 ALTER TABLE `ClassSubjects`
-  ADD CONSTRAINT `classsubjects_ibfk_1` FOREIGN KEY (`ClassID`) REFERENCES `Classes` (`ClassID`),
-  ADD CONSTRAINT `classsubjects_ibfk_2` FOREIGN KEY (`SubjectID`) REFERENCES `Subjects` (`SubjectID`);
+  ADD CONSTRAINT `classsubjects_ibfk_1` FOREIGN KEY (`ClassID`) REFERENCES `classes` (`ClassID`),
+  ADD CONSTRAINT `classsubjects_ibfk_2` FOREIGN KEY (`SubjectID`) REFERENCES `subjects` (`SubjectID`);
 
 --
 -- Constraints for table `LogActivity`
@@ -742,16 +959,17 @@ ALTER TABLE `Materials`
 -- Constraints for table `Questions`
 --
 ALTER TABLE `Questions`
-  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`TestID`) REFERENCES `Tests` (`TestID`);
+  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`TestID`) REFERENCES `tests` (`TestID`);
 
 --
 -- Constraints for table `StudentResponses`
 --
 ALTER TABLE `StudentResponses`
-  ADD CONSTRAINT `studentresponses_ibfk_1` FOREIGN KEY (`StudentID`) REFERENCES `Students` (`StudentID`),
-  ADD CONSTRAINT `studentresponses_ibfk_2` FOREIGN KEY (`TestID`) REFERENCES `Tests` (`TestID`),
-  ADD CONSTRAINT `studentresponses_ibfk_3` FOREIGN KEY (`QuestionID`) REFERENCES `Questions` (`QuestionID`),
-  ADD CONSTRAINT `studentresponses_ibfk_4` FOREIGN KEY (`AnswerID`) REFERENCES `Answers` (`AnswerID`);
+  ADD CONSTRAINT `studentresponses_ibfk_1` FOREIGN KEY (`StudentID`) REFERENCES `students` (`StudentID`),
+  ADD CONSTRAINT `studentresponses_ibfk_2` FOREIGN KEY (`TestID`) REFERENCES `tests` (`TestID`),
+  ADD CONSTRAINT `studentresponses_ibfk_3` FOREIGN KEY (`QuestionID`) REFERENCES `questions` (`QuestionID`),
+  ADD CONSTRAINT `studentresponses_ibfk_4` FOREIGN KEY (`AnswerID`) REFERENCES `answers` (`AnswerID`),
+  ADD CONSTRAINT `studentresponses_ibfk_5` FOREIGN KEY (`TestID`) REFERENCES `Tests` (`TestID`);
 
 --
 -- Constraints for table `Students`
@@ -764,19 +982,27 @@ ALTER TABLE `Students`
 -- Constraints for table `Subjects`
 --
 ALTER TABLE `Subjects`
-  ADD CONSTRAINT `subjects_ibfk_1` FOREIGN KEY (`TeacherID`) REFERENCES `Teachers` (`TeacherID`);
+  ADD CONSTRAINT `subjects_ibfk_1` FOREIGN KEY (`TeacherID`) REFERENCES `teachers` (`TeacherID`);
 
 --
 -- Constraints for table `Teachers`
 --
 ALTER TABLE `Teachers`
-  ADD CONSTRAINT `teachers_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`);
+  ADD CONSTRAINT `teachers_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
+
+--
+-- Constraints for table `TestResults`
+--
+ALTER TABLE `TestResults`
+  ADD CONSTRAINT `testresults_ibfk_1` FOREIGN KEY (`StudentID`) REFERENCES `Students` (`StudentID`),
+  ADD CONSTRAINT `testresults_ibfk_2` FOREIGN KEY (`TestID`) REFERENCES `Tests` (`TestID`);
 
 --
 -- Constraints for table `Tests`
 --
 ALTER TABLE `Tests`
-  ADD CONSTRAINT `tests_ibfk_1` FOREIGN KEY (`MaterialID`) REFERENCES `materials` (`MaterialID`);
+  ADD CONSTRAINT `tests_ibfk_1` FOREIGN KEY (`MaterialID`) REFERENCES `materials` (`MaterialID`),
+  ADD CONSTRAINT `tests_ibfk_2` FOREIGN KEY (`SubjectID`) REFERENCES `Subjects` (`SubjectID`);
 
 --
 -- Constraints for table `Users`

@@ -65,62 +65,9 @@ if ($currentMaterialIndex < count($materials) - 1) {
       <a href="javascript:void(0);" onclick="confirmLogout()" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Logout</a>
     </nav>
   </header>
-  <!-- Your existing header code can go here -->
   <div class="h-screen flex flex-row overflow-hidden sc-hide">
     <!-- Sidebar for Materials -->
-    <div class="bg-gray-200 w-3/12 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
-      <div class="p-4 hover:bg-gray-300">
-        <a href="../systems/dashboard_student.php" class=" hover:text-blue-500">
-          <i class="fas fa-arrow-left mr-2"></i>
-          Back
-        </a>
-      </div>
-      <h3 class="text-lg font-semibold p-4">Materials</h3>
-      <ul class="list-inside">
-        <!-- Displaying a manual type for "Start" -->
-        <li class="py-2 px-4 hover:bg-gray-300">
-          <span class="text-gray-500">Starter</span>
-        </li>
-        <!-- Special list item for "start" with an icon -->
-        <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=start" class="hover:text-blue-500">
-          <li class="py-2 px-4 hover:bg-gray-300">
-            <i class="fas fa-play-circle mr-2"></i> Start
-          </li>
-        </a>
-        <?php
-        $prevMaterialType = null;
-        foreach ($materials as $material) {
-          // Check if the current material has the same type as the previous one
-          if ($material['Type'] !== $prevMaterialType) {
-            // Display the material type
-            echo '<li class="py-2 px-4 hover:bg-gray-300">';
-            echo '<span class="text-gray-500">' . $material['Type'] . '</span>';
-            echo '</li>';
-          }
-          echo '<a href="subjects_detail.php?subject_id=' . $subjectID . '&material=' . $material['MaterialID'] . '" class="hover:text-blue-500">';
-          echo '<li class="py-2 px-4 hover:bg-gray-300">';
-          echo '<i class="fas fa-file-alt mr-2"></i>' . $material['TitleMaterial'];
-          echo '</li>';
-          echo '</a>';
-
-          // Update the previous material type
-          $prevMaterialType = $material['Type'];
-        }
-        ?>
-
-        <!-- Displaying a manual type for "End" -->
-        <li class="py-2 px-4 hover-bg-gray-300">
-          <span class="text-gray-500">Finish</span>
-        </li>
-
-        <!-- Special list item for "end" with an icon -->
-        <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=end" class="hover:text-blue-500">
-          <li class="py-2 px-4 hover-bg-gray-300">
-            <i class="fas fa-stop-circle mr-2"></i> End
-          </li>
-        </a>
-      </ul>
-    </div>
+    <?php include_once('../components/sidebar_students.php') ?>
     <!-- Main Content -->
     <div class="w-9/12 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
       <!-- Main Content -->
@@ -213,5 +160,23 @@ if ($currentMaterialIndex < count($materials) - 1) {
     </div>
   </div>
 </body>
-
+<script>
+  function confirmLogout() {
+    Swal.fire({
+      title: 'Apakah Anda yakin ingin logout?',
+      text: 'Anda akan keluar dari sesi ini.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, Logout!',
+      cancelButtonText: 'Batal'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirect to the logout page or trigger your logout logic here
+        window.location.href = '../systems/logout.php';
+      }
+    });
+  }
+</script>
 </html>

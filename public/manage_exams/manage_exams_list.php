@@ -38,19 +38,27 @@ $errors = array();
         <div class="flex flex-col w-full">
           <!-- Navigation -->
           <div class="flex flex-row justify-between items-center w-full mb-2 pb-2">
-            <!-- ... (Similar structure for welcome message and search form) ... -->
+            <!-- Search -->
+            <form class="flex items-center justify-end space-x-2 w-1/2">
+                <input type="text" name="search" class="bg-gray-200 focus-bg-white focus-outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" placeholder="Search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+                <button type="submit" class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded space-x-2 inline-flex items-center">
+                    <i class="fas fa-search"></i>
+                    <span>Search</span>
+                </button>
+            </form>
+            <!-- End Search -->
+            <!-- Filter -->
+            <div class="flex flex-row justify-end items-center w-full mb-2 space-x-2">
+              <label class="text-gray-600">Filter:</label>
+              <select id="testTypeFilter" class="bg-white border border-gray-300 p-2 rounded">
+                <option value="">All</option>
+                <option value="Pretest">Pretest</option>
+                <option value="Post-test">Post-test</option>
+              </select>
+            </div>
+            <!-- End Filter -->
           </div>
           <!-- End Navigation -->
-          <!-- Filter -->
-          <div class="flex flex-row justify-between items-center w-full mb-2">
-            <label class="text-gray-600">Filter:</label>
-            <select id="testTypeFilter" class="bg-white border border-gray-300 p-2 rounded">
-              <option value="">All</option>
-              <option value="Pretest">Pretest</option>
-              <option value="Post-test">Post-test</option>
-            </select>
-          </div>
-          <!-- End Filter -->
           <!-- Table -->
           <table class="min-w-full">
             <thead>
@@ -58,6 +66,7 @@ $errors = array();
                 <th class="text-left py-2">No</th>
                 <th class="text-left py-2">Test Name</th>
                 <th class="text-left py-2">Test Type</th>
+                <th class="text-left py-2">Subject Title</th>
                 <th class="text-left py-2">Material Title</th>
                 <th class="text-left py-2">Action</th>
               </tr>
@@ -71,19 +80,23 @@ $errors = array();
 
               $condition = "WHERE Tests.TestType LIKE '%$testTypeFilter%'";
               if (!empty($searchTerm)) {
-                $condition .= " AND Materials.TitleMaterial LIKE '%$searchTerm%'";
+                  $condition .= " AND (Tests.TestName LIKE '%$searchTerm%'
+                                    OR Materials.TitleMaterial LIKE '%$searchTerm%'
+                                    OR Subjects.SubjectName LIKE '%$searchTerm%')";
               }
 
-              $query = "SELECT Tests.*, Materials.TitleMaterial FROM Tests
+              $query = "SELECT Tests.*, Materials.TitleMaterial, Subjects.SubjectName FROM Tests
                         INNER JOIN Materials ON Tests.MaterialID = Materials.MaterialID
+                        LEFT JOIN Subjects ON Tests.SubjectID = Subjects.SubjectID
                         $condition
                         LIMIT 15 OFFSET " . ($page - 1) * 15;
               $result = $conn->query($query);
 
               // Count total rows in the table
               $queryCount = "SELECT COUNT(*) AS count FROM Tests
-                             INNER JOIN Materials ON Tests.MaterialID = Materials.MaterialID
-                             $condition";
+               INNER JOIN Materials ON Tests.MaterialID = Materials.MaterialID
+               LEFT JOIN Subjects ON Tests.SubjectID = Subjects.SubjectID
+               $condition";
               $resultCount = $conn->query($queryCount);
               $rowCount = $resultCount->fetch_assoc()['count'];
               $totalPage = ceil($rowCount / 15);
@@ -96,6 +109,7 @@ $errors = array();
                   <td class="py-2"><?php echo $no++; ?></td>
                   <td class="py-2"><?php echo $row['TestName']; ?></td>
                   <td class="py-2"><?php echo $row['TestType']; ?></td>
+                  <td class="py-2"><?php echo $row['SubjectName']; ?></td>
                   <td class="py-2"><?php echo $row['TitleMaterial']; ?></td>
                   <td class='py-2'>
                     <a href="<?php echo $baseUrl; ?>public/manage_exams/manage_exams_detail.php?id=<?php echo $row['TestID'] ?>" class='bg-green-500 hover-bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>

@@ -30,9 +30,9 @@ if (isset($_GET['id'])) {
         $testData = $result->fetch_assoc();
 
         // Retrieve questions associated with the test
-        $questionsQuery = "SELECT q.QuestionID, q.QuestionText, q.QuestionType
-                           FROM Questions q
-                           WHERE q.TestID = $testID";
+        $questionsQuery = "SELECT q.QuestionID, q.QuestionText, q.QuestionType, q.QuestionImage
+                   FROM Questions q
+                   WHERE q.TestID = $testID";
         $questionsResult = $conn->query($questionsQuery);
 
         if ($questionsResult->num_rows > 0) {
@@ -127,39 +127,47 @@ if (isset($_GET['id'])) {
                                 </button>
                             </div>
                             <?php if (!empty($questionsData)) : ?>
-                                <?php foreach ($questionsData as $question) : ?>
-                                    <div class="border-b border-gray-200 py-4 relative">
-                                        <!-- Question Type in the top-right corner -->
-                                        <p class="text-gray-500 absolute top-0 right-0 mt-2 mr-2"><?php echo $question['QuestionType']; ?></p>
-                                        <p class="text-lg font-semibold text-gray-800"><?php echo $question['QuestionText']; ?></p>
-                                        <?php if (!empty($question['Answers'])) : ?>
-                                            <div class="flex flex-wrap items-center">
-                                                <?php foreach ($question['Answers'] as $answer) : ?>
-                                                    <div class="flex items-center mr-4">
-                                                        <?php if ($answer['IsCorrect']) : ?>
-                                                            <span class="m-2 py-1 px-2 text-white rounded-md bg-green-500">
-                                                                <?php echo $answer['AnswerText']; ?>
-                                                                <i class="fas fa-check"></i>
-                                                            </span>
-                                                        <?php else : ?>
-                                                            <span class="mr-2 text-gray-500"><?php echo $answer['AnswerText']; ?></span>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                <?php endforeach; ?>
-                                            </div>
-                                        <?php else : ?>
-                                            <p class="text-gray-500">No answers available.</p>
+                            <?php foreach ($questionsData as $question) : ?>
+                                <div class="border-b border-gray-200 py-4 relative">
+                                    <!-- Question Type in the top-right corner -->
+                                    <p class="text-gray-500 absolute top-0 right-0 mt-2 mr-2"><?php echo $question['QuestionType']; ?></p>
+                                    <div class="flex items-start">
+                                        <?php if (!empty($question['QuestionImage'])) : ?>
+                                            <!-- Display question image if available -->
+                                            <img src="<?php echo $question['QuestionImage']; ?>" alt="Question Image" class="mr-4 rounded-md w-40">
                                         <?php endif; ?>
-                                        <div class="mt-2">
-                                            <a href="#" class="text-blue-500 hover:underline mr-4" onclick="editQuestion(<?php echo $question['QuestionID']; ?>)">
-                                                <i class="fas fa-edit"></i> Edit
-                                            </a>
-                                            <a href="#" class="text-red-500 hover:underline" onclick="confirmDeleteQuestion(<?php echo $question['QuestionID']; ?>)">
-                                                <i class="fas fa-trash"></i> Delete
-                                            </a>
+                                        <div class="flex-grow">
+                                            <p class="text-lg font-semibold text-gray-800"><?php echo $question['QuestionText']; ?></p>
+                                            <?php if (!empty($question['Answers'])) : ?>
+                                                <div class="flex flex-wrap items-center">
+                                                    <?php foreach ($question['Answers'] as $answer) : ?>
+                                                        <div class="flex items-center mr-4">
+                                                            <?php if ($answer['IsCorrect']) : ?>
+                                                                <span class="m-2 py-1 px-2 text-white rounded-md bg-green-500">
+                                                                    <?php echo $answer['AnswerText']; ?>
+                                                                    <i class="fas fa-check"></i>
+                                                                </span>
+                                                            <?php else : ?>
+                                                                <span class="mr-2 text-gray-500"><?php echo $answer['AnswerText']; ?></span>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php else : ?>
+                                                <p class="text-gray-500">No answers available.</p>
+                                            <?php endif; ?>
+                                            <div class="mt-2">
+                                                <a href="#" class="text-blue-500 hover:underline mr-4" onclick="editQuestion(<?php echo $question['QuestionID']; ?>)">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                                <a href="#" class="text-red-500 hover:underline" onclick="confirmDeleteQuestion(<?php echo $question['QuestionID']; ?>)">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
+                                </div>
+                            <?php endforeach; ?>
                                 <?php
                                 // Pagination
                                 ?>

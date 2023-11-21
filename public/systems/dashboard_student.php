@@ -10,12 +10,11 @@ if (isset($_SESSION['UserID'])) {
             JOIN Students s ON u.UserID = s.UserID
             JOIN Classes c ON s.ClassID = c.ClassID
             WHERE u.UserID = $userID";
-
   $result = mysqli_query($conn, $query);
 
   if ($result && mysqli_num_rows($result) > 0) {
     $studentData = mysqli_fetch_assoc($result);
-
+    $_SESSION['StudentID'] = $studentData['StudentID'];
     // Ambil data kelas dan mata pelajaran siswa
     $classID = $studentData['ClassID'];
     $classQuery = "SELECT cs.ClassID, s.SubjectID, s.SubjectName, s.DifficultyLevel, s.TeachingMethod, s.LearningObjective, t.TeacherID, t.NIP, t.AcademicDegree, u.FullName, COUNT(m.MaterialID) as TotalMaterials

@@ -38,7 +38,19 @@ $errors = array();
         <div class="flex flex-col w-full">
           <!-- Navigation -->
           <div class="flex flex-row justify-between items-center w-full mb-2 pb-2">
-            <!-- ... (Similar structure for welcome message and search form) ... -->
+              <div>
+                  <h2 class="text-lg text-gray-800 font-semibold">Welcome back, <?php echo $_SESSION['FullName']; ?>!</h2>
+                  <p class="text-gray-600 text-sm">Material information.</p>
+              </div>
+              <!-- Search -->
+              <form class="flex items-center justify-end space-x-2 w-96">
+                  <input type="text" name="search" class="bg-gray-200 focus-bg-white focus-outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" placeholder="Search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+                  <button type="submit" class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded space-x-2 inline-flex items-center">
+                      <i class="fas fa-search"></i>
+                      <span>Search</span>
+                  </button>
+              </form>
+              <!-- End Search -->
           </div>
           <!-- End Navigation -->
           <!-- Table -->
@@ -57,14 +69,23 @@ $errors = array();
               // Fetch material data from the database
               $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
               $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+              // Use LEFT JOIN to include 'Subjects' table and retrieve 'SubjectName'
               $query = "SELECT Materials.*, Subjects.SubjectName FROM Materials
-                        INNER JOIN Subjects ON Materials.SubjectID = Subjects.SubjectID
+                        LEFT JOIN Subjects ON Materials.SubjectID = Subjects.SubjectID
                         WHERE Materials.TitleMaterial LIKE '%$searchTerm%'
+                          OR Materials.Type LIKE '%$searchTerm%'
+                          OR Subjects.SubjectName LIKE '%$searchTerm%'
                         LIMIT 15 OFFSET " . ($page - 1) * 15;
+
               $result = $conn->query($query);
 
               // Count total rows in the table
-              $queryCount = "SELECT COUNT(*) AS count FROM Materials WHERE TitleMaterial LIKE '%$searchTerm%'";
+              $queryCount = "SELECT COUNT(*) AS count FROM Materials
+                            LEFT JOIN Subjects ON Materials.SubjectID = Subjects.SubjectID
+                            WHERE Materials.TitleMaterial LIKE '%$searchTerm%'
+                                OR Materials.Type LIKE '%$searchTerm%'
+                                OR Subjects.SubjectName LIKE '%$searchTerm%'";
               $resultCount = $conn->query($queryCount);
               $rowCount = $resultCount->fetch_assoc()['count'];
               $totalPage = ceil($rowCount / 15);

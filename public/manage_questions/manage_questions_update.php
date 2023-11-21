@@ -94,17 +94,49 @@ if (
     // Check for errors
     if (empty($errors)) {
         // Update the question in the database
-        // Note: Adjust the SQL query based on your database schema
-        $query = "UPDATE Questions SET QuestionText = ?, QuestionType = ? WHERE QuestionID = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param(
-            "ssi",
-            $questionText,
-            $questionType,
-            $questionID
-        );
+        // Process image upload
+        $questionQuery = "SELECT QuestionImage FROM Questions WHERE QuestionID = ?";
+        $questionStmt = $conn->prepare($questionQuery);
+        $questionStmt->bind_param("i", $questionID);
+        $questionStmt->execute();
+        $questionResult = $questionStmt->get_result();
+        if ($questionRow = $questionResult->fetch_assoc()) {
+            $questionImageOld = $questionRow['QuestionImage'];
+            $questionImage = $questionRow['QuestionImage'];
+        }
+        if (!empty($_FILES['question_image']['name'])) {
+            $uploadDirectory = '../static/image/tests/';
 
-        if ($stmt->execute()) {
+            // Create the question_id folder if it doesn't exist
+            $questionIdFolder = $uploadDirectory . $questionID;
+            if (!file_exists($questionIdFolder)) {
+                mkdir($questionIdFolder, 0777, true); // 0777 grants full permissions, adjust as needed
+            }
+
+            // Generate a unique file name based on time
+            $uploadedFileName = uniqid() . '_' . basename($_FILES['question_image']['name']);
+            $targetFilePath = $questionIdFolder . '/' . $uploadedFileName;
+
+            if (move_uploaded_file($_FILES['question_image']['tmp_name'], $targetFilePath)) {
+                $questionImage = $targetFilePath;
+                if (!empty($questionImageOld) && file_exists($questionImageOld)) {
+                    unlink($questionImageOld);
+                }
+                echo ($_FILES['question_image']['name']) . "BERHASIL";
+            } else {
+                $errors['question_image'] = "Image upload failed.";
+                echo ($_FILES['question_image']['name']) . "ERROR";
+            }
+        } else {
+            echo "error woe";
+        }
+
+        // Update the SQL query to include the image column
+        $updateQuery = "UPDATE Questions SET QuestionText = ?, QuestionType = ?, QuestionImage = ? WHERE QuestionID = ?";
+        $updateStmt = $conn->prepare($updateQuery);
+        $updateStmt->bind_param("sssi", $questionText, $questionType, $questionImage, $questionID);
+        
+        if ($updateStmt->execute()) {
             // Delete existing answers for the question
             $deleteQuery = "DELETE FROM Answers WHERE QuestionID = ?";
             $deleteStmt = $conn->prepare($deleteQuery);
@@ -158,7 +190,7 @@ if (
 }
 
 // Fetch the question details for editing
-$questionQuery = "SELECT QuestionText, QuestionType FROM Questions WHERE QuestionID = ?";
+$questionQuery = "SELECT QuestionText, QuestionType, QuestionImage FROM Questions WHERE QuestionID = ?";
 $questionStmt = $conn->prepare($questionQuery);
 $questionStmt->bind_param("i", $questionID);
 $questionStmt->execute();
@@ -166,6 +198,7 @@ $questionResult = $questionStmt->get_result();
 if ($questionRow = $questionResult->fetch_assoc()) {
     $questionText = $questionRow['QuestionText'];
     $questionType = $questionRow['QuestionType'];
+    $questionImage = $questionRow['QuestionImage'];
 }
 
 // Close the database connection
@@ -204,7 +237,7 @@ if ($questionRow = $questionResult->fetch_assoc()) {
                     </div>
                     <!-- End Navigation -->
                     <!-- Question Update Form -->
-                    <form action="" method="POST" class="flex flex-col w-full space-x-2">
+                    <form action="" method="POST" class="flex flex-col w-full space-x-2" enctype="multipart/form-data">
                         <!-- Test ID (Read-only) -->
                         <label for="test_id" class="block font-semibold text-gray-800 mt-2 mb-2">Test ID</label>
                         <input type="text" id="test_id" name="test_id" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" value="<?php echo htmlspecialchars($testID); ?>" readonly>
@@ -222,7 +255,15 @@ if ($questionRow = $questionResult->fetch_assoc()) {
                             </p>
                         <?php endif; ?>
 
-                        <!-- Question Type -->
+                        <!-- Image Upload -->
+                        <label for="question_image" class="block font-semibold text-gray-800 mt-2 mb-2">Question Image</label>
+                        <input type="file" name="question_image" accept="image/*">
+
+                        <!-- Display existing question image -->
+                        <?php if (!empty($questionImage)) : ?>
+                            <img src="<?php echo $questionImage; ?>" alt="Question Image" class="mt-2 mb-2 w-40">
+                        <?php endif; ?>
+
                         <!-- Question Type -->
                         <label for="question_type" class="block font-semibold text-gray-800 mt-2 mb-2">Question Type <span class="text-red-500">*</span></label>
                         <input type="text" id="question_type" name="question_type" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" value="<?php echo htmlspecialchars($questionType); ?>" readonly>
