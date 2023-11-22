@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2023 at 12:14 AM
+-- Generation Time: Nov 22, 2023 at 03:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -109,10 +109,6 @@ INSERT INTO `Answers` (`AnswerID`, `AnswerText`, `IsCorrect`, `QuestionID`) VALU
 (225, 'Wide Area Network', 0, 53),
 (226, 'Personal Area Network', 0, 53),
 (227, 'Metropolitan Area Network', 0, 53),
-(228, 'Sebuah sistem yang terdiri dari satu komputer.', 0, 28),
-(229, 'Sebuah sistem yang terdiri dari beberapa komputer dan perangkat jaringan yang saling terhubung.', 1, 28),
-(230, 'Sebuah sistem yang hanya menggunakan media transmisi nirkabel.', 0, 28),
-(231, 'Sebuah sistem yang tidak memungkinkan berbagi data antar komputer.', 0, 28),
 (232, 'Sender mengirim sinyal analog tanpa protokol encode.', 0, 29),
 (233, 'Receiver langsung mengolah sinyal digital.', 0, 29),
 (234, 'Sender mengirim sinyal informasi, diubah oleh protokol encode, dan di-decode oleh protokol kedua pada receiver.', 1, 29),
@@ -120,7 +116,11 @@ INSERT INTO `Answers` (`AnswerID`, `AnswerText`, `IsCorrect`, `QuestionID`) VALU
 (236, 'Menerima sinyal dari media transmisi', 0, 34),
 (237, 'Mengubah sinyal digital menjadi sinyal analog', 0, 34),
 (238, 'Mengirim pesan atau data', 1, 34),
-(239, 'Menghubungkan antara pengirim dan penerima informasi', 0, 34);
+(239, 'Menghubungkan antara pengirim dan penerima informasi', 0, 34),
+(240, 'BENER', 1, 54),
+(241, 'BENER POL', 0, 54),
+(242, 'BENER BENER', 0, 54),
+(243, 'BENER SALAH', 1, 54);
 
 -- --------------------------------------------------------
 
@@ -167,7 +167,8 @@ INSERT INTO `ClassSubjects` (`ClassSubjectID`, `ClassID`, `SubjectID`) VALUES
 (9, 1, 1),
 (10, 1, 2),
 (11, 2, 2),
-(14, 3, 2);
+(14, 3, 2),
+(15, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -459,7 +460,19 @@ INSERT INTO `LogActivity` (`LogID`, `UserID`, `ActivityDescription`, `ActivityTi
 (270, 137648118, 'Question updated with ID: 29', '2023-11-21 14:50:03'),
 (271, 137648118, 'Question updated with ID: 34', '2023-11-21 14:50:11'),
 (272, 137648118, 'User logged out', '2023-11-21 14:50:19'),
-(273, 65405, 'User logged in', '2023-11-21 14:50:26');
+(273, 65405, 'User logged in', '2023-11-21 14:50:26'),
+(274, 65405, 'User logged in', '2023-11-22 01:09:01'),
+(275, 65405, 'User logged out', '2023-11-22 02:11:50'),
+(276, 137648118, 'User logged in', '2023-11-22 02:11:56'),
+(277, 137648118, 'User with Username: mukti has been created with the following details - Full Name: Firmansyah Mukti Wijaya, Role: 3, Account Status: Active, Activation Status: Activated.', '2023-11-22 02:12:37'),
+(278, 137648118, 'User with UserID: 1700619157 has been deleted.', '2023-11-22 02:12:45'),
+(279, 137648118, 'Student created: Student Number: 0124981284, Parent/Guardian: saffsa', '2023-11-22 02:13:30'),
+(280, 65405, 'User logged in', '2023-11-22 02:14:18'),
+(281, 65405, 'User logged in', '2023-11-22 02:26:11'),
+(282, 137648118, 'Material created: TOPOLOGI', '2023-11-22 02:27:37'),
+(283, 137648118, 'Question with QuestionID: 28 has been deleted.', '2023-11-22 02:28:28'),
+(284, 137648118, 'Exam created: 20, Type: Post-test, Name: CEK PEMAHAMAN SISWA Skalabilitas dan Ketersediaan', '2023-11-22 02:30:07'),
+(285, 137648118, 'Question created for Test ID: 15', '2023-11-22 02:31:17');
 
 -- --------------------------------------------------------
 
@@ -497,7 +510,7 @@ INSERT INTO `Materials` (`MaterialID`, `SubjectID`, `TitleMaterial`, `Type`, `Co
 (24, 1, 'A) Pengertian IP Address', 'IP Address', 'Test', '../materials_data/1_A)PengertianIPAddress.php', 13),
 (25, 1, 'B) Jenis-Jenis IP Address', 'IP Address', 'Test', '../materials_data/1_B)Jenis-JenisIPAddress.php', 14),
 (26, 1, 'C) Penggunaan IP Address', 'IP Address', 'Test', '../materials_data/1_C)PenggunaanIPAddress.php', 15),
-(27, 1, 'D) Cara Menghitung IP Address dan Subnet Mask', 'IP Address', 'Test', '../materials_data/1_D)CaraMenghitungIPAddressdanSubnetMask.php', 16);
+(27, 1, 'D) Cara Menghitung IP Address dan Subnet Mask', 'IP Address', 'Test', '../materials_data/1_D)CaraMenghitungIPAddressdanSubnetMask.php', 17);
 
 -- --------------------------------------------------------
 
@@ -518,7 +531,6 @@ CREATE TABLE `Questions` (
 --
 
 INSERT INTO `Questions` (`QuestionID`, `QuestionText`, `QuestionType`, `TestID`, `QuestionImage`) VALUES
-(28, 'Pertanyaan : Apa itu Jaringan Komputer?', 'single_choice', 5, '../static/image/tests/28/655cc392ee349_2 contoh gambar topologi.jpg'),
 (29, 'Pertanyaan : Bagaimana prinsip kerja Jaringan Komputer?', 'single_choice', 5, '../static/image/tests/29/655cc39b50a79_2 contoh gambar topologi.jpg'),
 (30, 'Pernyataan: Jaringan Komputer adalah sistem yang terdiri dari satu komputer dan beberapa perangkat jaringan.', 'true_false', 5, NULL),
 (31, 'Pernyataan: Media transmisi adalah media yang menghubungkan antara pengirim dan penerima informasi.', 'true_false', 5, NULL),
@@ -542,7 +554,8 @@ INSERT INTO `Questions` (`QuestionID`, `QuestionText`, `QuestionType`, `TestID`,
 (50, 'Apa kekurangan dari topologi star dalam jaringan?', 'single_choice', 12, NULL),
 (51, 'Topologi jaringan tidak mempengaruhi kecepatan transfer data.', 'true_false', 13, NULL),
 (52, 'Apa kekurangan dari topologi bus dalam jaringan?', 'multiple_choice', 13, NULL),
-(53, 'Apa yang dimaksud dengan LAN?', 'single_choice', 13, NULL);
+(53, 'Apa yang dimaksud dengan LAN?', 'single_choice', 13, NULL),
+(54, 'CEK BOR', 'multiple_choice', 15, '../static/image/tests/54/655d67f56948f_cleaning-a-computer.jpg');
 
 -- --------------------------------------------------------
 
@@ -585,13 +598,21 @@ CREATE TABLE `StudentResponses` (
 
 INSERT INTO `StudentResponses` (`ResponseID`, `StudentID`, `TestID`, `QuestionID`, `AnswerID`, `IsCorrect`) VALUES
 (208, 2, 5, 32, 151, 0),
-(213, 2, 5, 28, 229, 1),
 (216, 2, 5, 29, 234, 1),
 (217, 2, 5, 30, 145, 1),
 (218, 2, 5, 31, 146, 1),
 (219, 2, 5, 33, 152, 1),
 (220, 2, 5, 33, 154, 0),
-(221, 2, 5, 34, 239, 0);
+(221, 2, 5, 34, 239, 0),
+(222, 2, 8, 36, 168, 1),
+(223, 2, 8, 37, 170, 1),
+(224, 2, 8, 38, 174, 1),
+(225, 2, 11, 45, 199, 0),
+(226, 2, 11, 46, 201, 0),
+(227, 2, 11, 46, 202, 0),
+(228, 2, 11, 47, 204, 1),
+(229, 2, 15, 54, 240, 1),
+(230, 2, 15, 54, 243, 1);
 
 -- --------------------------------------------------------
 
@@ -620,7 +641,8 @@ INSERT INTO `Students` (`StudentID`, `StudentNumber`, `Religion`, `ParentGuardia
 (2, '235235234', 'Agnostik', 'Paijo', 'Paijo', 'Paijo', 'paijo@gmail.com', 1, 65405),
 (4, '542436546', 'Agnostik', 'Kartu Prakerja - Firmansyah Mukti Wijaya', 'Jl. Ahmad Dahlan No.76, Mojoroto, Kec. Mojoroto, Kota Kediri, Jawa Timur 64112', '+6281216318022', 'iki.mukti@gmail.com', 3, 1698716970),
 (5, '8345738488', 'Agnostik', 'Paijo', 'Paijo', 'Paijo', 'paijo@gmail.com', 2, 0),
-(6, '13466174142', 'fsdgsfdh', 'dfgsdg', 'sdgsdgsd', 'sdgsdgsfg', 'dsfhsdufh@jbsfbdfb.s', 3, 0);
+(6, '13466174142', 'fsdgsfdh', 'dfgsdg', 'sdgsdgsd', 'sdgsdgsfg', 'dsfhsdufh@jbsfbdfb.s', 3, 0),
+(7, '0124981284', 'asddsa', 'saffsa', 'safasf', 'asfasf', 'asf', 2, 1700619157);
 
 -- --------------------------------------------------------
 
@@ -696,7 +718,10 @@ CREATE TABLE `TestResults` (
 --
 
 INSERT INTO `TestResults` (`ResultID`, `StudentID`, `TestID`, `IsCompleted`, `CorrectAnswers`, `IncorrectAnswers`, `Score`) VALUES
-(1, 2, 5, 1, 5, 2, 71);
+(1, 2, 5, 1, 5, 2, 71),
+(2, 2, 8, 1, 3, 0, 100),
+(3, 2, 11, 1, 1, 2, 33),
+(4, 2, 15, 1, 2, -1, 200);
 
 -- --------------------------------------------------------
 
@@ -725,7 +750,8 @@ INSERT INTO `Tests` (`TestID`, `TestName`, `TestType`, `DurationMins`, `NumQuest
 (10, 'Pretest 3', 'Pretest', 40, 3, 16, 1),
 (11, 'Post-test 1', 'Post-test', 40, 3, 14, 1),
 (12, 'Post-test 2', 'Post-test', 40, 3, 15, 1),
-(13, 'Post-test 3', 'Post-test', 40, 3, 16, 1);
+(13, 'Post-test 3', 'Post-test', 40, 3, 16, 1),
+(15, 'CEK PEMAHAMAN SISWA Skalabilitas dan Ketersediaan', 'Post-test', NULL, NULL, 20, NULL);
 
 -- --------------------------------------------------------
 
@@ -757,8 +783,8 @@ CREATE TABLE `Users` (
 
 INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `DateOfBirth`, `Gender`, `Address`, `PhoneNumber`, `RoleID`, `AccountCreationDate`, `LastLogin`, `AccountStatus`, `ProfilePictureURL`, `ActivationStatus`) VALUES
 (0, 'ikimukti', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '19103020046@unpkediri.ac.id', 'Firmansyah Mukti Wijaya', '2023-10-12', 'Male', 'Nglaban 1111', '081216318022', 3, '2023-11-03 10:17:58', '2023-11-03 17:17:58', NULL, '653e5a409b4fb.jpeg', 'active'),
-(65405, 'ahmadhasby', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'ahmadhasby@gmail.com', 'Ahmad Hasby Maulana', '2023-10-10', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-11-21 14:50:26', '2023-11-21 21:50:26', NULL, 'default.png', 'active'),
-(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-11-21 14:49:15', '2023-11-21 21:49:15', NULL, 'default.png', 'active'),
+(65405, 'ahmadhasby', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'ahmadhasby@gmail.com', 'Ahmad Hasby Maulana', '2023-10-10', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-11-22 02:26:11', '2023-11-22 09:26:11', NULL, 'default.png', 'active'),
+(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-11-22 02:11:56', '2023-11-22 09:11:56', NULL, 'default.png', 'active'),
 (1698716970, 'akbarsandi', '$2y$10$GzsUjuYCcfymGzNusQgul.fUn42ETSFy71ECQpYe8NTVRi1z45SoS', 'akbarsandi@gmail.com', 'Akbar Sandi Pratama', '2023-10-12', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:17:23', NULL, NULL, NULL, 'active'),
 (1698719401, 'andrean', '$2y$10$hELFb0BIW5L8uwyVqMLmd.hG7L2avzq/dojKCui.XW1XJOffghcma', 'andreanprasetyo@gmail.com', 'Andrean Prasetyo', '2023-02-07', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:30:01', NULL, 'active', NULL, 'active'),
 (1699006643, 'paijo', '$2y$10$sYyoVnssegJ91BQO8RC6qOFr3XWgUAvNFKcI/WPO8s63Yi8KmGIMu', 'sdhgushg@hfugihdf.d', 'isdhgouhsduog', '2023-11-22', 'Male', 'agdsgdfghdfhg', 'dgsdfhgdf', 3, '2023-11-03 10:17:23', NULL, 'active', NULL, 'active'),
@@ -767,6 +793,7 @@ INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `Dat
 (1699008390, 'renal', '$2y$10$MPgdqVlT.pfxusRT.4xFbuwHE2YHCHPKEmyl/aiDeqXAcxr2fbV7y', 'asfasgag@afasfa', 'Renal', '2023-11-17', 'Male', 'asgadads', '12481285712', 2, '2023-11-03 10:54:11', NULL, 'active', NULL, 'active'),
 (1699008906, 'agdag', '$2y$10$qiodW.6G2b42N5akckDfr.PQqNFr6m/JEWZ2AoOhPonAUIEXqhvwG', 'aoghouah@ojfouadhsd', 'Nefira', '2023-11-08', 'Female', 'asgagasg', '3532456346', 2, '2023-11-03 10:55:25', NULL, 'active', NULL, 'active'),
 (1699008959, 'nanda', '$2y$10$S.Lr0XU71eYd93gnHJYFkuNvwDlySLWMAa1kCobICvsOJUinbFDeq', 'sedhgisdfghi@olfosdhf', 'Nanda', NULL, 'Male', 'sdhgedfhdryxj', '24534563546457', 2, '2023-11-03 11:01:59', NULL, 'Active', NULL, 'active'),
+(1700619157, 'mukti', '$2y$10$OnMJVb7WWNtzU7StPb6dtupCd.VyrFWoWPCmP9wmCqgkbr.eNEpha', 'iki.mukti@gmail.com', 'Firmansyah Mukti Wijaya', NULL, 'Male', 'Nglaban', '081216318022', 3, '2023-11-22 02:12:45', NULL, 'Active', NULL, 'active'),
 (2147483647, 'abisatria', '$2y$10$lHoNtWimVtfPR7WomlzRx.KN4P08K1LhlUHWgF4L.xz0ziNjqGyOS', 'abisatria@gmail.com', 'Abi Satria', '2023-10-27', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-11-07 05:00:21', NULL, 'Active', NULL, 'active');
 
 --
@@ -887,7 +914,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Answers`
 --
 ALTER TABLE `Answers`
-  MODIFY `AnswerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+  MODIFY `AnswerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
 
 --
 -- AUTO_INCREMENT for table `Classes`
@@ -899,37 +926,37 @@ ALTER TABLE `Classes`
 -- AUTO_INCREMENT for table `ClassSubjects`
 --
 ALTER TABLE `ClassSubjects`
-  MODIFY `ClassSubjectID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ClassSubjectID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `LogActivity`
 --
 ALTER TABLE `LogActivity`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=274;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
 
 --
 -- AUTO_INCREMENT for table `Materials`
 --
 ALTER TABLE `Materials`
-  MODIFY `MaterialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `MaterialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `Questions`
 --
 ALTER TABLE `Questions`
-  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `StudentResponses`
 --
 ALTER TABLE `StudentResponses`
-  MODIFY `ResponseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
+  MODIFY `ResponseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 
 --
 -- AUTO_INCREMENT for table `Students`
 --
 ALTER TABLE `Students`
-  MODIFY `StudentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `StudentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `Subjects`
@@ -947,13 +974,13 @@ ALTER TABLE `Teachers`
 -- AUTO_INCREMENT for table `TestResults`
 --
 ALTER TABLE `TestResults`
-  MODIFY `ResultID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ResultID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `Tests`
 --
 ALTER TABLE `Tests`
-  MODIFY `TestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `TestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -973,12 +1000,6 @@ ALTER TABLE `ClassSubjects`
   ADD CONSTRAINT `classsubjects_ibfk_2` FOREIGN KEY (`SubjectID`) REFERENCES `subjects` (`SubjectID`);
 
 --
--- Constraints for table `LogActivity`
---
-ALTER TABLE `LogActivity`
-  ADD CONSTRAINT `LogActivity_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `Materials`
 --
 ALTER TABLE `Materials`
@@ -989,14 +1010,6 @@ ALTER TABLE `Materials`
 --
 ALTER TABLE `Questions`
   ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`TestID`) REFERENCES `tests` (`TestID`);
-
---
--- Constraints for table `StudentResponses`
---
-ALTER TABLE `StudentResponses`
-  ADD CONSTRAINT `studentresponses_ibfk_1` FOREIGN KEY (`StudentID`) REFERENCES `students` (`StudentID`),
-  ADD CONSTRAINT `studentresponses_ibfk_2` FOREIGN KEY (`TestID`) REFERENCES `tests` (`TestID`),
-  ADD CONSTRAINT `studentresponses_ibfk_5` FOREIGN KEY (`TestID`) REFERENCES `tests` (`TestID`);
 
 --
 -- Constraints for table `Students`
@@ -1016,13 +1029,6 @@ ALTER TABLE `Subjects`
 --
 ALTER TABLE `Teachers`
   ADD CONSTRAINT `teachers_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`);
-
---
--- Constraints for table `TestResults`
---
-ALTER TABLE `TestResults`
-  ADD CONSTRAINT `testresults_ibfk_1` FOREIGN KEY (`StudentID`) REFERENCES `students` (`StudentID`),
-  ADD CONSTRAINT `testresults_ibfk_2` FOREIGN KEY (`TestID`) REFERENCES `tests` (`TestID`);
 
 --
 -- Constraints for table `Tests`

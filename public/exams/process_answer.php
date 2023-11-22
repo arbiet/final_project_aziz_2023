@@ -1,6 +1,6 @@
 <?php
-require_once('../../database/connection.php');
 session_start();
+require_once('../../database/connection.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['answer']) || isset($_POST['answers'])) {
