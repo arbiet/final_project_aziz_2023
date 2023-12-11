@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2023 at 03:36 AM
+-- Generation Time: Dec 11, 2023 at 10:33 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -121,6 +121,80 @@ INSERT INTO `Answers` (`AnswerID`, `AnswerText`, `IsCorrect`, `QuestionID`) VALU
 (241, 'BENER POL', 0, 54),
 (242, 'BENER BENER', 0, 54),
 (243, 'BENER SALAH', 1, 54);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `AssignmentAttachments`
+--
+
+CREATE TABLE `AssignmentAttachments` (
+  `AttachmentID` int(11) NOT NULL,
+  `AssignmentID` int(11) DEFAULT NULL,
+  `AttachmentFile` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `AssignmentAttachments`
+--
+
+INSERT INTO `AssignmentAttachments` (`AttachmentID`, `AssignmentID`, `AttachmentFile`) VALUES
+(1, 1, '../static/image/attachment/attachment_6576980d8ef4e_1702270989.jpg'),
+(3, 3, '../static/image/attachment/attachment_6576aa08a2e1b_1702275592.jpg'),
+(4, 4, '../static/image/attachment/attachment_6576bb396b0f5_1702279993.pdf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Assignments`
+--
+
+CREATE TABLE `Assignments` (
+  `AssignmentID` int(11) NOT NULL,
+  `SubjectID` int(11) DEFAULT NULL,
+  `MaterialID` int(11) DEFAULT NULL,
+  `Title` varchar(255) NOT NULL,
+  `Description` text DEFAULT NULL,
+  `DueDate` date DEFAULT NULL,
+  `AssignedDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `PriorityLevel` int(11) DEFAULT NULL,
+  `Status` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Assignments`
+--
+
+INSERT INTO `Assignments` (`AssignmentID`, `SubjectID`, `MaterialID`, `Title`, `Description`, `DueDate`, `AssignedDate`, `PriorityLevel`, `Status`) VALUES
+(1, 1, 27, 'Praktek Woe', 'Praktek Woe', '2024-11-11', '2023-12-11 05:03:09', 0, NULL),
+(3, 1, 16, 'asdasfsfaedsfg', 'asfasfsff', '2005-04-12', '2023-12-11 06:19:52', 1, NULL),
+(4, 1, 7, 'asdasdgdsgsdg', '100000dihbfiydsfiygsdf', '2029-02-10', '2023-12-11 07:33:13', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `AssignmentSubmissions`
+--
+
+CREATE TABLE `AssignmentSubmissions` (
+  `SubmissionID` int(11) NOT NULL,
+  `StudentID` int(11) DEFAULT NULL,
+  `AssignmentID` int(11) DEFAULT NULL,
+  `SubmissionText` text DEFAULT NULL,
+  `SubmissionFile` varchar(255) DEFAULT NULL,
+  `SubmissionDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `TeacherFeedback` text DEFAULT NULL,
+  `Grade` int(11) DEFAULT NULL,
+  `IsLateSubmission` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `AssignmentSubmissions`
+--
+
+INSERT INTO `AssignmentSubmissions` (`SubmissionID`, `StudentID`, `AssignmentID`, `SubmissionText`, `SubmissionFile`, `SubmissionDate`, `TeacherFeedback`, `Grade`, `IsLateSubmission`) VALUES
+(1, 2, 4, 'dasfasgasgsg', '../static/image/submission/1702282771_3b56b0b1b1.pdf', '2023-12-11 08:19:31', 'iudasudfh', 100, NULL),
+(2, 2, 3, 'rcyrcrctrctrcrycrycycyhvghg', '../static/image/submission/1702283288_955f1c69eb.pdf', '2023-12-11 08:28:08', 'uhuasdfhusdhfsubsudgf', 100, NULL);
 
 -- --------------------------------------------------------
 
@@ -472,7 +546,39 @@ INSERT INTO `LogActivity` (`LogID`, `UserID`, `ActivityDescription`, `ActivityTi
 (282, 137648118, 'Material created: TOPOLOGI', '2023-11-22 02:27:37'),
 (283, 137648118, 'Question with QuestionID: 28 has been deleted.', '2023-11-22 02:28:28'),
 (284, 137648118, 'Exam created: 20, Type: Post-test, Name: CEK PEMAHAMAN SISWA Skalabilitas dan Ketersediaan', '2023-11-22 02:30:07'),
-(285, 137648118, 'Question created for Test ID: 15', '2023-11-22 02:31:17');
+(285, 137648118, 'Question created for Test ID: 15', '2023-11-22 02:31:17'),
+(286, 137648118, 'User logged in', '2023-11-24 02:14:32'),
+(287, 137648118, 'User logged out', '2023-11-24 02:14:44'),
+(288, 65405, 'User logged in', '2023-11-24 02:14:54'),
+(289, 65405, 'User logged in', '2023-11-29 05:50:17'),
+(290, 137648118, 'User logged in', '2023-12-11 04:19:02'),
+(291, 137648118, 'Assignment created: SubjectID: 1, MaterialID: 27, Title: Praktek Woe', '2023-12-11 05:03:09'),
+(292, 137648118, 'Assignment created: SubjectID: 1, MaterialID: 26, Title: Praktek Yahud', '2023-12-11 05:04:02'),
+(293, 137648118, 'Assignment with AssignmentID: 2 has been deleted.', '2023-12-11 06:18:34'),
+(294, 137648118, 'User logged out', '2023-12-11 06:19:20'),
+(295, 137648118, 'User logged in', '2023-12-11 06:19:29'),
+(296, 137648118, 'Assignment created: SubjectID: 1, MaterialID: 16, Title: asdasfsfaedsfg', '2023-12-11 06:19:52'),
+(297, 137648118, 'User logged out', '2023-12-11 06:19:57'),
+(298, 137648118, 'User logged in', '2023-12-11 06:20:02'),
+(299, 137648118, 'User logged out', '2023-12-11 06:20:05'),
+(300, 65405, 'User logged in', '2023-12-11 07:07:40'),
+(301, 65405, 'User logged out', '2023-12-11 07:29:21'),
+(302, 65405, 'User logged in', '2023-12-11 07:30:03'),
+(303, 65405, 'User logged out', '2023-12-11 07:32:26'),
+(304, 137648118, 'User logged in', '2023-12-11 07:32:32'),
+(305, 137648118, 'Assignment created: SubjectID: 1, MaterialID: 7, Title: asdasdgdsgsdg', '2023-12-11 07:33:13'),
+(306, 137648118, 'User logged out', '2023-12-11 07:33:19'),
+(307, 65405, 'User logged in', '2023-12-11 07:33:26'),
+(308, 65405, 'User logged out', '2023-12-11 08:24:25'),
+(309, 137648118, 'User logged in', '2023-12-11 08:24:30'),
+(310, 137648118, 'User logged out', '2023-12-11 08:25:40'),
+(311, 65405, 'User logged in', '2023-12-11 08:25:52'),
+(312, 65405, 'User logged out', '2023-12-11 08:28:20'),
+(313, 137648118, 'User logged in', '2023-12-11 08:28:29'),
+(314, 137648118, 'User logged out', '2023-12-11 09:04:17'),
+(315, 137648118, 'User logged in', '2023-12-11 09:04:41'),
+(316, 137648118, 'User logged out', '2023-12-11 09:10:54'),
+(317, 65405, 'User logged in', '2023-12-11 09:11:02');
 
 -- --------------------------------------------------------
 
@@ -612,7 +718,10 @@ INSERT INTO `StudentResponses` (`ResponseID`, `StudentID`, `TestID`, `QuestionID
 (227, 2, 11, 46, 202, 0),
 (228, 2, 11, 47, 204, 1),
 (229, 2, 15, 54, 240, 1),
-(230, 2, 15, 54, 243, 1);
+(230, 2, 15, 54, 243, 1),
+(231, 2, 9, 39, 179, 0),
+(232, 2, 9, 40, 180, 1),
+(233, 2, 9, 41, 186, 0);
 
 -- --------------------------------------------------------
 
@@ -695,7 +804,7 @@ INSERT INTO `Teachers` (`TeacherID`, `NIP`, `AcademicDegree`, `EducationLevel`, 
 (1, '24124123515', 'S.Kom', 'Bachelor Degree', 'Active', 1699007959),
 (2, '14125323523', 'S.Pd', 'Bachelor Degree', 'Active', 1699008117),
 (3, '34235235', 'S. Kom', 'asgasg', 'Active', 1699008390),
-(4, '23582358253', 'S.T.', 'Banchelor Degree', 'active', 1699008906);
+(4, '23582358253', 'S.T.', 'Banchelor Degree', 'Active', 1699008906);
 
 -- --------------------------------------------------------
 
@@ -721,7 +830,8 @@ INSERT INTO `TestResults` (`ResultID`, `StudentID`, `TestID`, `IsCompleted`, `Co
 (1, 2, 5, 1, 5, 2, 71),
 (2, 2, 8, 1, 3, 0, 100),
 (3, 2, 11, 1, 1, 2, 33),
-(4, 2, 15, 1, 2, -1, 200);
+(4, 2, 15, 1, 2, -1, 200),
+(5, 2, 9, 1, 1, 2, 33);
 
 -- --------------------------------------------------------
 
@@ -783,8 +893,8 @@ CREATE TABLE `Users` (
 
 INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `DateOfBirth`, `Gender`, `Address`, `PhoneNumber`, `RoleID`, `AccountCreationDate`, `LastLogin`, `AccountStatus`, `ProfilePictureURL`, `ActivationStatus`) VALUES
 (0, 'ikimukti', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '19103020046@unpkediri.ac.id', 'Firmansyah Mukti Wijaya', '2023-10-12', 'Male', 'Nglaban 1111', '081216318022', 3, '2023-11-03 10:17:58', '2023-11-03 17:17:58', NULL, '653e5a409b4fb.jpeg', 'active'),
-(65405, 'ahmadhasby', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'ahmadhasby@gmail.com', 'Ahmad Hasby Maulana', '2023-10-10', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-11-22 02:26:11', '2023-11-22 09:26:11', NULL, 'default.png', 'active'),
-(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-11-22 02:11:56', '2023-11-22 09:11:56', NULL, 'default.png', 'active'),
+(65405, 'ahmadhasby', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'ahmadhasby@gmail.com', 'Ahmad Hasby Maulana', '2023-10-10', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-12-11 09:11:02', '2023-12-11 16:11:02', NULL, 'default.png', 'active'),
+(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2023-12-11 09:04:41', '2023-12-11 16:04:41', NULL, 'default.png', 'active'),
 (1698716970, 'akbarsandi', '$2y$10$GzsUjuYCcfymGzNusQgul.fUn42ETSFy71ECQpYe8NTVRi1z45SoS', 'akbarsandi@gmail.com', 'Akbar Sandi Pratama', '2023-10-12', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:17:23', NULL, NULL, NULL, 'active'),
 (1698719401, 'andrean', '$2y$10$hELFb0BIW5L8uwyVqMLmd.hG7L2avzq/dojKCui.XW1XJOffghcma', 'andreanprasetyo@gmail.com', 'Andrean Prasetyo', '2023-02-07', 'Male', 'DSN NGLABAN, RT 003 RW 003, MARON, BANYAKAN, KAB. KEDIRI', '+6281216318022', 3, '2023-10-31 02:30:01', NULL, 'active', NULL, 'active'),
 (1699006643, 'paijo', '$2y$10$sYyoVnssegJ91BQO8RC6qOFr3XWgUAvNFKcI/WPO8s63Yi8KmGIMu', 'sdhgushg@hfugihdf.d', 'isdhgouhsduog', '2023-11-22', 'Male', 'agdsgdfghdfhg', 'dgsdfhgdf', 3, '2023-11-03 10:17:23', NULL, 'active', NULL, 'active'),
@@ -806,6 +916,29 @@ INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `Dat
 ALTER TABLE `Answers`
   ADD PRIMARY KEY (`AnswerID`),
   ADD KEY `QuestionID` (`QuestionID`);
+
+--
+-- Indexes for table `AssignmentAttachments`
+--
+ALTER TABLE `AssignmentAttachments`
+  ADD PRIMARY KEY (`AttachmentID`),
+  ADD KEY `FK_Attachment_Assignment` (`AssignmentID`);
+
+--
+-- Indexes for table `Assignments`
+--
+ALTER TABLE `Assignments`
+  ADD PRIMARY KEY (`AssignmentID`),
+  ADD KEY `FK_Assignment_Subject` (`SubjectID`),
+  ADD KEY `FK_Assignment_Material` (`MaterialID`);
+
+--
+-- Indexes for table `AssignmentSubmissions`
+--
+ALTER TABLE `AssignmentSubmissions`
+  ADD PRIMARY KEY (`SubmissionID`),
+  ADD KEY `FK_Submission_Student` (`StudentID`),
+  ADD KEY `FK_Submission_Assignment` (`AssignmentID`);
 
 --
 -- Indexes for table `Classes`
@@ -917,6 +1050,24 @@ ALTER TABLE `Answers`
   MODIFY `AnswerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
 
 --
+-- AUTO_INCREMENT for table `AssignmentAttachments`
+--
+ALTER TABLE `AssignmentAttachments`
+  MODIFY `AttachmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `Assignments`
+--
+ALTER TABLE `Assignments`
+  MODIFY `AssignmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `AssignmentSubmissions`
+--
+ALTER TABLE `AssignmentSubmissions`
+  MODIFY `SubmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `Classes`
 --
 ALTER TABLE `Classes`
@@ -932,7 +1083,7 @@ ALTER TABLE `ClassSubjects`
 -- AUTO_INCREMENT for table `LogActivity`
 --
 ALTER TABLE `LogActivity`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=286;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
 
 --
 -- AUTO_INCREMENT for table `Materials`
@@ -950,7 +1101,7 @@ ALTER TABLE `Questions`
 -- AUTO_INCREMENT for table `StudentResponses`
 --
 ALTER TABLE `StudentResponses`
-  MODIFY `ResponseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
+  MODIFY `ResponseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
 
 --
 -- AUTO_INCREMENT for table `Students`
@@ -974,7 +1125,7 @@ ALTER TABLE `Teachers`
 -- AUTO_INCREMENT for table `TestResults`
 --
 ALTER TABLE `TestResults`
-  MODIFY `ResultID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ResultID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `Tests`
@@ -991,6 +1142,26 @@ ALTER TABLE `Tests`
 --
 ALTER TABLE `Answers`
   ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`QuestionID`) REFERENCES `questions` (`QuestionID`);
+
+--
+-- Constraints for table `AssignmentAttachments`
+--
+ALTER TABLE `AssignmentAttachments`
+  ADD CONSTRAINT `FK_Attachment_Assignment` FOREIGN KEY (`AssignmentID`) REFERENCES `Assignments` (`AssignmentID`);
+
+--
+-- Constraints for table `Assignments`
+--
+ALTER TABLE `Assignments`
+  ADD CONSTRAINT `FK_Assignment_Material` FOREIGN KEY (`MaterialID`) REFERENCES `Materials` (`MaterialID`),
+  ADD CONSTRAINT `FK_Assignment_Subject` FOREIGN KEY (`SubjectID`) REFERENCES `Subjects` (`SubjectID`);
+
+--
+-- Constraints for table `AssignmentSubmissions`
+--
+ALTER TABLE `AssignmentSubmissions`
+  ADD CONSTRAINT `FK_Submission_Assignment` FOREIGN KEY (`AssignmentID`) REFERENCES `Assignments` (`AssignmentID`),
+  ADD CONSTRAINT `FK_Submission_Student` FOREIGN KEY (`StudentID`) REFERENCES `Students` (`StudentID`);
 
 --
 -- Constraints for table `ClassSubjects`

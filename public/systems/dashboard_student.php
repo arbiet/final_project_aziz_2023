@@ -65,7 +65,7 @@ if (isset($_SESSION['UserID'])) {
           <p class="text-gray-500">NISN: <?php echo $studentData['StudentNumber']; ?></p>
           <p class="text-gray-500">Email: <?php echo $studentData['Email']; ?></p>
           <p class="text-gray-500">Kelas: <?php echo $studentData['ClassName']; ?></p>
-          <a href="detail_kelas.php?class_id=<?php echo $studentData['ClassID']; ?>" class="text-blue-500 hover:underline">Lihat Kelas</a>
+          <a href="../class/class_detail.php?class_id=<?php echo $studentData['ClassID']; ?>" class="text-blue-500 hover:underline">Lihat Kelas</a>
 
         </div>
       </div>
@@ -97,8 +97,8 @@ if (isset($_SESSION['UserID'])) {
               <a href="../subjects/subjects_detail.php?subject_id=<?php echo $subject['SubjectID']; ?>&material=start" class="text-blue-500 hover:underline">Lihat Materi</a>
               <span class="text-blue-500 font-semibold"><?php echo $subject['TotalMaterials']; ?> Materi <i class="fas fa-file-alt mr-2"></i></span>
             </div>
-            <div class="mt-4 mb-4">
-              <label for="progress-<?php echo $subject['SubjectName']; ?>" class="text-sm font-semibold block">Progress:</label>
+            <!-- <div class="mt-4 mb-4">
+              <label for="progress-// echo $subject['SubjectName'];" class="text-sm font-semibold block">Progress:</label>
               <div class="relative pt-1">
                 <div class="flex mb-2 items-center justify-between">
                   <div>
@@ -116,7 +116,7 @@ if (isset($_SESSION['UserID'])) {
                   <div class="absolute left-0 bg-green-600 py-1 rounded-full" style="width: 50%"></div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         <?php } ?>
       </div>
