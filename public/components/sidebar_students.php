@@ -108,7 +108,31 @@
 
                   echo '</a>';
                   echo '</li>';
-              }
+                }
+                // Fetch and display assignments for the current material
+                $assignmentQuery = "SELECT * FROM Assignments WHERE MaterialID = {$material['MaterialID']}";
+                $assignmentResult = mysqli_query($conn, $assignmentQuery);
+
+                while ($assignment = mysqli_fetch_assoc($assignmentResult)) {
+                    // Check if the user has submitted the assignment
+                    $submissionQuery = "SELECT * FROM AssignmentSubmissions WHERE AssignmentID = {$assignment['AssignmentID']} AND StudentID = {$_SESSION['StudentID']}";
+                    $submissionResult = mysqli_query($conn, $submissionQuery);
+                    $hasSubmitted = mysqli_num_rows($submissionResult) > 0;
+
+                    echo '<li class="py-2 pl-8 pr-4 hover:bg-gray-300">';
+                    echo '<a href="subjects_assignment.php?subject_id=' . $subjectID . '&assignment_id=' . $assignment['AssignmentID'] . '" class="hover:text-blue-500">';
+                    echo '<i class="fas fa-tasks mr-2"></i>' . $assignment['Title'];
+
+                    // Display an indicator if the user has submitted the assignment
+                    if ($hasSubmitted) {
+                        echo '<span class="text-green-500 ml-2"><i class="fas fa-check-circle"></i> Submitted</span>';
+                    } else {
+                        echo '<span class="text-red-500 ml-2"><i class="fas fa-times-circle"></i> Not Submitted</span>';
+                    }
+
+                    echo '</a>';
+                    echo '</li>';
+                }
 
 
               // Update the previous material type
