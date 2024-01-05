@@ -146,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         <!-- Content -->
                         <label for="content" class="block font-semibold text-gray-800 mt-2 mb-2">Content</label>
-                        <textarea id="content" name="content" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" rows="10"><?php echo $content; ?></textarea>
+                        <textarea id="content" name="content" class="ckeditor w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" rows="10"><?php echo $content; ?></textarea>
 
                         <!-- Type -->
                         <label for="type" class="block font-semibold text-gray-800 mt-2 mb-2">Type</label>

@@ -18,6 +18,7 @@
         echo $addedHead;
     }
     ?>
+    <script type="text/javascript" src="../../module/ckeditor/ckeditor.js"></script>
 </head>
 
 <body class="overflow-hidden">

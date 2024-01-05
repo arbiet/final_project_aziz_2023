@@ -127,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // If there are no errors, insert the data into the database
         if (empty($errors)) {
             $query = "INSERT INTO Materials (SubjectID, TitleMaterial, Type, Content, Link, Sequence)
-                  VALUES (?, ?, ?, ?, ?, ?)";
+                VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
                 "ssssss",
@@ -295,7 +295,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div id="create-new-content" style="display: none">
                             <!-- Content -->
                             <label for="content" class="block font-semibold text-gray-800 mt-2 mb-2">Content</label>
-                            <textarea id="content" name="content" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" rows="10"></textarea>
+                            <textarea id="content" name="content" class="ckeditor w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" rows="10"></textarea>
                         </div>
 
                         <!-- Upload File (Initially Hidden) -->
