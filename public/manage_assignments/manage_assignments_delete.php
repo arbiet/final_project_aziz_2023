@@ -26,45 +26,30 @@ $error_message = '';
 $conn->query('SET foreign_key_checks = 0');
 
 // Delete associated assignment submissions
-$deleteSubmissionsQuery = "DELETE FROM AssignmentSubmissions WHERE AssignmentID = ?";
-$stmtDeleteSubmissions = $conn->prepare($deleteSubmissionsQuery);
-$stmtDeleteSubmissions->bind_param('i', $id);
+$deleteSubmissionsQuery = "DELETE FROM AssignmentSubmissions WHERE AssignmentID = $id";
 
-if ($stmtDeleteSubmissions->execute()) {
+if ($conn->query($deleteSubmissionsQuery)) {
     // Delete associated attachment file (if any)
-    $selectAttachmentQuery = "SELECT AttachmentFile FROM AssignmentAttachments WHERE AssignmentID = ?";
-    $stmtSelectAttachment = $conn->prepare($selectAttachmentQuery);
-    $stmtSelectAttachment->bind_param('i', $id);
-    $stmtSelectAttachment->execute();
-    $stmtSelectAttachment->bind_result($attachmentFile);
+    $selectAttachmentQuery = "SELECT AttachmentFile FROM AssignmentAttachments WHERE AssignmentID = $id";
+    $stmtSelectAttachment = $conn->query($selectAttachmentQuery);
 
-    if ($stmtSelectAttachment->fetch()) {
+    if ($attachmentFile = $stmtSelectAttachment->fetch_assoc()) {
         // Delete the attachment file from the server
-        if (!empty($attachmentFile) && file_exists($attachmentFile)) {
-            unlink($attachmentFile);
+        if (!empty($attachmentFile['AttachmentFile']) && file_exists($attachmentFile['AttachmentFile'])) {
+            unlink($attachmentFile['AttachmentFile']);
         }
 
         // Delete the assignment attachment record
-        $deleteAttachmentQuery = "DELETE FROM AssignmentAttachments WHERE AssignmentID = ?";
-        $stmtDeleteAttachment = $conn->prepare($deleteAttachmentQuery);
-        $stmtDeleteAttachment->bind_param('i', $id);
-
-        if (!$stmtDeleteAttachment->execute()) {
+        $deleteAttachmentQuery = "DELETE FROM AssignmentAttachments WHERE AssignmentID = $id";
+        if (!$conn->query($deleteAttachmentQuery)) {
             // Attachment deletion failed
             $error_message = "Failed to delete associated attachment.";
         }
-
-        $stmtDeleteAttachment->close();
     }
 
-    $stmtSelectAttachment->close();
-
     // Delete the assignment
-    $deleteAssignmentQuery = "DELETE FROM Assignments WHERE AssignmentID = ?";
-    $stmtDeleteAssignment = $conn->prepare($deleteAssignmentQuery);
-    $stmtDeleteAssignment->bind_param('i', $id);
-
-    if ($stmtDeleteAssignment->execute()) {
+    $deleteAssignmentQuery = "DELETE FROM Assignments WHERE AssignmentID = $id";
+    if ($conn->query($deleteAssignmentQuery)) {
         // Activity description
         $activityDescription = "Assignment with AssignmentID: $id has been deleted.";
 
@@ -77,8 +62,6 @@ if ($stmtDeleteSubmissions->execute()) {
         // Assignment deletion failed
         $error_message = "Failed to delete the assignment.";
     }
-
-    $stmtDeleteAssignment->close();
 } else {
     // Assignment submission deletion failed
     $error_message = "Failed to delete assignment submissions.";
@@ -86,8 +69,6 @@ if ($stmtDeleteSubmissions->execute()) {
 
 // Enable foreign key checks again
 $conn->query('SET foreign_key_checks = 1');
-
-$stmtDeleteSubmissions->close();
 
 // Display success or error messages using SweetAlert2
 if (!empty($success_message)) {
