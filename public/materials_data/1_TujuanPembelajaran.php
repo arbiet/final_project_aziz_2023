@@ -8,5 +8,5 @@
         <li>Memahami jenis-jenis jaringan</li>
         <li>Memahami macam-macam topologi jaringan</li>
     </ul>
-    <img src="../materials_data/1_TujuanPembelajaran/logo.png" alt="Ilustrasi Jaringan" class="w-1/2 mx-auto mt-4">
+    <img src="../materials_data/1_TujuanPembelajaran/ilustrasi.png" alt="Ilustrasi Jaringan" class="w-1/2 mx-auto mt-4">
 </div>
