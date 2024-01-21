@@ -5,7 +5,7 @@
     <div class="mb-4">
         <div class="mb-4">
             <h4 class="text-md font-semibold mb-2">A. Menu Bar</h4>
-            <img src="menu_bar_icon.png" alt="Menu Bar Icon" class="mb-2">
+            <img src="../materials_data/5_A)Tool-ToolpadaCiscoPacketTracer/toola.png" alt="Menu Bar Icon" class="mb-2">
             <ul class="list-disc list-inside pl-4">
                 <!-- List of Menu Bar items with descriptions -->
                 <li>File = Yang berisikan perintah New, Open, Open Samples, Save, Save As, Save As PKZ, Save As Common Cartridge, Print, Recent File, dan Exit</li>
@@ -20,7 +20,7 @@
 
         <div class="mb-4">
             <h4 class="text-md font-semibold mb-2">B. Primary Tool Bar</h4>
-            <img src="primary_toolbar_icon.png" alt="Primary Tool Bar Icon" class="mb-2">
+            <img src="../materials_data/5_A)Tool-ToolpadaCiscoPacketTracer/toolb.png" alt="Primary Tool Bar Icon" class="mb-2">
             <ul class="list-disc list-inside pl-4">
                 <!-- List of Primary Tool Bar items with descriptions -->
                 <li>New = Untuk membuat file baru</li>
@@ -38,7 +38,7 @@
 
         <div class="mb-4">
             <h4 class="text-md font-semibold mb-2">C. Secondary Toolbar</h4>
-            <img src="secondary_toolbar_icon.png" alt="Secondary Toolbar Icon" class="mb-2">
+            <img src="../materials_data/5_A)Tool-ToolpadaCiscoPacketTracer/toolc.png" alt="Secondary Toolbar Icon" class="mb-2">
             <ul class="list-disc list-inside pl-4">
                 <!-- List of Secondary Toolbar items with descriptions -->
                 <li>Select (Esc) = untuk memilih/fokus ke object pada workspace, masuk ke perangkat dan untuk menambahkan perangkat dari bottom toolbar ke workspace.</li>
@@ -55,7 +55,7 @@
         </div>
         <div class="mb-4">
             <h4 class="text-md font-semibold mb-2">D. Bottom Toolbar</h4>
-            <img src="bottom_toolbar_icon.png" alt="Bottom Toolbar Icon" class="mb-2">
+            <img src="../materials_data/5_A)Tool-ToolpadaCiscoPacketTracer/toold.png" alt="Bottom Toolbar Icon" class="mb-2">
             <ul class="list-disc list-inside pl-4">
                 <!-- List of Bottom Toolbar items with descriptions -->
                 <li>Time = Menunjukan sudah berapa lama kita mengerjakan / mebuka workspace.</li>
@@ -67,7 +67,7 @@
 
         <div class="mb-4">
             <h4 class="text-md font-semibold mb-2">E. Konfigurasi End Device</h4>
-            <img src="config_end_device_icon.png" alt="Configuration End Device Icon" class="mb-2">
+            <img src="../materials_data/5_A)Tool-ToolpadaCiscoPacketTracer/toole.png" alt="Configuration End Device Icon" class="mb-2">
             <p>
                 Konfigurasi end device yang dimaksud disini ada pada PC dan Laptop. Di perangkat tersebut biasanya kita perlu melakukan konfigurasi maupun pengujian. Semua itu bisa diakses di satu tab. Klik saja pada devicenya maka secara default tab Desktop akan terbuka otomatis. Di situ ada daftar menu yang tersedia. Untuk pemula yang sering digunakan adalah:
             </p>
@@ -81,7 +81,7 @@
 
         <div class="mb-4">
             <h4 class="text-md font-semibold mb-2">F. Konfigurasi Network Device</h4>
-            <img src="config_network_device_icon.png" alt="Configuration Network Device Icon" class="mb-2">
+            <img src="../materials_data/5_A)Tool-ToolpadaCiscoPacketTracer/toolf.png" alt="Configuration Network Device Icon" class="mb-2">
             <p>
                 Network device yaitu: Router, Switch, Acces Point, dsb. Pada kehidupan nyata, untuk mengakses network device cisco harus melalui console (menghubungkan network device tersebut ke PC/Laptop dengan kabel Serial Console lalu membukanya di terminal). Di Cisco Packet Tracer kita bisa langsung membuka consolenya melalui tab CLI. Klik saja pada network device yang akan dikonfigurasi, kemudian pada bagian atas pilih tab CLI. Sekalipun disitu tersedia GUI tapi fiturnya terbatas dan kami sarankan selalu mengkonfigurasi network device dengan CLI agar kita terbiasa.
             </p>
@@ -99,7 +99,7 @@
 
         <div class="mb-4">
             <h4 class="text-md font-semibold mb-2">G. Simulation Mode</h4>
-            <img src="simulation_mode_icon.png" alt="Simulation Mode Icon" class="mb-2">
+            <img src="../materials_data/5_A)Tool-ToolpadaCiscoPacketTracer/toolg.png" alt="Simulation Mode Icon" class="mb-2">
             <p>
                 Simulation Mode ini adalah salah satu fitur yang memudahkan kita dalam belajar jaringan, khususnya dalam melakukan troubleshooting atau menyelesaikan suatu masalah. Dengan simulation mode ini kita bisa mengamati jalannya paket di setiap device. Sebelum mempelajari simulation mode, kami sarankan teman-teman mempelajari dan latihan membuat jaringan sederhana di Cisco Packet Tracer.
             </p>

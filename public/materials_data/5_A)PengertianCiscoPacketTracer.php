@@ -1,6 +1,7 @@
 <div class="bg-white rounded p-4 shadow-md mb-4">
     <h1 class="text-3xl font-semibold mb-4">Pengenalan</h1>
     <h2 class="text-2xl font-semibold mb-2">A. Pengertian Cisco Packet Tracer</h2>
+    <img src="../materials_data/5_A)PengertianCiscoPacketTracer/logo.jpg" alt="Cisco Packet Tracer" class="w-1/4 mx-auto mt-4">
 
     <p class="mb-4">Cisco Packet Tracer merupakan aplikasi simulasi yang dirancang khusus untuk mensimulasikan perangkat jaringan Cisco. Digunakan sebagai media pembelajaran, pelatihan, dan penelitian simulasi jaringan komputer. Diciptakan oleh Cisco Systems dan disediakan gratis kepada fakultas, siswa, dan alumni Cisco Networking Academy.</p>
 
