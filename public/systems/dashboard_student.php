@@ -25,7 +25,6 @@ if (isset($_SESSION['UserID'])) {
                LEFT JOIN Materials m ON s.SubjectID = m.SubjectID
                WHERE cs.ClassID = $classID
                GROUP BY cs.ClassID, s.SubjectID";
-
     $classResult = mysqli_query($conn, $classQuery);
     $classSubjects = array();
 

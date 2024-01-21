@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $curriculum_framework = mysqli_real_escape_string($conn, $_POST['curriculum_framework']);
   $assessment_method = mysqli_real_escape_string($conn, $_POST['assessment_method']);
   $student_engagement = mysqli_real_escape_string($conn, $_POST['student_engagement']);
+  $teacher_mapel = mysqli_real_escape_string($conn, $_POST['teacher_mapel']);
 
   // Check for errors
   if (empty($subject_name)) {
@@ -29,10 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   // If there are no errors, insert the data into the database
   if (empty($errors)) {
-    $query = "INSERT INTO Subjects (SubjectName, DifficultyLevel, TeachingMethod, LearningObjective, DurationHours, CurriculumFramework, AssessmentMethod, StudentEngagement)
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO Subjects (SubjectName, DifficultyLevel, TeachingMethod, LearningObjective, DurationHours, CurriculumFramework, AssessmentMethod, StudentEngagement, TeacherID)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssssss", $subject_name, $difficulty_level, $teaching_method, $learning_objective, $duration_hours, $curriculum_framework, $assessment_method, $student_engagement);
+    $stmt->bind_param("ssssssssi", $subject_name, $difficulty_level, $teaching_method, $learning_objective, $duration_hours, $curriculum_framework, $assessment_method, $student_engagement, $teacher_mapel);
 
     if ($stmt->execute()) {
       // Subject creation successful
@@ -115,6 +116,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php echo $errors['subject_name']; ?>
               </p>
             <?php endif; ?>
+            <?php
+              // Fetch the list of teachers
+              $query = "SELECT Teachers.TeacherID, Users.FullName, Teachers.AcademicDegree
+              FROM Teachers
+              INNER JOIN Users ON Teachers.UserID = Users.UserID";
+
+              $result = $conn->query($query);
+
+              // Check for errors in the database query
+              if (!$result) {
+                  die("Database query failed: " . $conn->error);
+              }
+
+              // Close the database connection
+              $conn->close();
+
+            ?>
+
+            <!-- Homeroom Teacher -->
+            <label for="teacher_mapel" class="block font-semibold text-gray-800 mt-2 mb-2">Homeroom Teacher</label>
+            <select id="teacher_mapel" name="teacher_mapel" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600">
+                <?php
+                // Iterate through the retrieved teachers and populate the select field
+                while ($row = $result->fetch_assoc()) {
+                    $teacherID = $row['TeacherID'];
+                    $teacherName = $row['FullName'];
+                    $AcademicDegree = $row['AcademicDegree'];
+                    echo "<option value='$teacherID'>$teacherName, $AcademicDegree</option>";
+                }
+                ?>
+            </select>
 
             <!-- Difficulty Level -->
             <label for="difficulty_level" class="block font-semibold text-gray-800 mt-2 mb-2">Difficulty Level</label>
@@ -127,7 +159,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <!-- Learning Objective -->
             <label for="learning_objective" class="block font-semibold text-gray-800 mt-2 mb-2">Learning Objective</label>
             <textarea id="learning_objective" name="learning_objective" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Learning Objective"><?php echo $learning_objective; ?></textarea>
-
 
             <!-- Duration (Hours) -->
             <label for="duration_hours" class="block font-semibold text-gray-800 mt-2 mb-2">Duration (Hours)</label>

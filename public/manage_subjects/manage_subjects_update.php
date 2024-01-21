@@ -6,7 +6,7 @@ require_once('../../database/connection.php');
 include_once('../components/header.php');
 
 // Initialize variables
-$subject_id = $subject_name = $difficulty_level = $teaching_method = $learning_objective = $duration_hours = $curriculum_framework = $assessment_method = $student_engagement = '';
+$subject_id = $subject_name = $difficulty_level = $teaching_method = $learning_objective = $duration_hours = $curriculum_framework = $assessment_method = $student_engagement = $tacher_mapel  = '';
 $errors = array();
 
 // Retrieve the subject data to be updated (you might need to pass the subject ID to this page)
@@ -34,6 +34,7 @@ if (isset($_GET['id'])) {
         $curriculum_framework = $subject['CurriculumFramework'];
         $assessment_method = $subject['AssessmentMethod'];
         $student_engagement = $subject['StudentEngagement'];
+        $teacher_mapel = $subject['TeacherID'];
         // You can also retrieve other fields as needed
     }
 }
@@ -49,14 +50,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $curriculum_framework = mysqli_real_escape_string($conn, $_POST['curriculum_framework']);
     $assessment_method = mysqli_real_escape_string($conn, $_POST['assessment_method']);
     $student_engagement = mysqli_real_escape_string($conn, $_POST['student_engagement']);
+    $teacher_mapel = mysqli_real_escape_string($conn, $_POST['teacher_mapel']);
     // You should validate the fields and handle errors as needed
 
     // Update subject data in the database
     $query = "UPDATE Subjects 
-              SET SubjectName = ?, DifficultyLevel = ?, TeachingMethod = ?, LearningObjective = ?, DurationHours = ?, CurriculumFramework = ?, AssessmentMethod = ?, StudentEngagement = ? 
+              SET SubjectName = ?, DifficultyLevel = ?, TeachingMethod = ?, LearningObjective = ?, DurationHours = ?, CurriculumFramework = ?, AssessmentMethod = ?, StudentEngagement = ?, TeacherID = ? 
               WHERE SubjectID = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssssssss", $subject_name, $difficulty_level, $teaching_method, $learning_objective, $duration_hours, $curriculum_framework, $assessment_method, $student_engagement, $subject_id);
+    $stmt->bind_param("ssssssssii", $subject_name, $difficulty_level, $teaching_method, $learning_objective, $duration_hours, $curriculum_framework, $assessment_method, $student_engagement, $teacher_mapel, $subject_id);
 
     if ($stmt->execute()) {
         // Subject update successful
@@ -138,6 +140,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <?php echo $errors['subject_name']; ?>
                             </p>
                         <?php endif; ?>
+
+                        <?php
+                        // Fetch the list of teachers
+                        $query = "SELECT Teachers.TeacherID, Users.FullName, Teachers.AcademicDegree
+                        FROM Teachers
+                        INNER JOIN Users ON Teachers.UserID = Users.UserID";
+
+                        $result = $conn->query($query);
+
+                        // Check for errors in the database query
+                        if (!$result) {
+                            die("Database query failed: " . $conn->error);
+                        }
+
+                        // Close the database connection
+                        $conn->close();
+
+                        ?>
+
+                        <!-- Homeroom Teacher -->
+                        <label for="teacher_mapel" class="block font-semibold text-gray-800 mt-2 mb-2">Homeroom Teacher</label>
+                        <select id="teacher_mapel" name="teacher_mapel" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600">
+                            <?php
+                            // Iterate through the retrieved teachers and populate the select field
+                            while ($row = $result->fetch_assoc()) {
+                                $teacherID = $row['TeacherID'];
+                                $teacherName = $row['FullName'];
+                                $AcademicDegree = $row['AcademicDegree'];
+                                echo "<option value='$teacherID'>$teacherName, $AcademicDegree</option>";
+                            }
+                            ?>
+                        </select>
 
                         <!-- Difficulty Level -->
                         <label for="difficulty_level" class="block font-semibold text-gray-800 mt-2 mb-2">Difficulty Level</label>
