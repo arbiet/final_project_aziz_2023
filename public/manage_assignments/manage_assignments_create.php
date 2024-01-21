@@ -38,47 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // File Attachment Handling
     $attachment_file = $_FILES['attachment_file'];
 
-    if ($attachment_file['error'] == UPLOAD_ERR_OK) {
-        // Validate file type, size, etc., as needed
-        $allowed_extensions = array('pdf', 'doc', 'docx', 'txt', 'png', 'jpg', 'jpeg');
-        $file_extension = strtolower(pathinfo($attachment_file['name'], PATHINFO_EXTENSION));
-
-        if (!in_array($file_extension, $allowed_extensions)) {
-            $errors['attachment_file'] = "Invalid file type. Allowed types: " . implode(', ', $allowed_extensions);
-        }
-
-        // Additional validation if needed
-
-        // Generate a unique file name to avoid overwriting existing files
-        $unique_file_name = uniqid('attachment_') . '_' . time() . '.' . $file_extension;
-
-        // Move the uploaded file to a designated directory with the unique file name
-        $upload_directory = '../static/image/attachment/'; // Change this to your desired directory
-        $file_path = $upload_directory . $unique_file_name;
-
-        if (!move_uploaded_file($attachment_file['tmp_name'], $file_path)) {
-            $errors['attachment_file'] = "File upload failed.";
-        }
-
-        // If there are no errors, insert the file information into the AssignmentAttachments table
-        if (empty($errors)) {
-            $attachment_query = "INSERT INTO AssignmentAttachments (AssignmentID, AttachmentFile)
-                                VALUES (?, ?)";
-            $stmt_attachment = $conn->prepare($attachment_query);
-            $stmt_attachment->bind_param("is", $assignment_id, $file_path);
-
-            if (!$stmt_attachment->execute()) {
-                $errors['attachment_file'] = "Failed to save file information.";
-            }
-
-            // Close the statement
-            $stmt_attachment->close();
-        }
-    } elseif ($attachment_file['error'] != UPLOAD_ERR_NO_FILE) {
-        // Handle file upload error, if any
-        $errors['attachment_file'] = "File upload error: " . $attachment_file['error'];
-    }
-
     // If there are no errors, insert the data into the database
     if (empty($errors)) {
         $query = "INSERT INTO Assignments (SubjectID, MaterialID, Title, Description, DueDate, PriorityLevel)
@@ -87,6 +46,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("iisssi", $subject_id, $material_id, $title, $description, $due_date, $priority_level);
 
         if ($stmt->execute()) {
+
+            $last_assignment_id = $conn->insert_id;
+
+            if ($attachment_file['error'] == UPLOAD_ERR_OK) {
+                // Validate file type, size, etc., as needed
+                $allowed_extensions = array('pdf', 'doc', 'docx', 'txt', 'png', 'jpg', 'jpeg');
+                $file_extension = strtolower(pathinfo($attachment_file['name'], PATHINFO_EXTENSION));
+        
+                if (!in_array($file_extension, $allowed_extensions)) {
+                    $errors['attachment_file'] = "Invalid file type. Allowed types: " . implode(', ', $allowed_extensions);
+                }
+        
+                // Additional validation if needed
+        
+                // Generate a unique file name to avoid overwriting existing files
+                $unique_file_name = uniqid('attachment_') . '_' . time() . '.' . $file_extension;
+        
+                // Move the uploaded file to a designated directory with the unique file name
+                $upload_directory = '../static/image/attachment/'; // Change this to your desired directory
+                $file_path = $upload_directory . $unique_file_name;
+        
+                if (!move_uploaded_file($attachment_file['tmp_name'], $file_path)) {
+                    $errors['attachment_file'] = "File upload failed.";
+                }
+        
+                // If there are no errors, insert the file information into the AssignmentAttachments table
+                if (empty($errors)) {
+                    $attachment_query = "INSERT INTO AssignmentAttachments (AssignmentID, AttachmentFile)
+                                        VALUES (?, ?)";
+                    $stmt_attachment = $conn->prepare($attachment_query);
+                    $stmt_attachment->bind_param("is", $assignment_id, $file_path);
+        
+                    if (!$stmt_attachment->execute()) {
+                        $errors['attachment_file'] = "Failed to save file information.";
+                    }
+        
+                    // Close the statement
+                    $stmt_attachment->close();
+                }
+            } elseif ($attachment_file['error'] != UPLOAD_ERR_NO_FILE) {
+                // Handle file upload error, if any
+                $errors['attachment_file'] = "File upload error: " . $attachment_file['error'];
+            }
             // Assignment creation successful
             // Log the activity for assignment creation
             $activityDescription = "Assignment created: SubjectID: $subject_id, MaterialID: $material_id, Title: $title";

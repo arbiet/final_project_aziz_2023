@@ -142,10 +142,10 @@ if (isset($_GET['id'])) {
                                     <i class="fas fa-plus"></i> Add Submission
                                 </button>
                             </div>
-                        <?php if (!empty($submissionsData)) : ?>
+                            <?php if (!empty($submissionsData)) : ?>
                             <div class="grid grid-cols-1 gap-4">
                                 <?php foreach ($submissionsData as $submission) : ?>
-                                    <div class="bg-white border rounded-md p-4 mb-4">
+                                    <div class="border rounded-md p-4 mb-4 <?php echo empty($submission['Grade']) ? 'bg-yellow-100' : 'bg-white'; ?>">
                                         <div class="flex items-center mb-2">
                                             <span class="font-semibold mr-2">Submission ID:</span>
                                             <span><?php echo $submission['SubmissionID']; ?></span>
@@ -170,12 +170,11 @@ if (isset($_GET['id'])) {
                                             <button class="bg-blue-500 text-white px-2 py-1 rounded mr-2" onclick="provideFeedback(<?php echo $submission['SubmissionID']; ?>)">
                                                 Feedback
                                             </button>
-                                            <a href="#" class="text-blue-500 hover:underline mr-2" onclick="editSubmission(<?php echo $submission['SubmissionID']; ?>)">
-                                                <i class="fas fa-edit"></i> Edit
-                                            </a>
-                                            <a href="#" class="text-red-500 hover:underline" onclick="confirmDeleteSubmission(<?php echo $submission['SubmissionID']; ?>)">
-                                                <i class="fas fa-trash"></i> Delete
-                                            </a>
+                                            <?php if ($submission['Grade'] !== NULL) : ?>
+                                                <button class="bg-red-500 text-white px-2 py-1 rounded mr-2" onclick="provideDelete(<?php echo $submission['SubmissionID']; ?>)">
+                                                    Delete Grade
+                                                </button>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -185,6 +184,7 @@ if (isset($_GET['id'])) {
                                 <p>No submissions available for this assignment.</p>
                             </div>
                         <?php endif; ?>
+
 
                         </div>
                     <?php else : ?>
@@ -207,6 +207,46 @@ if (isset($_GET['id'])) {
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    function provideDelete(submissionID) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Perform an AJAX request to delete the submission
+                $.ajax({
+                    type: 'GET',
+                    url: `../manage_assignments/manage_submissions_delete.php?assignment_id=<?php echo $assignmentID; ?>&submission_id=${submissionID}`,
+                    dataType: 'json', // Specify JSON dataType
+                    success: function (response) {
+                        if (response.success) {
+                            // Reload the page after successful deletion
+                            location.reload();
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Deletion Failed',
+                                text: response.error || 'There was an error deleting the submission.',
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Deletion Failed',
+                            text: 'There was an error deleting the submission.',
+                        });
+                    }
+                });
+            }
+        });
+    }
     function provideFeedback(submissionID) {
         const gradeElement = document.getElementById(`grade_${submissionID}`);
         const currentGrade = gradeElement ? gradeElement.innerText : '';
@@ -267,6 +307,8 @@ if (isset($_GET['id'])) {
                             if (gradeElement) {
                                 gradeElement.innerText = updatedGrade;
                             }
+
+                            location.reload();
                         } else {
                             Swal.fire({
                                 icon: 'error',

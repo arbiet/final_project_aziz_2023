@@ -24,9 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $submissionFile = $fileDestination;
         }
 
+        // Check if the submission is late based on due date
+        $isLateSubmission = isLateSubmission($assignmentID);
+
         // Insert submission data into the database
-        $insertQuery = "INSERT INTO AssignmentSubmissions (StudentID, AssignmentID, SubmissionText, SubmissionFile, SubmissionDate) 
-                        VALUES ({$_SESSION['StudentID']}, $assignmentID, '$submissionText', '$submissionFile', NOW())";
+        $insertQuery = "INSERT INTO AssignmentSubmissions (StudentID, AssignmentID, SubmissionText, SubmissionFile, SubmissionDate, IsLateSubmission) 
+                        VALUES ({$_SESSION['StudentID']}, $assignmentID, '$submissionText', '$submissionFile', NOW(), $isLateSubmission)";
 
         if (mysqli_query($conn, $insertQuery)) {
             // Successful submission
@@ -64,5 +67,25 @@ function generateUniqueFileName($originalFileName) {
     $uniqueFileName = "{$timestamp}_{$randomString}.{$fileExtension}";
 
     return $uniqueFileName;
+}
+
+// Function to check if the submission is late
+function isLateSubmission($assignmentID) {
+    global $conn;
+
+    // Fetch the due date of the assignment
+    $dueDateQuery = "SELECT DueDate FROM Assignments WHERE AssignmentID = $assignmentID";
+    $dueDateResult = mysqli_query($conn, $dueDateQuery);
+
+    if ($dueDateResult && mysqli_num_rows($dueDateResult) > 0) {
+        $dueDate = mysqli_fetch_assoc($dueDateResult)['DueDate'];
+        $currentDate = date('Y-m-d H:i:s');
+
+        // Compare the current date with the due date
+        return ($currentDate > $dueDate) ? 1 : 0;
+    }
+
+    // Default to not late if due date is not found
+    return 0;
 }
 ?>
