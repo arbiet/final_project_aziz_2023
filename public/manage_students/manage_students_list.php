@@ -26,12 +26,18 @@ $errors = array();
         <!-- Header Content -->
         <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
           <h1 class="text-3xl text-gray-800 font-semibold w-full">Students</h1>
+          <?php
+            if(!$isTeacher && !$isHomeroomTeacher){
+          ?>
           <div class="flex flex-row justify-end items-center">
             <a href="<?php echo $baseUrl; ?>public/manage_students/manage_students_create.php" class="bg-green-500 hover-bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
               <i class="fas fa-plus mr-2"></i>
               <span>Create</span>
             </a>
           </div>
+          <?php
+            }
+          ?>
         </div>
         <!-- End Header Content -->
         <!-- Content -->
@@ -68,9 +74,10 @@ $errors = array();
             </thead>
             <tbody>
               <?php
-              // Fetch student data from the database
               $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
               $page = isset($_GET['page']) ? $_GET['page'] : 1;
+              
+              // Initialize the query with the common part
               $query = "SELECT Students.StudentID, Students.StudentNumber, Users.FullName, Users.PhoneNumber, Users.Email, Classes.ClassName 
                         FROM Students 
                         INNER JOIN Users ON Students.UserID = Users.UserID 
@@ -78,16 +85,30 @@ $errors = array();
                         WHERE Students.StudentNumber LIKE '%$searchTerm%' 
                         OR Users.FullName LIKE '%$searchTerm%' 
                         OR Users.PhoneNumber LIKE '%$searchTerm%' 
-                        OR Users.Email LIKE '%$searchTerm%' 
-                        LIMIT 15 OFFSET " . ($page - 1) * 15;
+                        OR Users.Email LIKE '%$searchTerm%'";
+              
+              // Append additional conditions if the user is a teacher and a homeroom teacher
+              if ($isTeacher && $isHomeroomTeacher) {
+                  $query .= " AND Classes.HomeroomTeacher = $teacherID";
+              }
+              
+              // Add LIMIT and OFFSET to the query
+              $query .= " LIMIT 15 OFFSET " . ($page - 1) * 15;
+              
               $result = $conn->query($query);
-
+              
               // Count total rows in the table
               $queryCount = "SELECT COUNT(*) AS count 
                              FROM Students 
                              INNER JOIN Users ON Students.UserID = Users.UserID 
                              LEFT JOIN Classes ON Students.ClassID = Classes.ClassID 
                              WHERE Students.StudentNumber LIKE '%$searchTerm%'";
+              
+              // Append additional conditions if the user is a teacher and a homeroom teacher
+              if ($isTeacher && $isHomeroomTeacher) {
+                  $queryCount .= " AND Classes.HomeroomTeacher = $teacherID";
+              }
+              
               $resultCount = $conn->query($queryCount);
               $rowCount = $resultCount->fetch_assoc()['count'];
               $totalPage = ceil($rowCount / 15);
