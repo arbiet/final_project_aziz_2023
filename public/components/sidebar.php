@@ -99,6 +99,7 @@
                         $homeroomRow = mysqli_fetch_assoc($resultHomeroom);
                         $homeroomTeacherID = $homeroomRow['HomeroomTeacher'];
                         $KelaseDewe = $homeroomRow['ClassID'];
+                        $_SESSION['HomeroomTeacher'] = $homeroomTeacherID;
 
                         // You can use $homeroomTeacherID to retrieve additional information about the HomeroomTeacher
                         // For example, you can query the Users table to get the user details

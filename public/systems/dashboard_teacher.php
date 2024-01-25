@@ -4,30 +4,6 @@ session_start();
 // Include the connection file
 require_once('../../database/connection.php');
 
-// Function to get total users count
-function getTotalUsers($conn) {
-    $query = "SELECT COUNT(*) as total_users FROM Users";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['total_users'];
-}
-
-// Function to get total students count
-function getTotalStudents($conn) {
-    $query = "SELECT COUNT(*) as total_students FROM Students";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['total_students'];
-}
-
-// Function to get total teachers count
-function getTotalTeachers($conn) {
-    $query = "SELECT COUNT(*) as total_teachers FROM Teachers";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
-    return $row['total_teachers'];
-}
-
 // Function to get total classes count
 function getTotalClasses($conn) {
     $query = "SELECT COUNT(*) as total_classes FROM Classes";
@@ -59,155 +35,265 @@ function getTotalClasses($conn) {
                     if ($_SESSION['RoleID'] === 1) {
                         echo " (Admin)";
                     } elseif ($_SESSION['RoleID'] === 2) {
-                        echo " (Student)";
-                    } elseif ($_SESSION['RoleID'] === 3) {
                         echo " (Teacher)";
+                    } elseif ($_SESSION['RoleID'] === 3) {
+                        echo " (Student)";
                     }
                     ?>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 mt-6 w-full">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 w-full">
-                        <!-- Total Users -->
-                        <div class="p-4 bg-white shadow-md rounded-md">
-                            <div class="flex items-center">
-                                <i class="fas fa-users text-3xl text-gray-600 mr-2"></i>
-                                <div>
-                                    <p class="text-sm text-gray-500">Total Users</p>
-                                    <p class="text-lg font-semibold"><?php echo getTotalUsers($conn); ?></p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Total Students -->
-                        <div class="p-4 bg-white shadow-md rounded-md">
-                            <div class="flex items-center">
-                                <i class="fas fa-user-graduate text-3xl text-green-500 mr-2"></i>
-                                <div>
-                                    <p class="text-sm text-gray-500">Total Students</p>
-                                    <p class="text-lg font-semibold"><?php echo getTotalStudents($conn); ?></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="p-4 bg-white shadow-md rounded-md">
                         <div class="flex items-center">
                             <i class="fas fa-school text-3xl text-indigo-500 mr-2"></i>
                             <div>
-                                <p class="text-sm text-gray-500">Total Classes</p>
-                                <p class="text-lg font-semibold"><?php echo getTotalClasses($conn); ?></p>
+                                <p class="text-sm text-gray-500">Classes</p>
                             </div>
                         </div>
                         <div class="mt-4">
-                            <p class="text-sm text-gray-500">Total Students per Class</p>
-                            <table class="min-w-full border border-gray-300">
-                                <thead>
-                                    <tr>
-                                        <th class="text-sm py-1 px-2 border-b">Class</th>
-                                        <th class="text-sm py-1 px-2 border-b">Teacher</th>
-                                        <th class="text-sm py-1 px-2 border-b">Total Students</th>
-                                        <th class="text-sm py-1 px-2 border-b">Students Login</th>
-                                        <th class="text-sm py-1 px-2 border-b">Log Logins</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    // Fetch and display total students and logins per class
-                                    $classQuery = "SELECT c.ClassID, c.ClassName, c.EducationLevel, c.HomeroomTeacher, c.Curriculum, c.AcademicYear, c.ClassCode, u.FullName AS TeacherName
-                                        FROM Classes c
-                                        JOIN Teachers t ON c.HomeroomTeacher = t.TeacherID
-                                        JOIN Users u ON t.UserID = u.UserID";
-                                    $classResult = mysqli_query($conn, $classQuery);
+                            <?php
+                            // Check if the user is a homeroom teacher
+                            if (isset($_SESSION['HomeroomTeacher']) && $_SESSION['HomeroomTeacher'] !== null) {
+                                ?>
+                                <p class="text-sm text-gray-500">Total Students per Class</p>
+                                <table class="min-w-full border border-gray-300 mt-4">
+                                    <thead>
+                                        <tr>
+                                            <th class="py-1 px-2 border-b">Class</th>
+                                            <th class="py-1 px-2 border-b">Teacher</th>
+                                            <th class="py-1 px-2 border-b">Student Number</th>
+                                            <th class="py-1 px-2 border-b">Student</th>
+                                            <th class="py-1 px-2 border-b">Log Logins / Month</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $studentsQuery = "SELECT s.UserID, s.StudentID, s.StudentNumber, u.FullName AS StudentName, c.ClassID, c.ClassCode, t.UserID AS TeacherUserID, t.TeacherID, u2.FullName AS TeacherName
+                                                            FROM Students s
+                                                            JOIN Classes c ON s.ClassID = c.ClassID
+                                                            JOIN Teachers t ON c.HomeroomTeacher = t.TeacherID
+                                                            JOIN Users u ON s.UserID = u.UserID
+                                                            JOIN Users u2 ON t.UserID = u2.UserID
+                                                            WHERE c.HomeroomTeacher = {$_SESSION['Teacher']}";
 
-                                    while ($classRow = mysqli_fetch_assoc($classResult)) {
-                                        $classID = $classRow['ClassID'];
-                                        $className = $classRow['ClassCode'];
-                                        $TeacherName = $classRow['TeacherName'];
+                                        $studentsResult = mysqli_query($conn, $studentsQuery);
 
-                                        // Get total students
-                                        $totalStudentsQuery = "SELECT COUNT(*) as total_students FROM Students WHERE ClassID = $classID";
-                                        $totalStudentsResult = mysqli_query($conn, $totalStudentsQuery);
-                                        $totalStudentsRow = mysqli_fetch_assoc($totalStudentsResult);
-                                        $totalStudents = $totalStudentsRow['total_students'];
+                                        // Check if $studentsResult is empty
+                                        if (mysqli_num_rows($studentsResult) > 0) {
+                                            while ($studentRow = mysqli_fetch_assoc($studentsResult)) {
+                                                $classID = $studentRow['ClassID'];
+                                                $className = $studentRow['ClassCode'];
+                                                $teacherUserID = $studentRow['TeacherUserID'];
+                                                $teacherID = $studentRow['TeacherID'];
+                                                $teacherName = $studentRow['TeacherName'];
+                                                $studentNumber = $studentRow['StudentNumber'];
+                                                $studentName = $studentRow['StudentName'];
 
-                                        // Get total logins this month for students in this class
-                                        $totalLoginsQuery = "SELECT COUNT(DISTINCT LogActivity.UserID) as total_students, COUNT(*) as total_logins FROM LogActivity 
-                                                            INNER JOIN Students ON LogActivity.UserID = Students.UserID
-                                                            WHERE Students.ClassID = $classID 
-                                                            AND LogActivity.ActivityDescription = 'User logged in'
-                                                            AND MONTH(LogActivity.ActivityTimestamp) = MONTH(CURRENT_DATE())";
-                                        $totalLoginsResult = mysqli_query($conn, $totalLoginsQuery);
-                                        $totalLoginsRow = mysqli_fetch_assoc($totalLoginsResult);
-                                        $totalLogins = $totalLoginsRow['total_logins'];
-                                        $totalLogStudents = $totalLoginsRow['total_students'];
+                                                // Fetch and display total logins per student in this class
+                                                $totalLoginsQuery = "SELECT COUNT(DISTINCT la.UserID) AS total_logins
+                                                                    FROM LogActivity la
+                                                                    WHERE la.UserID = {$studentRow['UserID']}
+                                                                    AND la.ActivityDescription = 'User logged in'
+                                                                    AND MONTH(la.ActivityTimestamp) = MONTH(CURRENT_DATE())";
 
-                                        // Calculate total logins per student
-                                        $totalLoginsPerStudent = ($totalLogins > 0) ? round($totalLogins / $totalLogStudents, 2) : 0;
+                                                $totalLoginsResult = mysqli_query($conn, $totalLoginsQuery);
+                                                $totalLoginsRow = mysqli_fetch_assoc($totalLoginsResult);
+                                                $totalLogins = $totalLoginsRow['total_logins'];
 
-                                        echo "<tr>";
-                                        echo "<td class='text-sm py-1 px-2 border-b'>$className</td>";
-                                        echo "<td class='text-sm py-1 px-2 border-b'>$TeacherName</td>";
-                                        echo "<td class='text-sm py-1 px-2 border-b'>$totalStudents student</td>";
-                                        echo "<td class='text-sm py-1 px-2 border-b'>$totalLogStudents student</td>";
-                                        echo "<td class='text-sm py-1 px-2 border-b'>$totalLoginsPerStudent log/$totalLogStudents student</td>";
-                                        echo "</tr>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                                                echo "<tr>";
+                                                echo "<td class='py-1 px-2 border-b'>$className</td>";
+                                                echo "<td class='py-1 px-2 border-b'>$teacherName</td>";
+                                                echo "<td class='py-1 px-2 border-b'>$studentNumber</td>";
+                                                echo "<td class='py-1 px-2 border-b'>$studentName</td>";
+                                                echo "<td class='py-1 px-2 border-b'>$totalLogins logins</td>";
+                                                echo "</tr>";
+                                            }
+                                        } else {
+                                            // Display a message if there are no students in the class
+                                            echo "<tr><td colspan='5' class='py-2 px-4 text-center'>No students in this class.</td></tr>";
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            <?php
+                            } else {
+                                // Display a message if the user is not a homeroom teacher
+                                echo "<p class='text-sm text-gray-500'>You are not a homeroom teacher.</p>";
+                            }
+                            ?>
                         </div>
                     </div>
-
-                    <!-- Total Teachers -->
                     <div class="p-4 bg-white shadow-md rounded-md">
-                        <div class="flex items-center">
-                            <i class="fas fa-chalkboard-teacher text-3xl text-blue-500 mr-2"></i>
-                            <div>
-                                <p class="text-sm text-gray-500">Total Teachers</p>
-                                <p class="text-lg font-semibold"><?php echo getTotalTeachers($conn); ?></p>
-                            </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-book text-3xl text-indigo-500 mr-2"></i>
+                        <div>
+                            <p class="text-sm text-gray-500">Subject Result</p>
                         </div>
-                        <!-- Subjects Taught and Classes -->
-                        <div class="mt-4">
-                            <p class="text-sm text-gray-500">Subjects Taught and Classes</p>
-                            <table class="min-w-full border border-gray-300">
-                                <thead>
-                                    <tr>
-                                        <th class="text-sm py-1 px-2 border-b">Teacher Name</th>
-                                        <th class="text-sm py-1 px-2 border-b">Subject Taught</th>
-                                        <th class="text-sm py-1 px-2 border-b">Classes with Same Subjects</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    // Fetch and display subjects taught by each teacher and corresponding classes
-                                    $teacherQuery = "SELECT t.TeacherID, t.NIP, s.SubjectName, Fullname, GROUP_CONCAT(DISTINCT c.ClassCode SEPARATOR ', ') as ClassNames
-                                                    FROM Teachers t
-                                                    INNER JOIN Subjects s ON t.TeacherID = s.TeacherID
-                                                    LEFT JOIN ClassSubjects cs ON s.SubjectID = cs.SubjectID
-                                                    LEFT JOIN Classes c ON cs.ClassID = c.ClassID
-                                                    LEFT JOIN Users u ON t.UserID = u.UserID
-                                                    GROUP BY t.TeacherID, s.SubjectID";
-                                    $teacherResult = mysqli_query($conn, $teacherQuery);
+                    </div>
+                    <div class="mt-4">
+                        <label for="subjectFilter" class="text-sm text-gray-500">Filter by Subject:</label>
+                        <select id="subjectFilter" name="subjectFilter" class="ml-2 p-2 border border-gray-300">
+                            <?php
+                            // Fetch subjects based on TeacherID
+                            $teacherID = $_SESSION['Teacher'];
+                            $subjectsQuery = "SELECT * FROM Subjects WHERE TeacherID = $teacherID";
+                            $subjectsResult = mysqli_query($conn, $subjectsQuery);
 
-                                    while ($teacherRow = mysqli_fetch_assoc($teacherResult)) {
-                                        $teacherNIP = $teacherRow['NIP'];
-                                        $fullname = $teacherRow['Fullname'];
-                                        $subjectName = $teacherRow['SubjectName'];
-                                        $classNames = $teacherRow['ClassNames'];
+                            while ($subjectRow = mysqli_fetch_assoc($subjectsResult)) {
+                                $subjectID = $subjectRow['SubjectID'];
+                                $subjectName = $subjectRow['SubjectName'];
 
-                                        echo "<tr>";
-                                        echo "<td class='text-sm py-1 px-2 border-b'>$fullname (NIP : $teacherNIP)</td>";
-                                        echo "<td class='text-sm py-1 px-2 border-b'>$subjectName</td>";
-                                        echo "<td class='text-sm py-1 px-2 border-b'>$classNames</td>";
-                                        echo "</tr>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                echo "<option value='$subjectID'>$subjectName</option>";
+                            }
+                            ?>
+                        </select>
+
+                        <!-- JavaScript to handle subject filter -->
+                        <script>
+                            document.getElementById('subjectFilter').addEventListener('change', function() {
+                                // Reload the page with the selected subject as a parameter
+                                window.location.href = '?subject=' + this.value;
+                            });
+
+                            // Set the selected option based on the URL parameter
+                            const urlParams = new URLSearchParams(window.location.search);
+                            const selectedSubject = urlParams.get('subject');
+                            if (selectedSubject) {
+                                document.getElementById('subjectFilter').value = selectedSubject;
+                            }
+                        </script>
+
+                        <?php
+                        // Check if a subject filter is set
+                        if (isset($_GET['subject'])) {
+                            $selectedSubjectID = $_GET['subject'];
+
+                            // Fetch Assignment Titles for the selected subject
+                            $assignmentTitlesQuery = "SELECT DISTINCT a.Title, a.AssignmentID
+                                                    FROM Assignments a
+                                                    WHERE a.SubjectID = $selectedSubjectID";
+                            $assignmentTitlesResult = mysqli_query($conn, $assignmentTitlesQuery);
+                            ?>
+                            <label for="assignmentTitleFilter" class="text-sm text-gray-500">Filter by Assignment Title:</label>
+                            <select id="assignmentTitleFilter" name="assignmentTitleFilter" class="ml-2 p-2 border border-gray-300">
+                                <?php
+                                while ($assignmentTitleRow = mysqli_fetch_assoc($assignmentTitlesResult)) {
+                                    $assignmentTitleID = $assignmentTitleRow['AssignmentID'];
+                                    $assignmentTitle = $assignmentTitleRow['Title'];
+
+                                    echo "<option value='$assignmentTitleID'>$assignmentTitle</option>";
+                                }
+                                ?>
+                            </select>
+
+                            <!-- JavaScript to handle assignment title filter -->
+                            <script>
+                                document.getElementById('assignmentTitleFilter').addEventListener('change', function() {
+                                    // Reload the page with the selected assignment title as a parameter
+                                    window.location.href = `?subject=${selectedSubject}&assignment=${this.value}`;
+                                });
+
+                                // Set the selected option based on the URL parameter
+                                const selectedAssignmentTitle = urlParams.get('assignment');
+                                if (selectedAssignmentTitle) {
+                                    document.getElementById('assignmentTitleFilter').value = selectedAssignmentTitle;
+                                }
+                            </script>
+
+                            <?php
+                            // Fetch classes based on the selected subject
+                            $classesQuery = "SELECT c.ClassID, c.ClassCode
+                                            FROM Classes c
+                                            JOIN ClassSubjects cs ON c.ClassID = cs.ClassID
+                                            WHERE cs.SubjectID = $selectedSubjectID";
+                            $classesResult = mysqli_query($conn, $classesQuery);
+                            ?>
+                            <label for="classFilter" class="text-sm text-gray-500">Filter by Class:</label>
+                            <select id="classFilter" name="classFilter" class="ml-2 p-2 border border-gray-300">
+                                <?php
+                                while ($classRow = mysqli_fetch_assoc($classesResult)) {
+                                    $classID = $classRow['ClassID'];
+                                    $classCode = $classRow['ClassCode'];
+
+                                    echo "<option value='$classID'>$classCode</option>";
+                                }
+                                ?>
+                            </select>
+
+                            <!-- JavaScript to handle class filter -->
+                            <script>
+                                document.getElementById('classFilter').addEventListener('change', function() {
+                                    // Reload the page with the selected class as a parameter
+                                    window.location.href = `?subject=${selectedSubject}&assignment=${selectedAssignmentTitle}&class=${this.value}`;
+                                });
+
+                                // Set the selected option based on the URL parameter
+                                const selectedClass = urlParams.get('class');
+                                if (selectedClass) {
+                                    document.getElementById('classFilter').value = selectedClass;
+                                }
+                            </script>
+
+                            <?php
+                            // Check if a class filter is set
+                            if (isset($_GET['assignment']) && isset($_GET['class'])) {
+                                $selectedAssignmentID = $_GET['assignment'];
+                                $selectedClassID = $_GET['class'];
+
+                                // Fetch assignments and submissions for the selected subject, assignment title, and class
+                                $assignmentsQuery = "SELECT s.StudentID, u.FullName AS StudentName, a.Title, asub.Grade, asub.TeacherFeedback
+                                    FROM Students s
+                                    LEFT JOIN AssignmentSubmissions asub ON s.StudentID = asub.StudentID AND asub.AssignmentID = $selectedAssignmentID
+                                    LEFT JOIN Assignments a ON asub.AssignmentID = a.AssignmentID AND a.SubjectID = $selectedSubjectID
+                                    JOIN Users u ON s.UserID = u.UserID
+                                    WHERE s.ClassID = $selectedClassID";
+
+                                $assignmentsResult = mysqli_query($conn, $assignmentsQuery);
+                                ?>
+                                <table class="min-w-full border border-gray-300 mt-4">
+                                    <thead>
+                                        <tr>
+                                            <th class="py-1 px-2 border-b">Student</th>
+                                            <th class="py-1 px-2 border-b">Grade</th>
+                                            <th class="py-1 px-2 border-b">Teacher Feedback</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        while ($assignmentRow = mysqli_fetch_assoc($assignmentsResult)) {
+                                            $studentName = $assignmentRow['StudentName'];
+                                            $assignmentTitle = $assignmentRow['Title'];
+                                            $assignmentTeacherFeedback = $assignmentRow['TeacherFeedback'];
+
+                                            // Check if the student has submitted an assignment
+                                            if ($assignmentRow['Grade'] === null && $assignmentRow['Title'] !== null) {
+                                                // Student has not submitted the assignment
+                                                $grade = 'No Grade';
+                                            } else {
+                                                // Student has submitted the assignment, check if there is a grade
+                                                $grade = ($assignmentRow['Grade'] !== null) ? $assignmentRow['Grade'] : 'Not Submitted';
+                                            }
+
+                                            echo "<tr>";
+                                            echo "<td class='py-1 px-2 border-b'>$studentName</td>";
+                                            echo "<td class='py-1 px-2 border-b'>$grade</td>";
+                                            echo "<td class='py-1 px-2 border-b'>$assignmentTeacherFeedback</td>";
+                                            echo "</tr>";
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            <?php
+                            } else {
+                                // Display a message to select an assignment title and class
+                                echo "<p class='text-sm text-gray-500 mt-4'>Please select an assignment title and class from the dropdowns above.</p>";
+                            }
+                        } else {
+                            // Display a message to select a subject
+                            echo "<p class='text-sm text-gray-500 mt-4'>Please select a subject from the dropdown above.</p>";
+                        }
+                        ?>
                     </div>
                 </div>
-            </div>
-            <!-- Inside the main content section -->
         </main>
         <!-- End Main Content -->
     </div>
