@@ -26,12 +26,18 @@ $errors = array();
         <!-- Header Content -->
         <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
           <h1 class="text-3xl text-gray-800 font-semibold w-full">Subjects</h1>
+          <?php
+            if(!$isTeacher && !$isHomeroomTeacher){
+          ?>
           <div class="flex flex-row justify-end items-center">
             <a href="<?php echo $baseUrl; ?>public/manage_subjects/manage_subjects_create.php" class="bg-green-500 hover-bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
               <i class="fas fa-plus mr-2"></i>
               <span>Create</span>
             </a>
           </div>
+          <?php
+            }
+          ?>
         </div>
         <!-- End Header Content -->
         <!-- Content -->
@@ -71,12 +77,26 @@ $errors = array();
               $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
               $page = isset($_GET['page']) ? $_GET['page'] : 1;
               $query = "SELECT * FROM Subjects
-                                      WHERE SubjectName LIKE '%$searchTerm%'
-                                      LIMIT 15 OFFSET " . ($page - 1) * 15;
+                          WHERE SubjectName LIKE '%$searchTerm%'";
+              
+              // Append additional conditions if the user is a teacher and a homeroom teacher
+              if ($isTeacher) {
+                  $query .= " AND Subjects.TeacherID = $teacherID";
+              }
+            
+              // Add LIMIT and OFFSET to the query
+              $query .= " LIMIT 15 OFFSET " . ($page - 1) * 15;
               $result = $conn->query($query);
 
               // Count total rows in the table
               $queryCount = "SELECT COUNT(*) AS count FROM Subjects WHERE SubjectName LIKE '%$searchTerm%'";
+              // Append additional conditions if the user is a teacher and a homeroom teacher
+              if ($isTeacher) {
+                  $queryCount .= " AND Subjects.TeacherID = $teacherID";
+              }
+            
+              // Add LIMIT and OFFSET to the query
+              $queryCount .= " LIMIT 15 OFFSET " . ($page - 1) * 15;
               $resultCount = $conn->query($queryCount);
               $rowCount = $resultCount->fetch_assoc()['count'];
               $totalPage = ceil($rowCount / 15);
@@ -105,10 +125,16 @@ $errors = array();
                       <i class='fas fa-edit mr-2'></i>
                       <span>Edit</span>
                     </a>
+                    <?php
+                      if(!$isTeacher && !$isHomeroomTeacher){
+                    ?>
                     <a href="#" onclick="confirmDelete(<?php echo $row['SubjectID']; ?>)" class='bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                       <i class='fas fa-trash mr-2'></i>
                       <span>Delete</span>
                     </a>
+                    <?php
+                      }
+                    ?>
                   </td>
                 </tr>
               <?php

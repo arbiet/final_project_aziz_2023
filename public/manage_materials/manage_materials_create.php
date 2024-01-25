@@ -263,6 +263,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <!-- Add options dynamically based on your subjects -->
                             <?php
                             $query = "SELECT SubjectID, SubjectName FROM Subjects";
+
+                            if ($teacherID !== null) {
+                                // If $teacherID is not null, add a condition to filter by TeacherID
+                                $query .= " WHERE TeacherID = '$teacherID'";
+                            }
                             $result = $conn->query($query);
                             while ($row = $result->fetch_assoc()) {
                                 $selected = ($_GET['subject_id'] == $row['SubjectID']) ? 'selected' : '';

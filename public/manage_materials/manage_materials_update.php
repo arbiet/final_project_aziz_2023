@@ -117,12 +117,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="hidden" name="material_id" value="<?php echo $material_id; ?>">
 
                         <!-- Subject ID -->
-                        <label for="subject_id" class="block font-semibold text-gray-800 mt-2 mb-2">Subject <span class="text-red-500">*</span></label>
-                        <select id="subject_id" name="subject_id" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600">
+                        <label for="subject_id" class="block font-semibold text-gray-800 mt-2 mb-2 <?php echo ($teacherID !== null) ? 'hidden' : '';?>">Subject <span class="text-red-500">*</span></label>
+                        <select id="subject_id" name="subject_id" class="<?php echo ($teacherID !== null) ? 'hidden' : '';?> w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600">
                             <option value="">Select Subject</option>
                             <!-- Add options dynamically based on your subjects -->
                             <?php
                             $query = "SELECT SubjectID, SubjectName FROM Subjects";
+                            if ($teacherID !== null) {
+                                // If $teacherID is not null, add a condition to filter by TeacherID
+                                $query .= " WHERE TeacherID = '$teacherID'";
+                            }
                             $result = $conn->query($query);
                             while ($row = $result->fetch_assoc()) {
                                 $selected = ($subject_id == $row['SubjectID']) ? 'selected' : '';

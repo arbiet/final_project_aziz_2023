@@ -73,10 +73,15 @@ $errors = array();
               // Use LEFT JOIN to include 'Subjects' table and retrieve 'SubjectName'
               $query = "SELECT Materials.*, Subjects.SubjectName FROM Materials
                         LEFT JOIN Subjects ON Materials.SubjectID = Subjects.SubjectID
-                        WHERE Materials.TitleMaterial LIKE '%$searchTerm%'
+                        WHERE (Materials.TitleMaterial LIKE '%$searchTerm%'
                           OR Materials.Type LIKE '%$searchTerm%'
-                          OR Subjects.SubjectName LIKE '%$searchTerm%'
-                        LIMIT 15 OFFSET " . ($page - 1) * 15;
+                          OR Subjects.SubjectName LIKE '%$searchTerm%')";
+              // Append additional conditions if the user is a teacher and a homeroom teacher
+              if ($isTeacher) {
+                  $query .= " AND Subjects.TeacherID = $teacherID";
+              }
+              // Add LIMIT and OFFSET to the query
+              $query .= " LIMIT 15 OFFSET " . ($page - 1) * 15;
 
               $result = $conn->query($query);
 
@@ -86,6 +91,11 @@ $errors = array();
                             WHERE Materials.TitleMaterial LIKE '%$searchTerm%'
                                 OR Materials.Type LIKE '%$searchTerm%'
                                 OR Subjects.SubjectName LIKE '%$searchTerm%'";
+              // Append additional conditions if the user is a teacher and a homeroom teacher
+              if ($isTeacher) {
+                  $queryCount .= " AND Subjects.TeacherID = $teacherID";
+              }
+            
               $resultCount = $conn->query($queryCount);
               $rowCount = $resultCount->fetch_assoc()['count'];
               $totalPage = ceil($rowCount / 15);

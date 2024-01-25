@@ -12,6 +12,10 @@ $form_processed = false;
 
 // Fetch subjects
 $subject_query = "SELECT * FROM Subjects";
+if ($_SESSION['Teacher'] !== null) {
+    // If $_SESSION['Teacher'] is not null, add a condition to filter by TeacherID
+    $subject_query .= " WHERE TeacherID = '{$_SESSION['Teacher']}'";
+}
 $result_subject = $conn->query($subject_query);
 $subjects = $result_subject->fetch_all(MYSQLI_ASSOC);
 
@@ -338,11 +342,15 @@ $result_subject->close();
                         var option = document.createElement('option');
                         option.value = material.MaterialID;
                         option.textContent = material.TitleMaterial;
+                        if (material.MaterialID == <?php echo $material_id; ?>) { // Tambahkan ini
+                            option.selected = true; // Tambahkan ini
+                        } // Tambahkan ini
                         materialDropdown.appendChild(option);
                     });
                 });
         }
     }
+
 
     // Call loadMaterials on page load to pre-fill material dropdown if editing
     window.onload = loadMaterials;

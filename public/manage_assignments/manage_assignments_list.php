@@ -92,11 +92,16 @@ $errors = array();
                 $condition .= " AND Assignments.PriorityLevel = '$priorityLevelFilter'";
             }
 
-            $query = "SELECT Assignments.*, Materials.TitleMaterial, Subjects.SubjectName FROM Assignments
+              $query = "SELECT Assignments.*, Materials.TitleMaterial, Subjects.SubjectName FROM Assignments
                         INNER JOIN Materials ON Assignments.MaterialID = Materials.MaterialID
                         LEFT JOIN Subjects ON Assignments.SubjectID = Subjects.SubjectID
-                        WHERE 1 $condition
-                        LIMIT 15 OFFSET " . ($page - 1) * 15;
+                        WHERE 1 $condition";
+              // Append additional conditions if the user is a teacher and a homeroom teacher
+              if ($isTeacher) {
+                  $query .= " AND Subjects.TeacherID = $teacherID";
+              }
+              // Add LIMIT and OFFSET to the query
+              $query .= " LIMIT 15 OFFSET " . ($page - 1) * 15;
 
               $result = $conn->query($query);
 
@@ -105,6 +110,12 @@ $errors = array();
                 INNER JOIN Materials ON Assignments.MaterialID = Materials.MaterialID
                 LEFT JOIN Subjects ON Assignments.SubjectID = Subjects.SubjectID
                 WHERE 1 $condition";
+                // Append additional conditions if the user is a teacher and a homeroom teacher
+                if ($isTeacher) {
+                    $queryCount .= " AND Subjects.TeacherID = $teacherID";
+                }
+                // Add LIMIT and OFFSET to the query
+                $queryCount .= " LIMIT 15 OFFSET " . ($page - 1) * 15;
               $resultCount = $conn->query($queryCount);
               $rowCount = $resultCount->fetch_assoc()['count'];
               $totalPage = ceil($rowCount / 15);

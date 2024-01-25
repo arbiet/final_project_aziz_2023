@@ -102,6 +102,7 @@ function getTotalClasses($conn) {
                                 <thead>
                                     <tr>
                                         <th class="text-sm py-1 px-2 border-b">Class</th>
+                                        <th class="text-sm py-1 px-2 border-b">Teacher</th>
                                         <th class="text-sm py-1 px-2 border-b">Total Students</th>
                                         <th class="text-sm py-1 px-2 border-b">Students Login</th>
                                         <th class="text-sm py-1 px-2 border-b">Log Logins</th>
@@ -110,12 +111,16 @@ function getTotalClasses($conn) {
                                 <tbody>
                                     <?php
                                     // Fetch and display total students and logins per class
-                                    $classQuery = "SELECT ClassID, ClassName, ClassCode FROM Classes";
+                                    $classQuery = "SELECT c.ClassID, c.ClassName, c.EducationLevel, c.HomeroomTeacher, c.Curriculum, c.AcademicYear, c.ClassCode, u.FullName AS TeacherName
+                                        FROM Classes c
+                                        JOIN Teachers t ON c.HomeroomTeacher = t.TeacherID
+                                        JOIN Users u ON t.UserID = u.UserID";
                                     $classResult = mysqli_query($conn, $classQuery);
 
                                     while ($classRow = mysqli_fetch_assoc($classResult)) {
                                         $classID = $classRow['ClassID'];
                                         $className = $classRow['ClassCode'];
+                                        $TeacherName = $classRow['TeacherName'];
 
                                         // Get total students
                                         $totalStudentsQuery = "SELECT COUNT(*) as total_students FROM Students WHERE ClassID = $classID";
@@ -139,6 +144,7 @@ function getTotalClasses($conn) {
 
                                         echo "<tr>";
                                         echo "<td class='text-sm py-1 px-2 border-b'>$className</td>";
+                                        echo "<td class='text-sm py-1 px-2 border-b'>$TeacherName</td>";
                                         echo "<td class='text-sm py-1 px-2 border-b'>$totalStudents student</td>";
                                         echo "<td class='text-sm py-1 px-2 border-b'>$totalLogStudents student</td>";
                                         echo "<td class='text-sm py-1 px-2 border-b'>$totalLoginsPerStudent log/$totalLogStudents student</td>";

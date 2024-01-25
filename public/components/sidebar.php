@@ -76,7 +76,7 @@
                 // Query the Teachers table to check if the user is a teacher
                 $query = "SELECT * FROM Teachers WHERE UserID = $userID";
                 $result = mysqli_query($conn, $query);
-
+                $teacherID = NULL;
                 if ($result && mysqli_num_rows($result) > 0) {
                     $isTeacher = true;
                     $row = mysqli_fetch_assoc($result);
@@ -86,30 +86,36 @@
                 // Check if the user is a homeroom teacher
                 $isHomeroomTeacher = false;
 
-                // Query the Classes table to get the HomeroomTeacher using TeacherID
-                $queryHomeroom = "SELECT HomeroomTeacher FROM Classes WHERE HomeroomTeacher = $teacherID";
-                $resultHomeroom = mysqli_query($conn, $queryHomeroom);
+                if ($teacherID != NULL) {
+                    $_SESSION['Teacher'] = $teacherID;
+                    // Query the Classes table to get the HomeroomTeacher using TeacherID
+                    $queryHomeroom = "SELECT HomeroomTeacher, ClassID FROM Classes WHERE HomeroomTeacher = $teacherID";
+                    $resultHomeroom = mysqli_query($conn, $queryHomeroom);
 
-                if ($resultHomeroom && mysqli_num_rows($resultHomeroom) > 0) {
-                    $isHomeroomTeacher = true;
+                    if ($resultHomeroom && mysqli_num_rows($resultHomeroom) > 0) {
+                        $isHomeroomTeacher = true;
 
-                    // Fetch additional information about the HomeroomTeacher if needed
-                    $homeroomRow = mysqli_fetch_assoc($resultHomeroom);
-                    $homeroomTeacherID = $homeroomRow['HomeroomTeacher'];
+                        // Fetch additional information about the HomeroomTeacher if needed
+                        $homeroomRow = mysqli_fetch_assoc($resultHomeroom);
+                        $homeroomTeacherID = $homeroomRow['HomeroomTeacher'];
+                        $KelaseDewe = $homeroomRow['ClassID'];
 
-                    // You can use $homeroomTeacherID to retrieve additional information about the HomeroomTeacher
-                    // For example, you can query the Users table to get the user details
-                    $queryUser = "SELECT * FROM Users WHERE UserID = $homeroomTeacherID";
-                    $resultUser = mysqli_query($conn, $queryUser);
+                        // You can use $homeroomTeacherID to retrieve additional information about the HomeroomTeacher
+                        // For example, you can query the Users table to get the user details
+                        $queryUser = "SELECT * FROM Users WHERE UserID = $homeroomTeacherID";
+                        $resultUser = mysqli_query($conn, $queryUser);
 
-                    if ($resultUser && mysqli_num_rows($resultUser) > 0) {
-                        $homeroomTeacherInfo = mysqli_fetch_assoc($resultUser);
-                        // Now you can use $homeroomTeacherInfo to display information about the HomeroomTeacher
+                        if ($resultUser && mysqli_num_rows($resultUser) > 0) {
+                            $homeroomTeacherInfo = mysqli_fetch_assoc($resultUser);
+                            // Now you can use $homeroomTeacherInfo to display information about the HomeroomTeacher
+                        }
                     }
                 }
 
+                
+
                 // Display "Manage Users" only if the user is a teacher and a homeroom teacher
-                if ($isHomeroomTeacher) {
+                if ($isHomeroomTeacher OR $_SESSION['RoleID'] === 1) {
                     echo '
                     <li class="px-6 py-4 hover-bg-gray-700 cursor-pointer space-x-2 flex items-center">
                         <i class="fa-solid fa-users mr-3"></i>
@@ -143,15 +149,15 @@
         }
         ?>
         <?php
-        if ($_SESSION['RoleID'] === 1 or $_SESSION['RoleID'] === 2) {
-            // Menu "Manage Users" hanya ditampilkan jika peran pengguna adalah "Admin"
-            echo '
-            <li class="px-6 py-4 hover-bg-gray-700 cursor-pointer space-x-2 flex items-center">
-                <i class="fa-solid fa-comments mr-3"></i>
-                <a href="../manage_exams/manage_exams_list.php">Manage Exams</a>
-            </li>
-            ';
-        }
+        // if ($_SESSION['RoleID'] === 1 or $_SESSION['RoleID'] === 2) {
+        //     // Menu "Manage Users" hanya ditampilkan jika peran pengguna adalah "Admin"
+        //     echo '
+        //     <li class="px-6 py-4 hover-bg-gray-700 cursor-pointer space-x-2 flex items-center">
+        //         <i class="fa-solid fa-comments mr-3"></i>
+        //         <a href="../manage_exams/manage_exams_list.php">Manage Exams</a>
+        //     </li>
+        //     ';
+        // }
         ?>
         <?php
         if ($_SESSION['RoleID'] === 1 or $_SESSION['RoleID'] === 2) {

@@ -46,7 +46,7 @@ $errors = array();
           <div class="flex flex-row justify-between items-center w-full mb-2 pb-2">
             <div>
               <h2 class="text-lg text-gray-800 font-semibold">Welcome back, <?php echo $_SESSION['FullName']; ?>!</h2>
-              <p class="text-gray-600 text-sm">Student information.</p>
+              <p class="text-gray-600 text-sm">Student information. <?php echo $teacherID; ?></p>
             </div>
             <!-- Search -->
             <form class="flex items-center justify-end space-x-2 w-96">
@@ -76,20 +76,20 @@ $errors = array();
               <?php
               $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
               $page = isset($_GET['page']) ? $_GET['page'] : 1;
-              
+
               // Initialize the query with the common part
               $query = "SELECT Students.StudentID, Students.StudentNumber, Users.FullName, Users.PhoneNumber, Users.Email, Classes.ClassName 
                         FROM Students 
                         INNER JOIN Users ON Students.UserID = Users.UserID 
                         LEFT JOIN Classes ON Students.ClassID = Classes.ClassID 
-                        WHERE Students.StudentNumber LIKE '%$searchTerm%' 
+                        WHERE (Students.StudentNumber LIKE '%$searchTerm%' 
                         OR Users.FullName LIKE '%$searchTerm%' 
                         OR Users.PhoneNumber LIKE '%$searchTerm%' 
-                        OR Users.Email LIKE '%$searchTerm%'";
+                        OR Users.Email LIKE '%$searchTerm%')";
               
               // Append additional conditions if the user is a teacher and a homeroom teacher
               if ($isTeacher && $isHomeroomTeacher) {
-                  $query .= " AND Classes.HomeroomTeacher = $teacherID";
+                  $query .= " AND Students.ClassID = $KelaseDewe";
               }
               
               // Add LIMIT and OFFSET to the query
@@ -101,12 +101,11 @@ $errors = array();
               $queryCount = "SELECT COUNT(*) AS count 
                              FROM Students 
                              INNER JOIN Users ON Students.UserID = Users.UserID 
-                             LEFT JOIN Classes ON Students.ClassID = Classes.ClassID 
-                             WHERE Students.StudentNumber LIKE '%$searchTerm%'";
+                             LEFT JOIN Classes ON Students.ClassID = Classes.ClassID";
               
               // Append additional conditions if the user is a teacher and a homeroom teacher
               if ($isTeacher && $isHomeroomTeacher) {
-                  $queryCount .= " AND Classes.HomeroomTeacher = $teacherID";
+                  $queryCount .= " WHERE Classes.ClassID = $KelaseDewe";
               }
               
               $resultCount = $conn->query($queryCount);
@@ -142,10 +141,16 @@ $errors = array();
                       <i class='fas fa-edit mr-2'></i>
                       <span>Edit</span>
                     </a>
+                    <?php
+                      if(!$isTeacher && !$isHomeroomTeacher){
+                    ?>
                     <a href="#" onclick="confirmDelete(<?php echo $row['StudentID']; ?>)" class='bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                       <i class='fas fa-trash mr-2'></i>
                       <span>Delete</span>
                     </a>
+                    <?php
+                      }
+                    ?>
                   </td>
                 </tr>
               <?php

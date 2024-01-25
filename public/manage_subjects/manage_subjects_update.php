@@ -140,7 +140,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <?php echo $errors['subject_name']; ?>
                             </p>
                         <?php endif; ?>
-
+                        <?php
+                            if(!$isTeacher && !$isHomeroomTeacher){
+                        ?>
                         <?php
                         // Fetch the list of teachers
                         $query = "SELECT Teachers.TeacherID, Users.FullName, Teachers.AcademicDegree
@@ -172,6 +174,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             }
                             ?>
                         </select>
+                        <?php
+                        }
+                        ?>
+
+                        
 
                         <!-- Difficulty Level -->
                         <label for="difficulty_level" class="block font-semibold text-gray-800 mt-2 mb-2">Difficulty Level</label>

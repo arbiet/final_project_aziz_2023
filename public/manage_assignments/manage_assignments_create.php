@@ -12,6 +12,10 @@ $form_processed = false;
 
 // Fetch subjects
 $subject_query = "SELECT * FROM Subjects";
+if ($_SESSION['Teacher'] !== null) {
+    // If $_SESSION['Teacher'] is not null, add a condition to filter by TeacherID
+    $subject_query .= " WHERE TeacherID = '{$_SESSION['Teacher']}'";
+}
 $result_subject = $conn->query($subject_query);
 $subjects = $result_subject->fetch_all(MYSQLI_ASSOC);
 
