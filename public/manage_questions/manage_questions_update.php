@@ -219,7 +219,7 @@ if ($questionRow = $questionResult->fetch_assoc()) {
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
                     <h1 class="text-3xl text-gray-800 font-semibold w-full">Update Question</h1>
                     <div class="flex flex-row justify-end items-center">
-                        <a href="../manage_exams/manage_exams_detail.php?id=<?php echo $testID; ?>" class="bg-gray-800 hover-bg-gray-700 text-white font-bold py-2 px-4 rounded inline-flex items-center space-x-2">
+                        <a href="../manage_exams/manage_exams_detail.php?id=<?php echo $testID; ?>" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded inline-flex items-center space-x-2">
                             <i class="fas fa-arrow-left"></i>
                             <span>Back</span>
                         </a>
@@ -338,7 +338,7 @@ if ($questionRow = $questionResult->fetch_assoc()) {
                         <!-- End Answers Section -->
 
                         <!-- Submit Button -->
-                        <button type="submit" class="bg-green-500 hover-bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">
+                        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">
                             <i class="fas fa-check mr-2"></i>
                             <span>Update Question</span>
                         </button>

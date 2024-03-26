@@ -3,7 +3,7 @@ session_start();
 
 // Include the database connection
 require_once('../../database/connection.php');
-include_once('../components/header2.php');
+include_once('../components/header.php');
 
 
 // Initialize variables
@@ -209,13 +209,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Close the database connection
 ?>
-<?php include('../components/sidebar2.php'); ?>
-<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
-    <?php include('../components/navbar2.php'); ?>
-    <!-- Content -->
-      <div class="p-4">
+<!-- Main Content Height Adjusted to Fit Between Header and Footer -->
+<div class="h-screen flex flex-col">
+    <!-- Top Navbar -->
+    <?php include('../components/navbar.php'); ?>
+    <!-- End Top Navbar -->
+    <!-- Main Content -->
+    <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
+        <!-- Sidebar -->
+        <?php include('../components/sidebar.php'); ?>
+        <!-- End Sidebar -->
+
         <!-- Main Content -->
-        <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
+        <main class="bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
+            <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
                 <!-- Header Content -->
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
                     <h1 class="text-3xl text-gray-800 font-semibold w-full">Create Material</h1>
@@ -314,7 +321,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="text" id="type" name="type" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Type" value="<?php echo $type; ?>">
 
                         <!-- Submit Button -->
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">
+                        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">
                             <i class="fas fa-check mr-2"></i>
                             <span>Create Material</span>
                         </button>
@@ -323,7 +330,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <!-- End Content -->
             </div>
+        </main>
         <!-- End Main Content -->
+    </div>
+    <!-- End Main Content -->
+    <!-- Footer -->
+    <?php include('../components/footer.php'); ?>
+    <!-- End Footer -->
+</div>
+<!-- End Main Content -->
+</body>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Ambil elemen-elemen yang diperlukan
@@ -350,5 +366,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         materialOption.addEventListener("change", toggleMaterialOption);
     });
 </script>
-</main>
-<?php include('../components/footer2.php'); ?>
+
+
+</html>

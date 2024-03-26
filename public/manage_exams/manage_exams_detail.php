@@ -92,7 +92,7 @@ if (isset($_GET['id'])) {
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
                     <h1 class="text-3xl text-gray-800 font-semibold w-full">Test Details</h1>
                     <div class="flex flex-row justify-end items-center">
-                        <a href="../manage_exams/manage_exams_list.php" class="bg-gray-800 hover-bg-gray-700 text-white font-bold py-2 px-4 rounded inline-flex items-center space-x-2">
+                        <a href="../manage_exams/manage_exams_list.php" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded inline-flex items-center space-x-2">
                             <i class="fas fa-arrow-left"></i>
                             <span>Back</span>
                         </a>
@@ -180,10 +180,10 @@ if (isset($_GET['id'])) {
                                         $prevPage = $page > 1 ? $page - 1 : 1;
                                         $nextPage = $page < $totalPage ? $page + 1 : $totalPage;
                                         ?>
-                                        <a href="?id=<?php echo $testData['TestID'] ?>&page=1&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover-bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
+                                        <a href="?id=<?php echo $testData['TestID'] ?>&page=1&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
                                             <i class="fas fa-angle-double-left"></i>
                                         </a>
-                                        <a href="?id=<?php echo $testData['TestID'] ?>&page=<?php echo $prevPage; ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover-bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
+                                        <a href="?id=<?php echo $testData['TestID'] ?>&page=<?php echo $prevPage; ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
                                             <i class="fas fa-angle-left"></i>
                                         </a>
                                         <!-- Page number -->
@@ -191,16 +191,16 @@ if (isset($_GET['id'])) {
                                         for ($i = $startPage; $i <= $endPage; $i++) {
                                             if ($i == $page) {
                                                 $aidi = $testData['TestID'];
-                                                echo "<a href='?id=$aidi&page=$i&search=$searchTerm' class='bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center'>$i</a>";
+                                                echo "<a href='?id=$aidi&page=$i&search=$searchTerm' class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center'>$i</a>";
                                             } else {
-                                                echo "<a href='?id=$aidi&page=$i&search=$searchTerm' class='bg-gray-200 hover-bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center'>$i</a>";
+                                                echo "<a href='?id=$aidi&page=$i&search=$searchTerm' class='bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center'>$i</a>";
                                             }
                                         }
                                         ?>
-                                        <a href="?id=<?php echo $testData['TestID'] ?>&page=<?php echo $nextPage; ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover-bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
+                                        <a href="?id=<?php echo $testData['TestID'] ?>&page=<?php echo $nextPage; ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
                                             <i class="fas fa-angle-right"></i>
                                         </a>
-                                        <a href="?id=<?php echo $testData['TestID'] ?>&page=<?php echo $totalPage; ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover-bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
+                                        <a href="?id=<?php echo $testData['TestID'] ?>&page=<?php echo $totalPage; ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
                                             <i class="fas fa-angle-double-right"></i>
                                         </a>
                                     </div>

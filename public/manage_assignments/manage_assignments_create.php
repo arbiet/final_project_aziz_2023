@@ -3,7 +3,7 @@ session_start();
 
 // Include the database connection
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 
 // Initialize variables
 $subject_id = $material_id = $title = $description = $due_date = $priority_level = '';
@@ -12,9 +12,9 @@ $form_processed = false;
 
 // Fetch subjects
 $subject_query = "SELECT * FROM Subjects";
-if ($_SESSION['Teacher'] !== null) {
+if ($_SESSION['TeacherID'] !== null) {
     // If $_SESSION['Teacher'] is not null, add a condition to filter by TeacherID
-    $subject_query .= " WHERE TeacherID = '{$_SESSION['Teacher']}'";
+    $subject_query .= " WHERE TeacherID = '{$_SESSION['TeacherID']}'";
 }
 $result_subject = $conn->query($subject_query);
 $subjects = $result_subject->fetch_all(MYSQLI_ASSOC);
@@ -129,25 +129,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Close the database connection
 $result_subject->close();
 ?>
-<!-- Main Content Height Adjusted to Fit Between Header and Footer -->
-<div class="h-screen flex flex-col">
-    <!-- Top Navbar -->
-    <?php include('../components/navbar.php'); ?>
-    <!-- End Top Navbar -->
-    <!-- Main Content -->
-    <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
-        <!-- Sidebar -->
-        <?php include('../components/sidebar.php'); ?>
-        <!-- End Sidebar -->
-
+<?php include('../components/sidebar2.php'); ?>
+<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
+    <?php include('../components/navbar2.php'); ?>
+    <!-- Content -->
+      <div class="p-4">
         <!-- Main Content -->
-        <main class="bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
-            <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
+        <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
                 <!-- Header Content -->
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
                     <h1 class="text-3xl text-gray-800 font-semibold w-full">Create Assignment</h1>
                     <div class="flex flex-row justify-end items-center">
-                        <a href="manage_assignments_list.php" class="bg-gray-800 hover-bg-gray-700 text-white font-bold py-2 px-4 rounded inline-flex items-center space-x-2">
+                        <a href="manage_assignments_list.php" class="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded inline-flex items-center space-x-2">
                             <i class="fas fa-arrow-left"></i>
                             <span>Back</span>
                         </a>
@@ -238,7 +231,7 @@ $result_subject->close();
                         <?php endif; ?>
 
                         <!-- Submit Button -->
-                        <button type="submit" class="bg-green-500 hover-bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">
                             <i class="fas fa-check mr-2"></i>
                             <span>Create Assignment</span>
                         </button>
@@ -246,16 +239,9 @@ $result_subject->close();
                     <!-- End Assignment Creation Form -->
                 </div>
                 <!-- End Content -->
-            </div>
-        </main>
         <!-- End Main Content -->
-    </div>
+        </div>
     <!-- End Main Content -->
-    <!-- Footer -->
-    <?php include('../components/footer.php'); ?>
-    <!-- End Footer -->
-</div>
-<!-- End Main Content -->
 
 <!-- JavaScript to dynamically load materials based on the selected subject -->
 <script>
@@ -281,7 +267,5 @@ $result_subject->close();
         }
     }
 </script>
-
-</body>
-
-</html>
+</main>
+<?php include('../components/footer2.php'); ?>

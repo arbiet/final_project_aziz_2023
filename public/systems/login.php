@@ -52,8 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Check if user exists
         if ($result->num_rows === 1) {
-            // Perform login actions (e.g., set sessions, redirect, etc.)
-
+            // Fetch user data
             $row = $result->fetch_assoc();
             $_SESSION['UserID'] = $row['UserID'];
             $_SESSION['Username'] = $row['Username'];
@@ -61,6 +60,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['Email'] = $row['Email'];
             $_SESSION['FullName'] = $row['FullName'];
             $_SESSION['ProfilePictureURL'] = $row['ProfilePictureURL'];
+
+            // If user has role ID 2, fetch TeacherID from Teachers table
+            if ($row['RoleID'] == 2) {
+                $query_teacher = "SELECT TeacherID FROM Teachers WHERE UserID = ?";
+                $stmt_teacher = $conn->prepare($query_teacher);
+                $stmt_teacher->bind_param('i', $row['UserID']); // Assuming UserID is an integer
+                $stmt_teacher->execute();
+                $result_teacher = $stmt_teacher->get_result();
+
+                if ($result_teacher->num_rows === 1) {
+                    $teacher_row = $result_teacher->fetch_assoc();
+                    $_SESSION['TeacherID'] = $teacher_row['TeacherID'];
+                } else {
+                    $_SESSION['TeacherID'] = NULL; // No TeacherID found for the user
+                }
+            } else {
+                $_SESSION['TeacherID'] = NULL; // User does not have role ID 2
+            }
 
             // Update LastLogin in the Users table
             $activityDescription = 'User logged in';
@@ -196,7 +213,7 @@ $conn->close();
                 <div class="text-center px-40">
                     <a href="#" class="flex items-center justify-center mx-auto">
                         <img src="../static/image/icon.png" alt="Icon" class="w-14 h-14 mr-2">
-                        <h2 class="font-bold text-5xl">ES<span class="bg-[#f84525] text-white px-2 rounded-md">AY</span></h2>
+                        <h2 class="font-bold text-5xl">E<span class="bg-[#f84525] text-white px-2 rounded-md">SAY</span></h2>
                     </a>
                     <div class="p-4 x-6 py-4 bg-red shadow-lg rounded-lg border-blue-400">
                         <h3 class="text-3xl font-bold text-gray-700">Login</h3>

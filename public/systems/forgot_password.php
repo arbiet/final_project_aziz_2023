@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="text-center px-40">
         <a href="#" class="flex items-center justify-center mx-auto">
                         <img src="../static/image/icon.png" alt="Icon" class="w-14 h-14 mr-2">
-                        <h2 class="font-bold text-5xl">ES<span class="bg-[#f84525] text-white px-2 rounded-md">AY</span></h2>
+                        <h2 class="font-bold text-5xl">E<span class="bg-[#f84525] text-white px-2 rounded-md">SAY</span></h2>
                     </a>
           <div class="p-4 x-6 py-4 bg-red shadow-lg rounded-lg border-blue-400">
             <h3 class="text-3xl font-bold text-gray-700">Forgot Password</h3>

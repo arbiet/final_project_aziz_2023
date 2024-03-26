@@ -8,19 +8,26 @@ require_once('../../database/connection.php');
 $errors = array();
 
 ?>
-<?php include_once('../components/header2.php'); ?>
-<?php include('../components/sidebar2.php'); ?>
-<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
-    <?php include('../components/navbar2.php'); ?>
-    <!-- Content -->
-      <div class="p-4">
-        <!-- Main Content -->
-        <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
+<?php include_once('../components/header.php'); ?>
+<!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
+<div class="h-screen flex flex-col">
+  <!-- Top Navbar -->
+  <?php include('../components/navbar.php'); ?>
+  <!-- End Top Navbar -->
+  <!-- Main Content -->
+  <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
+    <!-- Sidebar -->
+    <?php include('../components/sidebar.php'); ?>
+    <!-- End Sidebar -->
+
+    <!-- Main Content -->
+    <main class="bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
+      <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
         <!-- Header Content -->
         <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
-          <h1 class="text-3xl text-gray-800 font-semibold w-full">Assignments</h1>
+          <h1 class="text-3xl text-gray-800 font-semibold w-full">Materials</h1>
           <div class="flex flex-row justify-end items-center">
-            <a href="<?php echo $baseUrl; ?>public/manage_assignments/manage_assignments_create.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+            <a href="<?php echo $baseUrl; ?>public/manage_materials/manage_materials_create.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
               <i class="fas fa-plus mr-2"></i>
               <span>Create</span>
             </a>
@@ -31,26 +38,19 @@ $errors = array();
         <div class="flex flex-col w-full">
           <!-- Navigation -->
           <div class="flex flex-row justify-between items-center w-full mb-2 pb-2">
-            <!-- Search -->
-            <form class="flex items-center justify-end space-x-2 w-1/2">
-                <input type="text" name="search" class="bg-gray-200 focus-bg-white focus-outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" placeholder="Search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded space-x-2 inline-flex items-center">
-                    <i class="fas fa-search"></i>
-                    <span>Search</span>
-                </button>
-            </form>
-            <!-- End Search -->
-            <!-- Filter -->
-            <div class="flex flex-row justify-end items-center w-full mb-2 space-x-2">
-                <label class="text-gray-600">Filter:</label>
-                <select id="priorityLevelFilter" class="bg-white border border-gray-300 p-2 rounded">
-                    <option value="">All</option>
-                    <option value="1">High Priority</option>
-                    <option value="2">Medium Priority</option>
-                    <option value="3">Low Priority</option>
-                </select>
-            </div>
-            <!-- End Filter -->
+              <div>
+                  <h2 class="text-lg text-gray-800 font-semibold">Welcome back, <?php echo $_SESSION['FullName']; ?>!</h2>
+                  <p class="text-gray-600 text-sm">Material information.</p>
+              </div>
+              <!-- Search -->
+              <form class="flex items-center justify-end space-x-2 w-96">
+                  <input type="text" name="search" class="bg-gray-200 focus-bg-white focus-outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" placeholder="Search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+                  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded space-x-2 inline-flex items-center">
+                      <i class="fas fa-search"></i>
+                      <span>Search</span>
+                  </button>
+              </form>
+              <!-- End Search -->
           </div>
           <!-- End Navigation -->
           <!-- Table -->
@@ -58,37 +58,24 @@ $errors = array();
             <thead>
               <tr>
                 <th class="text-left py-2">No</th>
-                <th class="text-left py-2">Assignment Title</th>
-                <th class="text-left py-2">Subject Title</th>
-                <th class="text-left py-2">Material Title</th>
-                <th class="text-left py-2">Due Date</th>
+                <th class="text-left py-2">Title</th>
+                <th class="text-left py-2">Type</th>
+                <th class="text-left py-2">Subject Name</th>
                 <th class="text-left py-2">Action</th>
               </tr>
             </thead>
             <tbody>
               <?php
-              // Fetch assignment data from the database
-              // Adjust the SQL query based on your table structure
+              // Fetch material data from the database
               $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
               $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-              // Add conditions as needed
-            $condition = "";
-            if (!empty($searchTerm)) {
-                $condition .= " AND (Assignments.Title LIKE '%$searchTerm%'
-                                OR Materials.TitleMaterial LIKE '%$searchTerm%'
-                                OR Subjects.SubjectName LIKE '%$searchTerm%')";
-            }
-
-            $priorityLevelFilter = isset($_GET['priorityLevelFilter']) ? $_GET['priorityLevelFilter'] : '';
-            if (!empty($priorityLevelFilter)) {
-                $condition .= " AND Assignments.PriorityLevel = '$priorityLevelFilter'";
-            }
-
-              $query = "SELECT Assignments.*, Materials.TitleMaterial, Subjects.SubjectName FROM Assignments
-                        INNER JOIN Materials ON Assignments.MaterialID = Materials.MaterialID
-                        LEFT JOIN Subjects ON Assignments.SubjectID = Subjects.SubjectID
-                        WHERE 1 $condition";
+              // Use LEFT JOIN to include 'Subjects' table and retrieve 'SubjectName'
+              $query = "SELECT Materials.*, Subjects.SubjectName FROM Materials
+                        LEFT JOIN Subjects ON Materials.SubjectID = Subjects.SubjectID
+                        WHERE (Materials.TitleMaterial LIKE '%$searchTerm%'
+                          OR Materials.Type LIKE '%$searchTerm%'
+                          OR Subjects.SubjectName LIKE '%$searchTerm%')";
               // Append additional conditions if the user is a teacher and a homeroom teacher
               if ($isTeacher) {
                   $query .= " AND Subjects.TeacherID = $teacherID";
@@ -99,16 +86,16 @@ $errors = array();
               $result = $conn->query($query);
 
               // Count total rows in the table
-              $queryCount = "SELECT COUNT(*) AS count FROM Assignments
-                INNER JOIN Materials ON Assignments.MaterialID = Materials.MaterialID
-                LEFT JOIN Subjects ON Assignments.SubjectID = Subjects.SubjectID
-                WHERE 1 $condition";
-                // Append additional conditions if the user is a teacher and a homeroom teacher
-                if ($isTeacher) {
-                    $queryCount .= " AND Subjects.TeacherID = $teacherID";
-                }
-                // Add LIMIT and OFFSET to the query
-                $queryCount .= " LIMIT 15 OFFSET " . ($page - 1) * 15;
+              $queryCount = "SELECT COUNT(*) AS count FROM Materials
+                            LEFT JOIN Subjects ON Materials.SubjectID = Subjects.SubjectID
+                            WHERE Materials.TitleMaterial LIKE '%$searchTerm%'
+                                OR Materials.Type LIKE '%$searchTerm%'
+                                OR Subjects.SubjectName LIKE '%$searchTerm%'";
+              // Append additional conditions if the user is a teacher and a homeroom teacher
+              if ($isTeacher) {
+                  $queryCount .= " AND Subjects.TeacherID = $teacherID";
+              }
+            
               $resultCount = $conn->query($queryCount);
               $rowCount = $resultCount->fetch_assoc()['count'];
               $totalPage = ceil($rowCount / 15);
@@ -119,31 +106,30 @@ $errors = array();
               ?>
                 <tr>
                   <td class="py-2"><?php echo $no++; ?></td>
-                  <td class="py-2"><?php echo $row['Title']; ?></td>
-                  <td class="py-2"><?php echo $row['SubjectName']; ?></td>
                   <td class="py-2"><?php echo $row['TitleMaterial']; ?></td>
-                  <td class="py-2"><?php echo date('Y-m-d', strtotime($row['DueDate'])); ?></td>
+                  <td class="py-2"><?php echo $row['Type']; ?></td>
+                  <td class="py-2"><?php echo $row['SubjectName']; ?></td>
                   <td class='py-2'>
-                    <a href="<?php echo $baseUrl; ?>public/manage_assignments/manage_assignments_detail.php?id=<?php echo $row['AssignmentID'] ?>" class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                    <a href="<?php echo $baseUrl; ?>public/manage_materials/manage_materials_detail.php?id=<?php echo $row['MaterialID'] ?>" class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                         <i class='fas fa-eye mr-2'></i>
                         <span>Detail</span>
                     </a>
-                    <a href="<?php echo $baseUrl; ?>public/manage_assignments/manage_assignments_update.php?id=<?php echo $row['AssignmentID'] ?>" class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                    <a href="<?php echo $baseUrl; ?>public/manage_materials/manage_materials_update.php?id=<?php echo $row['MaterialID'] ?>" class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                         <i class='fas fa-edit mr-2'></i>
                         <span>Edit</span>
                     </a>
-                    <a href="#" onclick="confirmDelete(<?php echo $row['AssignmentID']; ?>)" class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                    <a href="#" onclick="confirmDelete(<?php echo $row['MaterialID']; ?>)" class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                         <i class='fas fa-trash mr-2'></i>
                         <span>Delete</span>
                     </a>
-                  </td>
+                    </td>
                 </tr>
               <?php
               }
               if ($result->num_rows === 0) {
               ?>
                 <tr>
-                  <td colspan="6" class="py-2 text-center">No data found.</td>
+                  <td colspan="5" class="py-2 text-center">No data found.</td>
                 </tr>
               <?php
               }
@@ -207,13 +193,21 @@ $errors = array();
                 <span class="text-gray-600">Page <?php echo $page; ?> of <?php echo $totalPage; ?></span>
             </div>
         </div>
+        </div>
         <!-- End Content -->
       </div>
+    </main>
     <!-- End Main Content -->
+  </div>
+  <!-- End Main Content -->
+  <!-- Footer -->
+  <?php include('../components/footer.php'); ?>
+  <!-- End Footer -->
+</div>
 <!-- End Main Content -->
 <script>
   // Function to show a confirmation dialog for deletion
-  function confirmDelete(assignmentID) {
+  function confirmDelete(materialID) {
     Swal.fire({
       title: 'Are you sure?',
       text: 'You won\'t be able to revert this!',
@@ -224,10 +218,12 @@ $errors = array();
     }).then((result) => {
       if (result.isConfirmed) {
         // If the user confirms, redirect to the delete page
-        window.location.href = `manage_assignments_delete.php?id=${assignmentID}`;
+        window.location.href = `manage_materials_delete.php?id=${materialID}`;
       }
     });
   }
 </script>
-</main>
-<?php include('../components/footer2.php'); ?>
+
+</body>
+
+</html>

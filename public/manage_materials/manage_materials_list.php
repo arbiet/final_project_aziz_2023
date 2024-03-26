@@ -8,26 +8,19 @@ require_once('../../database/connection.php');
 $errors = array();
 
 ?>
-<?php include_once('../components/header.php'); ?>
-<!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
-<div class="h-screen flex flex-col">
-  <!-- Top Navbar -->
-  <?php include('../components/navbar.php'); ?>
-  <!-- End Top Navbar -->
-  <!-- Main Content -->
-  <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
-    <!-- Sidebar -->
-    <?php include('../components/sidebar.php'); ?>
-    <!-- End Sidebar -->
-
-    <!-- Main Content -->
-    <main class="bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
-      <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
+<?php include_once('../components/header2.php'); ?>
+<?php include('../components/sidebar2.php'); ?>
+<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
+    <?php include('../components/navbar2.php'); ?>
+    <!-- Content -->
+      <div class="p-4">
+        <!-- Main Content -->
+        <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
         <!-- Header Content -->
         <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
           <h1 class="text-3xl text-gray-800 font-semibold w-full">Materials</h1>
           <div class="flex flex-row justify-end items-center">
-            <a href="<?php echo $baseUrl; ?>public/manage_materials/manage_materials_create.php" class="bg-green-500 hover-bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+            <a href="<?php echo $baseUrl; ?>public/manage_materials/manage_materials_create.php" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
               <i class="fas fa-plus mr-2"></i>
               <span>Create</span>
             </a>
@@ -45,7 +38,7 @@ $errors = array();
               <!-- Search -->
               <form class="flex items-center justify-end space-x-2 w-96">
                   <input type="text" name="search" class="bg-gray-200 focus-bg-white focus-outline-none border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" placeholder="Search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
-                  <button type="submit" class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded space-x-2 inline-flex items-center">
+                  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded space-x-2 inline-flex items-center">
                       <i class="fas fa-search"></i>
                       <span>Search</span>
                   </button>
@@ -110,15 +103,15 @@ $errors = array();
                   <td class="py-2"><?php echo $row['Type']; ?></td>
                   <td class="py-2"><?php echo $row['SubjectName']; ?></td>
                   <td class='py-2'>
-                    <a href="<?php echo $baseUrl; ?>public/manage_materials/manage_materials_detail.php?id=<?php echo $row['MaterialID'] ?>" class='bg-green-500 hover-bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                    <a href="<?php echo $baseUrl; ?>public/manage_materials/manage_materials_detail.php?id=<?php echo $row['MaterialID'] ?>" class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                         <i class='fas fa-eye mr-2'></i>
                         <span>Detail</span>
                     </a>
-                    <a href="<?php echo $baseUrl; ?>public/manage_materials/manage_materials_update.php?id=<?php echo $row['MaterialID'] ?>" class='bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                    <a href="<?php echo $baseUrl; ?>public/manage_materials/manage_materials_update.php?id=<?php echo $row['MaterialID'] ?>" class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                         <i class='fas fa-edit mr-2'></i>
                         <span>Edit</span>
                     </a>
-                    <a href="#" onclick="confirmDelete(<?php echo $row['MaterialID']; ?>)" class='bg-red-500 hover-bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                    <a href="#" onclick="confirmDelete(<?php echo $row['MaterialID']; ?>)" class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                         <i class='fas fa-trash mr-2'></i>
                         <span>Delete</span>
                     </a>
@@ -145,14 +138,14 @@ $errors = array();
                 <span class="text-gray-600">Total <?php echo $rowCount; ?> rows</span>
             </div>
             <div class="flex flex-row justify-end items-center space-x-2">
-                <a href="?page=1&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover-bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
+                <a href="?page=1&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
                     <i class="fas fa-angle-double-left"></i>
                 </a>
                 <a href="?page=<?php if ($page == 1) {
                                 echo $page;
                             } else {
                                 echo $page - 1;
-                            } ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover-bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
+                            } ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
                     <i class="fas fa-angle-left"></i>
                 </a>
                 <!-- Page number -->
@@ -172,9 +165,9 @@ $errors = array();
                 }
                 for ($i = $startPage; $i <= $endPage; $i++) {
                     if ($i == $page) {
-                        echo "<a href='?page=$i&search=$searchTerm' class='bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center'>$i</a>";
+                        echo "<a href='?page=$i&search=$searchTerm' class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center'>$i</a>";
                     } else {
-                        echo "<a href='?page=$i&search=$searchTerm' class='bg-gray-200 hover-bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center'>$i</a>";
+                        echo "<a href='?page=$i&search=$searchTerm' class='bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center'>$i</a>";
                     }
                 }
                 ?>
@@ -182,10 +175,10 @@ $errors = array();
                                 echo $page;
                             } else {
                                 echo $page + 1;
-                            } ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover-bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
+                            } ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
                     <i class="fas fa-angle-right"></i>
                 </a>
-                <a href="?page=<?php echo $totalPage; ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover-bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
+                <a href="?page=<?php echo $totalPage; ?>&search=<?php echo $searchTerm; ?>" class="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center">
                     <i class="fas fa-angle-double-right"></i>
                 </a>
             </div>
@@ -196,34 +189,25 @@ $errors = array();
         </div>
         <!-- End Content -->
       </div>
-    </main>
     <!-- End Main Content -->
-  </div>
-  <!-- End Main Content -->
-  <!-- Footer -->
-  <?php include('../components/footer.php'); ?>
-  <!-- End Footer -->
-</div>
 <!-- End Main Content -->
-<script>
-  // Function to show a confirmation dialog for deletion
-  function confirmDelete(materialID) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // If the user confirms, redirect to the delete page
-        window.location.href = `manage_materials_delete.php?id=${materialID}`;
-      }
-    });
-  }
-</script>
-
-</body>
-
-</html>
+  <script>
+    // Function to show a confirmation dialog for deletion
+    function confirmDelete(materialID) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // If the user confirms, redirect to the delete page
+          window.location.href = `manage_materials_delete.php?id=${materialID}`;
+        }
+      });
+    }
+  </script>
+</main>
+<?php include('../components/footer2.php'); ?>

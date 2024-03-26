@@ -141,13 +141,13 @@
           ?>
 
         <!-- Displaying a manual type for "End" -->
-        <li class="py-2 px-4 hover-bg-gray-300">
+        <li class="py-2 px-4 hover:bg-gray-300">
           <span class="text-gray-500">Finish</span>
         </li>
 
         <!-- Special list item for "end" with an icon -->
         <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=end" class="hover:text-blue-500">
-          <li class="py-2 px-4 hover-bg-gray-300">
+          <li class="py-2 px-4 hover:bg-gray-300">
             <i class="fas fa-stop-circle mr-2"></i> End
           </li>
         </a>

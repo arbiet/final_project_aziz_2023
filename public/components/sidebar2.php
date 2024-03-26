@@ -2,7 +2,7 @@
     <div class="fixed left-0 top-0 w-64 h-full bg-[#f8f4f3] p-4 z-50 sidebar-menu transition-transform">
         <a href="#" class="flex items-end border-b border-b-gray-800 pb-4">
             <img src="../static/image/icon.png" alt="Icon" class="w-8 h-8 mr-2">
-            <h2 class="font-bold text-2xl">ES<span class="bg-[#f84525] text-white px-2 rounded-md">AY</span></h2>
+            <h2 class="font-bold text-2xl">E<span class="bg-[#f84525] text-white px-2 rounded-md">SAY</span></h2>
             <span class="text-xs text-gray-500 ml-1">.beta</span>
         </a>
         <ul class="mt-4">

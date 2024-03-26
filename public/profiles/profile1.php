@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <!-- Form untuk mengunggah gambar profil baru -->
                         <form id="image-upload-form" action="upload_image.php" method="POST" enctype="multipart/form-data" class="w-full">
                             <input type="file" name="profile_image" accept="image/*">
-                            <button type="button" onclick="confirmImageUpload()" class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-full">
+                            <button type="button" onclick="confirmImageUpload()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-full">
                                 Upload Image
                             </button>
                         </form>
