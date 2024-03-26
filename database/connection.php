@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 $baseUrl = "http://localhost/final_project_aziz_2023/";
 
 // base Title and description
-$baseTitle = "SMKN 1 KOTA KEDIRI";
+$baseTitle = "ESAY.beta";
 $baseDescription = "Sekolah Menengah Kejuruan Berbasis Teknologi dan Industri di Kota Kediri dengan 9 Kompetensi Keahlian. Beralamat di Jl. Veteran No. 9 Mojoroto Kota Kediri";
 
 // Base Logo

@@ -8,15 +8,21 @@ require_once('../../database/connection.php');
 $errors = array();
 
 ?>
-<?php include_once('../components/header2.php'); ?>
-<?php include('../components/sidebar2.php'); ?>
+<?php include_once('../components/header.php'); ?>
+<!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
+<div class="h-screen flex flex-col">
+    <!-- Top Navbar -->
+    <?php include('../components/navbar.php'); ?>
+    <!-- End Top Navbar -->
+    <!-- Main Content -->
+    <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
+        <!-- Sidebar -->
+        <?php include('../components/sidebar.php'); ?>
+        <!-- End Sidebar -->
 
-<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
-    <?php include('../components/navbar2.php'); ?>
-    <!-- Content -->
-    <div class="p-4">
         <!-- Main Content -->
-            <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
+        <main class="bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
+            <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
                 <!-- Header Content -->
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
                     <h1 class="text-3xl text-gray-800 font-semibold w-full">Classes</h1>
@@ -52,7 +58,7 @@ $errors = array();
                         <thead>
                             <tr>
                                 <th class="text-left py-2">No</th>
-                                <th class="text-left py-2">Class Code</th>
+                                <th class="text-left py-2">Class Name</th>
                                 <th class="text-left py-2">Education Level</th>
                                 <th class="text-left py-2">Homeroom Teacher</th>
                                 <th class="text-left py-2">Curriculum</th>
@@ -66,7 +72,7 @@ $errors = array();
                             $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
                             $page = isset($_GET['page']) ? $_GET['page'] : 1;
 
-                            $query = "SELECT Classes.ClassID, Classes.ClassCode, Classes.EducationLevel, Teachers.AcademicDegree, Users.FullName AS HomeroomTeacher, Classes.Curriculum, Classes.AcademicYear
+                            $query = "SELECT Classes.ClassID, Classes.ClassName, Classes.EducationLevel, Teachers.AcademicDegree, Users.FullName AS HomeroomTeacher, Classes.Curriculum, Classes.AcademicYear
                             FROM Classes
                             LEFT JOIN Teachers ON Classes.HomeroomTeacher = Teachers.TeacherID
                             LEFT JOIN Users ON Teachers.UserID = Users.UserID
@@ -87,7 +93,7 @@ $errors = array();
                             ?>
                                 <tr>
                                     <td class="py-2"><?php echo $no++; ?></td>
-                                    <td class="py-2"><?php echo $row['ClassCode']; ?></td>
+                                    <td class="py-2"><?php echo $row['ClassName']; ?></td>
                                     <td class="py-2"><?php echo $row['EducationLevel']; ?></td>
                                     <td class="py-2">
                                         <?php
@@ -197,7 +203,9 @@ $errors = array();
     </div>
     <!-- End Main Content -->
     <!-- Footer -->
+    <?php include('../components/footer.php'); ?>
     <!-- End Footer -->
+</div>
 <!-- End Main Content -->
 <script>
     // Function to show a confirmation dialog for deletion
@@ -217,5 +225,7 @@ $errors = array();
         });
     }
 </script>
-</main>
-<?php include('../components/footer2.php'); ?>
+
+</body>
+
+</html>

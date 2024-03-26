@@ -3,100 +3,87 @@ session_start();
 
 // Include the database connection
 require_once('../../database/connection.php');
-include_once('../components/header2.php');
+include_once('../components/header.php');
 
 // Initialize variables
-$class_id = $class_name = $education_level = $homeroom_teacher = $curriculum = $academic_year = '';
+$class_name = $education_level = $homeroom_teacher = $curriculum = $academic_year = '';
 $errors = array();
-
-// Retrieve the class data to be updated (you might need to pass the class ID to this page)
-if (isset($_GET['id'])) {
-    $class_id = mysqli_real_escape_string($conn, $_GET['id']);
-
-    // Query to fetch the existing class data
-    $query = "SELECT * FROM Classes WHERE ClassID = ? LIMIT 1";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param('s', $class_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $class = $result->fetch_assoc();
-
-    // Check if the class exists
-    if (!$class) {
-        // Class not found, handle accordingly (e.g., redirect to an error page)
-    } else {
-        // Populate variables with existing class data
-        $class_name = $class['ClassName'];
-        $education_level = $class['EducationLevel'];
-        $homeroom_teacher = $class['HomeroomTeacher'];
-        $curriculum = $class['Curriculum'];
-        $academic_year = $class['AcademicYear'];
-        // You can also retrieve other fields as needed
-    }
-}
 
 // Process the form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize and validate the input data (similar to create class form)
+    // Sanitize and validate the input data
     $class_name = mysqli_real_escape_string($conn, $_POST['class_name']);
     $education_level = mysqli_real_escape_string($conn, $_POST['education_level']);
     $homeroom_teacher = mysqli_real_escape_string($conn, $_POST['homeroom_teacher']);
     $curriculum = mysqli_real_escape_string($conn, $_POST['curriculum']);
     $academic_year = mysqli_real_escape_string($conn, $_POST['academic_year']);
-    // You should validate the fields and handle errors as needed
 
-    // Update class data in the database
-    $query = "UPDATE Classes 
-              SET ClassName = ?, EducationLevel = ?, HomeroomTeacher = ?, Curriculum = ?, AcademicYear = ? 
-              WHERE ClassID = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssss", $class_name, $education_level, $homeroom_teacher, $curriculum, $academic_year, $class_id);
+    // Check for errors
+    if (empty($class_name)) {
+        $errors['class_name'] = "Class Name is required.";
+    }
+    // Add validation rules for other fields as needed...
 
-    if ($stmt->execute()) {
-        // Class update successful
-        // Log the activity for class update
-        $activityDescription = "Class updated: $class_name, Academic Year: $academic_year";
-        $currentUserID = $_SESSION['UserID'];
-        insertLogActivity($conn, $currentUserID, $activityDescription);
-        // Tampilkan notifikasi SweetAlert untuk sukses
-        echo '<script>
+    // If there are no errors, insert the data into the database
+    if (empty($errors)) {
+        $query = "INSERT INTO Classes (ClassName, EducationLevel, HomeroomTeacher, Curriculum, AcademicYear)
+                  VALUES (?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("sssss", $class_name, $education_level, $homeroom_teacher, $curriculum, $academic_year);
+
+        if ($stmt->execute()) {
+            // Class creation successful
+            // Log the activity for class creation
+            $activityDescription = "Class created: $class_name, Academic Year: $academic_year";
+            $currentUserID = $_SESSION['UserID'];
+            insertLogActivity($conn, $currentUserID, $activityDescription);
+            // Tampilkan notifikasi SweetAlert untuk sukses
+            echo '<script>
         Swal.fire({
             icon: "success",
             title: "Success",
-            text: "Class update successfully.",
+            text: "Class created successfully.",
         }).then(function() {
             window.location.href = "manage_classes_list.php";
         });
     </script>';
-        exit();
-    } else {
-        // Class update failed
-        $errors['db_error'] = "Class update failed.";
+            exit();
+        } else {
+            // Class creation failed
+            $errors['db_error'] = "Class creation failed.";
 
-        // Tampilkan notifikasi SweetAlert untuk kegagalan
-        echo '<script>
+            // Tampilkan notifikasi SweetAlert untuk kegagalan
+            echo '<script>
         Swal.fire({
             icon: "error",
             title: "Error",
-            text: "Class update failed.",
+            text: "Class creation failed.",
         });
     </script>';
+        }
     }
 }
 
 // Close the database connection
 ?>
-<?php include('../components/sidebar2.php'); ?>
 
-<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
-    <?php include('../components/navbar2.php'); ?>
-    <!-- Content -->
-    <div class="p-4">
+<!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
+<div class="h-screen flex flex-col">
+    <!-- Top Navbar -->
+    <?php include('../components/navbar.php'); ?>
+    <!-- End Top Navbar -->
+    <!-- Main Content -->
+    <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
+        <!-- Sidebar -->
+        <?php include('../components/sidebar.php'); ?>
+        <!-- End Sidebar -->
+
         <!-- Main Content -->
-            <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
+        <main class="bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
+            <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
                 <!-- Header Content -->
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
-                    <h1 class="text-3xl text-gray-800 font-semibold w-full">Update Class</h1>
+                    <h1 class="text-3xl text-gray-800 font-semibold w-full">Create Class</h1>
                     <div class="flex flex-row justify-end items-center">
                         <a href="manage_classes_list.php" class="bg-gray-800 hover-bg-gray-700 text-white font-bold py-2 px-4 rounded inline-flex items-center space-x-2">
                             <i class="fas fa-arrow-left"></i>
@@ -111,11 +98,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="flex flex-row justify-between items-center w-full pb-2">
                         <div>
                             <h2 class="text-lg text-gray-800 font-semibold">Welcome back, <?php echo $_SESSION['FullName']; ?>!</h2>
-                            <p class="text-gray-600 text-sm">Update class information form.</p>
+                            <p class="text-gray-600 text-sm">Class creation form.</p>
                         </div>
                     </div>
                     <!-- End Navigation -->
-                    <!-- Class Update Form -->
+                    <!-- Class Creation Form -->
                     <form action="" method="POST" class="flex flex-col w-full space-x-2">
                         <!-- Class Name -->
                         <label for="class_name" class="block font-semibold text-gray-800 mt-2 mb-2">Class Name <span class="text-red-500">*</span></label>
@@ -173,15 +160,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="text" id="academic_year" name="academic_year" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Academic Year" value="<?php echo $academic_year; ?>">
 
                         <!-- Submit Button -->
-                        <button type="submit" class="bg-green-500 hover-bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">
+                        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">
                             <i class="fas fa-check mr-2"></i>
-                            <span>Update Class</span>
+                            <span>Create Class</span>
                         </button>
                     </form>
-                    <!-- End Class Update Form -->
+                    <!-- End Class Creation Form -->
                 </div>
                 <!-- End Content -->
             </div>
+        </main>
+        <!-- End Main Content -->
     </div>
-</main>
-<?php include('../components/footer2.php'); ?>
+    <!-- End Main Content -->
+    <!-- Footer -->
+    <?php include('../components/footer.php'); ?>
+    <!-- End Footer -->
+</div>
+<!-- End Main Content -->
+</body>
+
+</html>

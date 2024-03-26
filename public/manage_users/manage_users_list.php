@@ -9,21 +9,15 @@ $username = $password = '';
 $errors = array();
 
 ?>
-<?php include_once('../components/header.php'); ?>
-<!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
-<div class="h-screen flex flex-col">
-    <!-- Top Navbar -->
-    <?php include('../components/navbar.php'); ?>
-    <!-- End Top Navbar -->
-    <!-- Main Content -->
-    <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
-        <!-- Sidebar -->
-        <?php include('../components/sidebar.php'); ?>
-        <!-- End Sidebar -->
+<?php include('../components/header2.php'); ?>
+<?php include('../components/sidebar2.php'); ?>
 
+<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
+    <?php include('../components/navbar2.php'); ?>
+    <!-- Content -->
+    <div class="p-4">
         <!-- Main Content -->
-        <main class=" bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
-            <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
+            <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
                 <!-- Header Content -->
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
                     <h1 class="text-3xl text-gray-800 font-semibol w-full">Users</h1>
@@ -121,7 +115,7 @@ $errors = array();
                                         <!-- Button to update activation status -->
                                         <a href="#" onclick="confirmUpdateStatus(<?php echo $row['UserID']; ?>, '<?php echo $row['ActivationStatus']; ?>')" class='bg-purple-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                                             <i class='fas fa-sync-alt mr-2'></i>
-                                            <span>Status</span>
+                                            <span>Active</span>
                                         </a>
                                         <a href="<?php echo $baseUrl; ?>public/manage_users/manage_users_reset_password.php?id=<?php echo $row['UserID']; ?>" class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm">
                                             <i class="fas fa-key mr-2"></i>
@@ -204,11 +198,7 @@ $errors = array();
         <!-- End Main Content -->
     </div>
     <!-- End Main Content -->
-    <!-- Footer -->
-    <?php include('../components/footer.php'); ?>
-    <!-- End Footer -->
-</div>
-<!-- End Main Content -->
+</main>
 <script>
     // Function to show a confirmation dialog
     function confirmDelete(userID) {
@@ -257,7 +247,5 @@ $errors = array();
         });
     }
 </script>
-
-</body>
-
-</html>
+</main>
+<?php include('../components/footer2.php'); ?>

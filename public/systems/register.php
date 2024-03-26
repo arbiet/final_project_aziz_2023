@@ -134,15 +134,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
 <div class="h-screen flex flex-col">
     <!-- Top Navbar -->
-    <?php include('../components/navbar.php'); ?>
+    <?php // include('../components/navbar.php'); ?>
     <!-- End Top Navbar -->
     <!-- Main Content -->
     <main class="flex-grow bg-gray-50 flex flex-col">
         <!-- Registration Form -->
         <div class="flex-grow bg-gray-50">
-            <div class="flex justify-center items-center h-full">
-                <div class="text-center px-40">
-                    <h1 class="text-6xl font-bold text-gray-700 mb-10">Register</h1>
+            <div class="flex justify-center items-center h-full w-full">
+                <div class="text-center px-40 w-3/5">
+                    <a href="#" class="flex items-center justify-center mx-auto">
+                        <img src="../static/image/icon.png" alt="Icon" class="w-14 h-14 mr-2">
+                        <h2 class="font-bold text-5xl">ES<span class="bg-[#f84525] text-white px-2 rounded-md">AY</span></h2>
+                    </a>
+                    <div class="p-4 x-6 py-4 bg-red shadow-lg rounded-md border-blue-400">
+                        <h3 class="text-3xl font-bold text-gray-700">Register</h3>
                     <?php if (isset($errors['registration_failed'])) : ?>
                         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
                             <strong class="font-bold">Registration failed!</strong>
@@ -165,20 +170,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label for="fullname" class="block text-left text-gray-600 mb-2">Fullname</label>
                         <input type="text" id="fullname" name="fullname" class="border border-gray-300 rounded-full px-4 py-2 w-full mb-2" required value="<?php echo htmlspecialchars($fullname); ?>">
 
+                        <label for="class" class="block text-left text-gray-600 mb-2">Class</label>
+                        <select id="class" name="class" class="border border-gray-300 rounded-full px-4 py-2 w-full mb-2" required>
+                            <option value="">Select Class</option>
+                            <?php
+                            // Query untuk mengambil kelas yang AcademicYear-nya adalah tahun ini
+                            $currentYear = date("Y");
+                            $query = "SELECT `ClassID`, `ClassName`, `EducationLevel`, `HomeroomTeacher`, `Curriculum`, `AcademicYear`, `ClassCode` FROM `Classes` WHERE `AcademicYear` = ?";
+                            $stmt = $conn->prepare($query);
+                            $stmt->bind_param('s', $currentYear);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+
+                            // Tampilkan hasil kelas ke dalam dropdown
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<option value='" . $row['ClassID'] . "'>" . $row['ClassName']." - " . $currentYear. "</option>";
+                            }
+                            ?>
+                        </select>
+
                         <label for="email" class="block text-left text-gray-600 mb-2">Email</label>
                         <input type="email" id="email" name="email" class="border border-gray-300 rounded-full px-4 py-2 w-full mb-2" required value="<?php echo htmlspecialchars($email); ?>">
-
-                        <label for="password" class="block text-left text-gray-600 mb-2">Password</label>
-                        <input type="password" id="password" name="password" class="border border-gray-300 rounded-full px-4 py-2 w-full mb-2" required>
-
-                        <label for="confirm_password" class="block text-left text-gray-600 mb-2">Confirm Password</label>
-                        <input type="password" id="confirm_password" name="confirm_password" class="border border-gray-300 rounded-full px-4 py-2 w-full mb-6" required>
-
+                        <div class="flex row-auto">
+                            <div class="col w-full mr-2">
+                                <label for="password" class="block text-left text-gray-600 mb-2">Password</label>
+                                <input type="password" id="password" name="password" class="border border-gray-300 rounded-full px-4 py-2 w-full mb-2" required>
+                            </div>
+                            <div class="col w-full">
+                                <label for="confirm_password" class="block text-left text-gray-600 mb-2">Confirm Password</label>
+                                <input type="password" id="confirm_password" name="confirm_password" class="border border-gray-300 rounded-full px-4 py-2 w-full mb-6" required>
+                            </div>
+                        </div>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full">
                             Register
                         </button>
                     </form>
                     <p class="text-gray-500 text-sm">Already have an account? <a href="<?php echo $baseUrl; ?>public/systems/login.php" class="text-blue-500">Click here to login</a></p>
+                    <div>
                 </div>
             </div>
         </div>
@@ -186,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
     <!-- End Main Content -->
     <!-- Footer -->
-    <?php include('../components/footer.php'); ?>
+    <?php // include('../components/footer.php'); ?>
     <!-- End Footer -->
 </div>
 <!-- End Main Content -->

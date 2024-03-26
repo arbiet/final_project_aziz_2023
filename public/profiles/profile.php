@@ -2,7 +2,7 @@
 session_start();
 // Include the connection file
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 // Initialize variables
 $errors = array();
 // Retrieve user information from the database
@@ -121,102 +121,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // $conn->close();
 ?>
 
-
-<!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
-<div class="h-screen flex flex-col">
-    <!-- Top Navbar -->
-    <?php include('../components/navbar.php'); ?>
-    <!-- End Top Navbar -->
-    <!-- Main Content -->
-    <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
-        <!-- Sidebar -->
-        <?php include('../components/sidebar.php'); ?>
-        <!-- End Sidebar -->
-
-        <!-- Main Content -->
-        <main class=" bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
-            <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
-                <h1 class="text-3xl text-gray-800 font-semibold border-b border-gray-200 w-full">Profile</h1>
-                <h2 class="text-xl text-gray-800 font-semibold">Welcome back, <?php echo $_SESSION['FullName']; ?>!</h2>
-                <p class="text-gray-600">Profile information.</p>
-                <!-- Form -->
-                <div class="flex flex-row w-full space-x-2 space-y-2 mt-4 mb-4">
-                    <!-- Image Profile -->
-                    <div class="flex flex-col w-96 items-center justify-top pt-4">
-                        <img src="<?php echo $baseUrl; ?>public/static/image/profile/<?php echo $_SESSION['ProfilePictureURL']; ?>" alt="Profile Image" class="rounded-md object-cover mb-4">
-                        <!-- Form untuk mengunggah gambar profil baru -->
-                        <form id="image-upload-form" action="upload_image.php" method="POST" enctype="multipart/form-data" class="w-full">
-                            <input type="file" name="profile_image" accept="image/*">
-                            <button type="button" onclick="confirmImageUpload()" class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-full">
-                                Upload Image
-                            </button>
-                        </form>
-                    </div>
-                    <!-- End Image -->
-                    <!-- Form Profile -->
-                    <form action="profile.php" method="POST" class="flex flex-col w-full space-x-2 mt-4 mb-4" id="profile-update-form">
-                        <!-- Full Name -->
-                        <label for="fullname" class="block font-semibold text-gray-800 mt-2 mb-2">Full Name</label>
-                        <input type="text" id="fullname" name="fullname" class="w-full rounded-md border-gray-300 focus-border-blue-500 focus-ring focus-ring-blue-500 focus-ring-opacity-50 focus-outline-none px-2 py-2 border" value="<?php echo $user['FullName']; ?>">
-
-                        <!-- Email -->
-                        <label for="email" class="block font-semibold text-gray-800 mt-2 mb-2">Email</label>
-                        <input type="email" id="email" name="email" class="w-full rounded-md border-gray-300 focus-border-blue-500 focus-ring focus-ring-blue-500 focus-ring-opacity-50 focus-outline-none px-2 py-2 border" value="<?php echo $user['Email']; ?>">
-
-                        <!-- Username -->
-                        <label for="username" class="block font-semibold text-gray-800 mt-2 mb-2">Username</label>
-                        <input type="text" id="username" name="username" class="w-full rounded-md border-gray-300 focus-border-blue-500 focus-ring focus-ring-blue-500 focus-ring-opacity-50 focus-outline-none px-2 py-2 border" value="<?php echo $user['Username']; ?>">
-
-                        <!-- Date of Birth -->
-                        <label for="dob" class="block font-semibold text-gray-800 mt-2 mb-2">Date of Birth</label>
-                        <input type="date" id="dob" name="dob" class="w-full rounded-md border-gray-300 focus-border-blue-500 focus-ring focus-ring-blue-500 focus-ring-opacity-50 focus-outline-none px-2 py-2 border" value="<?php echo $user['DateOfBirth']; ?>">
-
-                        <!-- Gender -->
-                        <label for="gender" class="block font-semibold text-gray-800 mt-2 mb-2">Gender</label>
-                        <select id="gender" name="gender" class="w-full rounded-md border-gray-300 focus-border-blue-500 focus-ring focus-ring-blue-500 focus-ring-opacity-50 focus-outline-none px-2 py-2 border">
-                            <option value="Male" <?php if ($user['Gender'] === 'Male') echo 'selected'; ?>>Male</option>
-                            <option value="Female" <?php if ($user['Gender'] === 'Female') echo 'selected'; ?>>Female</option>
-                            <option value="Other" <?php if ($user['Gender'] === 'Other') echo 'selected'; ?>>Other</option>
-                        </select>
-
-                        <!-- Address -->
-                        <label for="address" class="block font-semibold text-gray-800 mt-2 mb-2">Address</label>
-                        <textarea id="address" name="address" class="w-full rounded-md border-gray-300 focus-border-blue-500 focus-ring focus-ring-blue-500 focus-ring-opacity-50 focus-outline-none px-2 py-2 border"><?php echo $user['Address']; ?></textarea>
-
-                        <!-- Phone Number -->
-                        <label for="phone" class="block font-semibold text-gray-800 mt-2 mb-2">Phone Number</label>
-                        <input type="text" id="phone" name="phone" class="w-full rounded-md border-gray-300 focus-border-blue-500 focus-ring focus-ring-blue-500 focus-ring-opacity-50 focus-outline-none px-2 py-2 border" value="<?php echo $user['PhoneNumber']; ?>">
-
-                        <!-- Role ID -->
-                        <label for="role" class="block font-semibold text-gray-800 mt-2 mb-2">Role</label>
-                        <input type="text" id="role" name="role" class="w-full rounded-md border-gray-300 focus-border-blue-500 focus-ring focus-ring-blue-500 focus-ring-opacity-50 focus-outline-none px-2 py-2 border" value="<?php echo $user['RoleName']; ?>" disabled>
-
-                        <!-- Account Status -->
-                        <label for="accountStatus" class="block font-semibold text-gray-800 mt-2 mb-2">Account Status</label>
-                        <input type="text" id="accountStatus" name="accountStatus" class="w-full rounded-md border-gray-300 focus-border-blue-500 focus-ring focus-ring-blue-500 focus-ring-opacity-50 focus-outline-none px-2 py-2 border" value="<?php echo ($user['AccountStatus'] !== null) ? $user['AccountStatus'] : 'Account Status Not Set'; ?>" disabled>
-
-                        <!-- Activation Status -->
-                        <label for="activationStatus" class="block font-semibold text-gray-800 mt-2 mb-2">Activation Status</label>
-                        <input type="text" id="activationStatus" name="activationStatus" class="w-full rounded-md border-gray-300 focus-border-blue-500 focus-ring focus-ring-blue-500 focus-ring-opacity-50 focus-outline-none px-2 py-2 border" value="<?php echo ($user['ActivationStatus'] !== null) ? $user['ActivationStatus'] : 'Activation Status Not Set'; ?>" disabled>
-
-                        <!-- Update Button -->
-                        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
-                            Update Profile
-                        </button>
-                    </form>
-                    <!-- End Form Profile -->
-                </div>
+<?php include('../components/sidebar2.php'); ?>
+<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main pb-2">
+    <?php include('../components/navbar2.php'); ?>
+    <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
+        <h1 class="text-2xl text-gray-800 font-semibold border-b border-gray-200 w-full">Profile</h1>
+        <!-- Form -->
+        <div class="flex flex-row w-full space-x-2 space-y-2 mt-4 mb-4">
+            <!-- Image Profile -->
+            <div class="flex flex-col w-96 items-center justify-top pt-4">
+                <img src="<?php echo $baseUrl; ?>public/static/image/profile/<?php echo $_SESSION['ProfilePictureURL']; ?>" alt="Profile Image" class="rounded-md object-cover mb-4">
+                <!-- Form untuk mengunggah gambar profil baru -->
+                <form id="image-upload-form" action="upload_image.php" method="POST" enctype="multipart/form-data" class="w-full">
+                    <input type="file" name="profile_image" accept="image/*">
+                    <button type="button" onclick="confirmImageUpload()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-full">
+                        Upload Image
+                    </button>
+                </form>
             </div>
-        </main>
-        <!-- End Main Content -->
+            <!-- End Image -->
+            <!-- Form Profile -->
+            <form action="profile.php" method="POST" class="flex flex-col w-full space-x-2 mt-4 mb-4" id="profile-update-form">
+                <!-- Full Name -->
+                <label for="fullname" class="block font-semibold text-gray-800 mt-2 mb-2">Full Name</label>
+                <input type="text" id="fullname" name="fullname" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border" value="<?php echo $user['FullName']; ?>">
+
+                <!-- Email -->
+                <label for="email" class="block font-semibold text-gray-800 mt-2 mb-2">Email</label>
+                <input type="email" id="email" name="email" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border" value="<?php echo $user['Email']; ?>">
+
+                <!-- Username -->
+                <label for="username" class="block font-semibold text-gray-800 mt-2 mb-2">Username</label>
+                <input type="text" id="username" name="username" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border" value="<?php echo $user['Username']; ?>">
+
+                <!-- Date of Birth -->
+                <label for="dob" class="block font-semibold text-gray-800 mt-2 mb-2">Date of Birth</label>
+                <input type="date" id="dob" name="dob" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border" value="<?php echo $user['DateOfBirth']; ?>">
+
+                <!-- Gender -->
+                <label for="gender" class="block font-semibold text-gray-800 mt-2 mb-2">Gender</label>
+                <select id="gender" name="gender" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border">
+                    <option value="Male" <?php if ($user['Gender'] === 'Male') echo 'selected'; ?>>Male</option>
+                    <option value="Female" <?php if ($user['Gender'] === 'Female') echo 'selected'; ?>>Female</option>
+                    <option value="Other" <?php if ($user['Gender'] === 'Other') echo 'selected'; ?>>Other</option>
+                </select>
+
+                <!-- Address -->
+                <label for="address" class="block font-semibold text-gray-800 mt-2 mb-2">Address</label>
+                <textarea id="address" name="address" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border"><?php echo $user['Address']; ?></textarea>
+
+                <!-- Phone Number -->
+                <label for="phone" class="block font-semibold text-gray-800 mt-2 mb-2">Phone Number</label>
+                <input type="text" id="phone" name="phone" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border" value="<?php echo $user['PhoneNumber']; ?>">
+
+                <!-- Role ID -->
+                <label for="role" class="block font-semibold text-gray-800 mt-2 mb-2">Role</label>
+                <input type="text" id="role" name="role" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border" value="<?php echo $user['RoleName']; ?>" disabled>
+
+                <!-- Account Status -->
+                <label for="accountStatus" class="block font-semibold text-gray-800 mt-2 mb-2">Account Status</label>
+                <input type="text" id="accountStatus" name="accountStatus" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border" value="<?php echo ($user['AccountStatus'] !== null) ? $user['AccountStatus'] : 'Account Status Not Set'; ?>" disabled>
+
+                <!-- Activation Status -->
+                <label for="activationStatus" class="block font-semibold text-gray-800 mt-2 mb-2">Activation Status</label>
+                <input type="text" id="activationStatus" name="activationStatus" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border" value="<?php echo ($user['ActivationStatus'] !== null) ? $user['ActivationStatus'] : 'Activation Status Not Set'; ?>" disabled>
+
+                <!-- Update Button -->
+                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+                    Update Profile
+                </button>
+            </form>
+            <!-- End Form Profile -->
+        </div>
     </div>
-    <!-- End Main Content -->
-    <!-- Footer -->
-    <?php include('../components/footer.php'); ?>
-    <!-- End Footer -->
-</div>
-<!-- End Main Content -->
-</body>
+      <!-- End Content -->
+</main>
 <script>
     function confirmImageUpload() {
         Swal.fire({
@@ -255,5 +234,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     }
 </script>
-
-</html>
+<?php include('../components/footer2.php'); ?>

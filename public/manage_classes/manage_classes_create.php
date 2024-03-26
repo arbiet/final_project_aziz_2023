@@ -3,7 +3,7 @@ session_start();
 
 // Include the database connection
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 
 // Initialize variables
 $class_name = $education_level = $homeroom_teacher = $curriculum = $academic_year = '';
@@ -66,21 +66,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Close the database connection
 ?>
+<?php include('../components/sidebar2.php'); ?>
 
-<!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
-<div class="h-screen flex flex-col">
-    <!-- Top Navbar -->
-    <?php include('../components/navbar.php'); ?>
-    <!-- End Top Navbar -->
-    <!-- Main Content -->
-    <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
-        <!-- Sidebar -->
-        <?php include('../components/sidebar.php'); ?>
-        <!-- End Sidebar -->
-
+<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
+    <?php include('../components/navbar2.php'); ?>
+    <!-- Content -->
+    <div class="p-4">
         <!-- Main Content -->
-        <main class="bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
-            <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
+            <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
                 <!-- Header Content -->
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
                     <h1 class="text-3xl text-gray-800 font-semibold w-full">Create Class</h1>
@@ -160,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="text" id="academic_year" name="academic_year" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Academic Year" value="<?php echo $academic_year; ?>">
 
                         <!-- Submit Button -->
-                        <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">
                             <i class="fas fa-check mr-2"></i>
                             <span>Create Class</span>
                         </button>
@@ -174,10 +167,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <!-- End Main Content -->
     <!-- Footer -->
-    <?php include('../components/footer.php'); ?>
-    <!-- End Footer -->
-</div>
-<!-- End Main Content -->
-</body>
-
-</html>
+</main>
+<?php include('../components/footer2.php'); ?>
