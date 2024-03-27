@@ -1,6 +1,6 @@
 <?php
 require_once('../../database/connection.php');
-include('../components/header2.php');
+include('../components/header.php');
 session_start();
 
 if (isset($_SESSION['UserID'])) {
@@ -42,13 +42,9 @@ if (isset($_SESSION['UserID'])) {
   <!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
   <div class="h-screen flex flex-col overflow-y-scroll flex-shrink-0 sc-hide">
     <!-- Navbar -->
-    <header class="bg-emerald-600 p-4 text-white">
+    <header class="bg-blue-600 p-4 text-white">
       <nav class="container mx-auto flex justify-between items-center">
-        <a href="#" class="flex items-end">
-            <img src="../static/image/icon.png" alt="Icon" class="w-8 h-8 mr-2">
-            <h2 class="font-bold text-2xl">E<span class="bg-[#f84525] text-white px-2 rounded-md">SAY</span></h2>
-            <span class="text-xs text-white ml-1">.beta</span>
-        </a>
+        <h1 class="text-2xl font-bold">Dashboard Siswa</h1>
         <a href="javascript:void(0);" onclick="confirmLogout()" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Logout</a>
       </nav>
     </header>
@@ -78,7 +74,7 @@ if (isset($_SESSION['UserID'])) {
       <h2 class="text-2xl font-semibold mb-4">Daftar Mata Pelajaran</h2>
       <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
         <?php foreach ($classSubjects as $subject) { ?>
-          <div class="bg-white rounded p-4 relative shadow-lg border border-gray-">
+          <div class="bg-white rounded p-4 shadow relative shadow:md">
             <!-- Tombol titik tiga (ellipsis) di pojok kanan atas -->
             <div class="absolute top-0 right-0 mt-2 mr-2">
               <button class="text-gray-600 hover:text-gray-700 rounded-full p-2">
