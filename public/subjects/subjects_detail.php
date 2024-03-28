@@ -1,6 +1,6 @@
   <?php
   require_once('../../database/connection.php');
-  include('../components/header.php');
+  include('../components/header2.php');
   session_start();
 
   if (isset($_SESSION['UserID'])) {
@@ -57,14 +57,13 @@
   }
   ?>
 
-  <body class="overflow-hidden">
-    <!-- Navbar -->
-    <header class="bg-blue-600 p-4 text-white">
-      <nav class="container mx-auto flex justify-between items-center">
-        <h1 class="text-2xl font-bold">Dashboard Siswa</h1>
-        <a href="javascript:void(0);" onclick="confirmLogout()" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Logout</a>
-      </nav>
-    </header>
+<?php include('../components/sidebar_students.php'); ?>
+<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
+    <?php include('../components/navbar4.php'); ?>
+    <!-- Content -->
+    <div class="p-4">
+        <!-- Main Content -->
+        <div class="flex items-start justify-start p-6 shadow-lg m-4 bg-white flex-1 flex-col rounded-md">
     <div class="h-screen flex flex-row overflow-hidden sc-hide">
       <!-- Sidebar for Materials -->
       <?php include_once('../components/sidebar_students.php') ?>

@@ -1,20 +1,20 @@
-    <!--sidenav -->
-    <div class="fixed left-0 top-0 w-64 h-full bg-emerald-600 p-4 z-50 sidebar-menu transition-transform">
-        <a href="#" class="flex items-end border-b border-b-gray-800 pb-4">
-            <img src="../static/image/icon.png" alt="Icon" class="w-8 h-8 mr-2">
-            <h2 class="font-bold text-2xl">E<span class="bg-[#f84525] text-white px-2 rounded-md">SAY</span></h2>
-            <span class="text-xs text-white ml-1">.beta</span>
-        </a>
-        <a href="../systems/dashboard_student.php" class="mt-4 flex font-semibold items-center py-2 px-4 text-white hover:bg-gray-950 hover:text-gray-200 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-200">
+<!-- Sidebar for Materials -->
+    <div class="bg-gray-200 w-3/12 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
+      <div class="p-4 hover:bg-gray-300">
+        <a href="../systems/dashboard_student.php" class=" hover:text-blue-500">
           <i class="fas fa-arrow-left mr-2"></i>
           Back
         </a>
-        <h3 class="text-lg font-semibold p-4">Materials</h3>
-        <ul class="list-inside">
+      </div>
+      <h3 class="text-lg font-semibold p-4">Materials</h3>
+      <ul class="list-inside">
         <!-- Displaying a manual type for "Start" -->
+        <li class="py-2 px-4 hover:bg-gray-300">
+          <span class="text-gray-500">Starter</span>
+        </li>
         <!-- Special list item for "start" with an icon -->
-        <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=start" class="text-white hover:text-gray-200">
-          <li class="py-2 px-4 text-white hover:bg-gray-300">
+        <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=start" class="hover:text-blue-500">
+          <li class="py-2 px-4 hover:bg-gray-300">
             <i class="fas fa-play-circle mr-2"></i> Start
           </li>
         </a>
@@ -25,9 +25,9 @@
               // Check if the current material has the same type as the previous one
               if ($material['Type'] !== $prevMaterialType) {
                   // Display the material type
-                  echo '<li class="py-2 px-4 text-white hover:bg-gray-300">';
+                  echo '<li class="py-2 px-4 hover:bg-gray-300">';
                   echo '<i class="fa-solid fa-book mr-2"></i>';
-                  echo '<span class="text-white">' . $material['Type'] . '</span>';
+                  echo '<span class="text-gray-500">' . $material['Type'] . '</span>';
                   echo '</li>';
               }
 
@@ -62,8 +62,8 @@
               }
               
               // Display the material without exam links
-              echo '<li class="py-2 pl-8 pr-4 text-white hover:bg-gray-300">';
-              echo '<a href="subjects_detail.php?subject_id=' . $subjectID . '&material=' . $material['MaterialID'] . '" class="hover:text-gray-200">';
+              echo '<li class="py-2 pl-8 pr-4 hover:bg-gray-300">';
+              echo '<a href="subjects_detail.php?subject_id=' . $subjectID . '&material=' . $material['MaterialID'] . '" class="hover:text-blue-500">';
               echo '<i class="fas fa-file-alt mr-2"></i>' . $material['TitleMaterial'];
               echo '</a>';
               echo '</li>';
@@ -71,7 +71,7 @@
               // Display pretest link if material has associated pretest
               if ($hasPretest) {
                   echo '<li class="py-2 pl-12 pr-4 hover:bg-gray-300 flex justify-between items-center">';
-                  echo '<a href="subjects_test.php?subject_id=' . $subjectID . '&material=' . $material['MaterialID'] . '&test_id=' . $pretestData['TestID'] . '&test_type=Pretest" class="hover:text-gray-200 flex items-center">';
+                  echo '<a href="subjects_test.php?subject_id=' . $subjectID . '&material=' . $material['MaterialID'] . '&test_id=' . $pretestData['TestID'] . '&test_type=Pretest" class="hover:text-blue-500 flex items-center">';
                   echo '<i class="fas fa-pencil-alt mr-2"></i>' . $pretestData['TestName'];
 
                   // Display pretest results
@@ -92,7 +92,7 @@
               // Display post-test link if material has associated post-test
               if ($hasPosttest) {
                   echo '<li class="py-2 pl-12 pr-4 hover:bg-gray-300 flex justify-between items-center">';
-                  echo '<a href="subjects_test.php?subject_id=' . $subjectID . '&material=' . $material['MaterialID'] . '&test_id=' . $postTestData['TestID'] . '&test_type=Post-test" class="hover:text-gray-200 flex items-center">';
+                  echo '<a href="subjects_test.php?subject_id=' . $subjectID . '&material=' . $material['MaterialID'] . '&test_id=' . $postTestData['TestID'] . '&test_type=Post-test" class="hover:text-blue-500 flex items-center">';
                   echo '<i class="fas fa-pencil-alt mr-2"></i>' . $postTestData['TestName'];
 
                   // Display post-test results
@@ -119,8 +119,8 @@
                     $submissionResult = mysqli_query($conn, $submissionQuery);
                     $hasSubmitted = mysqli_num_rows($submissionResult) > 0;
 
-                    echo '<li class="py-2 pl-8 pr-4 text-white hover:bg-gray-300">';
-                    echo '<a href="subjects_assignment.php?subject_id=' . $subjectID . '&assignment_id=' . $assignment['AssignmentID'] . '" class="hover:text-gray-200">';
+                    echo '<li class="py-2 pl-8 pr-4 hover:bg-gray-300">';
+                    echo '<a href="subjects_assignment.php?subject_id=' . $subjectID . '&assignment_id=' . $assignment['AssignmentID'] . '" class="hover:text-blue-500">';
                     echo '<i class="fas fa-tasks mr-2"></i>' . $assignment['Title'];
 
                     // Display an indicator if the user has submitted the assignment
@@ -141,18 +141,15 @@
           ?>
 
         <!-- Displaying a manual type for "End" -->
-        <li class="py-2 px-4 text-white hover:bg-gray-300">
-          <span class="text-white">Finish</span>
+        <li class="py-2 px-4 hover:bg-gray-300">
+          <span class="text-gray-500">Finish</span>
         </li>
 
         <!-- Special list item for "end" with an icon -->
-        <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=end" class="hover:text-gray-200">
-          <li class="py-2 px-4 text-white hover:bg-gray-300">
+        <a href="subjects_detail.php?subject_id=<?php echo $subjectID; ?>&material=end" class="hover:text-blue-500">
+          <li class="py-2 px-4 hover:bg-gray-300">
             <i class="fas fa-stop-circle mr-2"></i> End
           </li>
         </a>
       </ul>
     </div>
-    <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
-    <!-- end sidenav -->
-    
