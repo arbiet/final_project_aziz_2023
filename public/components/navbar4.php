@@ -11,14 +11,6 @@
                 "user_type1" => array(
                     array("name" => "Tutorial 1 for User Type 1", "description" => "Description of Tutorial 1", "file" => "tutorial1_user_type1.pdf", "image" => "https://placehold.co/32x32"),
                     array("name" => "Tutorial 2 for User Type 1", "description" => "Description of Tutorial 2", "file" => "tutorial2_user_type1.pdf", "image" => "https://placehold.co/32x32")
-                ),
-                "user_type2" => array(
-                    array("name" => "Tutorial 1 for User Type 2", "description" => "Description of Tutorial 1", "file" => "tutorial1_user_type2.pdf", "image" => "https://placehold.co/32x32"),
-                    array("name" => "Tutorial 2 for User Type 2", "description" => "Description of Tutorial 2", "file" => "tutorial2_user_type2.pdf", "image" => "https://placehold.co/32x32")
-                ),
-                "user_type3" => array(
-                    array("name" => "Tutorial 1 for User Type 3", "description" => "Description of Tutorial 1", "file" => "tutorial1_user_type3.pdf", "image" => "https://placehold.co/32x32"),
-                    array("name" => "Tutorial 2 for User Type 3", "description" => "Description of Tutorial 2", "file" => "tutorial2_user_type3.pdf", "image" => "https://placehold.co/32x32")
                 )
             );
             ?>
@@ -100,7 +92,13 @@
                     </button>
                     <ul class="dropdown-menu shadow-lg shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                         <li>
-                            <a href="<?php echo $baseUrl; ?>public/profiles/profile.php" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profile</a>
+                            <a href="<?php echo $baseUrl; ?>public/systems/dashboard_student.php" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $baseUrl; ?>public/profiles/profile_student.php" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profile</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $baseUrl; ?>public/class/class_detail.php?class_id=<?php echo $_SESSION['ClassID']; ?>" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">My Class</a>
                         </li>
                         <li>
                             <?php

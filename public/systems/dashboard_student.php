@@ -44,7 +44,7 @@ if (isset($_SESSION['UserID'])) {
   <div class="flex flex-col overflow-y-scroll flex-shrink-0 sc-hide">
     <!-- Navbar -->
     <div class="bg-white p-6 shadow-lg mb-4 relative container mx-auto mt-8 rounded-lg border border-gray-200">
-      <a href="#" class="absolute top-0 right-0 mt-4 mr-4 text-blue-500 hover:text-blue-700">
+      <a href="../profiles/profile_student.php" class="absolute top-0 right-0 mt-4 mr-4 text-blue-500 hover:text-blue-700">
         <i class="fas fa-edit text-xl"></i>
       </a>
       <!-- Badge Identifikasi -->
