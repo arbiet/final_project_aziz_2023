@@ -33,25 +33,16 @@ if (isset($_SESSION['UserID'])) {
         $classSubjects[] = $row;
       }
     }
+    $_SESSION['ClassID'] = $studentData['ClassID'];
   }
 }
 
 ?>
-
-<body class="overflow-hidden">
-  <!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
-  <div class="h-screen flex flex-col overflow-y-scroll flex-shrink-0 sc-hide">
+<!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
+<?php include('../components/navbar3.php'); ?>
+<div class="p-8 pt-20 bg-teal-100 h-screen">
+  <div class="flex flex-col overflow-y-scroll flex-shrink-0 sc-hide">
     <!-- Navbar -->
-    <header class="bg-emerald-600 p-4 text-white">
-      <nav class="container mx-auto flex justify-between items-center">
-        <a href="#" class="flex items-end">
-            <img src="../static/image/icon.png" alt="Icon" class="w-8 h-8 mr-2">
-            <h2 class="font-bold text-2xl">E<span class="bg-[#f84525] text-white px-2 rounded-md">SAY</span></h2>
-            <span class="text-xs text-white ml-1">.beta</span>
-        </a>
-        <a href="javascript:void(0);" onclick="confirmLogout()" class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-500 hover:bg-white mt-4 lg:mt-0">Logout</a>
-      </nav>
-    </header>
     <div class="bg-white p-6 shadow-lg mb-4 relative container mx-auto mt-8 rounded-lg border border-gray-200">
       <a href="#" class="absolute top-0 right-0 mt-4 mr-4 text-blue-500 hover:text-blue-700">
         <i class="fas fa-edit text-xl"></i>
@@ -124,15 +115,8 @@ if (isset($_SESSION['UserID'])) {
         <?php } ?>
       </div>
     </main>
-
-    <!-- Footer -->
-    <footer class="fixed bottom-0 w-full p-4 text-gray-600 bg-white">
-      <div class="container mx-auto text-center">
-        &copy; <?php echo date('Y'); ?> <?php echo $baseTitle; ?> - All Rights Reserved
-      </div>
-    </footer>
-  </div>
-</body>
+</div>
+</div>
 <script>
   function confirmLogout() {
     Swal.fire({
@@ -152,5 +136,4 @@ if (isset($_SESSION['UserID'])) {
     });
   }
 </script>
-
-</html>
+<?php include('../components/footer2.php'); ?>

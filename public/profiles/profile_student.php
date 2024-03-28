@@ -121,9 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // $conn->close();
 ?>
 
-<?php include('../components/sidebar2.php'); ?>
-<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main pb-2">
-    <?php include('../components/navbar2.php'); ?>
+<?php include('../components/navbar3.php'); ?>
+<div class="p-8 pt-20 bg-teal-100">
+<main class="w-full min-h-screen transition-all main">
     <div class="flex items-start justify-start p-6 shadow-lg m-4 bg-white flex-1 flex-col rounded-md">
         <h1 class="text-2xl text-gray-800 font-semibold border-b border-gray-200 w-full">Profile</h1>
         <!-- Form -->
@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" id="activationStatus" name="activationStatus" class="w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 focus:outline-none px-2 py-2 border" value="<?php echo ($user['ActivationStatus'] !== null) ? $user['ActivationStatus'] : 'Activation Status Not Set'; ?>" disabled>
 
                 <!-- Update Button -->
-                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
                     Update Profile
                 </button>
             </form>
@@ -196,6 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
       <!-- End Content -->
 </main>
+</div>
 <script>
     function confirmImageUpload() {
         Swal.fire({

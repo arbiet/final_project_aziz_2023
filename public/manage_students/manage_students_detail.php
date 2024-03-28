@@ -34,7 +34,7 @@ if (isset($_GET['id'])) {
     <!-- Content -->
     <div class="p-4">
         <!-- Main Content -->
-        <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
+        <div class="flex items-start justify-start p-6 shadow-lg m-4 bg-white flex-1 flex-col rounded-md">
                 <!-- Header Content -->
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
                     <h1 class="text-3xl text-gray-800 font-semibold w-full">Student Details</h1>
@@ -59,7 +59,7 @@ if (isset($_GET['id'])) {
                     <!-- Student Details -->
                     <?php if (!empty($studentData)) : ?>
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-blue-200 shadow-md p-4 rounded-md">
+                            <div class="bg-blue-200 shadow-lg p-4 rounded-md">
                                 <h3 class="text-lg font-semibold text-gray-800">Student Information</h3>
                                 <p><strong>Student Number:</strong> <?php echo $studentData['StudentNumber']; ?></p>
                                 <p><strong>Religion:</strong> <?php echo $studentData['Religion']; ?></p>
@@ -70,7 +70,7 @@ if (isset($_GET['id'])) {
                                 <p><strong>Username:</strong> <?php echo $studentData['Username']; ?></p>
                                 <p><strong>Email:</strong> <?php echo $studentData['Email']; ?></p>
                             </div>
-                            <div class="bg-blue-200 shadow-md p-4 rounded-md">
+                            <div class="bg-blue-200 shadow-lg p-4 rounded-md">
                                 <h3 class="text-lg font-semibold text-gray-800">Personal Information</h3>
                                 <p><strong>Full Name:</strong> <?php echo $studentData['FullName']; ?></p>
                                 <p><strong>Date of Birth:</strong> <?php echo $studentData['DateOfBirth']; ?></p>
@@ -81,7 +81,7 @@ if (isset($_GET['id'])) {
                             </div>
                         </div>
                     <?php else : ?>
-                        <div class="bg-white shadow-md p-4 rounded-md">
+                        <div class="bg-white shadow-lg p-4 rounded-md">
                             <p>No student data available.</p>
                         </div>
                     <?php endif; ?>

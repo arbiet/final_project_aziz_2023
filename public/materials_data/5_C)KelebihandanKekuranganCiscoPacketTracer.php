@@ -1,4 +1,4 @@
-<div class="bg-white rounded p-4 shadow-md mb-4">
+<div class="bg-white rounded p-4 shadow-lg mb-4">
     <h2 class="text-2xl font-semibold mb-2">Kelebihan dan Kekurangan Cisco Packet Tracer</h2>
 
     <p>

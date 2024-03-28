@@ -45,7 +45,7 @@ function getTotalClasses($conn) {
     <!-- Content -->
     <div class="p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-6">
-            <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+            <div class="bg-white rounded-md border border-gray-100 p-6 shadow-lg shadow-black/5">
                 <div class="flex justify-between">
                         <div>
                             <i class="fas fa-users text-3xl text-green-500 mr-2"></i>
@@ -56,7 +56,7 @@ function getTotalClasses($conn) {
                         </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+                <div class="bg-white rounded-md border border-gray-100 p-6 shadow-lg shadow-black/5">
                     <div class="flex justify-between">
                         <div>
                             <i class="fas fa-user-graduate text-3xl text-indigo-500 mr-2"></i>

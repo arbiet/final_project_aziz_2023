@@ -21,13 +21,13 @@ function getTotalClasses($conn) {
     <?php include('../components/navbar.php'); ?>
     <!-- End Top Navbar -->
     <!-- Main Content -->
-    <div class="bg-gray-50 flex flex-row shadow-md">
+    <div class="bg-gray-50 flex flex-row shadow-lg">
         <!-- Sidebar -->
         <?php include('../components/sidebar.php'); ?>
         <!-- End Sidebar -->
         <!-- Main Content -->
         <main class="flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
-            <div class="flex items-start justify-start p-6 shadow-md m-4 flex-col">
+            <div class="flex items-start justify-start p-6 shadow-lg m-4 flex-col">
                 <h1 class="text-3xl text-gray-800 font-semibold border-b border-gray-200 w-full">Dashboard</h1>
                 <h2 class="text-xl text-gray-800 font-semibold">
                     Welcome back, <?php echo $_SESSION['FullName']; ?>!
@@ -42,7 +42,7 @@ function getTotalClasses($conn) {
                     ?>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 mt-6 w-full">
-                    <div class="p-4 bg-white shadow-md rounded-md">
+                    <div class="p-4 bg-white shadow-lg rounded-md">
                         <div class="flex items-center">
                             <i class="fas fa-school text-3xl text-indigo-500 mr-2"></i>
                             <div>
@@ -161,7 +161,7 @@ function getTotalClasses($conn) {
                             ?>
                         </div>
                     </div>
-                    <div class="p-4 bg-white shadow-md rounded-md">
+                    <div class="p-4 bg-white shadow-lg rounded-md">
                         <div class="flex items-center">
                             <i class="fas fa-book text-3xl text-indigo-500 mr-2"></i>
                             <div>

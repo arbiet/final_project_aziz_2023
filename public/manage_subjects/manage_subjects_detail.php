@@ -62,7 +62,7 @@ if (isset($_GET['id'])) {
     <!-- Content -->
     <div class="p-4">
         <!-- Main Content -->
-        <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
+        <div class="flex items-start justify-start p-6 shadow-lg m-4 bg-white flex-1 flex-col rounded-md">
                 <!-- Header Content -->
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
                     <h1 class="text-3xl text-gray-800 font-semibold w-full">Subject Details</h1>
@@ -86,7 +86,7 @@ if (isset($_GET['id'])) {
                     <!-- End Navigation -->
                     <!-- Subject Details -->
                     <?php if (!empty($subjectData)) : ?>
-                        <div class="bg-white shadow-md p-4 rounded-md">
+                        <div class="bg-white shadow-lg p-4 rounded-md">
                             <h3 class="text-lg font-semibold text-gray-800">Subject Information</h3>
                             <p><strong>Subject Name:</strong> <?php echo $subjectData['SubjectName']; ?></p>
                             <p><strong>Difficulty Level:</strong> <?php echo $subjectData['DifficultyLevel']; ?></p>
@@ -98,7 +98,7 @@ if (isset($_GET['id'])) {
                             <p><strong>Student Engagement:</strong> <?php echo $subjectData['StudentEngagement']; ?></p>
                         </div>
                         <?php if (!empty($materialsData)) : ?>
-                            <div class="mt-4 bg-white shadow-md p-4 rounded-md">
+                            <div class="mt-4 bg-white shadow-lg p-4 rounded-md">
                                 <h3 class="text-lg font-semibold text-gray-800">Materials for this Subject</h3>
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-100">
@@ -173,13 +173,13 @@ if (isset($_GET['id'])) {
                                 </table>
                             </div>
                         <?php else : ?>
-                            <div class="bg-white shadow-md p-4 rounded-md mt-4">
+                            <div class="bg-white shadow-lg p-4 rounded-md mt-4">
                                 <p>No materials available for this subject.</p>
                             </div>
                         <?php endif; ?>
                         <!-- Associated Classes -->
                         <?php if (!empty($classesData)) : ?>
-                            <div class="mt-4 bg-white shadow-md p-4 rounded-md">
+                            <div class="mt-4 bg-white shadow-lg p-4 rounded-md">
                                 <h3 class="text-lg font-semibold text-gray-800">Classes Offering this Subject</h3>
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-100">
@@ -219,12 +219,12 @@ if (isset($_GET['id'])) {
                                 </table>
                             </div>
                         <?php else : ?>
-                            <div class="bg-white shadow-md p-4 rounded-md mt-4">
+                            <div class="bg-white shadow-lg p-4 rounded-md mt-4">
                                 <p>No classes offer this subject.</p>
                             </div>
                         <?php endif; ?>
                     <?php else : ?>
-                        <div class="bg-white shadow-md p-4 rounded-md">
+                        <div class="bg-white shadow-lg p-4 rounded-md">
                             <p>No subject data available.</p>
                         </div>
                     <?php endif; ?>

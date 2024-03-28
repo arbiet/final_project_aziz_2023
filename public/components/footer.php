@@ -1,4 +1,4 @@
-        <footer class="bg-gray-800 text-gray-400 py-4 shadow-md mt-auto sticky bottom-0 border-t border-gray-700">
+        <footer class="bg-gray-800 text-gray-400 py-4 shadow-lg mt-auto sticky bottom-0 border-t border-gray-700">
             <div class="container mx-auto text-center text-sm">
                 <p>&copy; 2023 <?php echo $baseTitle; ?>. All rights reserved.</p>
             </div>

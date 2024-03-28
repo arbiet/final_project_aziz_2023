@@ -1,4 +1,4 @@
-<div class="bg-white rounded p-4 shadow-md mb-4">
+<div class="bg-white rounded p-4 shadow-lg mb-4">
     <h1 class="text-3xl font-semibold mb-4">Pengenalan</h1>
     <h2 class="text-2xl font-semibold mb-2">A. Pengertian Cisco Packet Tracer</h2>
     <img src="../materials_data/5_A)PengertianCiscoPacketTracer/logo.jpg" alt="Cisco Packet Tracer" class="w-1/4 mx-auto mt-4">

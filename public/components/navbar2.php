@@ -1,5 +1,5 @@
 <!-- navbar -->
-<div class="py-2 px-6 bg-[#f8f4f3] flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
+<div class="py-2 px-6 bg-[#f8f4f3] flex items-center shadow-lg shadow-black/5 sticky top-0 left-0 z-30">
             <button type="button" class="text-lg text-gray-900 font-semibold sidebar-toggle">
                 <i class="ri-menu-line"></i>
             </button>
@@ -27,7 +27,7 @@
                 <button type="button" class="dropdown-toggle text-gray-400 mr-4 w-8 h-8 rounded flex items-center justify-center hover:text-gray-600">
                     <i class="fa-regular fa-circle-question text-xl text-gray-600 mr-2"></i>
                 </button>
-                <div class="dropdown-menu shadow-md shadow-black/5 z-30 hidden max-w-xs w-full bg-white rounded-md border border-gray-100">
+                <div class="dropdown-menu shadow-lg shadow-black/5 z-30 hidden max-w-xs w-full bg-white rounded-md border border-gray-100">
                     <div class="flex items-center px-4 pt-4 border-b border-b-gray-100 notification-tab">
                         <?php foreach ($user_tutorials as $key => $tutorials): ?>
                             <button type="button" data-tab="notification" data-tab-page="<?php echo $key; ?>" class="text-gray-400 font-medium text-[13px] hover:text-gray-600 border-b-2 border-b-transparent mr-4 pb-1"><?php echo ucfirst($key); ?></button>
@@ -98,7 +98,7 @@
                             </p>
                         </div>                
                     </button>
-                    <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
+                    <ul class="dropdown-menu shadow-lg shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
                         <li>
                             <a href="<?php echo $baseUrl; ?>public/profiles/profile.php" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profile</a>
                         </li>

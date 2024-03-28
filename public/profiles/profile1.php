@@ -128,14 +128,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include('../components/navbar.php'); ?>
     <!-- End Top Navbar -->
     <!-- Main Content -->
-    <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
+    <div class="flex-grow bg-gray-50 flex flex-row shadow-lg">
         <!-- Sidebar -->
         <?php include('../components/sidebar.php'); ?>
         <!-- End Sidebar -->
 
         <!-- Main Content -->
         <main class=" bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
-            <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
+            <div class="flex items-start justify-start p-6 shadow-lg m-4 flex-1 flex-col">
                 <h1 class="text-3xl text-gray-800 font-semibold border-b border-gray-200 w-full">Profile</h1>
                 <h2 class="text-xl text-gray-800 font-semibold">Welcome back, <?php echo $_SESSION['FullName']; ?>!</h2>
                 <p class="text-gray-600">Profile information.</p>

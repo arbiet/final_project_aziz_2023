@@ -15,14 +15,14 @@ $errors = array();
   <?php include('../components/navbar.php'); ?>
   <!-- End Top Navbar -->
   <!-- Main Content -->
-  <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
+  <div class="flex-grow bg-gray-50 flex flex-row shadow-lg">
     <!-- Sidebar -->
     <?php include('../components/sidebar.php'); ?>
     <!-- End Sidebar -->
 
     <!-- Main Content -->
     <main class="bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
-      <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
+      <div class="flex items-start justify-start p-6 shadow-lg m-4 flex-1 flex-col">
         <!-- Header Content -->
         <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
           <h1 class="text-3xl text-gray-800 font-semibold w-full">Materials</h1>

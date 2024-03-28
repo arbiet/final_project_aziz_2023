@@ -65,7 +65,7 @@ if (isset($_GET['id'])) {
     <!-- Content -->
     <div class="p-4">
         <!-- Main Content -->
-            <div class="flex items-start justify-start p-6 shadow-md m-4 bg-white flex-1 flex-col rounded-md">
+            <div class="flex items-start justify-start p-6 shadow-lg m-4 bg-white flex-1 flex-col rounded-md">
         <!-- Header Content -->
         <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
           <h1 class="text-3xl text-gray-800 font-semibold w-full">Class Details</h1>
@@ -89,7 +89,7 @@ if (isset($_GET['id'])) {
           <!-- End Navigation -->
           <!-- Class Details -->
           <?php if (!empty($classData)) : ?>
-            <div class="bg-white shadow-md p-4 rounded-md">
+            <div class="bg-white shadow-lg p-4 rounded-md">
               <h3 class="text-lg font-semibold text-gray-800">Class Information</h3>
               <p><strong>Class Name:</strong> <?php echo $classData['ClassName']; ?></p>
               <p><strong>Education Level:</strong> <?php echo $classData['EducationLevel']; ?></p>
@@ -102,7 +102,7 @@ if (isset($_GET['id'])) {
 
             <!-- Associated Subjects -->
             <?php if (!empty($subjectsData)) : ?>
-              <div class="mt-4 bg-white shadow-md p-4 rounded-md">
+              <div class="mt-4 bg-white shadow-lg p-4 rounded-md">
                 <h3 class="text-lg font-semibold text-gray-800">Subjects in this Class</h3>
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-100">
@@ -145,14 +145,14 @@ if (isset($_GET['id'])) {
                 </table>
               </div>
             <?php else : ?>
-              <div class="bg-white shadow-md p-4 rounded-md mt-4">
+              <div class="bg-white shadow-lg p-4 rounded-md mt-4">
                 <p>No subjects in this class.</p>
               </div>
             <?php endif; ?>
 
             <!-- List of Students in the Class -->
             <?php if (!empty($studentsData)) : ?>
-              <div class="mt-4 bg-white shadow-md p-4 rounded-md">
+              <div class="mt-4 bg-white shadow-lg p-4 rounded-md">
                 <h3 class="text-lg font-semibold text-gray-800">Students in this Class</h3>
                 <table class="min-w-full divide-y divide-gray-200">
                   <thead class="bg-gray-100">
@@ -191,13 +191,13 @@ if (isset($_GET['id'])) {
                 </table>
               </div>
             <?php else : ?>
-              <div class="bg-white shadow-md p-4 rounded-md mt-4">
+              <div class="bg-white shadow-lg p-4 rounded-md mt-4">
                 <p>No students in this class.</p>
               </div>
             <?php endif; ?>
 
           <?php else : ?>
-            <div class="bg-white shadow-md p-4 rounded-md">
+            <div class="bg-white shadow-lg p-4 rounded-md">
               <p>No class data available.</p>
             </div>
           <?php endif; ?>

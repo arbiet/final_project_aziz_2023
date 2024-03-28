@@ -35,12 +35,12 @@ if (isset($_GET['id'])) {
     <?php include('../components/navbar.php'); ?>
     <!-- End Top Navbar -->
     <!-- Main Content -->
-    <div class="flex-grow bg-gray-50 flex flex-row shadow-md">
+    <div class="flex-grow bg-gray-50 flex flex-row shadow-lg">
         <!-- Sidebar -->
         <?php include('../components/sidebar.php'); ?>
         <!-- End Sidebar -->
         <main class="bg-gray-50 flex flex-col flex-1 overflow-y-scroll h-screen flex-shrink-0 sc-hide pb-40">
-            <div class="flex items-start justify-start p-6 shadow-md m-4 flex-1 flex-col">
+            <div class="flex items-start justify-start p-6 shadow-lg m-4 flex-1 flex-col">
                 <!-- Header Content -->
                 <div class="flex flex-row justify-between items-center w-full border-b-2 border-gray-600 mb-2 pb-2">
                     <h1 class="text-3xl text-gray-800 font-semibold w-full">User Details</h1>
@@ -65,7 +65,7 @@ if (isset($_GET['id'])) {
                     <!-- User Details -->
                     <?php if (!empty($userData)) : ?>
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white shadow-md p-4 rounded-md">
+                            <div class="bg-white shadow-lg p-4 rounded-md">
                                 <h3 class="text-lg font-semibold text-gray-800">User Information</h3>
                                 <p><strong>Username:</strong> <?php echo $userData['Username']; ?></p>
                                 <p><strong>Email:</strong> <?php echo $userData['Email']; ?></p>
@@ -73,7 +73,7 @@ if (isset($_GET['id'])) {
                                 <p><strong>Date of Birth:</strong> <?php echo $userData['DateOfBirth']; ?></p>
                                 <p><strong>Gender:</strong> <?php echo $userData['Gender']; ?></p>
                             </div>
-                            <div class="bg-white shadow-md p-4 rounded-md">
+                            <div class="bg-white shadow-lg p-4 rounded-md">
                                 <h3 class="text-lg font-semibold text-gray-800">Contact Information</h3>
                                 <p><strong>Address:</strong> <?php echo $userData['Address']; ?></p>
                                 <p><strong>Phone Number:</strong> <?php echo $userData['PhoneNumber']; ?></p>
@@ -91,7 +91,7 @@ if (isset($_GET['id'])) {
                             </a>
                         </div>
                     <?php else : ?>
-                        <div class="bg-white shadow-md p-4 rounded-md">
+                        <div class="bg-white shadow-lg p-4 rounded-md">
                             <p>No user data available.</p>
                         </div>
                     <?php endif; ?>

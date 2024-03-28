@@ -53,17 +53,33 @@ if (isset($_FILES['profile_image'])) {
         insertLogActivity($conn, $currentUserID, $activityDescription);
 
         // Display a success message using SweetAlert2
-        echo "<script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil!',
-                        text: 'Gambar profil berhasil diunggah.',
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(function() {
-                        window.location.href = 'profile.php'; // Redirect to the profile page
-                    });
-                </script>";
+        echo "<script>";
+        // Check if StudentID is not null
+        if ($_SESSION['StudentID'] != null) {
+            // Redirect to profile_student.php jika sesi StudentID tidak null
+            echo "Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Gambar profil berhasil diunggah.',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                window.location.href = 'profile_student.php'; // Redirect to the profile_student page
+            });";
+        } else {
+            // Redirect to profile.php jika sesi StudentID null
+            echo "Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Gambar profil berhasil diunggah.',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                window.location.href = 'profile.php'; // Redirect to the profile page
+            });";
+        }
+        echo "</script>";
+
         exit();
       } else {
         $errors[] = 'Gagal mengupdate URL gambar profil.';
