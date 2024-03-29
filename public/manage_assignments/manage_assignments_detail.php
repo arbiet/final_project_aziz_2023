@@ -132,6 +132,9 @@ if (isset($_GET['id'])) {
                                         </form>
                                     </div>
                                 </div>
+                                <button onclick="printReport()" class="bg-gray-500 text-white px-4 py-2 rounded">
+                                    <i class="fas fa-print"></i> Print Report
+                                </button>
                             </div>
                         <?php if (!empty($submissionsData)) : ?>
                             <div class="grid grid-cols-1 gap-4">
@@ -173,6 +176,7 @@ if (isset($_GET['id'])) {
                                             <button class="bg-blue-500 text-white px-2 py-1 rounded mr-2" onclick="viewSubmission(<?php echo $submission['SubmissionID']; ?>, '<?php echo $submission['SubmissionFile']; ?>')">
                                                 <i class="fas fa-eye"></i> View
                                             </button>
+                                            
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -196,6 +200,18 @@ if (isset($_GET['id'])) {
             </div>
     </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function printReport() {
+        // Dapatkan nilai filter kelas yang dipilih
+        var selectedClass = '<?php echo isset($_GET["class"]) ? $_GET["class"] : ""; ?>';
+        // Kirim permintaan cetak ke skrip PHP yang akan membuat PDF dengan nilai filter kelas yang dipilih
+        window.open('print_report.php?id=<?php echo $assignmentID; ?>&class=' + selectedClass, '_blank');
+    }
+</script>
+
+
+
+
 <script>
     function viewSubmission(submissionID, submissionFile) {
         // Cek apakah file adalah PDF atau bukan
@@ -236,45 +252,50 @@ if (isset($_GET['id'])) {
     }
 
     function provideDelete(submissionID) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'You won\'t be able to revert this!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Perform an AJAX request to delete the submission
-                $.ajax({
-                    type: 'GET',
-                    url: `../manage_assignments/manage_submissions_delete.php?assignment_id=<?php echo $assignmentID; ?>&submission_id=${submissionID}`,
-                    dataType: 'json', // Specify JSON dataType
-                    success: function (response) {
-                        if (response.success) {
-                            // Reload the page after successful deletion
-                            location.reload();
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Deletion Failed',
-                                text: response.error || 'There was an error deleting the submission.',
-                            });
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error:', error);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Perform an AJAX request to delete the grade
+            $.ajax({
+                type: 'GET',
+                url: `../manage_assignments/manage_assignments_delete_grade.php?submission_id=${submissionID}`,
+                dataType: 'json', // Specify JSON dataType
+                success: function(response) {
+                    if (response.success) {
+                        // Show success message
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deletion Successful',
+                            text: 'The grade has been deleted successfully.',
+                            onClose: () => {
+                                // Reload the page after successful deletion
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        // Show error message from server
                         Swal.fire({
                             icon: 'error',
                             title: 'Deletion Failed',
-                            text: 'There was an error deleting the submission.',
+                            text: response.error || 'There was an error deleting the grade.',
                         });
                     }
-                });
-            }
-        });
-    }
+                },
+                error: function(xhr, status, error) {
+                    location.reload();
+                }
+            });
+        }
+    });
+}
+
     function provideFeedback(submissionID) {
         const gradeElement = document.getElementById(`grade_${submissionID}`);
         const currentGrade = gradeElement ? gradeElement.innerText : '';
