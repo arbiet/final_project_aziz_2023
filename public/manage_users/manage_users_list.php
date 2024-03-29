@@ -112,12 +112,26 @@ $errors = array();
                                             <i class='fas fa-trash mr-2'></i>
                                             <span>Delete</span>
                                         </a>
-                                        <!-- Button to update activation status -->
-                                        <a href="#" onclick="confirmUpdateStatus(<?php echo $row['UserID']; ?>, '<?php echo $row['ActivationStatus']; ?>')" class='bg-purple-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                                        <?php
+                                        // Determine button class and background color based on activation status
+                                        $buttonClass = '';
+                                        $buttonText = '';
+                                        $activationStatus = $row['ActivationStatus'];
+
+                                        if ($activationStatus === 'active') {
+                                            $buttonClass = 'bg-gray-500 hover:bg-gray-700'; // Tombol dinonaktifkan dan background merah
+                                            $buttonText = 'Disabled';
+                                        } else {
+                                            $buttonClass = 'bg-green-500 hover:bg-green-700'; // Tombol aktif dan background hijau
+                                            $buttonText = 'Active';
+                                        }
+                                        ?>
+
+                                        <a href="#" onclick="confirmUpdateStatus(<?php echo $row['UserID']; ?>, '<?php echo $activationStatus; ?>')" class='<?php echo $buttonClass; ?> text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
                                             <i class='fas fa-sync-alt mr-2'></i>
-                                            <span>Active</span>
+                                            <span><?php echo $buttonText; ?></span>
                                         </a>
-                                        <a href="<?php echo $baseUrl; ?>public/manage_users/manage_users_reset_password.php?id=<?php echo $row['UserID']; ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm">
+                                        <a href="<?php echo $baseUrl; ?>public/manage_users/manage_users_reset_password.php?id=<?php echo $row['UserID']; ?>" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm">
                                             <i class="fas fa-key mr-2"></i>
                                             <span>Reset Password</span>
                                         </a>

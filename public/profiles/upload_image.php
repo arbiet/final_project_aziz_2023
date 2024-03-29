@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 
 // Check if the user is logged in
 if (!isset($_SESSION['UserID'])) {
@@ -55,7 +55,7 @@ if (isset($_FILES['profile_image'])) {
         // Display a success message using SweetAlert2
         echo "<script>";
         // Check if StudentID is not null
-        if ($_SESSION['StudentID'] != null) {
+        if (isset($_SESSION['StudentID'])) {
             // Redirect to profile_student.php jika sesi StudentID tidak null
             echo "Swal.fire({
                 icon: 'success',
@@ -75,7 +75,7 @@ if (isset($_FILES['profile_image'])) {
                 showConfirmButton: false,
                 timer: 1500
             }).then(function() {
-                window.location.href = 'profile.php'; // Redirect to the profile page
+                window.location.href = 'profile.php'; // Redirect to the login page
             });";
         }
         echo "</script>";
@@ -105,4 +105,4 @@ if (!empty($errors)) {
     </script>";
 }
 
-include('../components/footer.php');
+include('../components/footer2.php');

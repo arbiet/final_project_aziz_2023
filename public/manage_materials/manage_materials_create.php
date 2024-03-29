@@ -71,16 +71,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // File upload successful, update the $link variable with the file path
                     $link = '../materials_data/' . $new_file_name;
 
-                    $query = "INSERT INTO Materials (SubjectID, TitleMaterial, Type, Content, Link, Sequence)
-                  VALUES (?, ?, ?, ?, ?, ?)";
+                    // Check if a video file was uploaded
+                    if (!empty($_FILES['video_upload']['name'])) {
+                        $video_tmp = $_FILES['video_upload']['tmp_name'];
+                        $video_name = $_FILES['video_upload']['name'];
+                        $video_destination = '../materials_data/'.$title_material.'/'.'video/' . $video_name;
+
+                        // Create the directory if it does not exist
+                        $video_directory = dirname($video_destination);
+                        if (!file_exists($video_directory)) {
+                            mkdir($video_directory, 0777, true);
+                        }
+
+                        // Move the uploaded video to the destination folder
+                        if (move_uploaded_file($video_tmp, $video_destination)) {
+                            $video_link = 'materials_data/'.$title_material.'/'.'video/' . $video_name;
+                        } else {
+                            $errors['video_upload'] = "Video upload failed. Check directory permissions and file name validity.";
+                        }
+                    } else {
+                        $video_link = NULL; // If no video uploaded, set the link to empty
+                    }
+
+                    $query = "INSERT INTO Materials (SubjectID, TitleMaterial, Type, Content, Link, Video, Sequence) VALUES (?, ?, ?, ?, ?, ?, ?)";
                     $stmt = $conn->prepare($query);
                     $stmt->bind_param(
-                        "ssssss",
+                        "sssssss",
                         $subject_id,
                         $title_material,
                         $type,
                         $content,  // Use content as the value to be inserted into the database
                         $link,
+                        $video_link,
                         $sequence
                     );
 
@@ -126,16 +148,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // If there are no errors, insert the data into the database
         if (empty($errors)) {
-            $query = "INSERT INTO Materials (SubjectID, TitleMaterial, Type, Content, Link, Sequence)
-                VALUES (?, ?, ?, ?, ?, ?)";
+            // Check if a video file was uploaded
+            if (!empty($_FILES['video_upload']['name'])) {
+                $video_tmp = $_FILES['video_upload']['tmp_name'];
+                $video_name = $_FILES['video_upload']['name'];
+                $video_destination = '../materials_data/'.$title_material.'/'.'video/' . $video_name;
+
+                // Create the directory if it does not exist
+                $video_directory = dirname($video_destination);
+                if (!file_exists($video_directory)) {
+                    mkdir($video_directory, 0777, true);
+                }
+
+                // Move the uploaded video to the destination folder
+                if (move_uploaded_file($video_tmp, $video_destination)) {
+                    $video_link = 'materials_data/'.$title_material.'/'.'video/' . $video_name;
+                } else {
+                    $errors['video_upload'] = "Video upload failed. Check directory permissions and file name validity.";
+                }
+            } else {
+                $video_link = NULL; // If no video uploaded, set the link to empty
+            }
+
+            $query = "INSERT INTO Materials (SubjectID, TitleMaterial, Type, Content, Link, Video, Sequence)
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
-                "ssssss",
+                "sssssss",
                 $subject_id,
                 $title_material,
                 $type,
                 $content,  // Use content as the value to be inserted into the database
                 $link,
+                $video_link,
                 $sequence
             );
 
@@ -281,6 +326,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <?php echo $errors['title_material']; ?>
                             </p>
                         <?php endif; ?>
+
+                        <div id="upload-video">
+                            <label for="video_upload" class="block font-semibold text-gray-800 mt-2 mb-2">Upload Video (Optional)</label>
+                            <input type="file" id="video_upload" name="video_upload" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600">
+                        </div>
 
                         <!-- Material Option -->
                         <label for="material_option" class="block font-semibold text-gray-800 mt-2 mb-2">Material Option <span class="text-red-500">*</span></label>

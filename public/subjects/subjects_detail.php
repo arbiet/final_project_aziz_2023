@@ -72,6 +72,8 @@
               <main class="container mx-auto mt-4 p-6">
                 <div>
                   <h2 class="text-3xl font-semibold mb-4"><?php echo $subjectData['SubjectName']; ?></h2>
+                   <!-- Video -->
+                   
                   <?php if (isset($_GET['material'])) : ?>
                     <?php $material_id = $_GET['material']; ?>
                     <?php if ($material_id === 'start') : ?>
@@ -101,7 +103,16 @@
                       $materialResult = mysqli_query($conn, $materialQuery);
 
                       if ($materialResult && mysqli_num_rows($materialResult) > 0) {
-                        $materialData = mysqli_fetch_assoc($materialResult);
+                      $materialData = mysqli_fetch_assoc($materialResult);
+                      ?>
+                        <div class="relative w-full md:w-md mb-4 md:mt-2">
+                            <video id="floating-video" class="w-full md:w-md rounded max-w-3xl" controls>
+                                <source src="<?= '../'.$materialData['Video']; ?>" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+
+                      <?php
                         include($materialData['Link']); // Include the material file
                       } else {
                         echo "Material not found or invalid ID.";
@@ -158,4 +169,46 @@
         </div>
     </div>
 </main>
+<script>
+    window.addEventListener('scroll', function () {
+        var video = document.getElementById('floating-video');
+        if (window.scrollY > 100) {
+            video.classList.add('fixed', 'top-20', 'right-20', 'w-96', 'z-40');
+            video.classList.remove('static', 'w-full');
+        } else {
+            video.classList.remove('fixed', 'top-20', 'right-20', 'w-96', 'z-40');
+            video.classList.add('static', 'w-full');
+        }
+    });
+
+    var isDragging = false;
+    var initialX;
+    var initialY;
+
+    document.getElementById('floating-video').addEventListener('mousedown', function (e) {
+        isDragging = true;
+        initialX = e.clientX;
+        initialY = e.clientY;
+        video.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', function (e) {
+        if (isDragging) {
+            var dx = e.clientX - initialX;
+            var dy = e.clientY - initialY;
+            var rect = video.getBoundingClientRect();
+            var newTop = rect.top + dy;
+            var newRight = rect.right - dx;
+            video.style.top = newTop + 'px';
+            video.style.right = newRight + 'px';
+            initialX = e.clientX;
+            initialY = e.clientY;
+        }
+    });
+
+    document.addEventListener('mouseup', function () {
+        isDragging = false;
+        video.style.cursor = 'grab';
+    });
+</script>
 <?php include('../components/footer2.php'); ?>

@@ -52,143 +52,115 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Check if user exists
         if ($result->num_rows === 1) {
-            // Fetch user data
             $row = $result->fetch_assoc();
-            $_SESSION['UserID'] = $row['UserID'];
-            $_SESSION['Username'] = $row['Username'];
-            $_SESSION['RoleID'] = $row['RoleID'];
-            $_SESSION['Email'] = $row['Email'];
-            $_SESSION['FullName'] = $row['FullName'];
-            $_SESSION['ProfilePictureURL'] = $row['ProfilePictureURL'];
-
-            // If user has role ID 2, fetch TeacherID from Teachers table
-            if ($row['RoleID'] == 2) {
-                $query_teacher = "SELECT TeacherID FROM Teachers WHERE UserID = ?";
-                $stmt_teacher = $conn->prepare($query_teacher);
-                $stmt_teacher->bind_param('i', $row['UserID']); // Assuming UserID is an integer
-                $stmt_teacher->execute();
-                $result_teacher = $stmt_teacher->get_result();
-
-                if ($result_teacher->num_rows === 1) {
-                    $teacher_row = $result_teacher->fetch_assoc();
-                    $_SESSION['TeacherID'] = $teacher_row['TeacherID'];
-                } else {
-                    $_SESSION['TeacherID'] = NULL; // No TeacherID found for the user
-                }
+            // print_r($row);
+            // Check activation status
+            if ($row['ActivationStatus'] !== 'active' ) {
+                // Display SweetAlert for inactive account
+                echo '<script>
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Inactive Account",
+                            text: "Please meet an admin for account activation.",
+                            showConfirmButton: true
+                        }).then(function() {
+                            window.location.href = "login.php";
+                        });
+                    </script>';
             } else {
-                $_SESSION['TeacherID'] = NULL; // User does not have role ID 2
-            }
+                // Fetch user data
+                $_SESSION['UserID'] = $row['UserID'];
+                $_SESSION['Username'] = $row['Username'];
+                $_SESSION['RoleID'] = $row['RoleID'];
+                $_SESSION['Email'] = $row['Email'];
+                $_SESSION['FullName'] = $row['FullName'];
+                $_SESSION['ProfilePictureURL'] = $row['ProfilePictureURL'];
 
-            // Update LastLogin in the Users table
-            $activityDescription = 'User logged in';
-            $currentUserID = $_SESSION['UserID'];
-            insertLogActivity($conn, $currentUserID, $activityDescription);
+                // If user has role ID 2, fetch TeacherID from Teachers table
+                if ($row['RoleID'] == 2) {
+                    $query_teacher = "SELECT TeacherID FROM Teachers WHERE UserID = ?";
+                    $stmt_teacher = $conn->prepare($query_teacher);
+                    $stmt_teacher->bind_param('i', $row['UserID']); // Assuming UserID is an integer
+                    $stmt_teacher->execute();
+                    $result_teacher = $stmt_teacher->get_result();
 
-            $updateLastLoginQuery = "UPDATE Users SET LastLogin = NOW() WHERE UserID = ?";
-            $updateLastLoginStmt = $conn->prepare($updateLastLoginQuery);
-            $updateLastLoginStmt->bind_param('i', $currentUserID);
-            $updateLastLoginStmt->execute();
-            $updateLastLoginStmt->close();
+                    if ($result_teacher->num_rows === 1) {
+                        $teacher_row = $result_teacher->fetch_assoc();
+                        $_SESSION['TeacherID'] = $teacher_row['TeacherID'];
+                    } else {
+                        $_SESSION['TeacherID'] = NULL; // No TeacherID found for the user
+                    }
+                } else {
+                    $_SESSION['TeacherID'] = NULL; // User does not have role ID 2
+                }
 
-            // Perform login actions
-            $roleID = $row['RoleID'];
+                // Update LastLogin in the Users table
+                $activityDescription = 'User logged in';
+                $currentUserID = $_SESSION['UserID'];
+                insertLogActivity($conn, $currentUserID, $activityDescription);
 
-            if ($roleID == 1) {
-                // Admin login, redirect to admin dashboard
-                echo '<script>
-            Swal.fire({
-                icon: "success",
-                title: "Success!",
-                text: "Admin login successful.",
-                showConfirmButton: false,
-                timer: 1500
-            }).then(function() {
-                window.location.href = "dashboard_admin.php";
-            });
-        </script>';
-            } elseif ($roleID == 2) {
-                // Teacher login, redirect to teacher dashboard
-                echo '<script>
-            Swal.fire({
-                icon: "success",
-                title: "Success!",
-                text: "Teacher login successful.",
-                showConfirmButton: false,
-                timer: 1500
-            }).then(function() {
-                window.location.href = "dashboard_teacher.php";
-            });
-        </script>';
-            } elseif ($roleID == 3) {
-                // Student login, redirect to student dashboard
-                echo '<script>
-            Swal.fire({
-                icon: "success",
-                title: "Success!",
-                text: "Student login successful.",
-                showConfirmButton: false,
-                timer: 1500
-            }).then(function() {
-                window.location.href = "dashboard_student.php";
-            });
-        </script>';
-            }
-            // Perform login actions
-            $roleID = $row['RoleID'];
+                $updateLastLoginQuery = "UPDATE Users SET LastLogin = NOW() WHERE UserID = ?";
+                $updateLastLoginStmt = $conn->prepare($updateLastLoginQuery);
+                $updateLastLoginStmt->bind_param('i', $currentUserID);
+                $updateLastLoginStmt->execute();
+                $updateLastLoginStmt->close();
 
-            if ($roleID == 1) {
-                // Admin login, redirect to admin dashboard
-                echo '<script>
-            Swal.fire({
-                icon: "success",
-                title: "Success!",
-                text: "Admin login successful.",
-                showConfirmButton: false,
-                timer: 1500
-            }).then(function() {
-                window.location.href = "dashboard_admin.php";
-            });
-        </script>';
-            } elseif ($roleID == 2) {
-                // Teacher login, redirect to teacher dashboard
-                echo '<script>
-            Swal.fire({
-                icon: "success",
-                title: "Success!",
-                text: "Teacher login successful.",
-                showConfirmButton: false,
-                timer: 1500
-            }).then(function() {
-                window.location.href = "dashboard_teacher.php";
-            });
-        </script>';
-            } elseif ($roleID == 3) {
-                // Student login, redirect to student dashboard
-                echo '<script>
-            Swal.fire({
-                icon: "success",
-                title: "Success!",
-                text: "Student login successful.",
-                showConfirmButton: false,
-                timer: 1500
-            }).then(function() {
-                window.location.href = "dashboard_student.php";
-            });
-        </script>';
+                // Perform login actions
+                $roleID = $row['RoleID'];
+
+                if ($roleID == 1) {
+                    // Admin login, redirect to admin dashboard
+                    echo '<script>
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: "Admin login successful.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function() {
+                            window.location.href = "dashboard_admin.php";
+                        });
+                    </script>';
+                } elseif ($roleID == 2) {
+                    // Teacher login, redirect to teacher dashboard
+                    echo '<script>
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: "Teacher login successful.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function() {
+                            window.location.href = "dashboard_teacher.php";
+                        });
+                    </script>';
+                } elseif ($roleID == 3) {
+                    // Student login, redirect to student dashboard
+                    echo '<script>
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success!",
+                            text: "Student login successful.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function() {
+                            window.location.href = "dashboard_student.php";
+                        });
+                    </script>';
+                }
             }
         } else {
             $errors['login_failed'] = 'Invalid username or password.';
-
             // Trigger a SweetAlert for failed login
             echo '<script>
-            Swal.fire({
-                icon: "error",
-                title: "Error!",
-                text: "Invalid username or password.",
-                showConfirmButton: false,
-                timer: 1500
-            });
-          </script>';
+                Swal.fire({
+                    icon: "error",
+                    title: "Error!",
+                    text: "Invalid username or password.",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            </script>';
         }
 
         // Close the statement

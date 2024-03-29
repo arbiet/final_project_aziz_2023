@@ -23,6 +23,9 @@
     }
     ?>
     <script type="text/javascript" src="../../module/ckeditor/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/draggable/2.0.0-beta.11/draggable.bundle.legacy.min.js"></script>
 </head>
 
 <body class="text-gray-800 font-inter">

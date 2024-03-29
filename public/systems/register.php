@@ -98,18 +98,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param('sssssss', $user_id, $username, $email, $hashed_password, $default_role, $fullname, $default_profilepictureult);
 
         if ($stmt->execute()) {
-            // Registration successful, trigger SweetAlert
-            echo '<script>
+
+            // Get additional inputs for student registration
+            $student_number = $_POST['student_number'] ?? '-';
+            $religion = $_POST['religion'] ?? '-';
+            $parent_fullname = $_POST['parent_fullname'] ?? '-';
+            $parent_address = $_POST['parent_address'] ?? '-';
+            $parent_phone = $_POST['parent_phone'] ?? '-';
+            $parent_email = $_POST['parent_email'] ?? '-';
+            $class_id = $_POST['class']; // Assuming class ID is submitted via the form
+
+            // Prepare and execute a query to insert a new student record
+            $query = "INSERT INTO students (StudentNumber, Religion, ParentGuardianFullName, ParentGuardianAddress, ParentGuardianPhoneNumber, ParentGuardianEmail, ClassID, UserID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('ssssssss', $student_number, $religion, $parent_fullname, $parent_address, $parent_phone, $parent_email, $class_id, $user_id);
+
+            if ($stmt->execute()) {
+                // Registration successful, trigger SweetAlert
+                echo '<script>
+                        Swal.fire({
+                            icon: "success",
+                            title: "Registration Successful!",
+                            text: "You can now login.",
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(function(){
+                            window.location.href = "../systems/login.php";
+                        });
+                      </script>';
+            } else {
+                $errors['registration_failed'] = 'Failed to register user.';
+                // Registration failed, trigger SweetAlert for error
+                echo '<script>
                     Swal.fire({
-                        icon: "success",
-                        title: "Registration Successful!",
-                        text: "You can now login.",
+                        icon: "error",
+                        title: "Registration Failed!",
+                        text: "Failed to register user. Please try again later.",
                         showConfirmButton: false,
                         timer: 2000
-                    }).then(function(){
-                        window.location.href = "../systems/login.php";
                     });
                   </script>';
+            }
         } else {
             $errors['registration_failed'] = 'Failed to register user.';
             // Registration failed, trigger SweetAlert for error

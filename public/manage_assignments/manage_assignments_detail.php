@@ -132,12 +132,8 @@ if (isset($_GET['id'])) {
                                         </form>
                                     </div>
                                 </div>
-                                <!-- Add Submission button on the right -->
-                                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onclick="addSubmission()">
-                                    <i class="fas fa-plus"></i> Add Submission
-                                </button>
                             </div>
-                            <?php if (!empty($submissionsData)) : ?>
+                        <?php if (!empty($submissionsData)) : ?>
                             <div class="grid grid-cols-1 gap-4">
                                 <?php foreach ($submissionsData as $submission) : ?>
                                     <div class="border rounded-md p-4 mb-4 <?php echo empty($submission['Grade']) ? 'bg-yellow-100' : 'bg-white'; ?>">
@@ -158,18 +154,25 @@ if (isset($_GET['id'])) {
                                             <span><?php echo $submission['SubmissionText']; ?></span>
                                         </div>
                                         <div class="flex items-center mb-2">
+                                            <span class="font-semibold mr-2">Submission File:</span>
+                                            <span><?php echo $submission['SubmissionFile']; ?></span>
+                                        </div>
+                                        <div class="flex items-center mb-2">
                                             <span class="font-semibold mr-2">Grade:</span>
                                             <span id="grade_<?php echo $submission['SubmissionID']; ?>"><?php echo $submission['Grade']; ?></span>
                                         </div>
                                         <div class="flex items-center">
                                             <button class="bg-blue-500 text-white px-2 py-1 rounded mr-2" onclick="provideFeedback(<?php echo $submission['SubmissionID']; ?>)">
-                                                Feedback
+                                                <i class="fas fa-comment"></i> Feedback
                                             </button>
                                             <?php if ($submission['Grade'] !== NULL) : ?>
                                                 <button class="bg-red-500 text-white px-2 py-1 rounded mr-2" onclick="provideDelete(<?php echo $submission['SubmissionID']; ?>)">
-                                                    Delete Grade
+                                                    <i class="fas fa-trash"></i> Delete Grade
                                                 </button>
                                             <?php endif; ?>
+                                            <button class="bg-blue-500 text-white px-2 py-1 rounded mr-2" onclick="viewSubmission(<?php echo $submission['SubmissionID']; ?>, '<?php echo $submission['SubmissionFile']; ?>')">
+                                                <i class="fas fa-eye"></i> View
+                                            </button>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -194,6 +197,44 @@ if (isset($_GET['id'])) {
     </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    function viewSubmission(submissionID, submissionFile) {
+        // Cek apakah file adalah PDF atau bukan
+        var extension = submissionFile.split('.').pop().toLowerCase();
+        if (extension === 'pdf') {
+            // Jika file PDF, buka dengan SweetAlert
+            Swal.fire({
+                title: 'View Submission',
+                html: 'This submission is in PDF format. Do you want to view it?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, View',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Tambahkan logika untuk menampilkan file PDF di sini
+                    // Misalnya, jika ingin membuka file di jendela baru:
+                    window.open(submissionFile, '_blank');
+                }
+            });
+        } else {
+            // Jika bukan file PDF, langsung unduh dengan SweetAlert
+            Swal.fire({
+                title: 'Download Submission',
+                html: 'This submission is not in PDF format. Do you want to download it?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Download',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Tambahkan logika untuk mengunduh file di sini
+                    // Misalnya, jika ingin mengarahkan pengguna ke file untuk diunduh:
+                    window.location.href = submissionFile;
+                }
+            });
+        }
+    }
+
     function provideDelete(submissionID) {
         Swal.fire({
             title: 'Are you sure?',
