@@ -80,7 +80,7 @@
                     <button type="button" class="dropdown-toggle flex items-center">
                         <div class="flex-shrink-0 w-12 relative">
                             <div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
-                                <img class="w-12 h-12 rounded-full" src="<?php echo $baseLogoUrl; ?>" alt="Logo"/>
+                                <img class="w-12 h-12 rounded-full" src="<?php echo '../static/image/profile/'.$_SESSION['ProfilePictureURL']; ?>" alt="Logo"/>
                             </div>
                         </div>
                         <div class="p-2 md:block text-left">

@@ -59,6 +59,7 @@
         <div class="dropdown ml-3">
             <button type="button" class="dropdown-toggle flex items-center" aria-haspopup="true" aria-expanded="false">
                 <div class="h-8 w-8 relative bg-white rounded-full">
+                <img class="w-8 h-8 rounded-full" src="<?php echo '../static/image/profile/'.$_SESSION['ProfilePictureURL']; ?>" alt="Logo"/>
                 </div>
                 <div class="p-2 md:block text-left">
                     <h2 class="text-sm font-semibold text-white"><?php echo $_SESSION['FullName']; ?></h2>

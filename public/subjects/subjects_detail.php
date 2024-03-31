@@ -73,7 +73,6 @@
                 <div>
                   <h2 class="text-3xl font-semibold mb-4"><?php echo $subjectData['SubjectName']; ?></h2>
                    <!-- Video -->
-                   
                   <?php if (isset($_GET['material'])) : ?>
                     <?php $material_id = $_GET['material']; ?>
                     <?php if ($material_id === 'start') : ?>
@@ -81,20 +80,58 @@
                         <i class="fas fa-play-circle text-5xl text-blue-500 mb-4"></i>
                         <p class="text-2xl font-semibold">Welcome to the Beginning</p>
                         <p class="text-lg">You are about to start your exciting journey in <?= $subjectData['SubjectName']; ?>.</p>
-                        <p class="text-lg">Subject Name: <?= $subjectData['SubjectName']; ?></p>
-                        <p class="text-lg">Teacher: <?= $subjectData['TeacherName']; ?></p>
-                        <p class="text-lg">Difficulty: <?= $subjectData['DifficultyLevel']; ?></p>
-                        <p class="text-lg">Teaching Method: <?= $subjectData['TeachingMethod']; ?></p>
+                        <table class="table-auto">
+                          <tr>
+                            <td class="py-1"><p class="text-gray-500">Subject Name</p></td>
+                            <td class="py-1"><p class="text-gray-500">:</p></td>
+                            <td class="py-1"><p class="text-lg"><?php echo $subjectData['SubjectName']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td class="py-1"><p class="text-gray-500">Teacher</p></td>
+                            <td class="py-1"><p class="text-gray-500">:</p></td>
+                            <td class="py-1"><p class="text-lg"><?php echo $subjectData['TeacherName']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td class="py-1"><p class="text-gray-500">Difficulty</p></td>
+                            <td class="py-1"><p class="text-gray-500">:</p></td>
+                            <td class="py-1"><p class="text-lg"><?php echo $subjectData['DifficultyLevel']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td class="py-1"><p class="text-gray-500">Method</p></td>
+                            <td class="py-1"><p class="text-gray-500">:</p></td>
+                            <td class="py-1"><p class="text-lg"><?php echo $subjectData['TeachingMethod']; ?></p></td>
+                          </tr>
+                        </table>
+
                       </div>
                     <?php elseif ($material_id === 'end') : ?>
                       <div class="bg-white rounded p-4 shadow relative shadow:md mb-4">
                         <i class="fas fa-stop-circle text-5xl text-red-500 mb-4"></i>
                         <p class="text-2xl font-semibold">Congratulations, You've Finished!</p>
                         <p class="text-lg">You have successfully completed <?= $subjectData['SubjectName']; ?>.</p>
-                        <p class="text-lg">Subject Name: <?= $subjectData['SubjectName']; ?></p>
-                        <p class="text-lg">Teacher: <?= $subjectData['TeacherName']; ?></p>
-                        <p class="text-lg">Difficulty: <?= $subjectData['DifficultyLevel']; ?></p>
-                        <p class="text-lg">Teaching Method: <?= $subjectData['TeachingMethod']; ?></p>
+                        <table class="table-auto">
+                          <tr>
+                            <td class="py-1"><p class="text-gray-500">Subject Name</p></td>
+                            <td class="py-1"><p class="text-gray-500">:</p></td>
+                            <td class="py-1"><p class="text-lg"><?php echo $subjectData['SubjectName']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td class="py-1"><p class="text-gray-500">Teacher</p></td>
+                            <td class="py-1"><p class="text-gray-500">:</p></td>
+                            <td class="py-1"><p class="text-lg"><?php echo $subjectData['TeacherName']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td class="py-1"><p class="text-gray-500">Difficulty</p></td>
+                            <td class="py-1"><p class="text-gray-500">:</p></td>
+                            <td class="py-1"><p class="text-lg"><?php echo $subjectData['DifficultyLevel']; ?></p></td>
+                          </tr>
+                          <tr>
+                            <td class="py-1"><p class="text-gray-500">Method</p></td>
+                            <td class="py-1"><p class="text-gray-500">:</p></td>
+                            <td class="py-1"><p class="text-lg"><?php echo $subjectData['TeachingMethod']; ?></p></td>
+                          </tr>
+                        </table>
+
                       </div>
                     <?php else : ?>
                       <?php
@@ -105,13 +142,14 @@
                       if ($materialResult && mysqli_num_rows($materialResult) > 0) {
                       $materialData = mysqli_fetch_assoc($materialResult);
                       ?>
+                        <?php if(isset($materialData['Video'])): ?>
                         <div class="relative w-full md:w-md mb-4 md:mt-2">
-                            <video id="floating-video" class="w-full md:w-md rounded max-w-3xl" controls>
-                                <source src="<?= '../'.$materialData['Video']; ?>" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-
+                                <video id="floating-video" class="w-full md:w-md rounded max-w-3xl" controls>
+                                    <source src="<?= '../'.$materialData['Video']; ?>" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                          </div>
+                          <?php endif; ?>
                       <?php
                         include($materialData['Link']); // Include the material file
                       } else {
@@ -123,14 +161,36 @@
                     <!-- Display subject information if no material type is specified -->
                     <div class="bg-white rounded p-4 shadow relative shadow:md mb-4">
                       <h3 class="text-2xl font-semibold"><?= $subjectData['SubjectName']; ?></h3>
-                      <?php if (isset($subjectData['TeacherID'])) : ?>
-                        <p class="text-lg">Teacher: <?= $subjectData['TeacherName']; ?></p>
-                      <?php else : ?>
-                        <p class="text-lg">Teacher: Not assigned</p>
-                      <?php endif; ?>
-                      <p class="text-lg">Difficulty: <?= $subjectData['DifficultyLevel']; ?></p>
-                      <p class="text-lg">Teaching Method: <?= $subjectData['TeachingMethod']; ?></p>
+                      <table class="table-auto">
+                        <tr>
+                          <?php if (isset($subjectData['TeacherID'])) : ?>
+                            <td class="py-1"><p class="text-gray-500">Teacher</p></td>
+                            <td class="py-1"><p class="text-gray-500">:</p></td>
+                            <td class="py-1"><p class="text-lg"><?= $subjectData['TeacherName']; ?></p></td>
+                          <?php else : ?>
+                            <td class="py-1"><p class="text-gray-500">Teacher</p></td>
+                            <td class="py-1"><p class="text-gray-500">:</p></td>
+                            <td class="py-1"><p class="text-lg">Not assigned</p></td>
+                          <?php endif; ?>
+                        </tr>
+                        <tr>
+                          <td class="py-1"><p class="text-gray-500">Difficulty</p></td>
+                          <td class="py-1"><p class="text-gray-500">:</p></td>
+                          <td class="py-1"><p class="text-lg"><?= $subjectData['DifficultyLevel']; ?></p></td>
+                        </tr>
+                        <tr>
+                          <td class="py-1"><p class="text-gray-500">Method</p></td>
+                          <td class="py-1"><p class="text-gray-500">:</p></td>
+                          <td class="py-1"><p class="text-lg"><?= $subjectData['TeachingMethod']; ?></p></td>
+                        </tr>
+                        <?php if (!isset($subjectData['MaterialType'])) : ?>
+                          <tr>
+                            <td class="py-1" colspan="3"><p class="text-lg text-red-500">No materials available for this subject.</p></td>
+                          </tr>
+                        <?php endif; ?>
+                      </table>
                     </div>
+
                   <?php endif; ?>
                 </div>
                 <div class="flex justify-between">

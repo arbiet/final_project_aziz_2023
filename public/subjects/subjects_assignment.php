@@ -61,15 +61,34 @@ if (isset($_SESSION['UserID'])) {
         <div class="flex items-start justify-start shadow-lg m-4 bg-white flex-1 flex-col rounded-md">
             <!-- Main Content -->
             <!-- Main Content -->
-            <main class="container mx-auto mt-4 p-4 bg-white shadow-lg rounded-md">
+            <main class="container mx-auto mt-4 p-4 bg-white">
                 <h2 class="text-3xl font-semibold mb-4"><?php echo $assignmentData['Title']; ?></h2>
                 <?php if (isset($_GET['assignment_id'])) : ?>
                     <div class="bg-blue-100 p-4 rounded-md mb-4">
                         <h3 class="text-blue-700 font-semibold">Assignment Information:</h3>
-                        <p class="">Assignment Title: <?php echo $assignmentData['Title']; ?></p>
-                        <p class="">Description: <?php echo $assignmentData['Description']; ?></p>
-                        <p class="">Due Date: <?php echo $assignmentData['DueDate']; ?></p>
-                        <p class="">Assigned Date: <?php echo $assignmentData['AssignedDate']; ?></p>
+                        <table class="table-auto">
+                            <tr>
+                                <td class="py-1"><p class="text-gray-500">Assignment Title</p></td>
+                                <td class="py-1"><p class="text-gray-500">:</p></td>
+                                <td class="py-1"><p class=""><?php echo $assignmentData['Title']; ?></p></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1"><p class="text-gray-500">Description</p></td>
+                                <td class="py-1"><p class="text-gray-500">:</p></td>
+                                <td class="py-1"><p class=""><?php echo $assignmentData['Description']; ?></p></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1"><p class="text-gray-500">Due Date</p></td>
+                                <td class="py-1"><p class="text-gray-500">:</p></td>
+                                <td class="py-1"><p class=""><?php echo $assignmentData['DueDate']; ?></p></td>
+                            </tr>
+                            <tr>
+                                <td class="py-1"><p class="text-gray-500">Assigned Date</p></td>
+                                <td class="py-1"><p class="text-gray-500">:</p></td>
+                                <td class="py-1"><p class=""><?php echo $assignmentData['AssignedDate']; ?></p></td>
+                            </tr>
+                            </table>
+
                         <!-- Add more details as needed -->
                     </div>
 
@@ -190,7 +209,7 @@ if (isset($_SESSION['UserID'])) {
                                 <label for="submissionFile" class="block  text-gray-700 text-sm font-bold mb-2">Submission File:</label>
                                 <input type="file" name="submissionFile" id="submissionFile" class="w-full bg-white p-2 border border-gray-300 rounded-md">
 
-                                <button type="button" onclick="confirmSubmitAssignment()" class="mt-4 bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-700">Submit Assignment</button>
+                                <button type="submit" onclick="confirmSubmitAssignment()" class="bg-red-500 text-white mt-2 px-4 py-2 rounded-md hover:bg-red-700">Submit Assignment</button>
                             </form>
                         </div>
                 <?php endif; ?>

@@ -50,17 +50,31 @@ if (isset($_SESSION['UserID'])) {
       <!-- Badge Identifikasi -->
       <span class="bg-green-400 text-white text-xs px-2 py-1 rounded-full absolute -top-2 -left-2">Active</span>
       <div class="flex items-center">
-        <div class="w-20 h-20 bg-gray-300 rounded-full overflow-hidden">
+        <div class="w-40 h-40 bg-gray-300 rounded-full overflow-hidden">
           <img src="../static/image/profile/<?php echo $studentData['ProfilePictureURL']; ?>" alt="Profil Siswa" class="w-full h-full object-cover" />
         </div>
         <div class="ml-4">
           <h3 class="text-2xl font-semibold"><?php echo $studentData['FullName']; ?></h3>
-          <p class="text-gray-500">Class : <?php echo $studentData['ClassName']; ?></p>
-          <p class="text-gray-500">NISN: <?php echo $studentData['StudentNumber']; ?></p>
-          <p class="text-gray-500">Email: <?php echo $studentData['Email']; ?></p>
-          <p class="text-gray-500">Kelas: <?php echo $studentData['ClassName']; ?></p>
-          <a href="../class/class_detail.php?class_id=<?php echo $studentData['ClassID']; ?>" class="text-blue-500 hover:underline">Lihat Kelas</a>
-
+            <table class="table-auto">
+              <tr>
+                <td class="py-1"><p class="text-gray-500">Kelas</p></td>
+                <td class="py-1"><p class="text-gray-500">:</p></td>
+                <td class="py-1"><p class="text-gray-500"><?php echo $studentData['ClassName']; ?></p></td>
+              </tr>
+              <tr>
+                <td class="py-1"><p class="text-gray-500">NISN</p></td>
+                <td class="py-1"><p class="text-gray-500">:</p></td>
+                <td class="py-1"><p class="text-gray-500"><?php echo $studentData['StudentNumber']; ?></p></td>
+              </tr>
+              <tr>
+                <td class="py-1"><p class="text-gray-500">Email</p></td>
+                <td class="py-1"><p class="text-gray-500">:</p></td>
+                <td class="py-1"><p class="text-gray-500"><?php echo $studentData['Email']; ?></p></td>
+              </tr>
+            </table>
+            <a href="../class/class_detail.php?class_id=<?php echo $studentData['ClassID']; ?>" class="text-blue-500 hover:underline">
+              <i class="fas fa-arrow-circle-right ml-1"></i> View Class 
+          </a>
         </div>
       </div>
     </div>
@@ -77,18 +91,36 @@ if (isset($_SESSION['UserID'])) {
               </button>
             </div>
             <h3 class="text-lg font-semibold"><?php echo $subject['SubjectName']; ?></h3>
-            <!-- Informasi guru -->
-            <?php if (isset($subject['TeacherID'])) { ?>
-              <p class="text-gray-500">NIP: <?php echo $subject['NIP']; ?></p>
-              <p class="text-gray-500">Nama Guru: <?php echo $subject['FullName'] . ", " . $subject['AcademicDegree']; ?></p>
-            <?php } else { ?>
-              <p class="text-gray-500">Guru: Belum ditentukan</p>
-            <?php } ?>
-            <!-- Informasi tambahan tentang mata pelajaran -->
-            <p class="text-gray-500">Kesulitan: <?php echo $subject['DifficultyLevel']; ?></p>
-            <p class="text-gray-500">Metode Pengajaran: <?php echo $subject['TeachingMethod']; ?></p>
+          <!-- Informasi tambahan tentang mata pelajaran -->
+          <table class="table-auto">
+          <?php if (isset($subject['TeacherID'])) { ?>
+              <tr>
+                <td class="py-1"><p class="text-gray-500">NIP</p></td>
+                <td class="py-1"><p class="text-gray-500">:</p></td>
+                <td class="py-1"><p class="text-gray-500"><?php echo $subject['NIP']; ?></p></td>
+              </tr>
+              <tr>
+                <td class="py-1"><p class="text-gray-500">Teacher Name</p></td>
+                <td class="py-1"><p class="text-gray-500">:</p></td>
+                <td class="py-1"><p class="text-gray-500"><?php echo $subject['FullName'] . ", " . $subject['AcademicDegree']; ?></p></td>
+              </tr>
+          <?php } else { ?>
+            <p class="text-gray-500">Teacher: Undetermined</p>
+          <?php } ?>
+            <tr>
+              <td class="py-1"><p class="text-gray-500">Difficulty</p></td>
+              <td class="py-1"><p class="text-gray-500">:</p></td>
+              <td class="py-1"><p class="text-gray-500"><?php echo $subject['DifficultyLevel']; ?></p></td>
+            </tr>
+            <tr>
+              <td class="py-1"><p class="text-gray-500">Method</p></td>
+              <td class="py-1"><p class="text-gray-500">:</p></td>
+              <td class="py-1"><p class="text-gray-500"><?php echo $subject['TeachingMethod']; ?></p></td>
+            </tr>
+          </table>
+
             <div class="mt-2 flex justify-between items-center">
-              <a href="../subjects/subjects_detail.php?subject_id=<?php echo $subject['SubjectID']; ?>&material=start" class="text-blue-500 hover:underline">Lihat Materi</a>
+              <a href="../subjects/subjects_detail.php?subject_id=<?php echo $subject['SubjectID']; ?>&material=start" class="text-blue-500 hover:underline"><i class="fas fa-arrow-circle-right ml-1 mr-2"></i>Lihat Materi</a>
               <span class="text-blue-500 font-semibold"><?php echo $subject['TotalMaterials']; ?> Materi <i class="fas fa-file-alt mr-2"></i></span>
             </div>
             <!-- <div class="mt-4 mb-4">

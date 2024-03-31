@@ -62,11 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="flex-grow bg-gray-50">
       <div class="flex justify-center items-center h-full">
         <div class="text-center px-40">
-        <a href="#" class="flex items-center justify-center mx-auto">
-                        <img src="../static/image/icon.png" alt="Icon" class="w-14 h-14 mr-2">
-                        <h2 class="font-bold text-5xl">E<span class="bg-[#f84525] text-white px-2 rounded-md">SAY</span></h2>
+        <a href="#" class="flex items-center justify-center mx-auto mb-4">
+                        <img src="../static/image/icon.png" alt="Icon" class="w-16 h-16 mr-2">
+                        <h2 class="font-bold text-5xl">E<span class="bg-[#f84525] text-white px-2 py-0 rounded-md">SAY</span></h2>
                     </a>
-          <div class="p-4 x-6 py-4 bg-red shadow-lg rounded-lg border-blue-400">
+          <div class="p-8 x-6 py-4 bg-red shadow-lg border rounded-lg border-gray-200">
             <h3 class="text-3xl font-bold text-gray-700">Forgot Password</h3>
           <?php if (isset($errors['reset_failed'])) : ?>
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">

@@ -104,7 +104,7 @@ if (isset($_GET['id'])) {
                                     <thead class="bg-gray-100">
                                         <tr>
                                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Material Title</th>
-                                            <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                                            <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Chapter</th>
                                             <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sequence</th>
                                             <!-- <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam</th> -->
                                         </tr>

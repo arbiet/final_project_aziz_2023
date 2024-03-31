@@ -360,7 +360,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
 
                         <!-- Type -->
-                        <label for="type" class="block font-semibold text-gray-800 mt-2 mb-2">Type</label>
+                        <label for="type" class="block font-semibold text-gray-800 mt-2 mb-2">Chapter</label>
                         <input type="text" id="type" name="type" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Type" value="<?php echo $type; ?>">
 
                         <!-- Submit Button -->
