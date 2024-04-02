@@ -104,6 +104,8 @@ if (isset($_SESSION['UserID'])) {
                                         $allowedImageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
                                         $allowedPdfExtensions = ['pdf'];
                                         $allowedOfficeExtensions = ['xlsx', 'csv', 'docx', 'doc', 'xls', 'ppt', 'pptx'];
+                                        $allowedCompressionExtensions = ['zip', 'rar', '7z', 'tar.gz', 'tar.bz2', 'iso', 'cab', 'jar', 'gz', 'xz'];
+                                        $isCompression = in_array($fileExtension, $allowedCompressionExtensions);
                                         $isImage = in_array($fileExtension, $allowedImageExtensions);
                                         $isPdf = in_array($fileExtension, $allowedPdfExtensions);
                                         $isOfficeDocument = in_array($fileExtension, $allowedOfficeExtensions);

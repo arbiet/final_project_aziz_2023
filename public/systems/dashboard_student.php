@@ -48,7 +48,7 @@ if (isset($_SESSION['UserID'])) {
         <i class="fas fa-edit text-xl"></i>
       </a>
       <!-- Badge Identifikasi -->
-      <span class="bg-green-400 text-white text-xs px-2 py-1 rounded-full absolute -top-2 -left-2">Active</span>
+      <span class="bg-green-400 text-white text-xs px-2 py-1 rounded-full absolute -top-2 -left-2 z-50">Active</span>
       <div class="flex items-center">
         <div class="w-40 h-40 bg-gray-300 rounded-full overflow-hidden">
           <img src="../static/image/profile/<?php echo $studentData['ProfilePictureURL']; ?>" alt="Profil Siswa" class="w-full h-full object-cover" />

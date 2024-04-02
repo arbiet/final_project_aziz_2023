@@ -54,29 +54,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // If there are no errors, update the data in the database
     if (empty($errors)) {
-        $query = "UPDATE Materials SET SubjectID = ?, TitleMaterial = ?, Type = ?, Content = ? WHERE MaterialID = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("sssss", $subject_id, $title_material, $type, $content, $material_id);
+        // Check if a video file was uploaded
+        if (!empty($_FILES['video_upload']['name'])) {
+            $video_tmp = $_FILES['video_upload']['tmp_name'];
+            $video_name = $_FILES['video_upload']['name'];
+            $video_destination = '../materials_data/'.$title_material.'/'.'video/' . $video_name;
 
-        if ($stmt->execute()) {
-            // Material update successful
-            // Log the activity for material update
-            $activityDescription = "Material updated: $title_material";
-            $currentUserID = $_SESSION['UserID'];
-            insertLogActivity($conn, $currentUserID, $activityDescription);
-            $form_processed = true;
+            // Create the directory if it does not exist
+            $video_directory = dirname($video_destination);
+            if (!file_exists($video_directory)) {
+                mkdir($video_directory, 0777, true);
+            }
+
+            // Move the uploaded video to the destination folder
+            if (move_uploaded_file($video_tmp, $video_destination)) {
+                $video_link = 'materials_data/'.$title_material.'/'.'video/' . $video_name;
+                
+                // Update the video link in the database
+                $query = "UPDATE Materials SET SubjectID = ?, TitleMaterial = ?, Type = ?, Content = ?, Video = ? WHERE MaterialID = ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("ssssss", $subject_id, $title_material, $type, $content, $video_link, $material_id);
+
+                if ($stmt->execute()) {
+                    // Material update successful
+                    // Log the activity for material update
+                    $activityDescription = "Material updated: $title_material";
+                    $currentUserID = $_SESSION['UserID'];
+                    insertLogActivity($conn, $currentUserID, $activityDescription);
+                    $form_processed = true;
+                } else {
+                    // Material update failed
+                    $errors['db_error'] = "Material update failed.";
+
+                    // Display an error notification
+                    echo '<script>
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Material update failed.",
+                        });
+                    </script>';
+                }
+            } else {
+                $errors['video_upload'] = "Video upload failed. Check directory permissions and file name validity.";
+            }
         } else {
-            // Material update failed
-            $errors['db_error'] = "Material update failed.";
+            // If no video uploaded, update other fields except video link
+            $query = "UPDATE Materials SET SubjectID = ?, TitleMaterial = ?, Type = ?, Content = ? WHERE MaterialID = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("sssss", $subject_id, $title_material, $type, $content, $material_id);
 
-            // Display an error notification
-            echo '<script>
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Material update failed.",
-                });
-            </script>';
+            if ($stmt->execute()) {
+                // Material update successful
+                // Log the activity for material update
+                $activityDescription = "Material updated: $title_material";
+                $currentUserID = $_SESSION['UserID'];
+                insertLogActivity($conn, $currentUserID, $activityDescription);
+                $form_processed = true;
+            } else {
+                // Material update failed
+                $errors['db_error'] = "Material update failed.";
+
+                // Display an error notification
+                echo '<script>
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Material update failed.",
+                    });
+                </script>';
+            }
         }
     }
 }
@@ -104,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <!-- Content -->
                 <div class="flex flex-col w-full">
                     <!-- Material Update Form -->
-                    <form action="" method="POST" class="flex flex-col w-full space-x-2">
+                    <form action="" method="POST" class="flex flex-col w-full space-x-2" enctype="multipart/form-data">
                         <!-- Material ID (Hidden Input) -->
                         <input type="hidden" name="material_id" value="<?php echo $material_id; ?>">
 
@@ -147,6 +194,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <!-- Type -->
                         <label for="type" class="block font-semibold text-gray-800 mt-2 mb-2">Type</label>
                         <input type="text" id="type" name="type" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600" placeholder="Type" value="<?php echo $type; ?>">
+
+                        <!-- Video Upload -->
+                        <label for="video_upload" class="block font-semibold text-gray-800 mt-2 mb-2">Upload New Video</label>
+                        <input type="file" id="video_upload" name="video_upload" accept="video/*" class="w-full rounded-md border-gray-300 px-2 py-2 border text-gray-600">
+                        <?php if (isset($errors['video_upload'])) : ?>
+                            <p class="text-red-500 text-sm">
+                                <?php echo $errors['video_upload']; ?>
+                            </p>
+                        <?php endif; ?>
 
                         <!-- Submit Button -->
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4 text-center">

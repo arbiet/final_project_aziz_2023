@@ -28,4 +28,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/draggable/2.0.0-beta.11/draggable.bundle.legacy.min.js"></script>
 </head>
 
-<body class="text-gray-800 font-inter">
+<body class="text-gray-800">
