@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2024 at 02:49 AM
+-- Generation Time: Jan 22, 2024 at 12:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -103,7 +103,7 @@ CREATE TABLE `AssignmentSubmissions` (
 --
 
 INSERT INTO `AssignmentSubmissions` (`SubmissionID`, `StudentID`, `AssignmentID`, `SubmissionText`, `SubmissionFile`, `SubmissionDate`, `TeacherFeedback`, `Grade`, `IsLateSubmission`) VALUES
-(3, 1, 5, 'asdas', '../static/image/submission/1705871004_d930816f13.docx', '2024-01-21 21:03:24', 'apik', 100, NULL),
+(3, 1, 5, 'asdas', '../static/image/submission/1705871004_d930816f13.docx', '2024-01-21 21:03:24', NULL, NULL, NULL),
 (4, 1, 6, 'sdasd', '../static/image/submission/1705871018_cfb7c3dc8d.docx', '2024-01-21 21:03:38', NULL, NULL, NULL),
 (5, 2, 5, 'asfasf', '../static/image/submission/1705872665_c4897117d3.docx', '2024-01-21 21:31:05', NULL, NULL, 0);
 
@@ -128,12 +128,12 @@ CREATE TABLE `Classes` (
 --
 
 INSERT INTO `Classes` (`ClassID`, `ClassName`, `EducationLevel`, `HomeroomTeacher`, `Curriculum`, `AcademicYear`, `ClassCode`) VALUES
-(1, 'X TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '1', 'Kurikulum Merdeka', '2023', 'X TKJ 2'),
-(2, 'X TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '2', 'Kurikulum Merdeka', '2023', 'X TKJ 1'),
-(3, 'XI TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '3', 'Kurikulum Merdeka', '2023', 'XI TKJ 2'),
-(5, 'XI TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '4', 'Kurikulum Merdeka', '2023', 'XI TKJ 1'),
-(6, 'XII TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '6', 'Kurikulum Merdeka', '2023', 'XII TKJ 1'),
-(7, 'XII TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '7', 'Kurikulum Merdeka', '2023', 'XII TKJ 2');
+(1, 'X TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '1', 'Kurikulum Merdeka', '2023', NULL),
+(2, 'X TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '2', 'Kurikulum Merdeka', '2023', NULL),
+(3, 'XI TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '3', 'Kurikulum Merdeka', '2023', NULL),
+(5, 'XI TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '4', 'Kurikulum Merdeka', '2023', NULL),
+(6, 'XII TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '6', 'Kurikulum Merdeka', '2023', NULL),
+(7, 'XII TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '7', 'Kurikulum Merdeka', '2023', NULL);
 
 -- --------------------------------------------------------
 
@@ -523,97 +523,7 @@ INSERT INTO `LogActivity` (`LogID`, `UserID`, `ActivityDescription`, `ActivityTi
 (386, 137648118, 'User logged out', '2024-01-21 21:40:28'),
 (387, 1705540078, 'User logged out', '2024-01-21 21:40:34'),
 (388, 137648118, 'User logged in', '2024-01-21 21:40:42'),
-(389, 137648118, 'User logged out', '2024-01-21 21:51:38'),
-(390, 1705540077, 'User logged in', '2024-01-22 00:19:57'),
-(391, 137648118, 'User logged in', '2024-01-22 03:44:51'),
-(392, 1705540077, 'User logged in', '2024-01-22 03:45:59'),
-(393, 137648118, 'User logged out', '2024-01-22 03:50:40'),
-(394, 137648118, 'User logged in', '2024-01-22 04:18:32'),
-(395, 137648118, 'User logged in', '2024-01-24 03:44:46'),
-(396, 137648118, 'User logged out', '2024-01-24 04:37:10'),
-(397, 1699007959, 'User logged in', '2024-01-24 04:37:16'),
-(398, 1699007959, 'User logged in', '2024-01-24 04:55:07'),
-(399, 1699007959, 'User logged out', '2024-01-24 05:07:54'),
-(400, 137648118, 'User logged in', '2024-01-24 05:07:59'),
-(401, 137648118, 'User logged in', '2024-03-26 02:34:10'),
-(402, 137648118, 'User logged in', '2024-03-26 02:42:22'),
-(403, 137648118, 'User logged out', '2024-03-26 03:25:23'),
-(404, 137648118, 'User logged in', '2024-03-26 03:25:31'),
-(405, 137648118, 'User logged out', '2024-03-26 03:31:07'),
-(406, 137648118, 'User logged in', '2024-03-26 03:32:58'),
-(407, 137648118, 'User logged in', '2024-03-27 02:41:33'),
-(408, 137648118, 'User logged out', '2024-03-27 02:49:14'),
-(409, 1699007959, 'User logged in', '2024-03-27 02:50:20'),
-(410, 1699007959, 'User logged out', '2024-03-27 02:50:36'),
-(411, 137648118, 'User logged in', '2024-03-27 02:50:52'),
-(412, 137648118, 'User with UserID: 1699008390 has been deleted.', '2024-03-27 02:51:02'),
-(413, 137648118, 'User logged out', '2024-03-27 02:51:10'),
-(414, 1699008390, 'User logged in', '2024-03-27 02:51:15'),
-(415, 1699008390, 'User logged out', '2024-03-27 02:51:58'),
-(416, 1705540077, 'User logged in', '2024-03-27 02:52:06'),
-(417, 1705540077, 'User logged in', '2024-03-27 03:02:26'),
-(418, 1705540077, 'User logged out', '2024-03-27 03:03:05'),
-(419, 1705540077, 'User logged in', '2024-03-27 03:03:16'),
-(420, 1705540077, 'User logged out', '2024-03-27 03:03:30'),
-(421, 1705540077, 'User logged in', '2024-03-27 03:03:38'),
-(422, 1705540077, 'User logged out', '2024-03-27 03:06:10'),
-(423, 1705540077, 'User logged in', '2024-03-27 03:06:16'),
-(424, 1705540077, 'User logged out', '2024-03-27 03:14:52'),
-(425, 1705540077, 'User logged in', '2024-03-27 03:15:00'),
-(426, 1705540077, 'User logged in', '2024-03-27 03:15:17'),
-(427, 1705540077, 'User logged in', '2024-03-28 02:10:59'),
-(428, 1705540077, 'User logged out', '2024-03-28 02:22:49'),
-(429, 1705540077, 'User logged in', '2024-03-28 02:22:55'),
-(430, 1705540077, 'User logged out', '2024-03-28 02:40:46'),
-(431, 137648118, 'User logged in', '2024-03-28 02:41:00'),
-(432, 137648118, 'User logged out', '2024-03-28 02:41:19'),
-(433, 1705540077, 'User logged in', '2024-03-28 02:41:33'),
-(434, 1705540077, 'User logged out', '2024-03-28 02:57:09'),
-(435, 1705540077, 'User logged in', '2024-03-28 02:57:20'),
-(436, 1705540077, 'User logged out', '2024-03-28 03:01:24'),
-(437, 1705540077, 'User logged in', '2024-03-28 03:01:33'),
-(438, 1705540077, 'User logged out', '2024-03-28 03:03:55'),
-(439, 1705540077, 'User logged in', '2024-03-28 03:04:01'),
-(440, 1705540077, 'User logged out', '2024-03-28 03:07:17'),
-(441, 1705540077, 'User logged in', '2024-03-28 03:07:23'),
-(442, 1705540077, 'User logged out', '2024-03-28 03:07:32'),
-(443, 1705540077, 'User logged in', '2024-03-28 03:08:41'),
-(444, 137648118, 'User logged in', '2024-03-28 03:21:48'),
-(445, 137648118, 'User logged out', '2024-03-28 03:21:52'),
-(446, 1705540077, 'User logged in', '2024-03-28 03:21:59'),
-(447, 1705540077, 'User logged out', '2024-03-28 03:23:25'),
-(448, 1705540077, 'User logged in', '2024-03-28 03:23:37'),
-(449, 1705540077, 'User logged out', '2024-03-28 03:26:24'),
-(450, 1705540077, 'User logged in', '2024-03-28 03:26:33'),
-(451, 1705540077, 'Changed profile picture from default.png to 6604e39882b1f.png', '2024-03-28 03:27:20'),
-(452, 1705540077, 'User logged out', '2024-03-28 03:31:53'),
-(453, 137648118, 'User logged in', '2024-03-28 03:32:05'),
-(454, 137648118, 'User with UserID: 1699008390 has been deleted.', '2024-03-28 03:32:11'),
-(455, 137648118, 'User with UserID: 1705540080 has been deleted.', '2024-03-28 03:32:17'),
-(456, 137648118, 'User logged out', '2024-03-28 03:32:23'),
-(457, 1705540080, 'User logged in', '2024-03-28 03:32:32'),
-(458, 1705540080, 'Changed profile picture from default.png to 6604e5011908a.png', '2024-03-28 03:33:21'),
-(459, 1705540080, 'User logged out', '2024-03-28 04:25:25'),
-(460, 1705540077, 'User logged in', '2024-03-28 04:25:35'),
-(461, 1705540077, 'User logged out', '2024-03-28 04:26:57'),
-(462, 1705540077, 'User logged in', '2024-03-28 04:27:09'),
-(463, 1705540077, 'User logged in', '2024-03-28 04:27:54'),
-(464, 1705540077, 'User logged out', '2024-03-28 04:30:22'),
-(465, 1705540077, 'User logged in', '2024-03-28 04:30:38'),
-(466, 1705540077, 'User logged out', '2024-03-28 06:25:55'),
-(467, 1705540077, 'User logged in', '2024-03-28 06:26:27'),
-(468, 137648118, 'User logged in', '2024-04-02 02:51:02'),
-(469, 137648118, 'User logged in', '2024-04-02 02:54:39'),
-(470, 137648118, 'User logged in', '2024-04-02 03:01:53'),
-(471, 137648118, 'User logged in', '2024-04-02 03:03:39'),
-(472, 137648118, 'User logged out', '2024-04-02 03:04:34'),
-(473, 1705540077, 'User logged in', '2024-04-02 03:04:45'),
-(474, 1705540077, 'User logged out', '2024-04-02 03:05:26'),
-(475, 1705540077, 'User logged in', '2024-04-02 03:05:32'),
-(476, 1705540077, 'User logged out', '2024-04-02 03:06:08'),
-(477, 1699007959, 'User logged in', '2024-04-02 03:06:14'),
-(478, 1699007959, 'Changed profile picture from  to 660b763094b2b.png', '2024-04-02 03:06:24'),
-(479, 137648118, 'User logged in', '2024-04-02 03:39:54');
+(389, 137648118, 'User logged out', '2024-01-21 21:51:38');
 
 -- --------------------------------------------------------
 
@@ -648,8 +558,8 @@ INSERT INTO `Materials` (`MaterialID`, `SubjectID`, `TitleMaterial`, `Type`, `Co
 (21, 1, 'A) Pengertian Protokol Jaringan', 'Protokol Jaringan', 'Test', '../materials_data/1_A)PengertianProtokolJaringan.php', 10),
 (22, 1, 'B) Sejarah Protokol Jaringan', 'Protokol Jaringan', 'Test', '../materials_data/1_B)SejarahProtokolJaringan.php', 11),
 (23, 1, 'C) Pendalaman Protokol Jaringan', 'Protokol Jaringan', 'Test', '../materials_data/1_C)PendalamanProtokolJaringan.php', 12),
-(24, 1, 'A) Pengertian IP Address', 'IP Address', 'Test', '../materials_data/1_A)PengertianIPAddress.php', 14),
-(25, 1, 'B) Jenis-Jenis IP Address', 'IP Address', 'Test', '../materials_data/1_B)Jenis-JenisIPAddress.php', 13),
+(24, 1, 'A) Pengertian IP Address', 'IP Address', 'Test', '../materials_data/1_A)PengertianIPAddress.php', 13),
+(25, 1, 'B) Jenis-Jenis IP Address', 'IP Address', 'Test', '../materials_data/1_B)Jenis-JenisIPAddress.php', 14),
 (26, 1, 'C) Penggunaan IP Address', 'IP Address', 'Test', '../materials_data/1_C)PenggunaanIPAddress.php', 15),
 (27, 1, 'D) Cara Menghitung IP Address dan Subnet Mask', 'IP Address', 'Test', '../materials_data/1_D)CaraMenghitungIPAddressdanSubnetMask.php', 17),
 (29, 5, 'A) Pengertian Cisco Packet Tracer', 'Pengenalan', '<div class=\\\"bg-white rounded p-4 shadow relative shadow:md mb-4\\\">\\r\\n    <h1 class=\\\"text-3xl font-semibold\\\">Pengenalan</h1>\\r\\n    <h2 class=\\\"text-2xl font-semibold\\\">A. Pengertian Cisco Packet Tracer</h2>\\r\\n\\r\\n    <p>Cisco Packet Tracer merupakan aplikasi simulasi yang secara khusus dirancang untuk mensimulasikan alat-alat jaringan Cisco. Aplikasi ini tidak hanya digunakan sebagai media pembelajaran dan pelatihan, tetapi juga menjadi alat yang sangat berharga dalam penelitian simulasi jaringan komputer. Cisco Packet Tracer diciptakan oleh Cisco Systems dan diberikan secara gratis kepada fakultas, siswa, dan alumni yang telah berpartisipasi di Cisco Networking Academy.</p>\\r\\n\\r\\n    <p>Aplikasi ini memiliki peran penting dalam membantu para praktisi jaringan untuk mengembangkan keterampilan dan pemahaman praktis tentang konfigurasi dan manajemen perangkat Cisco. Simulasi yang ditawarkan oleh Cisco Packet Tracer memungkinkan pengguna untuk membuat dan menguji konfigurasi jaringan tanpa memerlukan perangkat fisik.</p>\\r\\n\\r\\n    <p>Cisco Packet Tracer tidak hanya menyediakan lingkungan simulasi untuk perangkat keras jaringan, tetapi juga mencakup fitur-fitur yang mendukung pengembangan solusi jaringan yang kompleks. Pengguna dapat merancang, membangun, dan menguji berbagai skenario jaringan dengan berbagai perangkat Cisco, mulai dari router hingga switch.</p>\\r\\n\\r\\n    <p>Aplikasi ini juga menjadi bagian integral dari Cisco Networking Academy, sebuah program pendidikan global yang memberikan pengetahuan dan keterampilan jaringan kepada siswa di berbagai tingkatan. Melalui Cisco Packet Tracer, peserta dapat mengasah keahlian mereka dalam pengelolaan jaringan dan memahami secara mendalam berbagai aspek teknologi jaringan Cisco.</p>\\r\\n\\r\\n    <p>Dengan adanya Cisco Packet Tracer, para pelajar dan profesional jaringan dapat mengakses lingkungan simulasi yang realistis, yang membantu mereka menjembatani kesenjangan antara teori dan praktik dalam dunia jaringan komputer.</p>\\r\\n</div>', '../materials_data/5_A)PengertianCiscoPacketTracer.php', 1),
@@ -986,17 +896,17 @@ CREATE TABLE `Users` (
 
 INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `DateOfBirth`, `Gender`, `Address`, `PhoneNumber`, `RoleID`, `AccountCreationDate`, `LastLogin`, `AccountStatus`, `ProfilePictureURL`, `ActivationStatus`) VALUES
 (0, 'ikimukti', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '19103020046@unpkediri.ac.id', 'Firmansyah Mukti Wijaya', '2023-10-12', 'Male', 'Nglaban 1111', '081216318022', 3, '2023-11-03 10:17:58', '2023-11-03 17:17:58', NULL, '653e5a409b4fb.jpeg', 'active'),
-(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2024-04-02 03:39:54', '2024-04-02 10:39:54', NULL, 'default.png', 'active'),
-(1699007959, 'aziz', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'wahyuadi@gmail.com', 'Muhammad As’adul Azis Wahyuadi ', '2023-11-22', 'Male', 'Tuban', '+62 896-8736-8865', 2, '2024-04-02 03:06:24', '2024-04-02 10:06:14', 'active', '660b763094b2b.png', 'active'),
+(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2024-01-21 21:40:42', '2024-01-22 04:40:42', NULL, 'default.png', 'active'),
+(1699007959, 'aziz', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'wahyuadi@gmail.com', 'Muhammad As’adul Azis Wahyuadi ', '2023-11-22', 'Male', 'Tuban', '+62 896-8736-8865', 2, '2024-01-21 21:04:28', '2024-01-22 04:04:28', 'active', NULL, 'active'),
 (1699008117, 'tika', '$2y$10$XMghwn955y4Vr4J7bc5pju78Dx6.ikMeerd49FnFCvPPKQB1axXtS', 'tik@gmail.com', 'Febriana Mahabatika', '2023-11-16', 'Female', 'Kediri', '+62 858-9307-5772', 2, '2024-01-18 00:39:12', NULL, 'active', NULL, 'active'),
-(1699008390, 'renal', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'renal@gmail.com', 'Renaldi Hariski Firdaus', '2023-11-17', 'Male', 'Nganjuk', '+62 813-5717-7521', 2, '2024-03-28 03:32:11', '2024-03-27 09:51:15', 'active', NULL, 'active'),
+(1699008390, 'renal', '$2y$10$MPgdqVlT.pfxusRT.4xFbuwHE2YHCHPKEmyl/aiDeqXAcxr2fbV7y', 'renal@gmail.com', 'Renaldi Hariski Firdaus', '2023-11-17', 'Male', 'Nganjuk', '+62 813-5717-7521', 2, '2024-01-18 00:39:50', NULL, 'active', NULL, 'active'),
 (1699008906, 'nefira', '$2y$10$qiodW.6G2b42N5akckDfr.PQqNFr6m/JEWZ2AoOhPonAUIEXqhvwG', 'nefira@gmail.com', 'Nefira Anastasya', '2023-11-08', 'Female', 'Sidoarjo', '+62 895-3672-40319', 2, '2024-01-18 04:36:13', NULL, 'active', NULL, 'active'),
 (1699008959, 'nanda', '$2y$10$S.Lr0XU71eYd93gnHJYFkuNvwDlySLWMAa1kCobICvsOJUinbFDeq', 'nanda@gmail.com', 'Nanda Ajeng Listia', '0000-00-00', 'Male', 'Surabaya', '24534563546457', 2, '2024-01-18 00:41:32', NULL, 'Active', NULL, 'active'),
 (1700619157, 'mukti', '$2y$10$OnMJVb7WWNtzU7StPb6dtupCd.VyrFWoWPCmP9wmCqgkbr.eNEpha', 'iki.mukti@gmail.com', 'Firmansyah Mukti Wijaya', NULL, 'Male', 'Nglaban', '081216318022', 3, '2023-11-22 02:12:45', NULL, 'Active', NULL, 'active'),
-(1705540077, 'abi_satria', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'abi.satria@example.com', 'Abi Satria', '2005-01-01', 'Male', 'Kediri', '08123456789', 3, '2024-04-02 03:05:32', '2024-04-02 10:05:32', 'Active', '6604e39882b1f.png', 'active'),
+(1705540077, 'abi_satria', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'abi.satria@example.com', 'Abi Satria', '2005-01-01', 'Male', 'Kediri', '08123456789', 3, '2024-01-21 21:20:12', '2024-01-22 04:20:12', 'Active', 'default.png', 'active'),
 (1705540078, 'aditya_prasetyo', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'aditya.prasetyo@example.com', 'Aditya Bagas Prasetyo', '2004-02-15', 'Male', 'Kediri', '08123456788', 3, '2024-01-21 21:30:57', '2024-01-22 04:30:57', 'Active', 'default.png', 'active'),
 (1705540079, 'ahmad_maulana', 'hashed_password', 'ahmad.maulana@example.com', 'Ahmad Hasby Maulana', '2003-11-20', 'Male', 'Kediri', '08123456787', 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
-(1705540080, 'akbar_pratama', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'akbar.pratama@example.com', 'Akbar Sandi Pratama', '2003-10-10', 'Male', 'Kediri', '08123456786', 3, '2024-03-28 03:33:21', '2024-03-28 10:32:32', 'Active', '6604e5011908a.png', 'active'),
+(1705540080, 'akbar_pratama', 'hashed_password', 'akbar.pratama@example.com', 'Akbar Sandi Pratama', '2003-10-10', 'Male', 'Kediri', '08123456786', 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
 (1705540081, 'andrean_prasetyo', 'hashed_password', 'andrean.prasetyo@example.com', 'Andrean Prasetyo', '2004-08-05', 'Male', 'Kediri', '08123456785', 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
 (1705540082, 'bintang_krisna', 'hashed_password', 'bintang.krisna@example.com', 'Bintang Krisna', '2003-12-18', 'Male', 'Kediri', '08123456784', 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
 (1705540186, 'cantika_sari', 'hashed_password', 'cantika.sari@example.com', 'Cantika Christin Novita Sari', '2003-05-20', 'Female', 'Kediri', '08123456783', 3, '2024-01-18 04:51:55', NULL, 'Active', 'default.png', 'Activated'),
@@ -1296,7 +1206,7 @@ ALTER TABLE `ClassSubjects`
 -- AUTO_INCREMENT for table `LogActivity`
 --
 ALTER TABLE `LogActivity`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=480;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=390;
 
 --
 -- AUTO_INCREMENT for table `Materials`
