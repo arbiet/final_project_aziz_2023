@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2024 at 02:49 AM
+-- Generation Time: Apr 14, 2024 at 02:42 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,6 +33,16 @@ CREATE TABLE `Answers` (
   `IsCorrect` tinyint(1) NOT NULL,
   `QuestionID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Answers`
+--
+
+INSERT INTO `Answers` (`AnswerID`, `AnswerText`, `IsCorrect`, `QuestionID`) VALUES
+(244, '1', 0, 55),
+(245, '2', 0, 55),
+(246, '3', 1, 55),
+(247, '4', 0, 55);
 
 -- --------------------------------------------------------
 
@@ -103,9 +113,10 @@ CREATE TABLE `AssignmentSubmissions` (
 --
 
 INSERT INTO `AssignmentSubmissions` (`SubmissionID`, `StudentID`, `AssignmentID`, `SubmissionText`, `SubmissionFile`, `SubmissionDate`, `TeacherFeedback`, `Grade`, `IsLateSubmission`) VALUES
-(3, 1, 5, 'asdas', '../static/image/submission/1705871004_d930816f13.docx', '2024-01-21 21:03:24', 'apik', 100, NULL),
+(3, 1, 5, 'asdas', '../static/image/submission/1711681397_812b030e56.docx', '2024-03-29 03:03:17', 'mantul', NULL, NULL),
 (4, 1, 6, 'sdasd', '../static/image/submission/1705871018_cfb7c3dc8d.docx', '2024-01-21 21:03:38', NULL, NULL, NULL),
-(5, 2, 5, 'asfasf', '../static/image/submission/1705872665_c4897117d3.docx', '2024-01-21 21:31:05', NULL, NULL, 0);
+(5, 2, 5, 'asfasf', '../static/image/submission/1705872665_c4897117d3.docx', '2024-01-21 21:31:05', NULL, NULL, 0),
+(6, 127, 5, 'aoifhouadhf', '../static/image/submission/1711697557_9de89a00ab.pdf', '2024-03-29 07:32:37', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -128,12 +139,12 @@ CREATE TABLE `Classes` (
 --
 
 INSERT INTO `Classes` (`ClassID`, `ClassName`, `EducationLevel`, `HomeroomTeacher`, `Curriculum`, `AcademicYear`, `ClassCode`) VALUES
-(1, 'X TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '1', 'Kurikulum Merdeka', '2023', 'X TKJ 2'),
-(2, 'X TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '2', 'Kurikulum Merdeka', '2023', 'X TKJ 1'),
-(3, 'XI TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '3', 'Kurikulum Merdeka', '2023', 'XI TKJ 2'),
-(5, 'XI TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '4', 'Kurikulum Merdeka', '2023', 'XI TKJ 1'),
-(6, 'XII TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '6', 'Kurikulum Merdeka', '2023', 'XII TKJ 1'),
-(7, 'XII TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '7', 'Kurikulum Merdeka', '2023', 'XII TKJ 2');
+(1, 'X TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '', 'Kurikulum Merdeka', '2024', 'X TKJ 2'),
+(2, 'X TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '2', 'Kurikulum Merdeka', '2024', 'X TKJ 1'),
+(3, 'XI TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '3', 'Kurikulum Merdeka', '2024', 'XI TKJ 2'),
+(5, 'XI TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '4', 'Kurikulum Merdeka', '2024', 'XI TKJ 1'),
+(6, 'XII TKJ 1 - (Teknik Komputer Jaringan)', 'SMK', '6', 'Kurikulum Merdeka', '2024', 'XII TKJ 1'),
+(7, 'XII TKJ 2 - (Teknik Komputer Jaringan)', 'SMK', '7', 'Kurikulum Merdeka', '2024', 'XII TKJ 2');
 
 -- --------------------------------------------------------
 
@@ -524,96 +535,168 @@ INSERT INTO `LogActivity` (`LogID`, `UserID`, `ActivityDescription`, `ActivityTi
 (387, 1705540078, 'User logged out', '2024-01-21 21:40:34'),
 (388, 137648118, 'User logged in', '2024-01-21 21:40:42'),
 (389, 137648118, 'User logged out', '2024-01-21 21:51:38'),
-(390, 1705540077, 'User logged in', '2024-01-22 00:19:57'),
-(391, 137648118, 'User logged in', '2024-01-22 03:44:51'),
-(392, 1705540077, 'User logged in', '2024-01-22 03:45:59'),
-(393, 137648118, 'User logged out', '2024-01-22 03:50:40'),
-(394, 137648118, 'User logged in', '2024-01-22 04:18:32'),
-(395, 137648118, 'User logged in', '2024-01-24 03:44:46'),
-(396, 137648118, 'User logged out', '2024-01-24 04:37:10'),
-(397, 1699007959, 'User logged in', '2024-01-24 04:37:16'),
-(398, 1699007959, 'User logged in', '2024-01-24 04:55:07'),
-(399, 1699007959, 'User logged out', '2024-01-24 05:07:54'),
-(400, 137648118, 'User logged in', '2024-01-24 05:07:59'),
-(401, 137648118, 'User logged in', '2024-03-26 02:34:10'),
-(402, 137648118, 'User logged in', '2024-03-26 02:42:22'),
-(403, 137648118, 'User logged out', '2024-03-26 03:25:23'),
-(404, 137648118, 'User logged in', '2024-03-26 03:25:31'),
-(405, 137648118, 'User logged out', '2024-03-26 03:31:07'),
-(406, 137648118, 'User logged in', '2024-03-26 03:32:58'),
-(407, 137648118, 'User logged in', '2024-03-27 02:41:33'),
-(408, 137648118, 'User logged out', '2024-03-27 02:49:14'),
-(409, 1699007959, 'User logged in', '2024-03-27 02:50:20'),
-(410, 1699007959, 'User logged out', '2024-03-27 02:50:36'),
-(411, 137648118, 'User logged in', '2024-03-27 02:50:52'),
-(412, 137648118, 'User with UserID: 1699008390 has been deleted.', '2024-03-27 02:51:02'),
-(413, 137648118, 'User logged out', '2024-03-27 02:51:10'),
-(414, 1699008390, 'User logged in', '2024-03-27 02:51:15'),
-(415, 1699008390, 'User logged out', '2024-03-27 02:51:58'),
-(416, 1705540077, 'User logged in', '2024-03-27 02:52:06'),
-(417, 1705540077, 'User logged in', '2024-03-27 03:02:26'),
-(418, 1705540077, 'User logged out', '2024-03-27 03:03:05'),
-(419, 1705540077, 'User logged in', '2024-03-27 03:03:16'),
-(420, 1705540077, 'User logged out', '2024-03-27 03:03:30'),
-(421, 1705540077, 'User logged in', '2024-03-27 03:03:38'),
-(422, 1705540077, 'User logged out', '2024-03-27 03:06:10'),
-(423, 1705540077, 'User logged in', '2024-03-27 03:06:16'),
-(424, 1705540077, 'User logged out', '2024-03-27 03:14:52'),
-(425, 1705540077, 'User logged in', '2024-03-27 03:15:00'),
-(426, 1705540077, 'User logged in', '2024-03-27 03:15:17'),
-(427, 1705540077, 'User logged in', '2024-03-28 02:10:59'),
-(428, 1705540077, 'User logged out', '2024-03-28 02:22:49'),
-(429, 1705540077, 'User logged in', '2024-03-28 02:22:55'),
-(430, 1705540077, 'User logged out', '2024-03-28 02:40:46'),
-(431, 137648118, 'User logged in', '2024-03-28 02:41:00'),
-(432, 137648118, 'User logged out', '2024-03-28 02:41:19'),
-(433, 1705540077, 'User logged in', '2024-03-28 02:41:33'),
-(434, 1705540077, 'User logged out', '2024-03-28 02:57:09'),
-(435, 1705540077, 'User logged in', '2024-03-28 02:57:20'),
-(436, 1705540077, 'User logged out', '2024-03-28 03:01:24'),
-(437, 1705540077, 'User logged in', '2024-03-28 03:01:33'),
-(438, 1705540077, 'User logged out', '2024-03-28 03:03:55'),
-(439, 1705540077, 'User logged in', '2024-03-28 03:04:01'),
-(440, 1705540077, 'User logged out', '2024-03-28 03:07:17'),
-(441, 1705540077, 'User logged in', '2024-03-28 03:07:23'),
-(442, 1705540077, 'User logged out', '2024-03-28 03:07:32'),
-(443, 1705540077, 'User logged in', '2024-03-28 03:08:41'),
-(444, 137648118, 'User logged in', '2024-03-28 03:21:48'),
-(445, 137648118, 'User logged out', '2024-03-28 03:21:52'),
-(446, 1705540077, 'User logged in', '2024-03-28 03:21:59'),
-(447, 1705540077, 'User logged out', '2024-03-28 03:23:25'),
-(448, 1705540077, 'User logged in', '2024-03-28 03:23:37'),
-(449, 1705540077, 'User logged out', '2024-03-28 03:26:24'),
-(450, 1705540077, 'User logged in', '2024-03-28 03:26:33'),
-(451, 1705540077, 'Changed profile picture from default.png to 6604e39882b1f.png', '2024-03-28 03:27:20'),
-(452, 1705540077, 'User logged out', '2024-03-28 03:31:53'),
-(453, 137648118, 'User logged in', '2024-03-28 03:32:05'),
-(454, 137648118, 'User with UserID: 1699008390 has been deleted.', '2024-03-28 03:32:11'),
-(455, 137648118, 'User with UserID: 1705540080 has been deleted.', '2024-03-28 03:32:17'),
-(456, 137648118, 'User logged out', '2024-03-28 03:32:23'),
-(457, 1705540080, 'User logged in', '2024-03-28 03:32:32'),
-(458, 1705540080, 'Changed profile picture from default.png to 6604e5011908a.png', '2024-03-28 03:33:21'),
-(459, 1705540080, 'User logged out', '2024-03-28 04:25:25'),
-(460, 1705540077, 'User logged in', '2024-03-28 04:25:35'),
-(461, 1705540077, 'User logged out', '2024-03-28 04:26:57'),
-(462, 1705540077, 'User logged in', '2024-03-28 04:27:09'),
-(463, 1705540077, 'User logged in', '2024-03-28 04:27:54'),
-(464, 1705540077, 'User logged out', '2024-03-28 04:30:22'),
-(465, 1705540077, 'User logged in', '2024-03-28 04:30:38'),
-(466, 1705540077, 'User logged out', '2024-03-28 06:25:55'),
-(467, 1705540077, 'User logged in', '2024-03-28 06:26:27'),
-(468, 137648118, 'User logged in', '2024-04-02 02:51:02'),
-(469, 137648118, 'User logged in', '2024-04-02 02:54:39'),
-(470, 137648118, 'User logged in', '2024-04-02 03:01:53'),
-(471, 137648118, 'User logged in', '2024-04-02 03:03:39'),
-(472, 137648118, 'User logged out', '2024-04-02 03:04:34'),
-(473, 1705540077, 'User logged in', '2024-04-02 03:04:45'),
-(474, 1705540077, 'User logged out', '2024-04-02 03:05:26'),
-(475, 1705540077, 'User logged in', '2024-04-02 03:05:32'),
-(476, 1705540077, 'User logged out', '2024-04-02 03:06:08'),
-(477, 1699007959, 'User logged in', '2024-04-02 03:06:14'),
-(478, 1699007959, 'Changed profile picture from  to 660b763094b2b.png', '2024-04-02 03:06:24'),
-(479, 137648118, 'User logged in', '2024-04-02 03:39:54');
+(390, 137648118, 'User logged in', '2024-01-22 07:15:39'),
+(391, 137648118, 'User logged in', '2024-01-25 16:19:32'),
+(392, 137648118, 'User logged in', '2024-02-06 05:37:33'),
+(393, 137648118, 'User logged out', '2024-02-06 05:41:36'),
+(394, 1699007959, 'User logged in', '2024-02-06 05:41:45'),
+(395, 1699007959, 'User logged out', '2024-02-06 05:43:04'),
+(396, 137648118, 'User logged in', '2024-02-06 05:43:25'),
+(397, 137648118, 'User logged out', '2024-02-06 05:43:45'),
+(398, 1705540077, 'User logged in', '2024-02-06 05:43:56'),
+(399, 1705540077, 'User logged out', '2024-02-06 05:44:57'),
+(400, 137648118, 'User logged in', '2024-02-12 07:00:09'),
+(401, 137648118, 'User logged out', '2024-02-12 07:01:15'),
+(402, 1705540077, 'User logged in', '2024-02-12 07:01:37'),
+(403, 1705540077, 'User logged out', '2024-02-12 07:05:39'),
+(404, 1699007959, 'User logged in', '2024-02-12 07:06:00'),
+(405, 1699007959, 'Exam created: 14, Type: Pretest, Name: test', '2024-02-12 07:07:07'),
+(406, 1699007959, 'Question created for Test ID: 17', '2024-02-12 07:08:25'),
+(407, 1699007959, 'User logged out', '2024-02-12 07:08:47'),
+(408, 1705540077, 'User logged in', '2024-02-12 07:08:59'),
+(409, 1705540077, 'User logged out', '2024-02-12 07:10:35'),
+(410, 1699007959, 'User logged in', '2024-02-12 07:10:45'),
+(411, 1699007959, 'User logged out', '2024-02-12 07:12:25'),
+(412, 137648118, 'User logged in', '2024-02-27 06:44:05'),
+(413, 137648118, 'User logged in', '2024-03-01 13:20:53'),
+(414, 137648118, 'User logged out', '2024-03-01 13:22:48'),
+(415, 1705540077, 'User logged in', '2024-03-01 13:23:11'),
+(416, 1705540077, 'User logged in', '2024-03-03 13:52:19'),
+(417, 1705540077, 'User logged out', '2024-03-03 14:23:57'),
+(418, 1699007959, 'User logged in', '2024-03-03 14:24:09'),
+(419, 1699007959, 'User logged out', '2024-03-03 14:54:30'),
+(420, 137648118, 'User logged in', '2024-03-03 14:54:41'),
+(421, 1705540077, 'User logged in', '2024-03-05 05:12:22'),
+(422, 1705540077, 'User logged out', '2024-03-05 05:16:25'),
+(423, 137648118, 'User logged in', '2024-03-05 05:16:34'),
+(424, 137648118, 'User logged out', '2024-03-05 05:17:33'),
+(425, 1705540077, 'User logged in', '2024-03-05 05:17:57'),
+(426, 1705540077, 'User logged in', '2024-03-20 03:42:55'),
+(427, 1705540077, 'User logged out', '2024-03-20 03:50:29'),
+(428, 137648118, 'User logged in', '2024-03-20 03:50:38'),
+(429, 137648118, 'User logged out', '2024-03-20 03:51:50'),
+(430, 1699007959, 'User logged in', '2024-03-20 03:52:01'),
+(431, 1699007959, 'User logged out', '2024-03-20 03:52:25'),
+(432, 137648118, 'User logged in', '2024-03-20 03:52:33'),
+(433, 137648118, 'User logged out', '2024-03-20 03:55:48'),
+(434, 1705540077, 'User logged in', '2024-03-20 03:55:58'),
+(435, 1705540077, 'User logged in', '2024-03-21 07:11:52'),
+(436, 1705540077, 'User logged out', '2024-03-21 07:14:09'),
+(437, 1699007959, 'User logged in', '2024-03-21 07:14:22'),
+(438, 1699007959, 'User logged out', '2024-03-21 07:17:16'),
+(439, 1705540077, 'User logged in', '2024-03-21 07:17:29'),
+(440, 1705540077, 'User logged out', '2024-03-21 07:18:26'),
+(441, 1699007959, 'User logged in', '2024-03-21 07:18:39'),
+(442, 1699007959, 'User logged out', '2024-03-21 07:19:49'),
+(443, 137648118, 'User logged in', '2024-03-21 07:20:01'),
+(444, 137648118, 'User logged out', '2024-03-21 07:24:06'),
+(445, 1705540077, 'User logged in', '2024-03-23 14:30:27'),
+(446, 137648118, 'User logged in', '2024-03-23 15:13:38'),
+(447, 137648118, 'User logged in', '2024-03-25 12:08:52'),
+(448, 1699007959, 'User logged out', '2024-03-25 12:15:38'),
+(449, 137648118, 'User logged in', '2024-03-25 12:15:45'),
+(450, 137648118, 'User logged out', '2024-03-25 12:16:03'),
+(451, 1699007959, 'User logged in', '2024-03-25 12:16:10'),
+(452, 1699007959, 'User logged out', '2024-03-25 12:16:24'),
+(453, 137648118, 'User logged in', '2024-03-25 12:16:34'),
+(454, 137648118, 'User logged out', '2024-03-25 12:17:01'),
+(455, 137648118, 'User logged in', '2024-03-25 12:17:23'),
+(456, 137648118, 'User logged out', '2024-03-25 12:17:36'),
+(457, 1699008390, 'User logged in', '2024-03-25 12:17:42'),
+(458, 1699008390, 'User logged out', '2024-03-25 12:18:47'),
+(459, 1699008390, 'User logged in', '2024-03-25 12:18:51'),
+(460, 1699008390, 'User logged in', '2024-03-25 12:57:03'),
+(461, 137648118, 'User logged in', '2024-03-25 13:04:02'),
+(462, 1699007959, 'User logged in', '2024-03-25 13:17:58'),
+(463, 1699007959, 'User logged out', '2024-03-25 13:18:09'),
+(464, 137648118, 'User logged in', '2024-03-25 13:18:18'),
+(465, 137648118, 'User with UserID: 1705540079 has been deleted.', '2024-03-25 13:23:06'),
+(466, 137648118, 'User with Username: ikimukti has been update.', '2024-03-25 13:26:45'),
+(467, 137648118, 'Class updated: X TKJ 2 - (Teknik Komputer Jaringan), Academic Year: 2023', '2024-03-25 13:54:12'),
+(468, 1705540077, 'User logged in', '2024-03-28 16:02:26'),
+(469, 1705540077, 'User logged in', '2024-03-28 16:53:30'),
+(470, 137648118, 'User logged in', '2024-03-28 17:09:53'),
+(471, 1705540077, 'User logged in', '2024-03-28 17:42:30'),
+(472, 1705540077, 'User logged out', '2024-03-28 18:20:53'),
+(473, 1699007959, 'User logged in', '2024-03-28 18:20:59'),
+(474, 1699007959, 'Changed profile picture from  to 6605b51a0c6b7.png', '2024-03-28 18:21:14'),
+(475, 1699007959, 'Changed profile picture from 6605b51a0c6b7.png to 6605b57ba847d.png', '2024-03-28 18:22:51'),
+(476, 1699007959, 'Changed profile picture from 6605b57ba847d.png to 6605b5ba06608.png', '2024-03-28 18:23:54'),
+(477, 1699007959, 'Changed profile picture from 6605b5ba06608.png to 6605b62686669.png', '2024-03-28 18:25:42'),
+(478, 1699007959, 'User logged out', '2024-03-28 20:29:01'),
+(479, 1705540077, 'User logged in', '2024-03-28 20:29:10'),
+(480, 1705540077, 'User logged out', '2024-03-28 20:29:38'),
+(481, 1699007959, 'User logged in', '2024-03-28 20:29:46'),
+(482, 1699007959, 'User logged out', '2024-03-28 20:34:24'),
+(483, 1711674623, 'User logged in', '2024-03-29 01:11:40'),
+(484, 1711674623, 'User logged out', '2024-03-29 01:15:55'),
+(485, 1711674979, 'User logged in', '2024-03-29 01:16:59'),
+(486, 1711674979, 'User logged out', '2024-03-29 01:17:38'),
+(487, 137648118, 'User logged in', '2024-03-29 01:17:43'),
+(488, 137648118, 'User with UserID: 1711674979 has been deleted.', '2024-03-29 01:17:52'),
+(489, 137648118, 'User with UserID: 1711674979 has been deleted.', '2024-03-29 01:24:01'),
+(490, 137648118, 'User logged out', '2024-03-29 01:24:23'),
+(491, NULL, 'User logged in', '2024-03-29 01:28:06'),
+(492, NULL, 'User logged in', '2024-03-29 01:28:22'),
+(493, 137648118, 'User logged in', '2024-03-29 01:28:34'),
+(494, 137648118, 'User logged out', '2024-03-29 01:28:37'),
+(495, 137648118, 'User logged in', '2024-03-29 01:28:47'),
+(496, 137648118, 'User with UserID: 137648118 has been deleted.', '2024-03-29 01:31:30'),
+(497, 137648118, 'User with UserID: 137648118 has been deleted.', '2024-03-29 01:31:34'),
+(498, 137648118, 'User with UserID: 137648118 has been deleted.', '2024-03-29 01:31:40'),
+(499, 137648118, 'User with UserID: 137648118 has been deleted.', '2024-03-29 01:34:16'),
+(500, 137648118, 'User logged out', '2024-03-29 01:34:48'),
+(501, 137648118, 'User logged in', '2024-03-29 01:34:52'),
+(502, 137648118, 'User logged in', '2024-03-29 01:35:12'),
+(503, 137648118, 'Material created: Test', '2024-03-29 01:51:53'),
+(504, 137648118, 'Material created: Test', '2024-03-29 01:57:02'),
+(505, 137648118, 'User logged out', '2024-03-29 01:59:34'),
+(506, 1705540077, 'User logged in', '2024-03-29 01:59:44'),
+(507, 1705540077, 'User logged out', '2024-03-29 02:39:33'),
+(508, 1705540077, 'User logged in', '2024-03-29 02:39:42'),
+(509, 1705540077, 'User logged in', '2024-03-29 02:44:53'),
+(510, 1705540077, 'User logged out', '2024-03-29 02:46:25'),
+(511, 1705540077, 'User logged in', '2024-03-29 02:47:26'),
+(512, 1705540077, 'User logged in', '2024-03-29 03:00:12'),
+(513, 1705540077, 'User logged in', '2024-03-29 03:01:06'),
+(514, 1705540077, 'User logged out', '2024-03-29 03:01:47'),
+(515, 1699007959, 'User logged in', '2024-03-29 03:01:53'),
+(516, 1699007959, 'User logged out', '2024-03-29 03:02:52'),
+(517, 1705540077, 'User logged in', '2024-03-29 03:03:03'),
+(518, 1705540077, 'User logged out', '2024-03-29 03:03:27'),
+(519, 1699007959, 'User logged in', '2024-03-29 03:03:33'),
+(520, 1699007959, 'User logged out', '2024-03-29 06:18:43'),
+(521, 137648118, 'User logged in', '2024-03-29 06:18:50'),
+(522, 137648118, 'Changed profile picture from default.png to 66065e1a2b808.png', '2024-03-29 06:22:18'),
+(523, 137648118, 'Material created: Test 2', '2024-03-29 06:25:27'),
+(524, 137648118, 'User logged out', '2024-03-29 06:25:36'),
+(525, 1705540077, 'User logged in', '2024-03-29 06:25:43'),
+(526, 1705540077, 'User logged out', '2024-03-29 06:29:50'),
+(527, 137648118, 'User logged in', '2024-03-29 06:29:55'),
+(528, 137648118, 'User logged out', '2024-03-29 06:31:32'),
+(529, 1705540077, 'User logged in', '2024-03-29 06:31:40'),
+(530, 1705540077, 'User logged out', '2024-03-29 06:36:14'),
+(531, 1699007959, 'User logged in', '2024-03-29 06:36:19'),
+(532, 1699007959, 'User logged out', '2024-03-29 06:40:51'),
+(533, 1699007959, 'User logged in', '2024-03-29 06:41:09'),
+(534, 1699007959, 'User logged out', '2024-03-29 06:43:05'),
+(535, 137648118, 'User logged in', '2024-03-29 06:43:10'),
+(536, 137648118, 'User logged out', '2024-03-29 06:43:14'),
+(537, 1705540077, 'User logged in', '2024-03-29 06:43:25'),
+(538, 1705540077, 'User logged out', '2024-03-29 06:45:30'),
+(539, 137648118, 'User logged in', '2024-03-29 06:52:58'),
+(540, 137648118, 'User with UserID: 1711695161 has been deleted.', '2024-03-29 06:53:13'),
+(541, 137648118, 'User logged out', '2024-03-29 06:53:16'),
+(542, 1711695161, 'User logged in', '2024-03-29 06:53:22'),
+(543, 1711695161, 'User logged in', '2024-03-29 07:19:19'),
+(544, 1711695161, 'User logged in', '2024-03-29 07:25:45'),
+(545, 1711695161, 'User logged in', '2024-03-29 07:27:38'),
+(546, 137648118, 'User logged in', '2024-04-14 11:58:29'),
+(547, 137648118, 'User logged out', '2024-04-14 12:06:10'),
+(548, 137648118, 'User logged in', '2024-04-14 12:06:20'),
+(549, 137648118, 'User logged out', '2024-04-14 12:27:22'),
+(550, 137648118, 'User logged in', '2024-04-14 12:40:53'),
+(551, 137648118, 'User logged out', '2024-04-14 12:41:02');
 
 -- --------------------------------------------------------
 
@@ -628,6 +711,7 @@ CREATE TABLE `Materials` (
   `Type` varchar(50) DEFAULT NULL,
   `Content` longtext DEFAULT NULL,
   `Link` varchar(255) DEFAULT NULL,
+  `Video` varchar(512) DEFAULT NULL,
   `Sequence` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -635,29 +719,31 @@ CREATE TABLE `Materials` (
 -- Dumping data for table `Materials`
 --
 
-INSERT INTO `Materials` (`MaterialID`, `SubjectID`, `TitleMaterial`, `Type`, `Content`, `Link`, `Sequence`) VALUES
-(7, 1, 'Tujuan Pembelajaran', 'Informasi', 'Material 1', '../materials_data/1_TujuanPembelajaran.php', 1),
-(13, 1, 'A) Dasar Teori', 'Pengenalan Jaringan', 'Test', '../materials_data/1_A)DasarTeori.php', 2),
-(14, 1, 'B) Sejarah Jaringan Komputer', 'Pengenalan Jaringan', 'Test', '../materials_data/1_B)SejarahJaringanKomputer.php', 3),
-(15, 1, 'C) Tipe-Tipe Jaringan Komputer', 'Pengenalan Jaringan', 'Test', '../materials_data/1_C)Tipe-TipeJaringanKomputer.php', 4),
-(16, 1, 'D) Topologi Jaringan', 'Pengenalan Jaringan', 'Test', '../materials_data/1_D)TopologiJaringan.php', 5),
-(17, 1, 'A) Pendahuluan', 'Arsitektur Jaringan', 'Test', '../materials_data/1_A)Pendahuluan.php', 6),
-(18, 1, 'B) Jenis-Jenis Arsitektur Jaringan', 'Arsitektur Jaringan', 'Test', '../materials_data/1_B)Jenis-JenisArsitekturJaringan.php', 7),
-(19, 1, 'C) Keamanan Jaringan', 'Arsitektur Jaringan', 'Test', '../materials_data/1_C)KeamananJaringan.php', 8),
-(20, 1, 'D) Skalabilitas dan Ketersediaan', 'Arsitektur Jaringan', 'Test', '../materials_data/1_D)SkalabilitasdanKetersediaan.php', 9),
-(21, 1, 'A) Pengertian Protokol Jaringan', 'Protokol Jaringan', 'Test', '../materials_data/1_A)PengertianProtokolJaringan.php', 10),
-(22, 1, 'B) Sejarah Protokol Jaringan', 'Protokol Jaringan', 'Test', '../materials_data/1_B)SejarahProtokolJaringan.php', 11),
-(23, 1, 'C) Pendalaman Protokol Jaringan', 'Protokol Jaringan', 'Test', '../materials_data/1_C)PendalamanProtokolJaringan.php', 12),
-(24, 1, 'A) Pengertian IP Address', 'IP Address', 'Test', '../materials_data/1_A)PengertianIPAddress.php', 14),
-(25, 1, 'B) Jenis-Jenis IP Address', 'IP Address', 'Test', '../materials_data/1_B)Jenis-JenisIPAddress.php', 13),
-(26, 1, 'C) Penggunaan IP Address', 'IP Address', 'Test', '../materials_data/1_C)PenggunaanIPAddress.php', 15),
-(27, 1, 'D) Cara Menghitung IP Address dan Subnet Mask', 'IP Address', 'Test', '../materials_data/1_D)CaraMenghitungIPAddressdanSubnetMask.php', 17),
-(29, 5, 'A) Pengertian Cisco Packet Tracer', 'Pengenalan', '<div class=\\\"bg-white rounded p-4 shadow relative shadow:md mb-4\\\">\\r\\n    <h1 class=\\\"text-3xl font-semibold\\\">Pengenalan</h1>\\r\\n    <h2 class=\\\"text-2xl font-semibold\\\">A. Pengertian Cisco Packet Tracer</h2>\\r\\n\\r\\n    <p>Cisco Packet Tracer merupakan aplikasi simulasi yang secara khusus dirancang untuk mensimulasikan alat-alat jaringan Cisco. Aplikasi ini tidak hanya digunakan sebagai media pembelajaran dan pelatihan, tetapi juga menjadi alat yang sangat berharga dalam penelitian simulasi jaringan komputer. Cisco Packet Tracer diciptakan oleh Cisco Systems dan diberikan secara gratis kepada fakultas, siswa, dan alumni yang telah berpartisipasi di Cisco Networking Academy.</p>\\r\\n\\r\\n    <p>Aplikasi ini memiliki peran penting dalam membantu para praktisi jaringan untuk mengembangkan keterampilan dan pemahaman praktis tentang konfigurasi dan manajemen perangkat Cisco. Simulasi yang ditawarkan oleh Cisco Packet Tracer memungkinkan pengguna untuk membuat dan menguji konfigurasi jaringan tanpa memerlukan perangkat fisik.</p>\\r\\n\\r\\n    <p>Cisco Packet Tracer tidak hanya menyediakan lingkungan simulasi untuk perangkat keras jaringan, tetapi juga mencakup fitur-fitur yang mendukung pengembangan solusi jaringan yang kompleks. Pengguna dapat merancang, membangun, dan menguji berbagai skenario jaringan dengan berbagai perangkat Cisco, mulai dari router hingga switch.</p>\\r\\n\\r\\n    <p>Aplikasi ini juga menjadi bagian integral dari Cisco Networking Academy, sebuah program pendidikan global yang memberikan pengetahuan dan keterampilan jaringan kepada siswa di berbagai tingkatan. Melalui Cisco Packet Tracer, peserta dapat mengasah keahlian mereka dalam pengelolaan jaringan dan memahami secara mendalam berbagai aspek teknologi jaringan Cisco.</p>\\r\\n\\r\\n    <p>Dengan adanya Cisco Packet Tracer, para pelajar dan profesional jaringan dapat mengakses lingkungan simulasi yang realistis, yang membantu mereka menjembatani kesenjangan antara teori dan praktik dalam dunia jaringan komputer.</p>\\r\\n</div>', '../materials_data/5_A)PengertianCiscoPacketTracer.php', 1),
-(30, 5, 'B) Tujuan Cisco Packet Tracer', 'Pengenalan', '<div class=\\\"bg-white rounded p-4 shadow relative shadow:md mb-4\\\">\\r\\n    <h1 class=\\\"text-3xl font-semibold\\\">Pengenalan</h1>\\r\\n    <h2 class=\\\"text-2xl font-semibold\\\">B. Tujuan</h2>\\r\\n    <p>Tujuan utama dari Cisco Packet Tracer adalah menyediakan alat yang efektif bagi siswa dan pengajar agar dapat memahami prinsip dasar jaringan komputer. Aplikasi ini juga bertujuan untuk membantu pengguna membangun keterampilan praktis dalam menggunakan alat-alat jaringan Cisco.</p>\\r\\n    <p>Cisco Packet Tracer sering digunakan sebagai sarana pembelajaran dalam konteks Cisco Networking Academy, terutama untuk persiapan sertifikasi Cisco Certified Network Associate (CCNA). Melalui penggunaan aplikasi ini, siswa dapat menguji dan memperdalam pemahaman mereka tentang konsep jaringan dan konfigurasi perangkat Cisco.</p>\\r\\n    <p>Alat ini dianggap sebagai pelengkap dan alat bantu belajar yang sangat berguna, namun perlu diingat bahwa beberapa fitur yang terdapat dalam Cisco routers dan switches sebenarnya tidak dapat sepenuhnya disimulasikan oleh Cisco Packet Tracer. Oleh karena itu, aplikasi ini dilihat sebagai tambahan belajar yang mendukung pemahaman konsep, bukan sebagai pengganti perangkat keras jaringan fisik.</p>\\r\\n    <p>Di samping itu, penggunaan Cisco Packet Tracer juga memiliki manfaat dalam konteks pelatihan dan pengajaran. Pengajar dapat menciptakan skenario jaringan yang realistis untuk memberikan pengalaman praktis kepada siswa, mempercepat pemahaman mereka terhadap situasi-situasi yang mungkin terjadi dalam lingkungan jaringan sebenarnya.</p>\\r\\n    <p>Selain itu, tujuan dari Cisco Packet Tracer juga melibatkan mendukung pengembangan keterampilan praktis dalam hal troubleshooting jaringan. Dengan menyediakan lingkungan simulasi yang interaktif, pengguna dapat mengidentifikasi dan memecahkan masalah jaringan secara efisien, meningkatkan keahlian mereka dalam menjaga kinerja jaringan yang optimal.</p>\\r\\n    <p>Dengan demikian, tujuan dari Cisco Packet Tracer tidak hanya terbatas pada pembelajaran konsep dasar jaringan, tetapi juga mencakup aspek-aspek praktis yang penting dalam mengelola dan memelihara jaringan komputer.</p>\\r\\n</div>\\r\\n', '../materials_data/5_B)TujuanCiscoPacketTracer.php', 2),
-(31, 5, 'C) Fungsi Cisco Packet Tracer', 'Pengenalan', 'test', '../materials_data/5_C)FungsiCiscoPacketTracer.php', 3),
-(32, 5, 'A) Tool - Tool pada Cisco Packet Tracer', 'Pembahasan', 'Test', '../materials_data/5_A)Tool-ToolpadaCiscoPacketTracer.php', 4),
-(33, 5, 'B) Subnetting dalam Jaringan', 'Pembahasan', 'test', '../materials_data/5_B)SubnettingdalamJaringan.php', 5),
-(34, 5, 'C) Kelebihan dan Kekurangan Cisco Packet Tracer', 'Pembahasan', 'Test', '../materials_data/5_C)KelebihandanKekuranganCiscoPacketTracer.php', 6);
+INSERT INTO `Materials` (`MaterialID`, `SubjectID`, `TitleMaterial`, `Type`, `Content`, `Link`, `Video`, `Sequence`) VALUES
+(7, 1, 'Tujuan Pembelajaran', 'Informasi', 'Material 1', '../materials_data/1_TujuanPembelajaran.php', NULL, 1),
+(13, 1, 'A) Dasar Teori', 'Pengenalan Jaringan', 'Test', '../materials_data/1_A)DasarTeori.php', NULL, 4),
+(14, 1, 'B) Sejarah Jaringan Komputer', 'Pengenalan Jaringan', 'Test', '../materials_data/1_B)SejarahJaringanKomputer.php', NULL, 5),
+(15, 1, 'C) Tipe-Tipe Jaringan Komputer', 'Pengenalan Jaringan', 'Test', '../materials_data/1_C)Tipe-TipeJaringanKomputer.php', NULL, 6),
+(16, 1, 'D) Topologi Jaringan', 'Pengenalan Jaringan', 'Test', '../materials_data/1_D)TopologiJaringan.php', NULL, 7),
+(17, 1, 'A) Pendahuluan', 'Arsitektur Jaringan', 'Test', '../materials_data/1_A)Pendahuluan.php', NULL, 8),
+(18, 1, 'B) Jenis-Jenis Arsitektur Jaringan', 'Arsitektur Jaringan', 'Test', '../materials_data/1_B)Jenis-JenisArsitekturJaringan.php', NULL, 9),
+(19, 1, 'C) Keamanan Jaringan', 'Arsitektur Jaringan', 'Test', '../materials_data/1_C)KeamananJaringan.php', NULL, 10),
+(20, 1, 'D) Skalabilitas dan Ketersediaan', 'Arsitektur Jaringan', 'Test', '../materials_data/1_D)SkalabilitasdanKetersediaan.php', NULL, 14),
+(21, 1, 'A) Pengertian Protokol Jaringan', 'Protokol Jaringan', 'Test', '../materials_data/1_A)PengertianProtokolJaringan.php', NULL, 11),
+(22, 1, 'B) Sejarah Protokol Jaringan', 'Protokol Jaringan', 'Test', '../materials_data/1_B)SejarahProtokolJaringan.php', NULL, 12),
+(23, 1, 'C) Pendalaman Protokol Jaringan', 'Protokol Jaringan', 'Test', '../materials_data/1_C)PendalamanProtokolJaringan.php', NULL, 13),
+(24, 1, 'A) Pengertian IP Address', 'IP Address', 'Test', '../materials_data/1_A)PengertianIPAddress.php', NULL, 15),
+(25, 1, 'B) Jenis-Jenis IP Address', 'IP Address', 'Test', '../materials_data/1_B)Jenis-JenisIPAddress.php', NULL, 16),
+(26, 1, 'C) Penggunaan IP Address', 'IP Address', 'Test', '../materials_data/1_C)PenggunaanIPAddress.php', NULL, 17),
+(27, 1, 'D) Cara Menghitung IP Address dan Subnet Mask', 'IP Address', 'Test', '../materials_data/1_D)CaraMenghitungIPAddressdanSubnetMask.php', NULL, 18),
+(29, 5, 'A) Pengertian Cisco Packet Tracer', 'Pengenalan', '<div class=\\\"bg-white rounded p-4 shadow relative shadow:md mb-4\\\">\\r\\n    <h1 class=\\\"text-3xl font-semibold\\\">Pengenalan</h1>\\r\\n    <h2 class=\\\"text-2xl font-semibold\\\">A. Pengertian Cisco Packet Tracer</h2>\\r\\n\\r\\n    <p>Cisco Packet Tracer merupakan aplikasi simulasi yang secara khusus dirancang untuk mensimulasikan alat-alat jaringan Cisco. Aplikasi ini tidak hanya digunakan sebagai media pembelajaran dan pelatihan, tetapi juga menjadi alat yang sangat berharga dalam penelitian simulasi jaringan komputer. Cisco Packet Tracer diciptakan oleh Cisco Systems dan diberikan secara gratis kepada fakultas, siswa, dan alumni yang telah berpartisipasi di Cisco Networking Academy.</p>\\r\\n\\r\\n    <p>Aplikasi ini memiliki peran penting dalam membantu para praktisi jaringan untuk mengembangkan keterampilan dan pemahaman praktis tentang konfigurasi dan manajemen perangkat Cisco. Simulasi yang ditawarkan oleh Cisco Packet Tracer memungkinkan pengguna untuk membuat dan menguji konfigurasi jaringan tanpa memerlukan perangkat fisik.</p>\\r\\n\\r\\n    <p>Cisco Packet Tracer tidak hanya menyediakan lingkungan simulasi untuk perangkat keras jaringan, tetapi juga mencakup fitur-fitur yang mendukung pengembangan solusi jaringan yang kompleks. Pengguna dapat merancang, membangun, dan menguji berbagai skenario jaringan dengan berbagai perangkat Cisco, mulai dari router hingga switch.</p>\\r\\n\\r\\n    <p>Aplikasi ini juga menjadi bagian integral dari Cisco Networking Academy, sebuah program pendidikan global yang memberikan pengetahuan dan keterampilan jaringan kepada siswa di berbagai tingkatan. Melalui Cisco Packet Tracer, peserta dapat mengasah keahlian mereka dalam pengelolaan jaringan dan memahami secara mendalam berbagai aspek teknologi jaringan Cisco.</p>\\r\\n\\r\\n    <p>Dengan adanya Cisco Packet Tracer, para pelajar dan profesional jaringan dapat mengakses lingkungan simulasi yang realistis, yang membantu mereka menjembatani kesenjangan antara teori dan praktik dalam dunia jaringan komputer.</p>\\r\\n</div>', '../materials_data/5_A)PengertianCiscoPacketTracer.php', NULL, 1),
+(30, 5, 'B) Tujuan Cisco Packet Tracer', 'Pengenalan', '<div class=\\\"bg-white rounded p-4 shadow relative shadow:md mb-4\\\">\\r\\n    <h1 class=\\\"text-3xl font-semibold\\\">Pengenalan</h1>\\r\\n    <h2 class=\\\"text-2xl font-semibold\\\">B. Tujuan</h2>\\r\\n    <p>Tujuan utama dari Cisco Packet Tracer adalah menyediakan alat yang efektif bagi siswa dan pengajar agar dapat memahami prinsip dasar jaringan komputer. Aplikasi ini juga bertujuan untuk membantu pengguna membangun keterampilan praktis dalam menggunakan alat-alat jaringan Cisco.</p>\\r\\n    <p>Cisco Packet Tracer sering digunakan sebagai sarana pembelajaran dalam konteks Cisco Networking Academy, terutama untuk persiapan sertifikasi Cisco Certified Network Associate (CCNA). Melalui penggunaan aplikasi ini, siswa dapat menguji dan memperdalam pemahaman mereka tentang konsep jaringan dan konfigurasi perangkat Cisco.</p>\\r\\n    <p>Alat ini dianggap sebagai pelengkap dan alat bantu belajar yang sangat berguna, namun perlu diingat bahwa beberapa fitur yang terdapat dalam Cisco routers dan switches sebenarnya tidak dapat sepenuhnya disimulasikan oleh Cisco Packet Tracer. Oleh karena itu, aplikasi ini dilihat sebagai tambahan belajar yang mendukung pemahaman konsep, bukan sebagai pengganti perangkat keras jaringan fisik.</p>\\r\\n    <p>Di samping itu, penggunaan Cisco Packet Tracer juga memiliki manfaat dalam konteks pelatihan dan pengajaran. Pengajar dapat menciptakan skenario jaringan yang realistis untuk memberikan pengalaman praktis kepada siswa, mempercepat pemahaman mereka terhadap situasi-situasi yang mungkin terjadi dalam lingkungan jaringan sebenarnya.</p>\\r\\n    <p>Selain itu, tujuan dari Cisco Packet Tracer juga melibatkan mendukung pengembangan keterampilan praktis dalam hal troubleshooting jaringan. Dengan menyediakan lingkungan simulasi yang interaktif, pengguna dapat mengidentifikasi dan memecahkan masalah jaringan secara efisien, meningkatkan keahlian mereka dalam menjaga kinerja jaringan yang optimal.</p>\\r\\n    <p>Dengan demikian, tujuan dari Cisco Packet Tracer tidak hanya terbatas pada pembelajaran konsep dasar jaringan, tetapi juga mencakup aspek-aspek praktis yang penting dalam mengelola dan memelihara jaringan komputer.</p>\\r\\n</div>\\r\\n', '../materials_data/5_B)TujuanCiscoPacketTracer.php', NULL, 2),
+(31, 5, 'C) Fungsi Cisco Packet Tracer', 'Pengenalan', 'test', '../materials_data/5_C)FungsiCiscoPacketTracer.php', NULL, 3),
+(32, 5, 'A) Tool - Tool pada Cisco Packet Tracer', 'Pembahasan', 'Test', '../materials_data/5_A)Tool-ToolpadaCiscoPacketTracer.php', NULL, 4),
+(33, 5, 'B) Subnetting dalam Jaringan', 'Pembahasan', 'test', '../materials_data/5_B)SubnettingdalamJaringan.php', NULL, 5),
+(34, 5, 'C) Kelebihan dan Kekurangan Cisco Packet Tracer', 'Pembahasan', 'Test', '../materials_data/5_C)KelebihandanKekuranganCiscoPacketTracer.php', NULL, 6),
+(36, 1, 'Test', 'Informasi', '<div class=\"bg-white rounded p-4 shadow relative shadow:md mb-4\">\r\n    <h1 class=\"text-3xl font-semibold\">Pengenalan Jaringan</h1>\r\n    <h2 class=\"text-2xl font-semibold\">A. Dasar Teori</h2>\r\n    <h3 class=\"text-xl font-semibold mt-4\">Pengertian</h3>\r\n    <ol class=\"list-decimal list-inside pl-4\">\r\n        <li><strong>Menurut Bahasa:</strong><br>Jaringan komputer adalah sistem yang terdiri dari dua atau lebih perangkat komputer yang terhubung bersama dengan tujuan berbagi sumber daya, seperti data, aplikasi, atau perangkat keras, serta memungkinkan komunikasi antar perangkat tersebut. Dalam jaringan komputer, perangkat-perangkat ini dapat berkomunikasi secara lokal atau melalui jarak jauh, tergantung pada topologi dan teknologi yang digunakan.</li>\r\n    </ol>\r\n    <h3 class=\"text-xl font-semibold mt-4\">Menurut Para Ahli:</h3>\r\n    <ul class=\"list-disc list-inside pl-4\">\r\n        <li><strong>Andrew S. Tanenbaum:</strong><br>Andrew S. Tanenbaum, seorang pakar dalam bidang jaringan komputer, memberikan pengertian jaringan komputer sebagai berikut:<br>\"Jaringan komputer adalah kumpulan dari dua atau lebih perangkat komputer yang dihubungkan bersama-sama sehingga dapat berkomunikasi dan berbagi sumber daya, seperti data dan perangkat keras.\"<br><img src=\"../materials_data/1_A)DasarTeori/AndrewSTanenbaum.jpg\" alt=\"Andrew S. Tanenbaum\" class=\"w-1/4 mx-auto mt-4\"></li>\r\n        <li><strong>Douglas E. Comer:</strong><br>Douglas E. Comer, seorang penulis terkenal dalam bidang jaringan komputer, mendefinisikan jaringan komputer sebagai berikut:<br>\"Jaringan komputer adalah infrastruktur yang memungkinkan komunikasi data antara berbagai perangkat komputer dan sistem komunikasi. Tujuannya adalah untuk memfasilitasi pertukaran informasi dan sumber daya antara pengguna.\"<br><img src=\"../materials_data/1_A)DasarTeori/DouglasEComer.jpg\" alt=\"Douglas E. Comer\" class=\"w-1/4 mx-auto mt-4\"></li>\r\n        <li><strong>Larry L. Peterson dan Bruce S. Davie:</strong><br>Larry L. Peterson dan Bruce S. Davie, dalam buku mereka yang terkenal tentang jaringan komputer, menjelaskan pengertian jaringan komputer sebagai berikut:<br>\"Jaringan komputer adalah kumpulan perangkat keras dan perangkat lunak yang bekerja sama untuk menghubungkan komputer-komputer dan perangkat lainnya sehingga pengguna dapat berkomunikasi, berbagi sumber daya, dan mengakses informasi secara efisien.\"<br><img src=\"../materials_data/1_A)DasarTeori/LarryLPeterson.jpg\" alt=\"Larry L. Peterson dan Bruce S. Davie\" class=\"w-1/4 mx-auto mt-4\"></li>\r\n    </ul>\r\n    <h3 class=\"text-xl font-semibold mt-4\">Sejarah Jaringan Komputer</h3>\r\n    <ul class=\"list-disc list-inside pl-4\">\r\n        <li><strong>1940:</strong><br>Sejarah jaringan computer (Computer Network) dimulai dari lahirnya konsep jaringan komputer pada tahun 1940-an di Amerika yang dibuat oleh proyek untuk pengembangan komputer di laboratorium Bell dan group riset dari Universitas Harvard yang dipimpin profesor Howard Aiken. Pada awalnya penemuan tersebut digunakan untuk memanfaatkan sebuah perangkat komputer untuk keperluan bersama. Idenya adalah untuk mengerjakan beberapa tugas tanpa membuang waktu kosong yang terlalu banyak, maka dibuatlah proses beruntun, sehingga program bisa dijalankan dalam beberapa komputer.</li>\r\n        <li><strong>1950:</strong><br>Pada tahun 1950-an ketika komputer mulai berkembang sampai terciptanya super komputer, maka sebuah komputer harus melayani beberapa tempat yang tersedia (terminal), untuk itu ditemukan konsep distribusi proses berdasarkan waktu yang dikenal dengan nama TSS (Time Sharing System). Maka untuk pertama kalinya bentuk jaringan (network) komputer diaplikasikan. Pada sistem TSS beberapa terminal terhubung secara seri ke sebuah komputer atau perangkat lainnya yang terhubung dalam suatu jaringan (host) komputer.</li>\r\n        <li><strong>1973:</strong><br>Pada Tahun 1973 ke atas dikenal sebagai Kelahiran dari internet atau jaringan internasional (International Network), Terdapat dua orang ahli komputer yang mengembangkan dan juga mengusulkan sebuah jaringan yang bersifat sangat luas dan dapat digunakan oleh semua orang di dunia. Vinton Cerf dan juga Bob Kahn adalah kedua orang tersebut, yang membuat sebuah gagasan besar, yang sebenarnya menjadi sebuah cikal bakal dari terciptanya internet atau international network. Saat ini, internet pun sudah menjelma menjadi jaringan terbesar yang ada di dunia, dan dapat menghubungkan setiap orang di berbagai belahan dunia.</li>\r\n    </ul>\r\n\r\n    <h3 class=\"text-xl font-semibold mt-4\">Fungsi</h3>\r\n    <ul class=\"list-disc list-inside pl-4\">\r\n        <li><strong>Mudah Melakukan Pertukaran Data:</strong><br>Keberadaan jaringan komputer seperti internet dan lain-lain, bisa memudahkan kita untuk melakukan pertukaran data atau dokumen lainnya. Kamu bahkan bisa mengirim dan menerima data melalui berbagai perangkat kapan saja menggunakan internet.</li>\r\n        <li><strong>Menjaga Keamanan Data:</strong><br>Jaringan komputer juga memiliki proteksi atau perlindungan data. Jadi, data atau dokumen penting lainnya yang kamu miliki atau milik perusahaan dapat tersimpan di komputer dengan aman dan terjamin keamanannya. Fungsi jaringan komputer jadi pelindung data yang berguna, termasuk mencegah kehilangan data penting, contohnya data penting perusahaan.</li>\r\n        <li><strong>Memudahkan Komunikasi:</strong><br>Selain mudah untuk pertukaran data, fungsi jaringan komputer juga bisa memudahkan dalam komunikasi jarak jauh sekalipun secara optimal.</li>\r\n        <li><strong>Menyampaikan Informasi Secara Cepat:</strong><br>Saat ini, kamu mungkin dengan mudah memperoleh informasi dari berbagai sumber karena adanya jaringan komputer. Selain itu, kamu juga bisa mengaksesnya kapan saja dan di mana saja tanpa ada batasan jarak dan waktu.</li>\r\n        <li><strong>Menghemat Biaya:</strong><br>Adanya jaringan komputer membuat pengguna tidak perlu repot-repot mencetak dokumen atau file tertentu. Kamu hanya perlu menyimpannya ke dalam perangkat dan bisa dengan mudah mengirim data lewat internet. Jadi tidak perlu biaya untuk mencetak berkas dan lain-lain.</li>\r\n        <li><strong>Tetap Up-to-date:</strong><br>Fungsi penting jaringan komputer juga bisa membuat informasi yang diterima selalu up-to-date. Dengan jaringan komputer bisa mengakses kapan saja. Proses pengiriman informasi juga mudah dan cepat, jadi tidak perlu waktu yang lama.</li>\r\n        <li><strong>Membagi Sumber Daya:</strong><br>Sumber daya ini bisa berupa printer atau sumber daya lain, seperti data-data, software. Sebelum adanya jaringan komputer, printer digunakan hanya untuk satu komputer saja. Namun setelah ada jaringan komputer, jadi bisa digunakan oleh berbagai komputer.</li>\r\n        <li><strong>Reliabilitas Tinggi:</strong><br>Seperti yang disebutkan sebelumnya bahwa fungsi jaringan komputer memungkinkan untuk mengkopi data-data ke lebih dari satu perangkat. Jika ada satu komputer rusak meskipun data-datanya hilang, tetapi data-datanya masih tersimpan di memory komputer lainnya.</li>\r\n        <li><strong>Mempercepat Transfer Data:</strong><br>Proses berbagi data jadi cepat karena transfer data pada jaringan selalu lebih cepat dibandingkan sarana berbagai data lainnya yang bukan jaringan. Hal ini juga sangat mempermudah user dalam memperoleh informasi.</li>\r\n    </ul>\r\n\r\n    <h3 class=\"text-xl font-semibold mt-4\">Tujuan</h3>\r\n    <ol class=\"list-decimal list-inside pl-4\">\r\n        <li><strong>Berbagi Sumber Daya:</strong> Jaringan memungkinkan perangkat untuk berbagi peralatan seperti printer, file, dan perangkat keras lainnya.</li>\r\n        <li><strong>Kemampuan Komunikasi:</strong> Memungkinkan pengguna untuk berkomunikasi melalui email, pesan instan, video konferensi, dan lainnya.</li>\r\n        <li><strong>Akses Internet:</strong> Jaringan menyediakan akses ke Internet, yang memungkinkan akses ke sumber daya global dan informasi.</li>\r\n        <li><strong>Peningkatan Keamanan:</strong> Jaringan dapat digunakan untuk mengimplementasikan langkah-langkah keamanan seperti firewall, enkripsi, dan akses terbatas.</li>\r\n        <li><strong>Skalabilitas:</strong> Jaringan dapat diperluas sesuai kebutuhan dengan menambahkan lebih banyak perangkat dan sumber daya.</li>\r\n    </ol>\r\n</div>', '../materials_data/1_Test.php', 'materials_data/Test/video/video.mp4', 2),
+(37, 1, 'Test 2', 'Informasi', '<div class=\"bg-white rounded p-4 shadow relative shadow:md mb-4\">\r\n    <h1 class=\"text-3xl font-semibold\">Pengenalan Jaringan</h1>\r\n    <h2 class=\"text-2xl font-semibold\">A. Dasar Teori</h2>\r\n    <h3 class=\"text-xl font-semibold mt-4\">Pengertian</h3>\r\n    <ol class=\"list-decimal list-inside pl-4\">\r\n        <li><strong>Menurut Bahasa:</strong><br>Jaringan komputer adalah sistem yang terdiri dari dua atau lebih perangkat komputer yang terhubung bersama dengan tujuan berbagi sumber daya, seperti data, aplikasi, atau perangkat keras, serta memungkinkan komunikasi antar perangkat tersebut. Dalam jaringan komputer, perangkat-perangkat ini dapat berkomunikasi secara lokal atau melalui jarak jauh, tergantung pada topologi dan teknologi yang digunakan.</li>\r\n    </ol>\r\n    <h3 class=\"text-xl font-semibold mt-4\">Menurut Para Ahli:</h3>\r\n    <ul class=\"list-disc list-inside pl-4\">\r\n        <li><strong>Andrew S. Tanenbaum:</strong><br>Andrew S. Tanenbaum, seorang pakar dalam bidang jaringan komputer, memberikan pengertian jaringan komputer sebagai berikut:<br>\"Jaringan komputer adalah kumpulan dari dua atau lebih perangkat komputer yang dihubungkan bersama-sama sehingga dapat berkomunikasi dan berbagi sumber daya, seperti data dan perangkat keras.\"<br><img src=\"../materials_data/1_A)DasarTeori/AndrewSTanenbaum.jpg\" alt=\"Andrew S. Tanenbaum\" class=\"w-1/4 mx-auto mt-4\"></li>\r\n        <li><strong>Douglas E. Comer:</strong><br>Douglas E. Comer, seorang penulis terkenal dalam bidang jaringan komputer, mendefinisikan jaringan komputer sebagai berikut:<br>\"Jaringan komputer adalah infrastruktur yang memungkinkan komunikasi data antara berbagai perangkat komputer dan sistem komunikasi. Tujuannya adalah untuk memfasilitasi pertukaran informasi dan sumber daya antara pengguna.\"<br><img src=\"../materials_data/1_A)DasarTeori/DouglasEComer.jpg\" alt=\"Douglas E. Comer\" class=\"w-1/4 mx-auto mt-4\"></li>\r\n        <li><strong>Larry L. Peterson dan Bruce S. Davie:</strong><br>Larry L. Peterson dan Bruce S. Davie, dalam buku mereka yang terkenal tentang jaringan komputer, menjelaskan pengertian jaringan komputer sebagai berikut:<br>\"Jaringan komputer adalah kumpulan perangkat keras dan perangkat lunak yang bekerja sama untuk menghubungkan komputer-komputer dan perangkat lainnya sehingga pengguna dapat berkomunikasi, berbagi sumber daya, dan mengakses informasi secara efisien.\"<br><img src=\"../materials_data/1_A)DasarTeori/LarryLPeterson.jpg\" alt=\"Larry L. Peterson dan Bruce S. Davie\" class=\"w-1/4 mx-auto mt-4\"></li>\r\n    </ul>\r\n    <h3 class=\"text-xl font-semibold mt-4\">Sejarah Jaringan Komputer</h3>\r\n    <ul class=\"list-disc list-inside pl-4\">\r\n        <li><strong>1940:</strong><br>Sejarah jaringan computer (Computer Network) dimulai dari lahirnya konsep jaringan komputer pada tahun 1940-an di Amerika yang dibuat oleh proyek untuk pengembangan komputer di laboratorium Bell dan group riset dari Universitas Harvard yang dipimpin profesor Howard Aiken. Pada awalnya penemuan tersebut digunakan untuk memanfaatkan sebuah perangkat komputer untuk keperluan bersama. Idenya adalah untuk mengerjakan beberapa tugas tanpa membuang waktu kosong yang terlalu banyak, maka dibuatlah proses beruntun, sehingga program bisa dijalankan dalam beberapa komputer.</li>\r\n        <li><strong>1950:</strong><br>Pada tahun 1950-an ketika komputer mulai berkembang sampai terciptanya super komputer, maka sebuah komputer harus melayani beberapa tempat yang tersedia (terminal), untuk itu ditemukan konsep distribusi proses berdasarkan waktu yang dikenal dengan nama TSS (Time Sharing System). Maka untuk pertama kalinya bentuk jaringan (network) komputer diaplikasikan. Pada sistem TSS beberapa terminal terhubung secara seri ke sebuah komputer atau perangkat lainnya yang terhubung dalam suatu jaringan (host) komputer.</li>\r\n        <li><strong>1973:</strong><br>Pada Tahun 1973 ke atas dikenal sebagai Kelahiran dari internet atau jaringan internasional (International Network), Terdapat dua orang ahli komputer yang mengembangkan dan juga mengusulkan sebuah jaringan yang bersifat sangat luas dan dapat digunakan oleh semua orang di dunia. Vinton Cerf dan juga Bob Kahn adalah kedua orang tersebut, yang membuat sebuah gagasan besar, yang sebenarnya menjadi sebuah cikal bakal dari terciptanya internet atau international network. Saat ini, internet pun sudah menjelma menjadi jaringan terbesar yang ada di dunia, dan dapat menghubungkan setiap orang di berbagai belahan dunia.</li>\r\n    </ul>\r\n\r\n    <h3 class=\"text-xl font-semibold mt-4\">Fungsi</h3>\r\n    <ul class=\"list-disc list-inside pl-4\">\r\n        <li><strong>Mudah Melakukan Pertukaran Data:</strong><br>Keberadaan jaringan komputer seperti internet dan lain-lain, bisa memudahkan kita untuk melakukan pertukaran data atau dokumen lainnya. Kamu bahkan bisa mengirim dan menerima data melalui berbagai perangkat kapan saja menggunakan internet.</li>\r\n        <li><strong>Menjaga Keamanan Data:</strong><br>Jaringan komputer juga memiliki proteksi atau perlindungan data. Jadi, data atau dokumen penting lainnya yang kamu miliki atau milik perusahaan dapat tersimpan di komputer dengan aman dan terjamin keamanannya. Fungsi jaringan komputer jadi pelindung data yang berguna, termasuk mencegah kehilangan data penting, contohnya data penting perusahaan.</li>\r\n        <li><strong>Memudahkan Komunikasi:</strong><br>Selain mudah untuk pertukaran data, fungsi jaringan komputer juga bisa memudahkan dalam komunikasi jarak jauh sekalipun secara optimal.</li>\r\n        <li><strong>Menyampaikan Informasi Secara Cepat:</strong><br>Saat ini, kamu mungkin dengan mudah memperoleh informasi dari berbagai sumber karena adanya jaringan komputer. Selain itu, kamu juga bisa mengaksesnya kapan saja dan di mana saja tanpa ada batasan jarak dan waktu.</li>\r\n        <li><strong>Menghemat Biaya:</strong><br>Adanya jaringan komputer membuat pengguna tidak perlu repot-repot mencetak dokumen atau file tertentu. Kamu hanya perlu menyimpannya ke dalam perangkat dan bisa dengan mudah mengirim data lewat internet. Jadi tidak perlu biaya untuk mencetak berkas dan lain-lain.</li>\r\n        <li><strong>Tetap Up-to-date:</strong><br>Fungsi penting jaringan komputer juga bisa membuat informasi yang diterima selalu up-to-date. Dengan jaringan komputer bisa mengakses kapan saja. Proses pengiriman informasi juga mudah dan cepat, jadi tidak perlu waktu yang lama.</li>\r\n        <li><strong>Membagi Sumber Daya:</strong><br>Sumber daya ini bisa berupa printer atau sumber daya lain, seperti data-data, software. Sebelum adanya jaringan komputer, printer digunakan hanya untuk satu komputer saja. Namun setelah ada jaringan komputer, jadi bisa digunakan oleh berbagai komputer.</li>\r\n        <li><strong>Reliabilitas Tinggi:</strong><br>Seperti yang disebutkan sebelumnya bahwa fungsi jaringan komputer memungkinkan untuk mengkopi data-data ke lebih dari satu perangkat. Jika ada satu komputer rusak meskipun data-datanya hilang, tetapi data-datanya masih tersimpan di memory komputer lainnya.</li>\r\n        <li><strong>Mempercepat Transfer Data:</strong><br>Proses berbagi data jadi cepat karena transfer data pada jaringan selalu lebih cepat dibandingkan sarana berbagai data lainnya yang bukan jaringan. Hal ini juga sangat mempermudah user dalam memperoleh informasi.</li>\r\n    </ul>\r\n\r\n    <h3 class=\"text-xl font-semibold mt-4\">Tujuan</h3>\r\n    <ol class=\"list-decimal list-inside pl-4\">\r\n        <li><strong>Berbagi Sumber Daya:</strong> Jaringan memungkinkan perangkat untuk berbagi peralatan seperti printer, file, dan perangkat keras lainnya.</li>\r\n        <li><strong>Kemampuan Komunikasi:</strong> Memungkinkan pengguna untuk berkomunikasi melalui email, pesan instan, video konferensi, dan lainnya.</li>\r\n        <li><strong>Akses Internet:</strong> Jaringan menyediakan akses ke Internet, yang memungkinkan akses ke sumber daya global dan informasi.</li>\r\n        <li><strong>Peningkatan Keamanan:</strong> Jaringan dapat digunakan untuk mengimplementasikan langkah-langkah keamanan seperti firewall, enkripsi, dan akses terbatas.</li>\r\n        <li><strong>Skalabilitas:</strong> Jaringan dapat diperluas sesuai kebutuhan dengan menambahkan lebih banyak perangkat dan sumber daya.</li>\r\n    </ol>\r\n</div>', '../materials_data/1_Test2.php', 'materials_data/Test 2/video/video.mp4', 3);
 
 -- --------------------------------------------------------
 
@@ -672,6 +758,13 @@ CREATE TABLE `Questions` (
   `TestID` int(11) DEFAULT NULL,
   `QuestionImage` varchar(1024) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `Questions`
+--
+
+INSERT INTO `Questions` (`QuestionID`, `QuestionText`, `QuestionType`, `TestID`, `QuestionImage`) VALUES
+(55, 'apakah', 'multiple_choice', 17, NULL);
 
 -- --------------------------------------------------------
 
@@ -854,7 +947,9 @@ INSERT INTO `Students` (`StudentID`, `StudentNumber`, `Religion`, `ParentGuardia
 (121, 'SN121', NULL, 'Orang Tua Tegar Jaya Wibowo', 'Kediri', NULL, NULL, 7, 1705553588),
 (122, 'SN122', NULL, 'Orang Tua Teo Arya Rinares Wijaya Lintang', 'Kediri', NULL, NULL, 7, 1705553589),
 (123, 'SN123', NULL, 'Orang Tua Yeremia Devano Susanto', 'Kediri', NULL, NULL, 7, 1705553590),
-(124, 'SN124', NULL, 'Orang Tua Yopi Irawan', 'Kediri', NULL, NULL, 7, 1705553591);
+(124, 'SN124', NULL, 'Orang Tua Yopi Irawan', 'Kediri', NULL, NULL, 7, 1705553591),
+(126, '-', '-', '-', '-', '-', '-', 6, 1711674979),
+(127, '-', '-', '-', '-', '-', '-', 3, 1711695161);
 
 -- --------------------------------------------------------
 
@@ -929,17 +1024,6 @@ CREATE TABLE `TestResults` (
   `Score` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `TestResults`
---
-
-INSERT INTO `TestResults` (`ResultID`, `StudentID`, `TestID`, `IsCompleted`, `CorrectAnswers`, `IncorrectAnswers`, `Score`) VALUES
-(1, 2, 5, 1, 5, 2, 71),
-(2, 2, 8, 1, 3, 0, 100),
-(3, 2, 11, 1, 1, 2, 33),
-(4, 2, 15, 1, 2, -1, 200),
-(5, 2, 9, 1, 1, 2, 33);
-
 -- --------------------------------------------------------
 
 --
@@ -985,18 +1069,17 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `DateOfBirth`, `Gender`, `Address`, `PhoneNumber`, `RoleID`, `AccountCreationDate`, `LastLogin`, `AccountStatus`, `ProfilePictureURL`, `ActivationStatus`) VALUES
-(0, 'ikimukti', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '19103020046@unpkediri.ac.id', 'Firmansyah Mukti Wijaya', '2023-10-12', 'Male', 'Nglaban 1111', '081216318022', 3, '2023-11-03 10:17:58', '2023-11-03 17:17:58', NULL, '653e5a409b4fb.jpeg', 'active'),
-(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2024-04-02 03:39:54', '2024-04-02 10:39:54', NULL, 'default.png', 'active'),
-(1699007959, 'aziz', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'wahyuadi@gmail.com', 'Muhammad As’adul Azis Wahyuadi ', '2023-11-22', 'Male', 'Tuban', '+62 896-8736-8865', 2, '2024-04-02 03:06:24', '2024-04-02 10:06:14', 'active', '660b763094b2b.png', 'active'),
+(137648118, 'admin', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin@ikimukti.com', 'Administrator', NULL, NULL, NULL, NULL, 1, '2024-04-14 12:40:53', '2024-04-14 19:40:53', NULL, '66065e1a2b808.png', 'active'),
+(1699007959, 'aziz', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'wahyuadi@gmail.com', 'Muhammad As’adul Azis Wahyuadi ', '2023-11-22', 'Male', 'Tuban', '+62 896-8736-8865', 2, '2024-03-29 06:41:09', '2024-03-29 13:41:09', 'active', '6605b62686669.png', 'active'),
 (1699008117, 'tika', '$2y$10$XMghwn955y4Vr4J7bc5pju78Dx6.ikMeerd49FnFCvPPKQB1axXtS', 'tik@gmail.com', 'Febriana Mahabatika', '2023-11-16', 'Female', 'Kediri', '+62 858-9307-5772', 2, '2024-01-18 00:39:12', NULL, 'active', NULL, 'active'),
-(1699008390, 'renal', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'renal@gmail.com', 'Renaldi Hariski Firdaus', '2023-11-17', 'Male', 'Nganjuk', '+62 813-5717-7521', 2, '2024-03-28 03:32:11', '2024-03-27 09:51:15', 'active', NULL, 'active'),
+(1699008390, 'renal', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'renal@gmail.com', 'Renaldi Hariski Firdaus', '2023-11-17', 'Male', 'Nganjuk', '+62 813-5717-7521', 2, '2024-03-25 12:57:03', '2024-03-25 19:57:03', 'active', NULL, 'active'),
 (1699008906, 'nefira', '$2y$10$qiodW.6G2b42N5akckDfr.PQqNFr6m/JEWZ2AoOhPonAUIEXqhvwG', 'nefira@gmail.com', 'Nefira Anastasya', '2023-11-08', 'Female', 'Sidoarjo', '+62 895-3672-40319', 2, '2024-01-18 04:36:13', NULL, 'active', NULL, 'active'),
 (1699008959, 'nanda', '$2y$10$S.Lr0XU71eYd93gnHJYFkuNvwDlySLWMAa1kCobICvsOJUinbFDeq', 'nanda@gmail.com', 'Nanda Ajeng Listia', '0000-00-00', 'Male', 'Surabaya', '24534563546457', 2, '2024-01-18 00:41:32', NULL, 'Active', NULL, 'active'),
 (1700619157, 'mukti', '$2y$10$OnMJVb7WWNtzU7StPb6dtupCd.VyrFWoWPCmP9wmCqgkbr.eNEpha', 'iki.mukti@gmail.com', 'Firmansyah Mukti Wijaya', NULL, 'Male', 'Nglaban', '081216318022', 3, '2023-11-22 02:12:45', NULL, 'Active', NULL, 'active'),
-(1705540077, 'abi_satria', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'abi.satria@example.com', 'Abi Satria', '2005-01-01', 'Male', 'Kediri', '08123456789', 3, '2024-04-02 03:05:32', '2024-04-02 10:05:32', 'Active', '6604e39882b1f.png', 'active'),
+(1705540077, 'abi_satria', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'abi.satria@example.com', 'Abi Satria', '2005-01-01', 'Male', 'Kediri', '08123456789', 3, '2024-03-29 06:43:25', '2024-03-29 13:43:25', 'Active', 'default.png', 'active'),
 (1705540078, 'aditya_prasetyo', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'aditya.prasetyo@example.com', 'Aditya Bagas Prasetyo', '2004-02-15', 'Male', 'Kediri', '08123456788', 3, '2024-01-21 21:30:57', '2024-01-22 04:30:57', 'Active', 'default.png', 'active'),
-(1705540079, 'ahmad_maulana', 'hashed_password', 'ahmad.maulana@example.com', 'Ahmad Hasby Maulana', '2003-11-20', 'Male', 'Kediri', '08123456787', 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
-(1705540080, 'akbar_pratama', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'akbar.pratama@example.com', 'Akbar Sandi Pratama', '2003-10-10', 'Male', 'Kediri', '08123456786', 3, '2024-03-28 03:33:21', '2024-03-28 10:32:32', 'Active', '6604e5011908a.png', 'active'),
+(1705540079, 'ahmad_maulana', 'hashed_password', 'ahmad.maulana@example.com', 'Ahmad Hasby Maulana', '2003-11-20', 'Male', 'Kediri', '08123456787', 3, '2024-03-25 13:23:06', NULL, 'Active', 'default.png', 'active'),
+(1705540080, 'akbar_pratama', 'hashed_password', 'akbar.pratama@example.com', 'Akbar Sandi Pratama', '2003-10-10', 'Male', 'Kediri', '08123456786', 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
 (1705540081, 'andrean_prasetyo', 'hashed_password', 'andrean.prasetyo@example.com', 'Andrean Prasetyo', '2004-08-05', 'Male', 'Kediri', '08123456785', 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
 (1705540082, 'bintang_krisna', 'hashed_password', 'bintang.krisna@example.com', 'Bintang Krisna', '2003-12-18', 'Male', 'Kediri', '08123456784', 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
 (1705540186, 'cantika_sari', 'hashed_password', 'cantika.sari@example.com', 'Cantika Christin Novita Sari', '2003-05-20', 'Female', 'Kediri', '08123456783', 3, '2024-01-18 04:51:55', NULL, 'Active', 'default.png', 'Activated'),
@@ -1117,7 +1200,10 @@ INSERT INTO `Users` (`UserID`, `Username`, `Password`, `Email`, `FullName`, `Dat
 (1705553589, 'teo_rinares_wijaya', 'hashed_password', 'teo.rinares.wijaya@example.com', 'Teo Arya Rinares Wijaya Lintang', NULL, 'Male', 'Kediri', NULL, 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
 (1705553590, 'yeremia_susanto', 'hashed_password', 'yeremia.susanto@example.com', 'Yeremia Devano Susanto', NULL, 'Male', 'Kediri', NULL, 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
 (1705553591, 'yopi_irawan', 'hashed_password', 'yopi.irawan@example.com', 'Yopi Irawan', NULL, 'Male', 'Kediri', NULL, 3, '2024-01-18 04:51:43', NULL, 'Active', 'default.png', 'Activated'),
-(1705866876, 'masmukti', '$2y$10$X365hXi/kYu1Nbnte/4U1Ons5w3uyv2Z4mDCGLsQwJWRLmEF8dOle', 'mukti@gmail.com', 'Firmansyah Mukti Wijaya', '2001-02-12', 'Male', 'Nglaban, Kediri', '081216318022', 2, '2024-01-21 19:54:36', NULL, 'active', NULL, 'active');
+(1705866876, 'masmukti', '$2y$10$X365hXi/kYu1Nbnte/4U1Ons5w3uyv2Z4mDCGLsQwJWRLmEF8dOle', 'mukti@gmail.com', 'Firmansyah Mukti Wijaya', '2001-02-12', 'Male', 'Nglaban, Kediri', '081216318022', 2, '2024-01-21 19:54:36', NULL, 'active', NULL, 'active'),
+(1711674623, 'mukti1', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'iki.mukti1@gmail.com', 'Firmansyah Mukti Wijaya', NULL, NULL, NULL, NULL, 3, '2024-03-29 01:11:40', '2024-03-29 08:11:40', NULL, 'default.png', NULL),
+(1711674979, 'paijo', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'paijo@ms.s', 'Pajio', NULL, NULL, NULL, NULL, 3, '2024-03-29 01:24:20', '2024-03-29 08:16:59', NULL, 'default.png', NULL),
+(1711695161, 'gembul', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'faugdg@ddd.dd', 'Gembul', NULL, NULL, NULL, NULL, 3, '2024-03-29 07:27:38', '2024-03-29 14:27:38', NULL, 'default.png', 'active');
 
 --
 -- Indexes for dumped tables
@@ -1260,7 +1346,7 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Answers`
 --
 ALTER TABLE `Answers`
-  MODIFY `AnswerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+  MODIFY `AnswerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=248;
 
 --
 -- AUTO_INCREMENT for table `AssignmentAttachments`
@@ -1278,7 +1364,7 @@ ALTER TABLE `Assignments`
 -- AUTO_INCREMENT for table `AssignmentSubmissions`
 --
 ALTER TABLE `AssignmentSubmissions`
-  MODIFY `SubmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `SubmissionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `Classes`
@@ -1296,19 +1382,19 @@ ALTER TABLE `ClassSubjects`
 -- AUTO_INCREMENT for table `LogActivity`
 --
 ALTER TABLE `LogActivity`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=480;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=552;
 
 --
 -- AUTO_INCREMENT for table `Materials`
 --
 ALTER TABLE `Materials`
-  MODIFY `MaterialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `MaterialID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `Questions`
 --
 ALTER TABLE `Questions`
-  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `StudentResponses`
@@ -1320,7 +1406,7 @@ ALTER TABLE `StudentResponses`
 -- AUTO_INCREMENT for table `Students`
 --
 ALTER TABLE `Students`
-  MODIFY `StudentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+  MODIFY `StudentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `Subjects`
@@ -1344,7 +1430,7 @@ ALTER TABLE `TestResults`
 -- AUTO_INCREMENT for table `Tests`
 --
 ALTER TABLE `Tests`
-  MODIFY `TestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `TestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
