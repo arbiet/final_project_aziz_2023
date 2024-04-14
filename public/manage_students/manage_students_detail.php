@@ -3,7 +3,12 @@
 session_start();
 // Include the connection file
 require_once('../../database/connection.php');
-
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
+if (!isset($_SESSION['UserID'])) {
+    // Jika tidak, arahkan ke halaman login
+    header("Location: ../systems/login.php");
+    exit(); // Pastikan tidak ada kode eksekusi setelah ini
+  }
 // Initialize variables
 $studentID = '';
 $errors = array();
@@ -27,7 +32,7 @@ if (isset($_GET['id'])) {
 }
 
 ?>
-<?php include_once('../components/header.php'); ?>
+<?php include_once('../components/header2.php'); ?>
 <?php include('../components/sidebar2.php'); ?>
 <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
     <?php include('../components/navbar2.php'); ?>

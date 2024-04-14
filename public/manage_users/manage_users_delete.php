@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 // Cek apakah user sudah login
 if (!isset($_SESSION['UserID'])) {
     header('Location: login.php');

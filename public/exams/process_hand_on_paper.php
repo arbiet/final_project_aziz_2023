@@ -2,7 +2,12 @@
 // Include necessary files and start session
 require_once('../../database/connection.php');
 session_start();
-
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
+if (!isset($_SESSION['UserID'])) {
+    // Jika tidak, arahkan ke halaman login
+    header("Location: ../systems/login.php");
+    exit(); // Pastikan tidak ada kode eksekusi setelah ini
+}
 // Check if the request is a GET request
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Retrieve user and test information from the session or any other secure source

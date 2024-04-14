@@ -1,14 +1,13 @@
 <?php
 session_start();
 require_once('../../database/connection.php');
-include_once('../components/header.php');
-
-// Check if the user is logged in
+include_once('../components/header2.php');
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
 if (!isset($_SESSION['UserID'])) {
-    header('Location: login.php');
-    exit();
-}
-
+    // Jika tidak, arahkan ke halaman login
+    header("Location: ../systems/login.php");
+    exit(); // Pastikan tidak ada kode eksekusi setelah ini
+  }
 // Check if the user's ID is provided in the query string
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header('Location: error.php'); // Redirect to an error page or an appropriate location

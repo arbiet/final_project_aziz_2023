@@ -8,7 +8,7 @@ require_once('../../database/connection.php');
 $errors = array();
 
 ?>
-<?php include_once('../components/header.php'); ?>
+<?php include_once('../components/header2.php'); ?>
 <!-- Main Content Height Menyesuaikan Hasil Kurang dari Header dan Footer -->
 <div class="h-screen flex flex-col">
   <!-- Top Navbar -->

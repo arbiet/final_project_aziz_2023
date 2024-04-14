@@ -1,12 +1,12 @@
 <?php
 session_start();
 require_once('../../database/connection.php');
-include_once('../components/header.php');
-
-// Check if the user is logged in
+include_once('../components/header2.php');
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
 if (!isset($_SESSION['UserID'])) {
-    header('Location: login.php');
-    exit();
+    // Jika tidak, arahkan ke halaman login
+    header("Location: ../systems/login.php");
+    exit(); // Pastikan tidak ada kode eksekusi setelah ini
 }
 
 // Check if the test ID is provided in the query parameter

@@ -4,7 +4,12 @@ session_start();
 // Include the database connection
 require_once('../../database/connection.php');
 include_once('../components/header2.php');
-
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
+if (!isset($_SESSION['UserID'])) {
+    // Jika tidak, arahkan ke halaman login
+    header("Location: ../systems/login.php");
+    exit(); // Pastikan tidak ada kode eksekusi setelah ini
+}
 // Initialize variables
 $class_name = $education_level = $homeroom_teacher = $curriculum = $academic_year = '';
 $errors = array();

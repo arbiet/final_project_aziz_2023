@@ -1,14 +1,14 @@
 <?php
 session_start();
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 
-// Cek apakah user sudah login
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
 if (!isset($_SESSION['UserID'])) {
-    header('Location: login.php');
-    exit();
-}
-
+    // Jika tidak, arahkan ke halaman login
+    header("Location: ../systems/login.php");
+    exit(); // Pastikan tidak ada kode eksekusi setelah ini
+  }
 // Cek apakah ID guru (TeacherID) disediakan dalam parameter query
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     // Redirect ke halaman error atau lokasi yang sesuai

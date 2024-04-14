@@ -2,7 +2,7 @@
 session_start();
 // Include the connection file
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 // Initialize variables
 $errors = array();
 // Retrieve user information from the database

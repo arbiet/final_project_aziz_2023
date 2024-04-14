@@ -1,6 +1,12 @@
 <?php
+session_start();
 require_once('../../database/connection.php');
-
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
+if (!isset($_SESSION['UserID'])) {
+    // Jika tidak, arahkan ke halaman login
+    header("Location: ../systems/login.php");
+    exit(); // Pastikan tidak ada kode eksekusi setelah ini
+}
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['assignment_id'], $_GET['submission_id'])) {
     $assignmentID = $_GET['assignment_id'];
     $submissionID = $_GET['submission_id'];

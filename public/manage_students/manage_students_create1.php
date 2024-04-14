@@ -3,7 +3,7 @@ session_start();
 
 // Include the database connection
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 
 // Initialize variables
 $student_number = $religion = $parent_guardian_full_name = $parent_guardian_address = $parent_guardian_phone = $parent_guardian_email = $class_id = '';

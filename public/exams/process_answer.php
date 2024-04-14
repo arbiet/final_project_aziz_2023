@@ -1,7 +1,12 @@
 <?php
 session_start();
 require_once('../../database/connection.php');
-
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
+if (!isset($_SESSION['UserID'])) {
+    // Jika tidak, arahkan ke halaman login
+    header("Location: ../systems/login.php");
+    exit(); // Pastikan tidak ada kode eksekusi setelah ini
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['answer']) || isset($_POST['answers'])) {
         // Retrieve user and question information from the session or any other secure source

@@ -4,7 +4,12 @@ session_start();
 // Include the database connection
 require_once('../../database/connection.php');
 include_once('../components/header2.php');
-
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
+if (!isset($_SESSION['UserID'])) {
+  // Jika tidak, arahkan ke halaman login
+  header("Location: ../systems/login.php");
+  exit(); // Pastikan tidak ada kode eksekusi setelah ini
+}
 // Initialize variables
 $student_number = $religion = $parent_guardian_full_name = $parent_guardian_address = $parent_guardian_phone = $parent_guardian_email = $class_id = '';
 $errors = array();

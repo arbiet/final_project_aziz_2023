@@ -1,7 +1,13 @@
 <?php
+session_start();
 // Include the connection file
 require_once('../../database/connection.php');
-
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
+if (!isset($_SESSION['UserID'])) {
+  // Jika tidak, arahkan ke halaman login
+  header("Location: ../systems/login.php");
+  exit(); // Pastikan tidak ada kode eksekusi setelah ini
+}
 // Retrieve materials data based on the subject or your specific query
 $subjectID = 1; // Replace with the appropriate subject ID
 $materialQuery = "SELECT MaterialID, Sequence FROM Materials WHERE SubjectID = $subjectID ORDER BY Sequence";

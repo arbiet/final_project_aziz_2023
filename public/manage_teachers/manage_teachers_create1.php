@@ -3,7 +3,7 @@ session_start();
 
 // Include the database connection
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 
 // Initialize variables
 $nip = $academic_degree = $education_level = $employment_status = $username = $password = $email = $full_name = $date_of_birth = $gender = $address = $phone_number = '';

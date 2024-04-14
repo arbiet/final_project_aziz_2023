@@ -64,7 +64,7 @@ if (isset($_GET['id'])) {
 
 ?>
 
-<?php include_once('../components/header.php'); ?>
+<?php include_once('../components/header2.php'); ?>
 <!-- Main Content Height Adjusts to Fit Between Header and Footer -->
 <div class="h-screen flex flex-col">
     <!-- Top Navbar -->

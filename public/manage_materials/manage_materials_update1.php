@@ -3,7 +3,7 @@ session_start();
 
 // Include the database connection
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 
 // Initialize variables
 $material_id = $subject_id = $title_material = $type = $content = $link = $sequence = '';

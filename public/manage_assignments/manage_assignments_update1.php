@@ -3,7 +3,7 @@ session_start();
 
 // Include the database connection
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 
 // Initialize variables
 $assignment_id = $subject_id = $material_id = $title = $description = $due_date = $priority_level = '';

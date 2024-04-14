@@ -3,7 +3,7 @@ session_start();
 
 // Include the database connection
 require_once('../../database/connection.php');
-include_once('../components/header.php');
+include_once('../components/header2.php');
 
 // Initialize variables
 $subject_id = $subject_name = $difficulty_level = $teaching_method = $learning_objective = $duration_hours = $curriculum_framework = $assessment_method = $student_engagement = $tacher_mapel  = '';

@@ -1,13 +1,12 @@
 <?php
 require_once('../../database/connection.php');
 session_start();
-
-// Pastikan hanya siswa yang dapat mengakses halaman ini
+// Periksa apakah sesi telah dimulai dengan mengecek salah satu variabel sesi
 if (!isset($_SESSION['UserID']) || $_SESSION['RoleID'] !== 3) {
-  header('Location: login.php');
-  exit;
+  // Jika tidak, arahkan ke halaman login
+  header("Location: ../systems/login.php");
+  exit(); // Pastikan tidak ada kode eksekusi setelah ini
 }
-
 // Mengambil data profil siswa dan kelas siswa dari database berdasarkan UserID sesi
 if (isset($_SESSION['UserID'])) {
   $userID = $_SESSION['UserID'];
