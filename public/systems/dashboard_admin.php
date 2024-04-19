@@ -74,11 +74,11 @@ function getTotalClasses($conn) {
                 </div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
-                <div class="p-6 relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                <div class="p-6 relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 w-full shadow-lg rounded">
                     <div class="rounded-t mb-0 px-0 border-0">
                         <div class="flex flex-wrap items-center px-4 py-2">
                             <div class="relative w-full max-w-full flex-grow flex-1">
-                                <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Total Classes</h3>
+                                <h3 class="font-semibold text-base text-gray-900">Total Classes</h3>
                             </div>
                         </div>
                         <div class="block w-full overflow-x-auto">
@@ -94,10 +94,10 @@ function getTotalClasses($conn) {
                                 <table class="min-w-full bg-transparent border-collapse">
                                     <thead>
                                         <tr>
-                                            <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Class</th>
-                                            <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Total Students</th>
-                                            <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Students Login</th>
-                                            <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Log Logins</th>
+                                            <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Class</th>
+                                            <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Total Students</th>
+                                            <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Students Login</th>
+                                            <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Log Logins</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -142,11 +142,11 @@ function getTotalClasses($conn) {
                 </div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-6">
-                <div class="p-6 relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50 dark:bg-gray-800 w-full shadow-lg rounded">
+                <div class="p-6 relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50  w-full shadow-lg rounded">
                     <div class="rounded-t mb-0 px-0 border-0">
                         <div class="flex flex-wrap items-center px-4 py-2">
                             <div class="relative w-full max-w-full flex-grow flex-1">
-                                <h3 class="font-semibold text-base text-gray-900 dark:text-gray-50">Total Teachers</h3>
+                                <h3 class="font-semibold text-base text-gray-900 ">Total Teachers</h3>
                             </div>
                         </div>
                         <div class="block w-full overflow-x-auto">
@@ -162,9 +162,9 @@ function getTotalClasses($conn) {
                                 <table class="min-w-full bg-transparent border-collapse">
                                     <thead>
                                         <tr>
-                                            <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Teacher Name</th>
-                                            <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Subject Taught</th>
-                                            <th class="px-4 bg-gray-100 dark:bg-gray-600 text-gray-500 dark:text-gray-100 align-middle border border-solid border-gray-200 dark:border-gray-500 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Classes with Same Subjects</th>
+                                            <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Teacher Name</th>
+                                            <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Subject Taught</th>
+                                            <th class="px-4 bg-gray-100 text-gray-500 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">Classes with Same Subjects</th>
                                         </tr>
                                     </thead>
                                     <tbody>

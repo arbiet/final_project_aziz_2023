@@ -120,6 +120,21 @@ $errors = array();
                         <i class='fas fa-trash mr-2'></i>
                         <span>Delete</span>
                     </a>
+                    <?php
+                    // Check if video is available
+                    if (!empty($row['Video'])) {?>
+                      <a href="#" onclick="watchVideo('<?php echo $row['Video']; ?>', '<?php echo $row['TitleMaterial']; ?>')" class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                          <i class='fas fa-play mr-2'></i>
+                          <span>Video</span>
+                      </a>
+                  <?php
+                        echo "<a href='#' onclick=\"confirmDeleteVideo(".$row['MaterialID'].", '".$row['TitleMaterial']."', '".$row['Video']."')\" class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center text-sm'>
+                            <i class='fas fa-trash mr-2'></i>
+                            <span>Video</span>
+                        </a>";
+                    
+                    }
+                    ?>
                     </td>
                 </tr>
               <?php
@@ -213,6 +228,34 @@ $errors = array();
         }
       });
     }
-  </script>
+    function watchVideo(videoURL, title) {
+        Swal.fire({
+            title: title,
+            html: `<video controls style="width:100%;"><source src="../${videoURL}" type="video/mp4"></video>`,
+            showConfirmButton: false,
+            width: '80%',
+            customClass: {
+                content: 'p-4',
+            }
+        });
+    }
+
+    // Function to show confirmation dialog for video deletion
+    function confirmDeleteVideo(materialID, title, videoURL) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `This will permanently delete the video for "../${videoURL}"!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If user confirms, redirect to the delete video page
+                window.location.href = `manage_materials_delete_video.php?id=${materialID}`;
+            }
+        });
+    }
+</script>
 </main>
 <?php include('../components/footer2.php'); ?>
