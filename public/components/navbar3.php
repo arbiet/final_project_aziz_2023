@@ -83,6 +83,9 @@
                 <li>
                     <a href="<?php echo $baseUrl; ?>public/profiles/profile_student.php" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profile</a>
                 </li>
+                <li>
+                    <a href="<?php echo $baseUrl; ?>public/profiles/change_password_student.php" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Change Password</a>
+                </li>
                  <li>
                     <a href="<?php echo $baseUrl; ?>public/class/class_detail.php?class_id=<?php echo $_SESSION['ClassID']; ?>" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">My Class</a>
                 </li>

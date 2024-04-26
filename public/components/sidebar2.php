@@ -43,6 +43,12 @@
                     <span class="text-sm">Profile</span>
                 </a>
             </li>
+            <li class="mb-1 group">
+                <a href="../profiles/change_password.php" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+                    <i class="fas fa-lock mr-3"></i>                
+                    <span class="text-sm">Change Password</span>
+                </a>
+            </li>
             <span class="text-gray-400 font-bold">Manage</span>
             <?php if ($_SESSION['RoleID'] === 1): ?>
             <li class="mb-1 group">
