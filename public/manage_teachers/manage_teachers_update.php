@@ -56,6 +56,7 @@ if (isset($_GET['id'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize and validate the input data
     $new_username = mysqli_real_escape_string($conn, $_POST['username']);
+    $teacher_number = mysqli_real_escape_string($conn, $_POST['teacher_number']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $full_name = mysqli_real_escape_string($conn, $_POST['full_name']);
     $academic_degree = mysqli_real_escape_string($conn, $_POST['academic_degree']);
