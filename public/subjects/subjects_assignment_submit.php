@@ -53,11 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'success' => false
         ];
     }
-
-    // Return JSON response
-    header('Content-Type: application/json');
-    echo json_encode($response);
-    exit;
+    exit(header("Location: subjects_assignment.php?subject_id=".$_POST['subject_id']."&assignment_id=".$_POST['assignment_id']));
 } else {
     // Invalid request method
     http_response_code(405);
